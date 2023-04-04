@@ -1,12 +1,21 @@
-import logo from "./logo.svg";
-import "./App.css";
+
+import React from 'react';
+import './App.css';
+import BatchList from './components/batch/BatchList';
+import { Route, Routes } from 'react-router-dom';
 import Dashboard from "./components/dashboard/Dashboard";
+
 
 function App() {
   return (
-    <div>
-      <Dashboard />
-    </div>
+    <React.Fragment >
+      <Routes>
+      <Route path="/" element={<Dashboard />} />
+        <Route path="batchlist" element={<BatchList />} />
+      </Routes>
+      <BatchList/>
+    </React.Fragment>
+
   );
 }
 
