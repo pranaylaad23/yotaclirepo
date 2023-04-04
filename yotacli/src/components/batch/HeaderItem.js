@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from '../../ui/button/Button';
-import InputField from '../../ui/inputField/InputField';
-import classes from "../../ui/card/Card.module.css";
-import "./HeaderItemmodule.css";
+import InputField from "../../ui/inputField/InputField";
+import classes from '../../components/batch/HeaderItem.module.css';
+
 
 
 
@@ -17,9 +17,9 @@ const HeaderItem = () => {
 
           <h5 className={classes.boxtitle}>Batch List
 
-            <button className='btn-filter'> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+            <button className={classes.btnfilter}> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
 
-              fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+              fill="currentColor" className="bi bi-filter" viewBox="0 0 16 16">
 
               <path
 
@@ -40,12 +40,14 @@ const HeaderItem = () => {
             {/* <Button>
               <div><i className='fa fa-filter' style={{ color: 'white' }}></i></div>
             </Button> */}
+            <div className="d-flex">
             <InputField >
-              <input className="inputField" type="search" placeholder="Search keyword..." aria-label="Search" />
+              <input className={classes.inputField} type="search" placeholder="Search keyword..." aria-label="Search" />
             </InputField>
-            <Button><i className='fa fa-search' style={{ color: 'white' }}></i></Button>
+            <Button className="button col-1"><i className='fa fa-search' style={{ color: 'white' }}></i></Button>
+            </div>
           </form>
-
+          
         </div>
       </div>
 
