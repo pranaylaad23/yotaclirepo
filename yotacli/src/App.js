@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './App.css';
 import BatchList from './components/batch/BatchList';
@@ -13,8 +12,8 @@ function App() {
       <Route path="/" element={<Dashboard />} />
         <Route path="batches" element={<BatchList />} />
       </Routes>
+      
     </React.Fragment>
-
   );
 }
 

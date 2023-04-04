@@ -4,6 +4,7 @@ function Navbar() {
   return (
     <>
       <nav className="navbar navbar-light bg-light" style={{ height: "60px",padding:"8px 16px" }}>
+
         <a className={`navbar-brand ${classes.yashimage}`}>
           <img src="Images/yashlogo.png" alt="yash-logo" />
         </a>

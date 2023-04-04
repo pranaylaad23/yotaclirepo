@@ -3,19 +3,24 @@ import { ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
 import classes from "../dashboard/Sidebar.module.css";
 import "../dashboard/Sidebar.css"
 
+
 function Sidebar() {
   return (
     <div
+
       className={`col-xl-2 col-lg-2 ${classes.sam}` }
+
       style={{ padding: "0px 0px", backgroundColor: "#144358" }}
     >
       <div
         className={`container ${classes.headerleft}`}
         style={{ height: "60px" }}
       >
+
         <div className={`row ${classes.rowhead}`} >
           <p style={{ padding: "0px",width:"109.27px" }}>YOTA App</p>
           <i style={{width:"50px",color:"white"}} className={`fa-solid fa-bars ${classes.iconhead}`}></i>
+
         </div>
       </div>
 
@@ -147,6 +152,7 @@ function Sidebar() {
         <li>
           <a href="index.html">
             <i className="fa-solid fa-magnifying-glass " style={{ color: "white" }}></i>
+
             Report
           </a>
         </li>

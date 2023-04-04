@@ -13,8 +13,10 @@
 }
 .dropdown-toggle .dropend{
     display: none;
+
 } 
  .dropdown-toggle::after{
+
     border: none;
 }
 .dropdown-menu.show {
