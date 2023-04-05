@@ -1,5 +1,5 @@
 
-const Data = 
+const TechData = 
 [
         {id:1, name:"Java", shortDescription:"This is java technology..."},
         {id:2, name:"Spring", shortDescription:"This is Spring technology..."},
@@ -8,4 +8,4 @@ const Data =
 
 ]
 
-export default Data;
+export default TechData;

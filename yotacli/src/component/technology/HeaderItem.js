@@ -15,23 +15,23 @@ const HeaderItem = () => {
           </svg>
           </button>
         </h5>
-        </div>
-        
-        
-        <div className='col-xl-4 col-lg-5 col-md-6 col-sm-8'>
-          <form className="form-inline">
-            {/* <Button>
+      </div>
+
+
+      <div className='col-xl-4 col-lg-5 col-md-6 col-sm-8'>
+        <form className="form-inline">
+          {/* <Button>
               <div><i className="fa fa-filter" style={{ color: 'white'}}></i></div>
             </Button> */}
-            <div className='d-flex'>
+          <div className='d-flex'>
             <InputField>
               <input className={classes.inputField} type="search" placeholder="Search keyword..." aria-label="Search" />
             </InputField>
             <Button><i className='fa fa-search' style={{ color: 'white' }}></i></Button>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
+    </div>
   )
 }
 

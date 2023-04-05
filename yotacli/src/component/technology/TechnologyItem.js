@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Data from '../store/Data';
+import TechData from '../store/TechData';
 import classes from '../technology/TechnologyItem.module.css';
 
 const TechnologyItem = () => {
 
-    const [technology, setTechnology] = useState(Data);
+    const [technology, setTechnology] = useState(TechData);
 
     // const handleDeleteClick = (technologyId) => {
     //     const newTechnology = [...technology];
