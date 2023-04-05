@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+
+import React from 'react';
 import './App.css';
+import BatchList from './components/batch/BatchList';
+import { Route, Routes } from 'react-router-dom';
+import Dashboard from "./components/dashboard/Dashboard";
+import ListQuestions from './components/Question/ListQuestions';
+import ListTechnology from './components/technology/ListTechnology';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment >
+      <Routes>
+      <Route path="/" element={<Dashboard />} />
+        <Route path="batches" element={<BatchList />} />
+        <Route path="questions" element={<ListQuestions />} />
+        <Route path='listTechnology' element={<ListTechnology/>}/>
+
+      </Routes>
+      
+    </React.Fragment>
   );
 }
 
