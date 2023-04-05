@@ -1,35 +1,37 @@
 import React from "react";
 import { ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
 import classes from "../dashboard/Sidebar.module.css";
-import "../dashboard/Sidebar.css"
-
+import "../dashboard/Sidebar.css";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
     <div
-
-      className={`col-xl-2 col-lg-2 ${classes.sam}` }
-
+      className={`col-xl-2 col-lg-2 ${classes.sam}`}
       style={{ padding: "0px 0px", backgroundColor: "#144358" }}
     >
       <div
         className={`container ${classes.headerleft}`}
         style={{ height: "60px" }}
       >
-
-        <div className={`row ${classes.rowhead}`} >
-          <p style={{ padding: "0px",width:"109.27px" }}>YOTA App</p>
-          <i style={{width:"50px",color:"white"}} className={`fa-solid fa-bars ${classes.iconhead}`}></i>
-
+        <div className={`row ${classes.rowhead}`}>
+          <p style={{ padding: "0px", width: "109.27px" }}>YOTA App</p>
+          <i
+            style={{ width: "50px", color: "white" }}
+            className={`fa-solid fa-bars ${classes.iconhead}`}
+          ></i>
         </div>
       </div>
 
       <ul className={classes.menucontainer}>
         <li>
-          <a href="index.html">
-            <i className="fa-solid fa-gauge-high " style={{ color: "white" }}></i>
+          <Link to="/">
+            <i
+              className="fa-solid fa-gauge-high "
+              style={{ color: "white" }}
+            ></i>
             Dashboard
-          </a>
+          </Link>
         </li>
         <li>
           <div>
@@ -53,7 +55,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="2"
               >
-                Batch List
+                <Link to="batchlist">Batch List</Link>
               </Dropdown.Item>
             </DropdownButton>
           </div>
@@ -83,7 +85,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="2"
               >
-                Question List
+                <Link to="questionlist">Question List</Link>
               </Dropdown.Item>
             </DropdownButton>
           </div>
@@ -111,7 +113,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="2"
               >
-                List Technology
+                <Link to="technologylist">List Technology</Link>
               </Dropdown.Item>
             </DropdownButton>
           </div>
@@ -151,8 +153,10 @@ function Sidebar() {
         </li>
         <li>
           <a href="index.html">
-            <i className="fa-solid fa-magnifying-glass " style={{ color: "white" }}></i>
-
+            <i
+              className="fa-solid fa-magnifying-glass "
+              style={{ color: "white" }}
+            ></i>
             Report
           </a>
         </li>
