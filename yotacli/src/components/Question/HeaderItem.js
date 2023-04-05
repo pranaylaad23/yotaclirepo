@@ -25,10 +25,13 @@ const HeaderItem = () => {
             {/* <Button>
               <div><i className="fa fa-filter" style={{ color: 'white'}}></i></div>
             </Button> */}
+            <div className="d-flex">
             <InputField>
               <input className="inputField " type="search" placeholder="Search keyword..." aria-label="Search" />
+              
             </InputField>
             <Button><i className='fa fa-search ' style={{ color: 'white' }}></i></Button>
+            </div>
           </form>
         </div>
       </div>
