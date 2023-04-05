@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '../../ui/button/Button';
-import classes from './HeaderItem.module.css';
+import classes from '../../components/technology/HeaderItem.module.css'
 import InputField from '../../ui/inputField/InputField';
 
 const HeaderItem = () => {
   return (
+
     <div className='row mt-3'>
       <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
         <h5 className={classes.boxtitle}>List Of Technology

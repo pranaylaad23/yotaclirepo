@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TechData from '../store/TechData';
+import TechData from "../../components/store/TechData"
 import classes from '../technology/TechnologyItem.module.css';
 
 const TechnologyItem = () => {
