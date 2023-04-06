@@ -10,9 +10,9 @@ const BatchItem = (props) => {
 
     return (
 
-        <div className={classes.table}>
+        <div className={`table-responsive ${classes.table}` }>
 
-            <table className='table table-bordered table-responsive-xs-sm-md-xl table-over'>
+            <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
                         <th>Identifier</th>

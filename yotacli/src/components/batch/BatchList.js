@@ -11,7 +11,7 @@ const BatchList = () => {
   return (
 
     <div className="justify-content-centre ">
-      <Card>
+      <Card className='responsive'>
         <HeaderItem />
         <hr />
         <BatchItem />

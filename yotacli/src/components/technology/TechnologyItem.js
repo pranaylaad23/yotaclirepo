@@ -17,8 +17,8 @@ const TechnologyItem = () => {
 
 
     return (
-        <div className={classes.table}>
-            <table className='table table-bordered table-hover table-responsive-sm-md-lg'>
+        <div className={`table-responsive ${classes.table}` }>
+            <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
                         <th>Sr.No.</th>

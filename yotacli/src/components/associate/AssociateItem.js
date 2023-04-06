@@ -7,8 +7,9 @@ const AssociateItem = () => {
     const [associate, setAssociate] = useState(AssociateData);
 
     return (
-        <div className={classes.table}>
-            <table className='table table-bordered'>
+        <div className={`table-responsive ${classes.table}`}>
+            
+            <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
                         <th>Sr.No.</th>
@@ -19,7 +20,7 @@ const AssociateItem = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {associate.map((associate,key) => (
+                    {associate.map((associate, key) => (
                         <tr key={key}>
                             <td><b>{associate.id}</b></td>
                             <td>{associate.name}</td>
