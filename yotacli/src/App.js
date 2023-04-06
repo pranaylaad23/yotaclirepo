@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./App.css";
 import BatchList from "./components/batch/BatchList";
@@ -8,6 +9,7 @@ import ListTechnology from "./components/technology/ListTechnology";
 
 function App() {
   return <Dashboard />;
+
 }
 
 export default App;

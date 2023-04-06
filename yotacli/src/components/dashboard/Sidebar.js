@@ -140,7 +140,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="2"
               >
-                Associate List
+              <Link to="associatelist">  Associate List</Link>
               </Dropdown.Item>
               <Dropdown.Item
                 style={{ backgroundColor: "#88b4ba", color: "white" }}

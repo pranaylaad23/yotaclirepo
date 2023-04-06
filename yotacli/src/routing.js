@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-// import BatchList from "./components/batch/BatchList";
+
 import TitleDashboard from "./components/dashboard/TitleDashboard";
-// import ListTechnology from "./components/technology/ListTechnology";
-// import ListQuestions from "./components/Question/ListQuestions";
+
 import TitleBatchList from "./components/batch/TitleBatchList";
 import TitleQuestionList from "./components/Question/TitleQuestionList";
 import TitleTechnologyList from "./components/technology/TitleTechnologyList";
-
+import TitleAssociateList from "./components/associate/TitleAssociateList";
 const Routing = () => {
   return (
     <>
@@ -15,6 +14,7 @@ const Routing = () => {
         <Route path="batchlist" element={<TitleBatchList />} />
         <Route path="technologylist" element={<TitleTechnologyList />} />
         <Route path="questionlist" element={<TitleQuestionList />} />
+        <Route path="associatelist" element={<TitleAssociateList />} />
       </Routes>
     </>
   );
