@@ -1,5 +1,5 @@
 import './App.css';
-import ListAssociate from './component/associate/ListAssociate';
+import ListAssociate from './components/associate/ListAssociate';
 
 function App() {
   return (
