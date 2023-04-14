@@ -1,16 +1,32 @@
-import React, { useState } from 'react'
-import Batches from '../store/Batches';
+import React, { useEffect, useState } from 'react'
+//import Batches from '../store/Batches';
 import classes from "../batch/BatchItem.module.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { showBatch } from '../../features/batch/batchListSlice';
+import axios from 'axios';
 
 
 
 const BatchItem = (props) => {
 
-    const [batch, setBatch] = useState(Batches);
+  const [batch, setBatch] = useState([]);
+
+    // const dispatch = useDispatch();
+
+    useEffect(() => {
+        axios.get('http://localhost:9090/yota/api/batches/')
+        .then((res) => {
+            console.log(res.data);
+            setBatch(res.data);
+        });
+       
+    }, [])
+
+
 
     return (
 
-        <div className={`table-responsive ${classes.table}` }>
+        <div className={`table-responsive ${classes.table}`}>
 
             <table className='table table-bordered table-hover'>
                 <thead>
@@ -26,26 +42,29 @@ const BatchItem = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {batch.map((list, key) => (
+
+                    {batch.map((result, key) => (
                         <tr key={key}>
-                            <td>{list.batchIdentifier}</td>
-                            <td>{list.batchName}</td>
-                            <td>{list.batchDescription}</td>
-                            <td>{list.startDate.toLocaleDateString()}</td>
-                            <td>{list.endDate.toLocaleDateString()}</td>
-                            <td>{list.createdAt.toLocaleDateString()}</td>
-                            <td>{list.updatedAt.toLocaleDateString()}</td>
+                            <td>{result.batchIdentifier}</td>
+                            <td>{result.batchName}</td>
+                            <td>{result.batchDescription}</td>
+                            <td>{result.startDate}</td>
+                            <td>{result.endDate}</td>
+                            <td>{result.createdAt}</td>
+                            <td>{result.updatedAt}</td>
                             <td><i className="fa fa-edit" ></i>&nbsp;                                                      {/* onClick={(event) => handleEditClick(event, list)} */}
                                 <i className='fa fa-trash-can'></i>                                                         {/* onClick={() => handleDeleteClick(tech.id)} */}
                             </td>
                         </tr>
                     ))}
+                    
                 </tbody>
             </table>
 
         </div>
 
     );
+
 }
 
 export default BatchItem;
