@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import AssociateData from '../store/AssociateData';
+
 import classes from '../associate/AssociateItem.module.css'
 
 const AssociateItem = () => {
 
-    const [associate, setAssociate] = useState(AssociateData);
+    const [associate, setAssociate] = useState([]);
 
     return (
         <div className={`table-responsive ${classes.table}`}>
