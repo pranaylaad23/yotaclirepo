@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import Batches from '../store/Batches';
 import classes from "../batch/BatchItem.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { showBatch } from "../../features/batch/batchListSlice";

@@ -1,10 +1,10 @@
 import React from 'react';
-import { data } from '../store/Data';
-
+import { useState } from 'react';
 import classes from './QuestionItem.module.css';
 
 const QuestionItem = () => {
 
+  const [question, setQuestion] = useState([]);
 
     return (
       <div className={`table-responsive ${classes.table}` }>
@@ -28,7 +28,7 @@ const QuestionItem = () => {
                 })
                 .map((item) => ( */}
                 {}
-                {data.map((item, key) => (
+                {question.map((item, key) => (
                           <tr key={key}>
                 
                     <td>{item.question}</td>

@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AssociateData from "../store/AssociateData";
 import classes from "../associate/AssociateItem.module.css";
 import axios from "axios";
 
 const AssociateItem = () => {
   const [associate, setAssociate] = useState([]);
-
-  // const dispatch = useDispatch();
-
   useEffect(() => {
     axios.get("http://localhost:9090/yota/api/associates/all").then((res) => {
       console.log(res.data);
