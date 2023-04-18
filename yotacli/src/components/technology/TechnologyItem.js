@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import TechData from '../store/TechData';
+import React, { useEffect, useState } from 'react';
 import classes from '../technology/TechnologyItem.module.css';
+import axios from 'axios';
 
 const TechnologyItem = () => {
 
-    const [technology, setTechnology] = useState(TechData);
+    const [technology, setTechnology] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:9090/yota/api/technologies/')
+            .then((res) => {
+                setTechnology(res.data);
+            })
+    }, [])
 
     // const handleDeleteClick = (technologyId) => {
     //     const newTechnology = [...technology];
@@ -17,8 +24,8 @@ const TechnologyItem = () => {
 
 
     return (
-        <div className={classes.table}>
-            <table className='table table-bordered table-hover table-responsive-sm-md-lg'>
+        <div className={`table-responsive ${classes.table}`}>
+            <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
                         <th>Sr.No.</th>
