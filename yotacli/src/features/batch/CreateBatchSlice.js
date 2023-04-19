@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //create bach
 export const createBatch = createAsyncThunk("batch/createBatch", async ({ values }, { rejectWithValue }) => {
 
-    const response = await fetch(`http://localhost:3030/batches/`, {
+    const response = await fetch(`http://localhost:9090/yota/api/batches/`, {
         method: "POST",
         headers: {
             Accept: "application/json",

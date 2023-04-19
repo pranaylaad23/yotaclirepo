@@ -3,15 +3,17 @@ import classes from '../technology/TechnologyItem.module.css';
 import axios from 'axios';
 
 
-const TechnologyItem = () => {
+const TechnologyItem = (props) => {
 
     const [technology, setTechnology] = useState([]);
 
     useEffect(() => {
-        axios.get("localhost:9090/yota/api/technologies/")
-            .then((res) => {
-                setTechnology(res.data);
-            })
+        axios.get("http://localhost:9090/yota/api/technologies/")
+            .then((response) => {
+                console.log(response.data)
+                setTechnology(response.data);
+
+            });
     }, [])
 
     return (
