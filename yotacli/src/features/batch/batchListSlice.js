@@ -1,4 +1,3 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 //create bach
@@ -22,70 +21,60 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // })
 //show batch details
 
-export const showBatch = createAsyncThunk("batch/showBatch",
-    async ({ rejectWithValue }) => {
+export const showBatch = createAsyncThunk(
+  "batch/showBatch",
+  async ({ rejectWithValue }) => {
+    const response = await fetch(`http://localhost:9090/yota/api/batches/`);
 
-       const response = await fetch("http://localhost:9090/yota/api/batches/");
+    console.log(response);
 
-       console.log(response);
-        
-        try {
-
-            const result = await response.json();
-            return result;
-
-        } catch (error) {
-
-            return rejectWithValue(error.response);
-        }
-
-    })
+    try {
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
 
 console.log(showBatch());
 
 export const batchList = createSlice({
+  name: "batch",
+  initialState: {
+    batch: [],
+    loading: false,
+    error: null,
 
-    name: "batch",
-    initialState: {
-        batch: [],
-        loading: false,
-        error: null,
-        
+    extraReducers: {
+      // [createBatch.pending]: (state) => {
+      //     state.loading = true;
+      // },
 
-        extraReducers: {
+      // [createBatch.fulfilled]: (state, action) => {
+      //     state.loading = false;
+      //     state.batch.push(action.payload);
+      // },
 
-            // [createBatch.pending]: (state) => {
-            //     state.loading = true;
-            // },
+      // [createBatch.rejected]: (state, action) => {
+      //     state.loading = false;
+      //     state.error = action.payload;
+      // },
 
-            // [createBatch.fulfilled]: (state, action) => {
-            //     state.loading = false;
-            //     state.batch.push(action.payload);
-            // },
+      [showBatch.pending]: (state, action) => {
+        state.loading = true;
+      },
 
-            // [createBatch.rejected]: (state, action) => {
-            //     state.loading = false;
-            //     state.error = action.payload;
-            // },
+      [showBatch.fulfilled]: (state, action) => {
+        state.loading = false;
+        state.batch = action.payload;
+      },
 
-            
-
-            [showBatch.pending]: (state,action) => {
-                state.loading = true;
-            },
-
-            [showBatch.fulfilled]: (state, action) => {
-                state.loading = false;
-                state.batch = action.payload;
-            },
-
-            [showBatch.rejected]: (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            },
-        }
+      [showBatch.rejected]: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      },
     },
-
-
-})
+  },
+});
 export default batchList.reducer;

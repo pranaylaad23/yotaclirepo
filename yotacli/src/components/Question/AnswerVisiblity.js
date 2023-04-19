@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditModal = () => {
+const AnswerVisiblity = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const EditModal = () => {
   )
 }
 
-export default EditModal
+export default AnswerVisiblity

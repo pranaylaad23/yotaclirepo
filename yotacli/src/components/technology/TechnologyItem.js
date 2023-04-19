@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import TechData from "../../components/store/TechData"
+import React, { useEffect, useState } from 'react';
 import classes from '../technology/TechnologyItem.module.css';
+import axios from 'axios';
 
-const TechnologyItem = () => {
 
-    const [technology, setTechnology] = useState(TechData);
+const TechnologyItem = (props) => {
 
-    // const handleDeleteClick = (technologyId) => {
-    //     const newTechnology = [...technology];
+    const [technology, setTechnology] = useState([]);
 
-    //     const index = technology.findIndex((technology) => technology.id === technologyId);
-    //     newTechnology.splice(index, 1);
+    useEffect(() => {
+        axios.get("http://localhost:9090/yota/api/technologies/")
+            .then((response) => {
+                console.log(response.data)
+                setTechnology(response.data);
 
-    //     setTechnology(newTechnology);
-    // }
-
+            });
+    }, [])
 
     return (
         <div className={`table-responsive ${classes.table}` }>
