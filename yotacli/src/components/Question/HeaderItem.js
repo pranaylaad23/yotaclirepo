@@ -1,12 +1,15 @@
 import React from "react";
 
-import "./HeaderItemModule.css";
+import classes from "./HeaderItem.module.css";
 import "./List.css";
+
+import InputField from "../../ui/inputField/InputField";
+import Button from "../../ui/button/Button";
 const HeaderItem = () => {
   return (
     <div className="row">
-      <div className="row mt-3" style={{marginLeft: "7%"}}>
-        <div className="col-xl-9 col-lg-7 col-md-6 col-sm-4" style={{width: "82%"}}>
+      <div className="row mt-3">
+        <div className="col-sm-12">
           <div class="pagination">
             <span>&lt; First</span>{" "}
             <span class="left2">&lt; Previous&nbsp;</span>

@@ -1,14 +1,12 @@
-import { Card } from 'react-bootstrap';
-import './App.css';
-import ListQuestions from './components/Question/ListQuestions';
+
+
+import React from "react";
+import "./App.css";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
-  return (
-   <div>
-    <ListQuestions/>
-   </div>
-   
-  );
+  return <Dashboard />;
+
 }
 
 export default App;

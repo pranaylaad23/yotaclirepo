@@ -3,14 +3,13 @@ import axios from "axios";
 import correctImage from "../../assests/correctv3.jpeg";
 import "./List.css";
 
-
 const ItemQuestion = (props) => {
   const [question, setQuestion] = useState([]);
 
   // const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/yota/api/questions/all").then((res) => {
+    axios.get("http://localhost:9090/yota/api/questions/all").then((res) => {
       console.log(res.data);
       setQuestion(res.data);
     });
@@ -26,12 +25,10 @@ const ItemQuestion = (props) => {
   };
 
   return (
-    <div className="row col-span-4 col-btns ml-4 mt-4">
-        
+    <div className="row col-span-4 col-btns ml-4 mt-4 p-4">
       <tbody>
         {question.map((result, key) => (
           <tr key={key}>
-
             <div className="row test-question">
               <a></a>
               <div className="col-span-25">
