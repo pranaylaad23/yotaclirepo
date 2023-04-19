@@ -3,7 +3,7 @@ import classes from "./Dashboard.module.css";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import TitleDashboard from "./TitleDashboard";
-import Routing from "../../routing";
+import Routing from "../../Routing";
 import Footer from "./Footer";
 function Dashboard() {
   return (
