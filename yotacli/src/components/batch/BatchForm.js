@@ -20,6 +20,8 @@ const BatchForm = (props) => {
 
     //handle create batch function
 
+
+
     return (
         <div>
 
@@ -75,4 +77,4 @@ const BatchForm = (props) => {
     )
 }
 
-export default BatchForm
+export default BatchForm;
