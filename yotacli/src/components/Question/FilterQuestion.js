@@ -2,20 +2,20 @@ import React from "react";
 import "./List.css";
 const FilterQuestion = () => {
   return (
-    <div class="filter">
+    <div className="filter">
       <div className="active">
-        <div class="row">
+        <div className="row">
           <strong>Active questions (2)</strong> &nbsp;
         </div>
-        <div class="rows">
-          <div class="nav-question-bank">
-            <div class="rows">
-              <div class="col-span-1">
-                <p class="littledark">Filters:</p>
+        <div className="rows">
+          <div className="nav-question-bank">
+            <div className="rows">
+              <div className="col-span-1">
+                <p className="littledark">Filters:</p>
               </div>
 
-              <div class="col-span-2">
-                <p class="littledark bold">
+              <div className="col-span-2">
+                <p className="littledark bold">
                   <label for="qtype1">Question Type</label>
                 </p>
                 <p>
