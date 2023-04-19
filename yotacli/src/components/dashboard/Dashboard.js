@@ -3,8 +3,10 @@ import classes from "./Dashboard.module.css";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import TitleDashboard from "./TitleDashboard";
-import Routing from "../../Routing";
+
 import Footer from "./Footer";
+import Routing from "../../Routing";
+
 function Dashboard() {
   return (
     <div className="container-fluid">

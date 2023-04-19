@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+
+
+import React, { useState , useEffect} from 'react';
 import classes from './QuestionItem.module.css';
+import axios from 'axios';
 
-const QuestionItem = () => {
 
-  const [data, setTechnology] = useState([]);
+const QuestionItem = (props) => {
+
+  const [question, setQuestion] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:9090/yota/api/questions/all").then((res) => {
+      console.log(res.data);
+      setQuestion(res.data);
+    });
+  }, []);
 
     return (
-        <div className={classes.table}>
-            <table className='table table-bordered table-hover table-responsive-sm-md-lg'>
+      <div className={`table-responsive ${classes.table}` }>
+      <table className='table table-bordered table-hover'>
+
                 <thead>
                 <tr>
                   <th>Question </th>
@@ -27,17 +39,18 @@ const QuestionItem = () => {
                 })
                 .map((item) => ( */}
                 {}
-                {data.map((item, key) => (
+
+                {question.map((item, key) => (
                           <tr key={key}>
                 
                     <td>{item.question}</td>
-                    <td>{item.question_Type}</td>
-                    <td>{item.question_Level}</td>
-                    <td>{item.option_a}</td>
-                    <td>{item.option_b}</td>
-                    <td>{item.option_c}</td>
-                    <td>{item.option_d}</td>
-                    <td>{item.correct_Answer}</td>
+                    <td>{item.questionType}</td>
+                    <td>{item.questionLevel}</td>
+                    <td>{item.a}</td>
+                    <td>{item.b}</td>
+                    <td>{item.c}</td>
+                    <td>{item.d}</td>
+                    <td>{item.correctAnswer}</td>
                     <td><i className="fa fa-edit" ></i>&nbsp;                                                      {/* onClick={(event) => handleEditClick(event, list)} */}
                                 <i className='fa fa-trash-can'></i>&nbsp;
                                 <i class="fa fa-eye"></i>                                                        {/* onClick={() => handleDeleteClick(tech.id)} */}

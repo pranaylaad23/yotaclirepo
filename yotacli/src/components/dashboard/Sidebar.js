@@ -49,7 +49,9 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="1"
               >
-                Create Batch
+
+                <Link to="createbatch">Create Batch</Link>
+
               </Dropdown.Item>
               <Dropdown.Item
                 style={{ backgroundColor: "#88b4ba", color: "white" }}

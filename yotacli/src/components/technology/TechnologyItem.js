@@ -2,29 +2,25 @@ import React, { useEffect, useState } from 'react';
 import classes from '../technology/TechnologyItem.module.css';
 import axios from 'axios';
 
-const TechnologyItem = () => {
+
+
+const TechnologyItem = (props) => {
 
     const [technology, setTechnology] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:9090/yota/api/technologies/')
-            .then((res) => {
-                setTechnology(res.data);
-            })
+        axios.get("http://localhost:9090/yota/api/technologies/")
+            .then((response) => {
+                console.log(response.data)
+                setTechnology(response.data);
+
+            });
     }, [])
 
-    // const handleDeleteClick = (technologyId) => {
-    //     const newTechnology = [...technology];
-
-    //     const index = technology.findIndex((technology) => technology.id === technologyId);
-    //     newTechnology.splice(index, 1);
-
-    //     setTechnology(newTechnology);
-    // }
-
-
     return (
-        <div className={`table-responsive ${classes.table}`}>
+
+        <div className={`table-responsive ${classes.table}` }>
+
             <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
