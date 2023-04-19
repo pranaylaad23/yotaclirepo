@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import TitleDashboard from "./components/dashboard/TitleDashboard";
 
 import TitleBatchList from "./components/batch/TitleBatchList";
-import TitleQuestionList from "./components/Question/TitleQuestionList";
+import TitleQuestionList from "./components/question/TitleQuestionList";
 import TitleTechnologyList from "./components/technology/TitleTechnologyList";
 import TitleAssociateList from "./components/associate/TitleAssociateList";
 import TitleCreateBatch from "./components/batch/TitleCreateBatch";

@@ -9,7 +9,7 @@ const QuestionItem = (props) => {
   const [question, setQuestion] = useState([]);
 
   useEffect(() => {
-    axios.get("localhost:9090/yota/api/questions/all").then((res) => {
+    axios.get("http://localhost:9090/yota/api/questions/all").then((res) => {
       console.log(res.data);
       setQuestion(res.data);
     });

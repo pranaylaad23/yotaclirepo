@@ -1,18 +1,24 @@
 import React from "react";
-import Card from "../../ui/card/Card";
-import Pagination from "../../ui/pagination/Pagination";
+import Button from "../../ui/button/Button";
+import FilterQuestion from "./FilterQuestion";
+import { Card, Dropdown } from "react-bootstrap";
 import HeaderItem from "./HeaderItem";
-import QuestionItem from "./QuestionItem";
+import ItemQuestion from "./ItemQuestion";
 
 const ListQuestions = () => {
   return (
-    <div className="col-12">
-      <Card>
-        <HeaderItem />
-        <hr />
-        <QuestionItem />
+    <div>
+      <br />
+      {/* <Card style={{ width: "100%", marginLeft: "8%" }}> */}
+      <Card className="p-4">
+        <FilterQuestion />
       </Card>
-      <Pagination />
+      <HeaderItem />
+      <Card>
+        <Dropdown />
+        <Button>Add New Question</Button>
+        <ItemQuestion />
+      </Card>
     </div>
   );
 };

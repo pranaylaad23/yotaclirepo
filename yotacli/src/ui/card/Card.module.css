@@ -3,12 +3,15 @@
     border-radius: 15px;
     padding-bottom: 5%;
     background-color: white;
-
 }
 
 .boxtitle {
     font-size: x-large;
     font-weight: 550;
     color: #144358;
-    margin-left: 5%;
+    margin-left: 275px;
+}
+.card2 {
+    width: 20%;
+    height: 10%;
 }

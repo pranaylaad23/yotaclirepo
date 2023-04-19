@@ -1,5 +1,4 @@
 import React from "react";
-
 import classes from "../../components/dashboard/TitleDashboard.module.css";
 import ListTechnology from "./ListTechnology";
 
