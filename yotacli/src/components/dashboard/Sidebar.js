@@ -143,12 +143,6 @@ function Sidebar() {
               >
               <Link to="associatelist">  Associate List</Link>
               </Dropdown.Item>
-              <Dropdown.Item
-                style={{ backgroundColor: "#88b4ba", color: "white" }}
-                eventKey="3"
-              >
-                <Link to="updateAssociate">Update Associate</Link>
-              </Dropdown.Item>
             </DropdownButton>
           </div>
         </li>
