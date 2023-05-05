@@ -2,7 +2,7 @@ import React from 'react';
 import AssociateItem from './AssociateItem';
 import Card from '../../ui/card/Card';
 import HeaderItem from './HeaderItem';
-import Pagination from "../../components/batch/Pagination"
+import Pagination from "../../ui/pagination/Pagination"
 
 const ListAssociate = () => {
   return (

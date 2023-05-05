@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "../../components/dashboard/TitleDashboard.module.css";
+import classes from "../../dashboard/TitleDashboard.module.css";
 import BatchList from "./BatchList";
 
 function TitleBatchList() {

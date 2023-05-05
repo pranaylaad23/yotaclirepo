@@ -3,7 +3,7 @@ import Card from "../../ui/card/Card";
 
 import HeaderItem from "../../components/technology/HeaderItem";
 import TechnologyItem from "./TechnologyItem";
-import Pagination from "../batch/Pagination";
+import Pagination from "../../ui/pagination/Pagination";
 
 const ListTechnology = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react'
-import Card from '../../ui/card/Card';
+import Card from '../../../ui/card/Card';
 import BatchItem from './BatchItem';
 import HeaderItem from './HeaderItem';
-import Pagination from './Pagination';
+import Pagination from '../../../ui/pagination/Pagination';
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import Button from '../../ui/button/Button';
-import InputField from "../../ui/inputField/InputField";
-import classes from '../../components/batch/HeaderItem.module.css';
+import Button from '../../../ui/button/Button';
+import InputField from "../../../ui/inputField/InputField";
+import classes from '../../../components/batch/batchlist/HeaderItem.module.css';
 
 
 

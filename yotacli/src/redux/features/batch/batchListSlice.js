@@ -24,7 +24,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const showBatch = createAsyncThunk(
   "batch/showBatch",
   async ({ rejectWithValue }) => {
-    const response = await fetch(`http://localhost:9090/yota/api/batches/`);
+    const response = await axios.get(`http://localhost:9090/yota/api/batches/`);
 
     console.log(response);
 

@@ -1,14 +1,12 @@
 import React from 'react'
 import BatchForm from './BatchForm'
-import CreateHeaderItem from "./CreateHeaderItem"
-import Card from '../../ui/card/Card'
+import Card from '../../../ui/card/Card'
+import classes from "../createbatch/Createbatch.module.css";
 
 const CreateBatch = () => {
   return (
-    <div className="justify-content-centre ">
+    <div className={`justify-content-centre ${classes.card}`}>
       <Card>
-        <CreateHeaderItem />
-        <hr />
         <BatchForm />
       </Card>
      
