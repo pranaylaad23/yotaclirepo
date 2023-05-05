@@ -1,4 +1,5 @@
 
+
 import React, { useState , useEffect} from 'react';
 import classes from './QuestionItem.module.css';
 import axios from 'axios';
@@ -18,6 +19,7 @@ const QuestionItem = (props) => {
     return (
       <div className={`table-responsive ${classes.table}` }>
       <table className='table table-bordered table-hover'>
+
                 <thead>
                 <tr>
                   <th>Question </th>
@@ -37,6 +39,7 @@ const QuestionItem = (props) => {
                 })
                 .map((item) => ( */}
                 {}
+
                 {question.map((item, key) => (
                           <tr key={key}>
                 

@@ -1,9 +1,9 @@
 import React from "react";
-import Card from "../../ui/card/Card";
+import Card from "../../../ui/card/Card";
+import Pagination from "../../../ui/pagination/Pagination";
+import ListTechnologyItem from "./ListTechnologyItem";
+import HeaderItem from "./HeaderItem";
 
-import HeaderItem from "../../components/technology/HeaderItem";
-import TechnologyItem from "./TechnologyItem";
-import Pagination from "../../ui/pagination/Pagination";
 
 const ListTechnology = () => {
   return (
@@ -11,7 +11,7 @@ const ListTechnology = () => {
       <Card>
         <HeaderItem />
         <hr />
-        <TechnologyItem />
+        <ListTechnologyItem />
       </Card>
       <Pagination />
     </div>

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import classes from "../associate/AssociateItem.module.css";
 import axios from "axios";
@@ -48,3 +49,4 @@ const AssociateItem = () => {
 };
 
 export default AssociateItem;
+

@@ -41,6 +41,7 @@ const HeaderItem = () => {
               <div><i className='fa fa-filter' style={{ color: 'white' }}></i></div>
             </Button> */}
             <div className="d-flex">
+
               <InputField>
                 <input className={classes.inputField} type="search" placeholder="Search keyword..." aria-label="Search" />
               </InputField>
