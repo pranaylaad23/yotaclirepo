@@ -4,7 +4,8 @@ import classes from "../batchlist/BatchItem.module.css"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { batchDelete } from '../../../redux/features/batch/deleteBatchSlice';
+import { batchDelete } from '../../../redux/features/batch/DeleteBatchSlice';
+
 
 
 
@@ -20,6 +21,7 @@ const BatchItem = (props) => {
       console.log(res.data);
       setBatch(res.data);
     });
+    
   }, []);
 
   return (
