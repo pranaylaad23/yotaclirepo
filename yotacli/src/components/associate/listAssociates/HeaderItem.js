@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../../ui/button/Button';
+import Button from '../../../ui/button/Button';
 import classes from './HeaderItem.module.css';
-import InputField from '../../ui/inputField/InputField';
+import InputField from '../../../ui/inputField/InputField';
 
 const HeaderItem = () => {
   return (

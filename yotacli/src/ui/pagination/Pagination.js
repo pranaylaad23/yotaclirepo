@@ -3,6 +3,7 @@ import React from 'react'
 import classes from "./Pagination.module.css"
 
 const Pagination = (props) => {
+
   return (
     <div className={classes.pagination}>
       <div className="row justify-content-center">
@@ -35,3 +36,4 @@ const Pagination = (props) => {
 }
 
 export default Pagination
+

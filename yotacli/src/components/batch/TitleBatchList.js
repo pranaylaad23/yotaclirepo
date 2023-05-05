@@ -1,22 +1,21 @@
 import React from "react";
 
 import classes from "../../components/dashboard/TitleDashboard.module.css";
-import ListAssociate from "./ListAssociate";
+import BatchList from "./BatchList";
 
-
-function TitlAssociateList() {
+function TitleBatchList() {
   return (
     <>
       {/* <!--dashbord--> */}
       <div className="container-fluid">
         <div className={`row ${classes.back}`}>
           <div className="col">
-            <h5 className={classes.title}>Associate Management</h5>
+            <h5 className={classes.title}>Batch Management</h5>
           </div>
         </div>
-        <ListAssociate />
+        <BatchList />
       </div>
     </>
   );
 }
-export default TitlAssociateList;
+export default TitleBatchList;

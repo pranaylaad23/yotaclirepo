@@ -1,8 +1,9 @@
 import React from 'react';
-import AssociateItem from './AssociateItem';
-import Card from '../../ui/card/Card';
+import AssociateItem from './ListAssociateItem';
+import Card from '../../../ui/card/Card';
 import HeaderItem from './HeaderItem';
-import Pagination from "../../ui/pagination/Pagination"
+import Pagination from "../../../ui/pagination/Pagination"
+
 
 const ListAssociate = () => {
   return (
