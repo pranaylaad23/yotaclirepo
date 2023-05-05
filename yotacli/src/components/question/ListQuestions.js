@@ -15,11 +15,15 @@ const ListQuestions = () => {
         <FilterQuestion />
       </Card>
       <HeaderItem />
+      <div className="row">
       <Card>
-        <Dropdown />
+        <div className="float-right col-sm-3">
         <Button>Add New Question</Button>
+        </div>
         <ItemQuestion />
       </Card>
+
+      </div>
 
     </div>
   );
