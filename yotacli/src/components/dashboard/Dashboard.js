@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import TitleDashboard from "./TitleDashboard";
 import Footer from "./Footer";
-import Routing from "../../Routing"
+import Routing from "../../routing.js"
 function Dashboard() {
   return (
     <div className="container-fluid">

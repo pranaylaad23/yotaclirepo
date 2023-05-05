@@ -21,7 +21,7 @@ const BatchItem = (props) => {
       console.log(res.data);
       setBatch(res.data);
     });
-    
+
   }, []);
 
   return (
@@ -29,7 +29,7 @@ const BatchItem = (props) => {
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
-          {/* <th>Sr.</th> */}
+            {/* <th>Sr.</th> */}
             <th>Identifier</th>
             <th>Name</th>
             <th>Description</th>
@@ -54,11 +54,11 @@ const BatchItem = (props) => {
                 <td>{result.updatedAt}</td>
                 <td>
                   <Link to={`/updatebatch/${result.id}`} className={classes.link}> <i className="fa fa-edit"></i>&nbsp;{" "}</Link>
-                
-                  <Link to={`/deletebatch/${result.id}`} 
-                        onClick={() => dispatch(batchDelete(result.id))}>
-                          <i className="fa fa-trash-can"></i></Link>
-                  
+
+                  <Link to={`/deletebatch/${result.id}`}
+                    onClick={() => dispatch(batchDelete(result.id))}>
+                    <i className="fa fa-trash-can"></i></Link>
+
                 </td>
               </tr>
             ))}
