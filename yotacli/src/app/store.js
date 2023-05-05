@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import batchReducer from "../features/batch/CreateBatchSlice";
-
+import createTech from "../redux/features/technology/CreateTechSlice";
 
 export const store = configureStore({
   reducer: {
-    app: batchReducer,
+    app: createTech,
   },
 });
-

@@ -49,9 +49,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="1"
               >
-
                 <Link to="createbatch">Create Batch</Link>
-
               </Dropdown.Item>
               <Dropdown.Item
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
@@ -108,7 +106,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="1"
               >
-                Add Technology
+                <Link to="addtechnology"> Add Technology</Link>
               </Dropdown.Item>
 
               <Dropdown.Item
@@ -116,6 +114,12 @@ function Sidebar() {
                 eventKey="2"
               >
                 <Link to="technologylist">List Technology</Link>
+              </Dropdown.Item>
+              <Dropdown.Item
+                style={{ backgroundColor: "#88b4ba", color: "white" }}
+                eventKey="2"
+              >
+                <Link to="updatetechnology">update Technology</Link>
               </Dropdown.Item>
             </DropdownButton>
           </div>
@@ -142,7 +146,7 @@ function Sidebar() {
                 style={{ backgroundColor: "#88b4ba", color: "white" }}
                 eventKey="2"
               >
-              <Link to="associatelist">  Associate List</Link>
+                <Link to="associatelist"> Associate List</Link>
               </Dropdown.Item>
               <Dropdown.Item
                 style={{ backgroundColor: "#88b4ba", color: "white" }}

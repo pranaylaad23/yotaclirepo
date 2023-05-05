@@ -1,6 +1,6 @@
 import React from "react";
-import classes from "../../components/dashboard/TitleDashboard.module.css";
-import ListTechnology from "./ListTechnology";
+import classes from "../../dashboard/TitleDashboard.module.css";
+import ListTechnology from "../listTechnology/ListTechnology";
 
 function TitleTechnologyList() {
   return (

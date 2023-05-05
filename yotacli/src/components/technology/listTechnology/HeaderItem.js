@@ -1,7 +1,8 @@
 import React from "react";
-import Button from "../../ui/button/Button";
-import classes from "../../components/technology/HeaderItem.module.css";
-import InputField from "../../ui/inputField/InputField";
+
+import classes from "../../../components/technology/listTechnology/HeaderItem.module.css";
+import InputField from "../../../ui/inputField/InputField";
+import Button from "../../../ui/button/Button";
 
 const HeaderItem = () => {
   return (
