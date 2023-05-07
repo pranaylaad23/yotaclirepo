@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Button from '../../../ui/button/Button';
 import InputField from "../../../ui/inputField/InputField";
 import classes from '../../../components/batch/batchlist/HeaderItem.module.css';
+import { useDispatch } from 'react-redux';
 
 
 
 
-const HeaderItem = () => {
+const HeaderItem = ({ onSearch }) => {
+
+
+  const dispatch = useDispatch();
+  const queryRef = useRef('');
+
+  const handleSearch = () => {
+    dispatch(search(queryRef.current.value));
+    onSearch(); // Call the onSearch callback function
+  };
 
   return (
 
@@ -43,9 +53,9 @@ const HeaderItem = () => {
             <div className="d-flex">
 
               <InputField>
-                <input className={classes.inputField} type="search" placeholder="Search keyword..." aria-label="Search" />
+                <input className={classes.inputField} type="search" placeholder="Search keyword..." aria-label="Search" ref={queryRef}/>
               </InputField>
-              <Button className="button col-1"><i className='fa fa-search' style={{ color: 'white' }}></i></Button>
+              <Button className="button col-1"><i className='fa fa-search' style={{ color: 'white' }} onClick={handleSearch}></i></Button>
             </div>
           </form>
 

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import TitleDashboard from "./components/dashboard/TitleDashboard";
 import TitleBatchList from "./components/batch/batchlist/TitleBatchList";
-import TitleQuestionList from "./components/question/TitleQuestionList";
+
 import TitleTechnologyList from "./components/technology/listTechnology/TitleTechnologyList";
 import TitleCreateBatch from "./components/batch/createbatch/TitleCreateBatch";
 import TitleUpdateBatch from "./components/batch/batchupdate/TitleUpdateBatch";
@@ -10,6 +10,7 @@ import TitleUpdateTechnology from "./components/technology/updateTechnology/Titl
 import TitleAssociateList from "./components/associate/listAssociates/TitleAssociateList";
 import TitleUpdateAssociate from "./components/associate/updateAssociate/TitleUpdateAssociate";
 import TitleRegisterAssociate from "./components/associate/registerAssociate/TitleRegisterAssociate";
+import TitleQuestionList from "./components/Question/TitleQuestionList";
 
 const Routing = () => {
   return (
