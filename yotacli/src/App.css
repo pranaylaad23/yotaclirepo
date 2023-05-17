@@ -36,6 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+
+ /* .InputField_inputBox__EiH00 .textArea{
+  width:90%
+}  */
+
+.InputField_inputBox__sii-7{
+  width:100%
+}
+
 .InputField_inputBox__2-3-W{
   width:75%
 }
@@ -51,3 +61,4 @@
 .FormItem_inputField__Gv8xp{
   width: 100%;
 }
+

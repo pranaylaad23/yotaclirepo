@@ -55,7 +55,7 @@ const UpdateAssociateForm = () => {
             }))
                 .unwrap()
                 .then(response => {
-                    // alert(response.data);
+                    alert(response.data);
                     nevigate("/associatelist");
 
                 })
@@ -79,10 +79,11 @@ const UpdateAssociateForm = () => {
 
                         <div className='col-xl-4 col-lg-5 col-md-6 col-sm-8'>
                             <form className="form-inline"
-                            onSubmit={handleOnUpdate}
+
+                             onSubmit={handleOnUpdate}
                             >
                                 <div className={classes.btn}>
-                                    <Button type="submit">Update</Button>
+                                    <Button  type="submit">Update</Button>
                                 </div>
                             </form>
                         </div>

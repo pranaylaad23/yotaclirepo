@@ -4,6 +4,7 @@ import Card from '../../../ui/card/Card';
 import HeaderItem from './HeaderItem';
 import Pagination from "../../../ui/pagination/Pagination"
 
+
 const ListAssociate = () => {
   return (
     <div className='col-12 justify-content-centre'> 
