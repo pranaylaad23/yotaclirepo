@@ -20,10 +20,10 @@ const Routing = () => {
         <Route path="createbatch" element={<TitleCreateBatch />} />
         <Route path="technologylist" element={<TitleTechnologyList />} />
         <Route path="questionlist" element={<TitleQuestionList />} />
-        <Route path="associatelist" element={<TitleAssociateList />} />
-        <Route path="registerAssociate" element={<TitleRegisterAssociate />} />
-        <Route path="updateAssociate/:id" element={<TitleUpdateAssociate />} />
-        <Route path="updateAssociate" element={<TitleUpdateAssociate />} />
+
+        <Route path="/associatelist" element={<TitleAssociateList />} />
+        <Route path="/registerAssociate/" element={<TitleRegisterAssociate />} />
+        <Route path="/updateAssociate/:id" element={<TitleUpdateAssociate />} />
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
 
 

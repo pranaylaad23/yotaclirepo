@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../../ui/button/Button'
 import InputField from '../../../ui/inputField/InputField'
 import classes from './UpdateAssociateForm.module.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios';
 import { updateAssociate } from '../../../redux/features/associate/UpdateAssociateSlice'
 
 
 const UpdateAssociateForm = () => {
+    const nevigate = useNavigate();
 
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -52,16 +53,18 @@ const UpdateAssociateForm = () => {
                 contactNo: updateAssociateData.contactNo,
                 emailId: updateAssociateData.emailId
             }))
-                // .unwrap()
-                // .then(response => {
-                //     alert(response.data);
+                .unwrap()
+                .then(response => {
+                    // alert(response.data);
+                    nevigate("/associatelist");
 
-                // })
+                })
                 .catch(err => {
                     window.alert(err.massage);
                 });
 
             window.alert("Associate updated successfully..!")
+            
         }
         console.log(updateAssociateData);
 
@@ -76,10 +79,10 @@ const UpdateAssociateForm = () => {
 
                         <div className='col-xl-4 col-lg-5 col-md-6 col-sm-8'>
                             <form className="form-inline"
-                            // onSubmit={handleOnUpdate}
+                            onSubmit={handleOnUpdate}
                             >
                                 <div className={classes.btn}>
-                                    <Button onClick={handleOnUpdate}>Update</Button>
+                                    <Button type="submit">Update</Button>
                                 </div>
                             </form>
                         </div>
