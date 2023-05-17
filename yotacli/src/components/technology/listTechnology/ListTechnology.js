@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "../../../ui/card/Card";
 import Pagination from "../../../ui/pagination/Pagination";
-
 import ListTechnologyItem from "./ListTechnologyItem";
 import HeaderItem from "./HeaderItem";
+
 
 const ListTechnology = () => {
   return (

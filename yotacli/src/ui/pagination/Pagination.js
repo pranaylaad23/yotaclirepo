@@ -1,7 +1,9 @@
-import React from 'react';
-import classes from './Pagination.module.css'
 
-const Pegination = (props) => {
+import React from 'react'
+import classes from "./Pagination.module.css"
+
+const Pagination = (props) => {
+
   return (
     <div className={classes.pagination}>
       <div className="row justify-content-center">
@@ -13,6 +15,7 @@ const Pegination = (props) => {
                   <span aria-hidden="true">&laquo;</span>
                   <span className="sr-only">Previous</span>
                 </a>
+
               </li>
               <li className="page-item"><a className="page-link" href='#'>1</a></li>
               <li className="page-item"><a className="page-link" href='#'>2</a></li>
@@ -27,8 +30,10 @@ const Pegination = (props) => {
           </nav>
         </div>
       </div>
+
       {props.children}</div>
   )
 }
 
-export default Pegination;
+export default Pagination
+
