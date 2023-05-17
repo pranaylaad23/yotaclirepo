@@ -1,14 +1,9 @@
-
-import React, { useEffect, useState } from 'react'
-import classes from "../batchlist/BatchItem.module.css"
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { batchDelete } from '../../../redux/features/batch/DeleteBatchSlice';
-
-
-
-
+import React, { useEffect, useState } from "react";
+import classes from "../batchlist/BatchItem.module.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import batchDelete from "../../../redux/features/batch/deleteBatchSlice";
 
 const BatchItem = (props) => {
   const [batch, setBatch] = useState([]);
@@ -21,7 +16,6 @@ const BatchItem = (props) => {
       console.log(res.data);
       setBatch(res.data);
     });
-
   }, []);
 
   return (
@@ -41,27 +35,31 @@ const BatchItem = (props) => {
           </tr>
         </thead>
         <tbody>
-          {
-            batch.map((result, key) => (
-              <tr key={key}>
-                {/* <td>{result.id}</td> */}
-                <td>{result.batchIdentifier}</td>
-                <td>{result.batchName}</td>
-                <td>{result.batchDescription}</td>
-                <td>{result.startDate}</td>
-                <td>{result.endDate}</td>
-                <td>{result.createdAt}</td>
-                <td>{result.updatedAt}</td>
-                <td>
-                  <Link to={`/updatebatch/${result.id}`} className={classes.link}> <i className="fa fa-edit"></i>&nbsp;{" "}</Link>
+          {batch.map((result, key) => (
+            <tr key={key}>
+              {/* <td>{result.id}</td> */}
+              <td>{result.batchIdentifier}</td>
+              <td>{result.batchName}</td>
+              <td>{result.batchDescription}</td>
+              <td>{result.startDate}</td>
+              <td>{result.endDate}</td>
+              <td>{result.createdAt}</td>
+              <td>{result.updatedAt}</td>
+              <td>
+                <Link to={`/updatebatch/${result.id}`} className={classes.link}>
+                  {" "}
+                  <i className="fa fa-edit"></i>&nbsp;{" "}
+                </Link>
 
-                  <Link to={`/deletebatch/${result.id}`}
-                    onClick={() => dispatch(batchDelete(result.id))}>
-                    <i className="fa fa-trash-can"></i></Link>
-
-                </td>
-              </tr>
-            ))}
+                <Link
+                  to={`/deletebatch/${result.id}`}
+                  onClick={() => dispatch(batchDelete(result.id))}
+                >
+                  <i className="fa fa-trash-can"></i>
+                </Link>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
