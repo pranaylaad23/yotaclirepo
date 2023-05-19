@@ -2,24 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { deleteAssociate } from '../../../redux/features/associate/DeleteAssociateSlice';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAssociate } from '../../../redux/features/associate/ListAssociateSlice';
 
 const AssociatesList = (props) => {
-    
-    const [associates, setAssociates] = useState([]);
-    const dispatch = useDispatch(associates);
-    let count = 1;
 
+    let count = 1;
+    
+    const dispatch = useDispatch();
+    const associate = useSelector((state) => state.associate);
     useEffect(() => {
-        axios.get("http://localhost:9090/yota/api/associates/all").then((res) => {
-            console.log(res.data);
-            setAssociates(res.data);
-        });
+        dispatch(fetchAssociate());
     }, []);
 
     return (
         <>
-            {associates.map((associate, key) => (
+            {associate.associates.map((associate, key) => (
                 <tr key={key}>
                     <td><b>{count++}
                     </b></td>

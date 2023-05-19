@@ -55,7 +55,7 @@ const UpdateAssociateForm = () => {
             }))
                 .unwrap()
                 .then(response => {
-                    alert(response.data);
+                    // alert(response.data);
                     nevigate("/associatelist");
 
                 })

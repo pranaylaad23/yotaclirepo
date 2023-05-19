@@ -30,7 +30,7 @@ export const registerAssociate = createAsyncThunk("registerassociate", async (da
 export const associateRegister = createSlice ({
     name : "associateRegister",
     initialState : {
-        batch : [],
+        associate : [],
         loading : false,
         error : null,
     },

@@ -24,7 +24,7 @@ export const updateAssociate = createAsyncThunk("updateassociate", async (data, 
 export const associateUpdate = createSlice ({
     name : "associateUpdate",
     initialState : {
-        batch : [],
+        associate : [],
         loading : false,
         error : null,
     },
