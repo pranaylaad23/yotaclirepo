@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../../ui/button/Button'
 import InputField from '../../../ui/inputField/InputField'
 import classes from './UpdateAssociateForm.module.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios';
 import { updateAssociate } from '../../../redux/features/associate/UpdateAssociateSlice'
 
 
 const UpdateAssociateForm = () => {
+    const nevigate = useNavigate();
 
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -54,7 +55,8 @@ const UpdateAssociateForm = () => {
             }))
                 .unwrap()
                 .then(response => {
-                    alert(response.data);
+                    // alert(response.data);
+                    nevigate("/associatelist");
 
                 })
                 .catch(err => {
@@ -62,6 +64,7 @@ const UpdateAssociateForm = () => {
                 });
 
             window.alert("Associate updated successfully..!")
+            
         }
         console.log(updateAssociateData);
 
@@ -76,6 +79,7 @@ const UpdateAssociateForm = () => {
 
                         <div className='col-xl-4 col-lg-5 col-md-6 col-sm-8'>
                             <form className="form-inline"
+
                              onSubmit={handleOnUpdate}
                             >
                                 <div className={classes.btn}>

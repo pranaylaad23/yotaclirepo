@@ -14,11 +14,15 @@ export const registerAssociate = createAsyncThunk("registerassociate", async (da
     try {
         const result = await response.json();
         console.log(result);
+        
         return result;
+        
     }
     catch(error){
         return rejectedWithValue(error);
     }
+   
+    
 });
 
 
@@ -26,7 +30,7 @@ export const registerAssociate = createAsyncThunk("registerassociate", async (da
 export const associateRegister = createSlice ({
     name : "associateRegister",
     initialState : {
-        batch : [],
+        associate : [],
         loading : false,
         error : null,
     },
