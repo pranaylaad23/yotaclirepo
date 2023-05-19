@@ -1,17 +1,13 @@
 import React, { useRef } from "react";
 import Button from "../../../ui/button/Button";
 import InputField from "../../../ui/inputField/InputField";
+
 import classes from "../../../components/batch/batchlist/HeaderItem.module.css";
 import { useDispatch } from "react-redux";
 
 const HeaderItem = ({ onSearch }) => {
   const dispatch = useDispatch();
   const queryRef = useRef("");
-
-  // const handleSearch = () => {
-  //   dispatch(search(queryRef.current.value));
-  //   onSearch(); // Call the onSearch callback function
-  // };
 
   return (
     <div className="row d-flex justify-content-between">
@@ -34,7 +30,6 @@ const HeaderItem = ({ onSearch }) => {
             </button>
           </h5>
         </div>
-
         <div className="col-6 col-lg-4">
           <form className="form-inline">
             {/* <Button>
@@ -49,6 +44,7 @@ const HeaderItem = ({ onSearch }) => {
                   aria-label="Search"
                 />
               </InputField>
+
               <Button className="button col-1">
                 <i className="fa fa-search" style={{ color: "white" }}></i>
               </Button>

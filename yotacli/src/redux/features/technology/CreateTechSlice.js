@@ -27,30 +27,7 @@ export const createTech = createAsyncThunk(
     }
   }
 );
-// // update
-// export const UpdateTech = createAsyncThunk(
-//   "updateTech",
-//   async ({ name, data }, { rejectedWithValue }) => {
-//     const response = await fetch(
-//       `http://localhost:9090/yota/api/technologies/`,
-//       { mode: "cors" },
-//       {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data),
-//       }
-//     );
-//     try {
-//       const result = await response.json();
-//       console.log(result);
-//       return result;
-//     } catch (error) {
-//       return rejectedWithValue(error);
-//     }
-//   }
-// );
+//update
 export const UpdateTech = createAsyncThunk(
   "updateBatch",
   async ({ id, data }, { rejectWithValue }) => {
@@ -67,6 +44,13 @@ export const UpdateTech = createAsyncThunk(
     }
   }
 );
+
+//get
+export const fetchTechnology = createAsyncThunk("technology", () => {
+  return axios
+    .get(`http://localhost:9090/yota/api/technologies/`)
+    .then((response) => response.data.map((technology) => technology));
+});
 
 //delete
 export const deleteTechnology = createAsyncThunk(
@@ -97,7 +81,7 @@ export const deleteTechnology = createAsyncThunk(
 export const techCreate = createSlice({
   name: "techCreate",
   initialState: {
-    batch: [],
+    technologies: [],
     loading: false,
     error: null,
   },
@@ -117,6 +101,20 @@ export const techCreate = createSlice({
       state.error = action.payload;
     },
 
+    //get
+    [fetchTechnology.pending]: (state) => {
+      state.loading = true;
+    },
+
+    [fetchTechnology.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.technologies = action.payload;
+    },
+
+    [fetchTechnology.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     // Update Data
     [UpdateTech.pending]: (state) => {
       state.loading = true;

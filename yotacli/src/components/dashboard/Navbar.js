@@ -3,7 +3,10 @@ import classes from "../dashboard/Navbar.module.css";
 function Navbar() {
   return (
     <>
-      <nav className="navbar navbar-light bg-light"    style={{ height: "60px", padding: "8px 16px" }}>
+      <nav
+        className="navbar navbar-light bg-light"
+        style={{ height: "60px", padding: "8px 16px" }}
+      >
         <a className={`navbar-brand ${classes.yashimage}`}>
           <img src="Images/yashlogo.png" alt="yash-logo" />
         </a>
@@ -16,7 +19,6 @@ function Navbar() {
             </span>
           </li>
           <li>
-
             <img className={classes.imageRole} src="Images/user.png" alt="" />
           </li>
         </ul>

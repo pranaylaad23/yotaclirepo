@@ -16,26 +16,6 @@ const RegisterTechnologyForm = (props) => {
     console.log(technologies);
   };
 
-  // const handleOnSubmit = async (e) => {
-  //   e.preventDefault();
-  //   alert("ijdfibfdibdi");
-  //   try {
-  //     const response = axios({
-  //       method: "post",
-  //       url: "http://localhost:9090/yota/api/technologies/",
-  //       data: technologies,
-  //     });
-
-  //     const result = await response.json();
-  //     return result;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   console.log(technologies);
-  // }, [technologies]);
   const handleOnSubmit = (e) => {
     e.preventDefault();
     console.log(technologies);

@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "../../dashboard/TitleDashboard.module.css";
-import BatchList from "./BatchList";
+import ListBatch from "./ListBatch";
 
 function TitleBatchList() {
   return (
@@ -13,7 +13,7 @@ function TitleBatchList() {
             <h5 className={classes.title}>Batch Management</h5>
           </div>
         </div>
-        <BatchList />
+        <ListBatch />
       </div>
     </>
   );

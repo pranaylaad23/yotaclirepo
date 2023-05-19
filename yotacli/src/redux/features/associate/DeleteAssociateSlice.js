@@ -3,6 +3,7 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 export const deleteAssociate = createAsyncThunk("deleteAssociate", async (id, { rejectWithValue }) => {
     if (window.confirm("Do you want to remove associate?"))
         try {
@@ -13,9 +14,12 @@ export const deleteAssociate = createAsyncThunk("deleteAssociate", async (id, { 
             ).then(() => {
                 alert("Removed Successfully..!");
                 window.location.reload();
+                        
             });
             const result = await response.json();
+            
             return result;
+            
         } catch (error) {
             console.log(error);
             return rejectWithValue(error.response.data);

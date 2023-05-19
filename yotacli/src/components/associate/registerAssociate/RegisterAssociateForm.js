@@ -5,12 +5,15 @@ import { registerAssociate } from '../../../redux/features/associate/RegisterAss
 import { useDispatch } from 'react-redux';
 import Button from '../../../ui/button/Button';
 import classes1 from './HeaderItem.module.css'
+import { useNavigate } from 'react-router-dom';
 
 const RegisterAssociateForm = (props) => {
 
+    const nevigate = useNavigate();
+
     const [associates, setAssociates] = useState({
-        emailId:"",
-        password:""
+        emailId: "",
+        password: ""
     });
     const dispatch = useDispatch();
 
@@ -26,12 +29,14 @@ const RegisterAssociateForm = (props) => {
         console.log(associates);
         dispatch(registerAssociate(associates));
         alert("Associate registered successfully...");
-        
+        nevigate("/registerAssociate");
         setAssociates({
-            emailId : "",
-            password : ""
-        });
+            emailId: "",
+            password: ""
+        })
+        
     };
+
 
     return (
         <>
@@ -50,7 +55,7 @@ const RegisterAssociateForm = (props) => {
                     </div>
                 </div>
             </div>
-            <hr/>
+            <hr />
             <div className={classes.form}>
                 {/* 1st row */}
                 <div className={classes.field}>
@@ -59,7 +64,7 @@ const RegisterAssociateForm = (props) => {
                             <h6><b>Email ID</b></h6>
                             <InputField><input
                                 onChange={getAssociateData}
-                                style={{width:"100%"}}
+                                style={{ width: "100%" }}
                                 name='emailId'
                                 className={classes.inputField}
                                 type="email"
@@ -76,7 +81,7 @@ const RegisterAssociateForm = (props) => {
                             <h6><b>Password</b></h6>
                             <InputField><input
                                 onChange={getAssociateData}
-                                style={{width:"100%"}}
+                                style={{ width: "100%" }}
                                 name='password'
                                 className={classes.inputField}
                                 type="password"
