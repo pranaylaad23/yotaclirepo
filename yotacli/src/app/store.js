@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import batchReducer from "../redux/features/batch/CreateBatchSlice";
+import batchReducer from "../redux/features/batch/batchListSlice";
 import technologyReducer from "../redux/features/technology/CreateTechSlice";
 import associateReducer from "../redux/features/associate/RegisterAssociateSlice";
 

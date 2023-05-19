@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteTechnology } from "../../../redux/features/technology/CreateTechSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteTechnology,
+  fetchTechnology,
+} from "../../../redux/features/technology/CreateTechSlice";
 
 const TechnologyList = () => {
-  const [technology, setTechnology] = useState([]);
-  const dispatch = useDispatch(technology);
+  const dispatch = useDispatch();
+  const technology = useSelector((state) => state.technology);
   useEffect(() => {
-    axios
-      .get("http://localhost:9090/yota/api/technologies/")
-      .then((response) => {
-        console.log(response.data);
-        setTechnology(response.data);
-      });
+    dispatch(fetchTechnology());
   }, []);
   return (
     <>
-      {technology.map((tech, key) => (
+      {technology.technologies.map((tech, key) => (
         <tr key={key}>
           <td>
             <b>{tech.id}</b>
