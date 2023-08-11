@@ -9,7 +9,9 @@ import TitleUpdateTechnology from "./components/technology/updateTechnology/Titl
 import TitleAssociateList from "./components/associate/listAssociates/TitleAssociateList";
 import TitleUpdateAssociate from "./components/associate/updateAssociate/TitleUpdateAssociate";
 import TitleRegisterAssociate from "./components/associate/registerAssociate/TitleRegisterAssociate";
-// import TitleQuestionList from "./components/q";
+import TestAssign from "./components/assignTest/TestAssign";
+import TitleAssignTest from "./components/assignTest/TitleAssignTest";
+
 
 const routing = () => {
   return (
@@ -29,9 +31,8 @@ const routing = () => {
           element={<TitleUpdateTechnology />}
         />
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
-        {/* <Route path="questionlist" element={<TitleQuestionList />} /> */}
-
-        <Route path="/associatelist" element={<TitleAssociateList />} />
+        <Route path="/associatelist" element={<TitleAssociateList />} >
+        </Route>
         <Route
           path="/registerAssociate/"
           element={<TitleRegisterAssociate />}
@@ -39,6 +40,12 @@ const routing = () => {
         <Route path="/updateAssociate/:id" element={<TitleUpdateAssociate />} />
 
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
+        <Route path="testList" element={<TitleAssignTest/> } />
+        <Route path="/assignTest" element={<TestAssign/>}/>
+    
+
+ 
+ 
       </Routes>
     </>
   );

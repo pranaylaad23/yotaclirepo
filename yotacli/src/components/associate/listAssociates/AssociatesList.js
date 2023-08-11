@@ -32,7 +32,8 @@ const AssociatesList = (props) => {
                         <Link to={`/deleteAssociate/${associate.id}`}
                             onClick={() => dispatch(deleteAssociate(associate.id))}>
                             <i className="fa fa-trash-can">
-                            </i></Link>
+                            </i></Link>&nbsp;&nbsp;
+                
                     </td>
                 </tr>
             ))}
