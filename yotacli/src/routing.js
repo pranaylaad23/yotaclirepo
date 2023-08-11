@@ -6,6 +6,7 @@ import TitleCreateBatch from "./components/batch/createbatch/TitleCreateBatch";
 import TitleUpdateBatch from "./components/batch/batchupdate/TitleUpdateBatch";
 import TitleAddTechnology from "./components/technology/addTechnology/TitleAddTechnology";
 import TitleUpdateTechnology from "./components/technology/updateTechnology/TitleUpdateTechnology";
+import TitleRecordTechnology from "./components/technology/recordTechnology/TitleRecordTechnology";
 import TitleAssociateList from "./components/associate/listAssociates/TitleAssociateList";
 import TitleUpdateAssociate from "./components/associate/updateAssociate/TitleUpdateAssociate";
 import TitleRegisterAssociate from "./components/associate/registerAssociate/TitleRegisterAssociate";
@@ -30,6 +31,8 @@ const routing = () => {
         />
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
         {/* <Route path="questionlist" element={<TitleQuestionList />} /> */}
+        <Route path="/recordTechnology" element={<TitleRecordTechnology />} />
+        <Route path="/recordTechDetails/:name" element={<TitleRecordTechnology />} />
 
         <Route path="/associatelist" element={<TitleAssociateList />} />
         <Route

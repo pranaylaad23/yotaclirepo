@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ListTechnologyItem.module.css";
 import axios from "axios";
-import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteTechnology } from "../../../redux/features/technology/CreateTechSlice";
-import TechnologyList from "./TechnologyList";
 
-const ListTechnologyItem = (props) => {
+import TechnologyList from "./TechnologyList";
+import { useSelector } from "react-redux";
+
+const ListTechnologyItem = ({currentPage, dataPerPage}) => {
+  // const technology = useSelector((state) => state.technology);
+  // console.log("State Error:",technology.searchError);
+
+
   return (
     <div className={`table-responsive ${classes.table}`}>
       <table className="table table-bordered table-hover">
@@ -19,7 +22,10 @@ const ListTechnologyItem = (props) => {
           </tr>
         </thead>
         <tbody>
-          <TechnologyList />
+            <TechnologyList 
+            currentPage={currentPage}
+            dataPerPage={dataPerPage}
+            />
         </tbody>
       </table>
     </div>

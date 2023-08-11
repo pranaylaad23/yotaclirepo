@@ -36,9 +36,10 @@ function BodyDashboard() {
               </h5>
               <hr />
               <ul className={classes.ulcard}>
-                <a href="AddAssociates.html">
+                {/* <a href="AddAssociates.html">
                   <li style={{ color: "black" }}>Add Associate</li>
-                </a>
+                </a> */}
+                <Link to= "/registerAssociate/"><li style={{ color: "black" }}>Add Associate</li></Link>
                 <hr />
                 <a href="ListAssociates.html">
                   <li style={{ color: "black" }}>Display Associate</li>
