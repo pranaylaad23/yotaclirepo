@@ -9,35 +9,35 @@ import TitleUpdateTechnology from "./components/technology/updateTechnology/Titl
 import TitleAssociateList from "./components/associate/listAssociates/TitleAssociateList";
 import TitleUpdateAssociate from "./components/associate/updateAssociate/TitleUpdateAssociate";
 import TitleRegisterAssociate from "./components/associate/registerAssociate/TitleRegisterAssociate";
-// import TitleQuestionList from "./components/q";
+import TitleQuestionList from "./components/Question/listQuestion/TitleQuestionList";
+import TitleAddQuestion from "./components/Question/addQuestion/TitleAddQuestion";
+import TitleUpdateQuestion from "./components/Question/updateQuestion/TitleUpdateQuestion";
 
 const routing = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<TitleDashboard />} />
+
         <Route path="batchlist" element={<TitleBatchList />} />
         <Route path="createbatch" element={<TitleCreateBatch />} />
         <Route path="/updatebatch/:id" element={<TitleUpdateBatch />} />
-
         <Route path="/deletebatch/:id" element={<TitleBatchList />} />
 
         <Route path="technologylist" element={<TitleTechnologyList />} />
         <Route path="addtechnology" element={<TitleAddTechnology />} />
-        <Route
-          path="/updatetechnology/:name"
-          element={<TitleUpdateTechnology />}
-        />
+        <Route path="/updatetechnology/:name" element={<TitleUpdateTechnology />}/>
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
-        {/* <Route path="questionlist" element={<TitleQuestionList />} /> */}
+        
+        <Route path="listquestion" element={<TitleQuestionList />} />
+        <Route path="addquestion" element={<TitleAddQuestion />} />
+        <Route path="/updatequestion/:id" element={<TitleUpdateQuestion/>}/>
+        <Route path="/deletequestion/:id" element={<TitleQuestionList />} />
+        
 
         <Route path="/associatelist" element={<TitleAssociateList />} />
-        <Route
-          path="/registerAssociate/"
-          element={<TitleRegisterAssociate />}
-        />
+        <Route path="/registerAssociate/" element={<TitleRegisterAssociate />}/>
         <Route path="/updateAssociate/:id" element={<TitleUpdateAssociate />} />
-
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
       </Routes>
     </>
