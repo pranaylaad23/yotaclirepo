@@ -11,7 +11,7 @@ import axios from "axios";
 import Button from "../../../ui/button/Button";
 import { useParams } from "react-router-dom";
 
-const UpdateTechnologyForm = (props) => {
+const  UpdateTechnologyForm = (props) => {
   const { name } = useParams();
   console.log(name);
 
