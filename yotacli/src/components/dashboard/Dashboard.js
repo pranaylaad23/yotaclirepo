@@ -38,6 +38,7 @@
 
 import React, { useState } from "react";
 
+import React, { useState } from "react";
 import classes from "./Dashboard.module.css";
 
 import Navbar from "./Navbar";
@@ -65,6 +66,21 @@ function Dashboard() {
         {/* <div className="col-xl-10 col-lg-10" style={{ padding: "0px 0px", width: isSideOpen ? "1050px" : "1200px" }}> */}
 
         <div className={`${isSideOpen ? "col-xl-10" : "col-11"}`}>
+          {console.log(isSideOpen)}
+
+
+  const[isSideOpen, setIsSideOpen] = useState(true);
+
+  const isOpen = (sidebar) => {
+    setIsSideOpen(sidebar);
+  }
+
+  return (
+    <div className="container-fluid">
+      <div className="row" style={{ height: "38.1rem"}}>
+        <Sidebar sideBarOpen={isOpen}/>
+        {/* <div className="col-xl-10 col-lg-10" style={{ padding: "0px 0px", width: isSideOpen ? "1050px" : "1200px" }}> */}
+        <div className={`${isSideOpen ? 'col-xl-10' : 'col-11'}`}>
           {console.log(isSideOpen)}
 
           <Navbar />

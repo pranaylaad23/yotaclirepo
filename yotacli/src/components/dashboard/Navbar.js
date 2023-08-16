@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "../dashboard/Navbar.module.css";
+import Notification from "./Notification";
 function Navbar() {
   return (
     <>
@@ -10,7 +11,7 @@ function Navbar() {
         <a className={`navbar-brand ${classes.yashimage}`}>
           <img src="Images/yashlogo.png" alt="yash-logo" />
         </a>
-
+        <Notification/>
         <ul className={classes.ulb}>
           <li>
             <span className={classes.nameDesign}>

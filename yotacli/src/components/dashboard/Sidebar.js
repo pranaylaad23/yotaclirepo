@@ -1,3 +1,4 @@
+
 // import React from "react";
 // import { ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
 // import classes from "../dashboard/Sidebar.module.css";
@@ -179,6 +180,7 @@
 // }
 // export default Sidebar;
 
+
 import React, { useState } from "react";
 
 import { ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
@@ -235,7 +237,6 @@ function Sidebar(props) {
               Dashboard
             </Link>
           </li>
-
           <li>
             <div>
               <i className="fa-solid fa-list" style={{ color: "white" }}></i>
@@ -287,19 +288,33 @@ function Sidebar(props) {
                   <Link to="addquestion">Create Question</Link>
                 </Dropdown.Item>
 
+                  <Link to="createbatch">Create Batch</Link>
+                </Dropdown.Item>
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="2"
                 >
+
                   <Link to="listquestion">Question List</Link>
+
+                  <Link to="batchlist">Batch List</Link>
                 </Dropdown.Item>
               </DropdownButton>
             </div>
           </li>
 
+
           <li style={{ paddingLeft: "15px" }}>
             <div>
               <i className="fa-solid fa-laptop" style={{ color: "white" }}></i>
+
+
+          <li>
+            <div>
+              <i
+                className="fa-solid fa-file-circle-question"
+                style={{ color: "white" }}
+              ></i>
 
               <DropdownButton
                 className="dropdown-toggle"
@@ -307,12 +322,17 @@ function Sidebar(props) {
                 id={`dropdown-button-drop-end`}
                 drop={"end"}
                 variant=""
+
                 title={`Technology Management`}
+
+                title={`Question Management`}
+
               >
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="1"
                 >
+
                   <Link to="addtechnology"> Add Technology</Link>
                 </Dropdown.Item>
 
@@ -323,10 +343,15 @@ function Sidebar(props) {
                   <Link to="technologylist">List Technology</Link>
                 </Dropdown.Item>
 
+
+                  <Link to="addquestion">Create Question</Link>
+                </Dropdown.Item>
+
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="2"
                 >
+
                   <Link to="updatetechnology">update Technology</Link>
                 </Dropdown.Item>
 
@@ -345,18 +370,33 @@ function Sidebar(props) {
             <div>
               <i className="fa-solid fa-users" style={{ color: "white" }}></i>
 
+                  <Link to="listquestion">Question List</Link>
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </li>
+          <li style={{ paddingLeft: "15px" }}>
+            <div>
+              <i className="fa-solid fa-laptop" style={{ color: "white" }}></i>
+
+
               <DropdownButton
                 className="dropdown-toggle"
                 as={ButtonGroup}
                 id={`dropdown-button-drop-end`}
                 drop={"end"}
                 variant=""
+
                 title={`Associate Management`}
+
+                title={`Technology Management`}
+
               >
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="1"
                 >
+
                   <Link to="registerAssociate"> Register Associate</Link>
                 </Dropdown.Item>
 
@@ -409,12 +449,25 @@ function Sidebar(props) {
                   eventKey="1"
                 >
                   <Link to="createbatch">Create Batch</Link>
+
+
+                  <Link to="addtechnology"> Add Technology</Link>
+
                 </Dropdown.Item>
 
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="2"
                 >
+                  <Link to="technologylist">List Technology</Link>
+
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+
                   <Link to="batchlist">Batch List</Link>
                 </Dropdown.Item>
               </DropdownButton>
@@ -428,6 +481,115 @@ function Sidebar(props) {
                 style={{ color: "white" }}
               ></i>
 
+                  <Link to="updatetechnology">update Technology</Link>
+                </Dropdown.Item>
+
+              </DropdownButton>
+            </div>
+          </li>
+          <li>
+            <div>
+              <i className="fa-solid fa-users" style={{ color: "white" }}></i>
+
+
+              <DropdownButton
+                className="dropdown-toggle"
+                as={ButtonGroup}
+                id={`dropdown-button-drop-end`}
+                drop={"end"}
+                variant=""
+
+              >
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="1"
+                >
+                  <Link to="addquestion">Create Question</Link>
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                  <Link to="listquestion">Question List</Link>
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </li>
+
+       title={`Associate Management`}
+              >
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+
+                  eventKey="1"
+                >
+                  <Link to="registerAssociate">  Register Associate</Link>
+
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                  <Link to="associatelist"> Associate List</Link>
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </li>
+          <li>
+            <a href="index.html">
+              <i
+                className="fa-solid fa-magnifying-glass "
+                style={{ color: "white" }}
+              ></i>
+              Report
+            </a>
+          </li>
+        </ul>
+      }
+      {!isOpen &&
+
+        <ul className={classes.menucontainer} style={{textAlign:"center"}}>
+          <li>
+            <Link to="/">
+              <i
+                className="fa-solid fa-gauge-high "
+                style={{ color: "white" }}
+              ></i>
+            </Link>
+          </li>
+          <li>
+            <div>
+              <i className="fa-solid fa-list" style={{ color: "white" }}></i>
+
+              <DropdownButton
+                className="dropdown-toggle"
+                as={ButtonGroup}
+                id={`dropdown-button-drop-end`}
+                drop={"end"}
+                variant=""
+              >
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="1"
+                >
+                  <Link to="createbatch">Create Batch</Link>
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                  <Link to="batchlist">Batch List</Link>
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </li>
+          <li>
+            <div>
+              <i
+                className="fa-solid fa-file-circle-question"
+                style={{ color: "white" }}
+              ></i>
               <DropdownButton
                 className="dropdown-toggle"
                 as={ButtonGroup}
@@ -441,7 +603,6 @@ function Sidebar(props) {
                 >
                   <Link to="addquestion">Create Question</Link>
                 </Dropdown.Item>
-
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="2"
@@ -463,6 +624,7 @@ function Sidebar(props) {
                 drop={"end"}
                 variant=""
               >
+
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="1"
@@ -491,6 +653,53 @@ function Sidebar(props) {
                 <Link to="recordTechnology">Record Technology</Link>
               </Dropdown.Item>
 
+
+                <Link to="associatelist"> Associate List</Link>
+              </Dropdown.Item>
+              <Dropdown.Item
+                style={{ backgroundColor: "#88b4ba", color: "white" }}
+                eventKey="2"
+              >
+                <Link to="testList"> Assign Test</Link>
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
+        </li>
+        <li>
+          <a href="index.html">
+            <i
+              className="fa-solid fa-magnifying-glass "
+              style={{ color: "white" }}
+            ></i>
+            Report
+          </a>
+        </li>
+      </ul>
+
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="1"
+                >
+
+                  <Link to="addtechnology"> Add Technology</Link>
+
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                  <Link to="technologylist">List Technology</Link>
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                  <Link to="updatetechnology">update Technology</Link>
+                </Dropdown.Item>
+
+
               </DropdownButton>
             </div>
           </li>
@@ -510,7 +719,8 @@ function Sidebar(props) {
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="1"
                 >
-                  <Link to="registerAssociate"> Register Associate</Link>
+                  <Link to="registerAssociate">  Register Associate</Link>
+
                 </Dropdown.Item>
 
                 <Dropdown.Item
@@ -538,3 +748,4 @@ function Sidebar(props) {
 }
 
 export default Sidebar;
+
