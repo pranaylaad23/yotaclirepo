@@ -14,7 +14,6 @@ const BatchForm = (props) => {
     const dispatch = useDispatch();
 
     const getBatchData = (e) => {
-
         setBatches({ ...batches, [e.target.name]: e.target.value });
         console.log(batches);
     }
