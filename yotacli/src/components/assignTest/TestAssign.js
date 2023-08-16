@@ -8,8 +8,11 @@ import modal from "./modal.css";
 import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import {assignTestToCandidate} from "../../redux/features/assignTestToCandidate/assignTestSlice";
-
+import 'react-quill/dist/quill.snow.css';
 import ReactQuill from "react-quill";
+import { store } from "../../app/store";
+import { postNotification } from "../../redux/features/notification/NotificationListSlice";
+
 
 const TestAssign = () => {
 const navigate = useNavigate();
@@ -117,6 +120,11 @@ const navigate = useNavigate();
       name : "", 
       body : body
     }
+    testEmail.map((mail)=>{return store.dispatch(postNotification({
+      email:mail,
+      message:subject
+    }))
+  })
     //dispatch(assignTestToCandidate(json));
     dispatch(assignTestToCandidate(json));
     
