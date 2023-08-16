@@ -1,11 +1,8 @@
-import React from "react";
+import React from 'react'
 import classes from "../../dashboard/TitleDashboard.module.css";
-import ListTechnology from "../listTechnology/ListTechnology";
+import RecordTechnology from './RecordTechnology';
 
-
-
-function TitleTechnologyList() {
-
+const TitleRecordTechnology = () => {
   return (
     <>
       {/* <!--dashbord--> */}
@@ -15,9 +12,10 @@ function TitleTechnologyList() {
             <h5 className={classes.title}>Technology Management</h5>
           </div>
         </div>
-        <ListTechnology />
+        <RecordTechnology />
       </div>
     </>
-  );
+  )
 }
-export default TitleTechnologyList;
+
+export default TitleRecordTechnology

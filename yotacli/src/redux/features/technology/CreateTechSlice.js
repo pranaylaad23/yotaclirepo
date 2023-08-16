@@ -27,6 +27,7 @@ export const createTech = createAsyncThunk(
     }
   }
 );
+
 //update
 export const UpdateTech = createAsyncThunk(
   "updateBatch",
@@ -45,12 +46,23 @@ export const UpdateTech = createAsyncThunk(
   }
 );
 
+
 //get
-export const fetchTechnology = createAsyncThunk("technology", () => {
+export const fetchTechnology = createAsyncThunk("technology", async () => {
   return axios
     .get(`http://localhost:9090/yota/api/technologies/`)
     .then((response) => response.data.map((technology) => technology));
 });
+
+
+//Search
+// export const searchTechnology = createAsyncThunk("searchTech", async (keyword) => {
+//   console.log("Keyword:", keyword);
+//   return axios
+//     .get(`http://localhost:9090/yota/api/technologies/search/${keyword}`)
+//     .then((response) => response.data.map((technology) => technology));
+// });
+
 
 //delete
 export const deleteTechnology = createAsyncThunk(
@@ -78,13 +90,40 @@ export const deleteTechnology = createAsyncThunk(
       }
   }
 );
+
+// Get Test Number API
+export const fetchTechnologyTestNumber = createAsyncThunk("technologyTestNumber", async () => {
+  return axios
+    .get(`http://localhost:9090/yota/api/technologies/tests`)
+    .then((response) => response.data);
+});
+
+// export const fetchTechnologyTestNumber = createAsyncThunk("fetchTechnologyTestNumber", async () => {
+//   const response = await fetch(
+//     `localhost:9090/yota/api/technologies/tests`
+//   );
+//   return response.json();
+// });
+
+// --------------------------------------------------------------------------------------
 export const techCreate = createSlice({
   name: "techCreate",
   initialState: {
     technologies: [],
+    searchTech:[],
+    testNumberArray:[],
     loading: false,
+    // searchError: false,
     error: null,
   },
+
+  reducers: {
+    handleSearchTech: (state, action) => {
+        state.searchTech = [];
+        state.searchTech.push(action.payload)
+    },
+},
+
   extraReducers: {
     // create
     [createTech.pending]: (state) => {
@@ -104,17 +143,39 @@ export const techCreate = createSlice({
     //get
     [fetchTechnology.pending]: (state) => {
       state.loading = true;
+      // state.searchError = false;
     },
 
     [fetchTechnology.fulfilled]: (state, action) => {
       state.loading = false;
+      // state.searchError = false;
       state.technologies = action.payload;
+      state.searchTech = action.payload;
     },
 
     [fetchTechnology.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
+
+    //search
+    // [searchTechnology.pending]: (state) => {
+    //   state.loading = true;
+    //   state.searchError = false;
+    // },
+
+    // [searchTechnology.fulfilled]: (state, action) => {
+    //   state.loading = false;
+    //   state.searchError = false;
+    //   state.technologies = action.payload;
+    // },
+
+    // [searchTechnology.rejected]: (state, action) => {
+    //   state.loading = false;
+    //   state.searchError = true;
+    //   state.error = action.payload;
+    // },
+
     // Update Data
     [UpdateTech.pending]: (state) => {
       state.loading = true;
@@ -148,6 +209,29 @@ export const techCreate = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
+
+    //get Test Number
+    [fetchTechnologyTestNumber.pending]: (state) => {
+      state.loading = true;
+      // state.searchError = false;
+      console.log("in Create Slice.js",state.testNumberArray);
+    },
+
+    [fetchTechnologyTestNumber.fulfilled]: (state, action) => {
+      state.loading = false;
+      // state.searchError = false;
+      state.testNumberArray = [action.payload];
+      // state.searchTech = action.payload;
+      console.log("in Create Slice.js",state.testNumberArray);
+    },
+
+    [fetchTechnologyTestNumber.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
   },
 });
+
+export const { handleSearchTech } = techCreate.actions;
 export default techCreate.reducer;
