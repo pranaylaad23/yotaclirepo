@@ -6,7 +6,6 @@ export const fetchBatch = createAsyncThunk("batch", () => {
     .get(`http://localhost:9090/yota/api/batches/`)
     .then((response) => response.data.map((batch) => batch));
 });
-console.log("sharad patil");
 
 export const batchList = createSlice({
   name: "batchList",

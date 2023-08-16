@@ -1,4 +1,3 @@
-
 import React, { Fragment } from 'react';
 import InputField from '../../../ui/inputField/InputField';
 import classes from "../createbatch/BatchForm.module.css"
@@ -6,6 +5,7 @@ import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { createBatch } from '../../../redux/features/batch/CreateBatchSlice';
 import Button from '../../../ui/button/Button';
+
 
 
 const BatchForm = (props) => {
@@ -27,13 +27,14 @@ const BatchForm = (props) => {
         e.preventDefault();
         console.log(batches);
         dispatch(createBatch(batches));
-        window.location.reload(false);
+        //window.location.reload(false);
 
     };
 
     return (
         <Fragment>
             <div className="row d-flex justify-content-center">
+             
                 <div className='row mt-3'>
 
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>

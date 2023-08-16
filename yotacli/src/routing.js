@@ -9,9 +9,12 @@ import TitleUpdateTechnology from "./components/technology/updateTechnology/Titl
 import TitleAssociateList from "./components/associate/listAssociates/TitleAssociateList";
 import TitleUpdateAssociate from "./components/associate/updateAssociate/TitleUpdateAssociate";
 import TitleRegisterAssociate from "./components/associate/registerAssociate/TitleRegisterAssociate";
+import TestAssign from "./components/assignTest/TestAssign";
+import TitleAssignTest from "./components/assignTest/TitleAssignTest";
 import TitleQuestionList from "./components/Question/listQuestion/TitleQuestionList";
 import TitleAddQuestion from "./components/Question/addQuestion/TitleAddQuestion";
 import TitleUpdateQuestion from "./components/Question/updateQuestion/TitleUpdateQuestion";
+
 
 const routing = () => {
   return (
@@ -28,17 +31,23 @@ const routing = () => {
         <Route path="addtechnology" element={<TitleAddTechnology />} />
         <Route path="/updatetechnology/:name" element={<TitleUpdateTechnology />}/>
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
+        <Route path="/associatelist" element={<TitleAssociateList />} >
+        </Route>
+        <Route
+          path="/registerAssociate/"
+          element={<TitleRegisterAssociate />}
+        />
         
         <Route path="listquestion" element={<TitleQuestionList />} />
         <Route path="addquestion" element={<TitleAddQuestion />} />
         <Route path="/updatequestion/:id" element={<TitleUpdateQuestion/>}/>
         <Route path="/deletequestion/:id" element={<TitleQuestionList />} />
-        
-
         <Route path="/associatelist" element={<TitleAssociateList />} />
         <Route path="/registerAssociate/" element={<TitleRegisterAssociate />}/>
         <Route path="/updateAssociate/:id" element={<TitleUpdateAssociate />} />
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
+        <Route path="testList" element={<TitleAssignTest/> } />
+        <Route path="/assignTest" element={<TestAssign/>}/>
       </Routes>
     </>
   );

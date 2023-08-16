@@ -256,6 +256,29 @@ function Sidebar(props) {
                 drop={"end"}
                 variant=""
               >
+
+                <Link to="associatelist"> Associate List</Link>
+              </Dropdown.Item>
+              <Dropdown.Item
+                style={{ backgroundColor: "#88b4ba", color: "white" }}
+                eventKey="2"
+              >
+                <Link to="testList"> Assign Test</Link>
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
+        </li>
+        <li>
+          <a href="index.html">
+            <i
+              className="fa-solid fa-magnifying-glass "
+              style={{ color: "white" }}
+            ></i>
+            Report
+          </a>
+        </li>
+      </ul>
+
                 <Dropdown.Item
                   style={{ backgroundColor: "#88b4ba", color: "white" }}
                   eventKey="1"
@@ -320,6 +343,7 @@ function Sidebar(props) {
           </li>
         </ul>
       }
+
     </div>
   );
 }
