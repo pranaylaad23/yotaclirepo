@@ -3,7 +3,7 @@ import { Button, Offcanvas, Toast, ToastContainer } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { store } from "../../app/store";
 import { deleteNotification, fetchNotification, updateNotification } from "../../redux/features/notification/NotificationListSlice";
-import Moment from "react-moment";
+import Moment from "react-moment";  
 import { Bell } from "react-bootstrap-icons";
 
 const Notification=()=>{

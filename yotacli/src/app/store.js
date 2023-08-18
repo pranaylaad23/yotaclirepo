@@ -11,7 +11,7 @@ export const store = configureStore({
     batch: batchReducer,
     technology: technologyReducer,
     associate: associateReducer,
-    notification: NotificationListSlice
+    notification: NotificationListSlice,
     assignTest:assignTest
 
   },
