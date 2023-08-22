@@ -98,12 +98,12 @@ export const fetchTechnologyTestNumber = createAsyncThunk("technologyTestNumber"
     .then((response) => response.data);
 });
 
-// export const fetchTechnologyTestNumber = createAsyncThunk("fetchTechnologyTestNumber", async () => {
-//   const response = await fetch(
-//     `localhost:9090/yota/api/technologies/tests`
-//   );
-//   return response.json();
-// });
+// Get Test Deatils of Technology API
+export const fetchTechnologyTestDetails = createAsyncThunk("fetchTechnologyTestDetails", async (name) => {
+  return axios
+    .get(`http://localhost:9090/yota/api/technologies/tests/${name}`)
+    .then((response) => response.data);
+});
 
 // --------------------------------------------------------------------------------------
 export const techCreate = createSlice({
@@ -112,6 +112,7 @@ export const techCreate = createSlice({
     technologies: [],
     searchTech:[],
     testNumberArray:[],
+    testDetailsArray:[],
     loading: false,
     // searchError: false,
     error: null,
@@ -226,6 +227,25 @@ export const techCreate = createSlice({
     },
 
     [fetchTechnologyTestNumber.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    //get Test Details
+    [fetchTechnologyTestDetails.pending]: (state) => {
+      state.loading = true;
+      // state.searchError = false;
+    },
+
+    [fetchTechnologyTestDetails.fulfilled]: (state, action) => {
+      state.loading = false;
+      // state.searchError = false;
+      state.testDetailsArray = [action.payload];
+      // state.searchTech = action.payload;
+      console.log("in Create Slice.js",state.testDetailsArray);
+    },
+
+    [fetchTechnologyTestDetails.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
