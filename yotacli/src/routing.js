@@ -54,6 +54,7 @@ const routing = () => {
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
         <Route path="testList" element={<TitleAssignTest/> } />
         <Route path="/assignTest" element={<TestAssign/>}/>
+        
       </Routes>
     </>
   );

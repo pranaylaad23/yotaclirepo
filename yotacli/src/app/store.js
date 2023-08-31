@@ -4,6 +4,8 @@ import technologyReducer from "../redux/features/technology/CreateTechSlice";
 import associateReducer from "../redux/features/associate/ListAssociateSlice";
 import NotificationListSlice from "../redux/features/notification/NotificationListSlice";
 import { assignTest } from "../redux/features/assignTestToCandidate/assignTestSlice";
+import listStudentSlice from "../redux/studentDashboard/listStudentSlice";
+
 
 
 export const store = configureStore({
@@ -12,7 +14,8 @@ export const store = configureStore({
     technology: technologyReducer,
     associate: associateReducer,
     notification: NotificationListSlice,
-    assignTest:assignTest
+    assignTest:assignTest,
+    studenttestlink : listStudentSlice
 
   },
 });
