@@ -4,7 +4,7 @@ import technologyReducer from "../redux/features/technology/CreateTechSlice";
 import associateReducer from "../redux/features/associate/ListAssociateSlice";
 import NotificationListSlice from "../redux/features/notification/NotificationListSlice";
 import { assignTest } from "../redux/features/assignTestToCandidate/assignTestSlice";
-
+import CreateClientSlice, {createClient} from "../redux/features/client/CreateClientSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +12,8 @@ export const store = configureStore({
     technology: technologyReducer,
     associate: associateReducer,
     notification: NotificationListSlice,
-    assignTest:assignTest
+    assignTest:assignTest,
+    clients:CreateClientSlice
 
   },
 });

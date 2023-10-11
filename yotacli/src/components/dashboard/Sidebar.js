@@ -187,6 +187,35 @@ function Sidebar(props) {
               </DropdownButton>
             </div>
           </li>
+          
+          <li>
+            <div>
+              <i className="fa-solid fa-list" style={{ color: "white" }}></i>
+
+              <DropdownButton
+                className="dropdown-toggle"
+                as={ButtonGroup}
+                id={`dropdown-button-drop-end`}
+                drop={"end"}
+                variant=""
+                title={`Client Management`}
+              >
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="1"
+                >
+                  <Link to="addclient">Create Client</Link>
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                 
+                  <Link to="clientlist">Client List</Link>
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </li>
           <li>
             <a href="index.html">
               <i
@@ -196,6 +225,34 @@ function Sidebar(props) {
               Report
             </a>
           </li>
+          {/* <li>
+            <div>
+              <i className="fa-solid fa-list" style={{ color: "white" }}></i>
+
+              <DropdownButton
+                className="dropdown-toggle"
+                as={ButtonGroup}
+                id={`dropdown-button-drop-end`}
+                drop={"end"}
+                variant=""
+                title={`Client Question Bank`}
+              >
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="1"
+                >
+                  <Link to="addclientquestion">Create Client Question</Link>
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ backgroundColor: "#88b4ba", color: "white" }}
+                  eventKey="2"
+                >
+                 
+                  <Link to="clientquestionlist">Client Question List</Link>
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </li> */}
         </ul>
       }
       {!isOpen &&

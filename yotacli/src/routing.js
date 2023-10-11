@@ -15,6 +15,13 @@ import TitleAssignTest from "./components/assignTest/TitleAssignTest";
 import TitleQuestionList from "./components/Question/listQuestion/TitleQuestionList";
 import TitleAddQuestion from "./components/Question/addQuestion/TitleAddQuestion";
 import TitleUpdateQuestion from "./components/Question/updateQuestion/TitleUpdateQuestion";
+import { Dashboard } from "./student/pages/Dashboard";
+import TitleAddClient from "./components/ClientMaster/addClient/TitleAddClient";
+import TitleClientList from "./components/ClientMaster/listClient/TitleClientList";
+import TitleViewQuestion from "./components/ClientMaster/viewQuestion/TitleViewQuestion";
+
+
+
 
 
 const routing = () => {
@@ -54,6 +61,10 @@ const routing = () => {
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
         <Route path="testList" element={<TitleAssignTest/> } />
         <Route path="/assignTest" element={<TestAssign/>}/>
+        <Route path="/student" element={<Dashboard/>}/>
+        <Route path="/addclient"element={<TitleAddClient/>} />
+        <Route path="/clientlist" element={<TitleClientList />} /> 
+        <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
       </Routes>
     </>
   );
