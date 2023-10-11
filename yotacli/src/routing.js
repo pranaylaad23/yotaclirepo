@@ -20,21 +20,15 @@ import TitleAddClient from "./components/ClientMaster/addClient/TitleAddClient";
 import TitleClientList from "./components/ClientMaster/listClient/TitleClientList";
 import TitleViewQuestion from "./components/ClientMaster/viewQuestion/TitleViewQuestion";
 
-
-
-
-
 const routing = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<TitleDashboard />} />
-
         <Route path="batchlist" element={<TitleBatchList />} />
         <Route path="createbatch" element={<TitleCreateBatch />} />
         <Route path="/updatebatch/:id" element={<TitleUpdateBatch />} />
         <Route path="/deletebatch/:id" element={<TitleBatchList />} />
-
         <Route path="technologylist" element={<TitleTechnologyList />} />
         <Route path="addtechnology" element={<TitleAddTechnology />} />
         <Route path="/updatetechnology/:name" element={<TitleUpdateTechnology />}/>
@@ -42,15 +36,9 @@ const routing = () => {
         {/* <Route path="questionlist" element={<TitleQuestionList />} /> */}
         <Route path="/recordTechnology" element={<TitleRecordTechnology />} />
         <Route path="/recordTechDetails/:name" element={<TitleRecordTechnology />} />
-
         <Route path="/associatelist" element={<TitleAssociateList />} />
-        <Route path="/associatelist" element={<TitleAssociateList />} >
-        </Route>
-        <Route
-          path="/registerAssociate/"
-          element={<TitleRegisterAssociate />}
-        />
-        
+        <Route path="/associatelist" element={<TitleAssociateList />} />
+        <Route path="/registerAssociate/" element={<TitleRegisterAssociate />} />
         <Route path="listquestion" element={<TitleQuestionList />} />
         <Route path="addquestion" element={<TitleAddQuestion />} />
         <Route path="/updatequestion/:id" element={<TitleUpdateQuestion/>}/>
