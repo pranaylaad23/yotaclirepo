@@ -6,25 +6,24 @@ import Button from "../../../ui/button/Button";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 // import { searchTechnology } from "../../../redux/features/technology/CreateTechSlice";
-import { handleSearchTech, fetchTechnology } from "../../../redux/features/technology/CreateTechSlice";
+import { handleSearchTech, fetchTest } from "../../../redux/features/technology/CreateTechSlice";
 
 const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
-  const technology = useSelector((state) => state.technology.technologies);
+  const test = useSelector((state) => state.test.tests);
 
   const pageDataOptions = [
-    {value: 5, label: "5"},
-    {value: 10, label: "10"},
-    {value: 15, label: "15"},
-    {value: 25, label: "25"},
-    {value: 100, label: "100"},
+    {value: 5, label: "React"},
+    {value: 10, label: "Java  "},
+    {value: 15, label: "AWS"},
+    {value: 25, label: "Python"},
+    {value: 100, label: "C#"},
 ];
 
   const handleSelectData = (selectOption) => {
     console.log("handleSelectData", selectOption);
     console.log("selectOption.value", selectOption.value);
-  
     setDataPerPage(selectOption.value);
 
     // Pagination
@@ -42,7 +41,7 @@ const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
       e.preventDefault();
       console.log("Search Term:",search);
       if(search !== ''){
-        const matchSearchTech = technology.filter(tech => 
+        const matchSearchTech = test.filter(tech => 
           tech.name.toLowerCase().includes(search.toLowerCase()));
           console.log("matchSearchTech:",matchSearchTech);
           dispatch(handleSearchTech(matchSearchTech));
@@ -63,8 +62,8 @@ const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
       <div className="row mt-3">
         <div className="col-xl-5 col-lg-5 col-md-4 col-sm-4 d-flex">
           <h6 className={classes.boxtitle}>
-            List Of Technology
-            
+            Test List
+           
           </h6>
 
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-8 ms-3">
