@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import classes from "./ListTechnologyItem.module.css";
 import axios from "axios";
 
-import TechnologyList from "./TechnologyList";
+import TestList from "./TestList";
 import { useSelector } from "react-redux";
 
-const ListTechnologyItem = ({currentPage, dataPerPage}) => {
+const ListTestItem = ({currentPage, dataPerPage}) => {
   // const technology = useSelector((state) => state.technology);
   // console.log("State Error:",technology.searchError);
 
@@ -15,14 +15,20 @@ const ListTechnologyItem = ({currentPage, dataPerPage}) => {
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>Sr.No.</th>
-            <th>Name </th>
-            <th>Description</th>
+            <th>Id</th>
+            <th>TestName</th>
+            <th>AssignTest</th>
+            <th>TestTekan</th>
+            <th>Shortlisted</th>
+            <th>CreatedOn</th>
+            <th>EndDate</th>
+            <th>Status</th>
+            <th>TestType</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-            <TechnologyList 
+            <TestList 
             currentPage={currentPage}
             dataPerPage={dataPerPage}
             />
@@ -32,4 +38,4 @@ const ListTechnologyItem = ({currentPage, dataPerPage}) => {
   );
 };
 
-export default ListTechnologyItem;
+export default ListTestItem;

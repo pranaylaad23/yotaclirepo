@@ -7,7 +7,11 @@ import classes1 from "./HeaderItem.module.css";
 import axios from "axios";
 
 import Button from "../../../ui/button/Button";
-const RegisterTechnologyForm = (props) => {
+import { createClient } from "../../../redux/features/test/CreateTestSlice";
+import Select from 'react-select';
+
+
+const RegisterClientForm = (props) => {
   const [technologies, setTechnologies] = useState({});
   const dispatch = useDispatch();
 
@@ -19,16 +23,21 @@ const RegisterTechnologyForm = (props) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     console.log(technologies);
-    dispatch(createTech(technologies));
+    dispatch(createClient(technologies));
+    window.location.reload();
     alert("technology created successfully");
   };
-
+  const data =[
+    { value: 'java', label: 'JAVA' },
+  { value: 'reactjs', label: 'REACTJS' },
+  { value: 'aws', label: 'AWS' }
+  ]
   return (
     <>
       <div className="row">
         <div className="row mt-3">
           <div className="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-            <h5 className={classes1.boxtitle}>Add Parent Technology</h5>
+            <h5 className={classes1.boxtitle}>Add Client Master</h5>
           </div>
 
           <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8">
@@ -40,12 +49,11 @@ const RegisterTechnologyForm = (props) => {
           </div>
         </div>
       </div>
+
       <hr />
-      {/*  */}
-      <div className="col-10 mt-4">
-      
-      </div>
-      {/*  */}
+
+      <div className="col-10 mt-4"></div>
+
       <div className="row align-items-end">
         <div className={`col-3 ${classes.inputName}`}>
           <div>
@@ -54,33 +62,31 @@ const RegisterTechnologyForm = (props) => {
             </label>
           </div>
         </div>
+
         <div className={`col `}>
           <InputField>
             <input
               type="text"
               id="inputName"
-              name="name"
+              name="clientName"
               className={`form-control ${classes.inputField}`}
               onChange={getTechnologyData}
               aria-describedby="nameHelpInline"
-              placeholder="Enter Technology Name"
-              style={{width:"400px"}}
+              placeholder="Enter Client Name"
+              style={{ width: "400px" }}
             />
           </InputField>
         </div>
-        <div className="col" style={{ paddingBottom: "10px" }}>
-          <span
-            id="nameHelpInline"
-            className="form-text"
-            style={{ paddingBottom: "10px" }}
-          ></span>
-        </div>
       </div>
+
       <div className="row align-items-end">
-        <div className={`col-3 mb-4 ${classes.inputName}`}>
-          <label for="description">Description:</label>
+        <div className={`col-3 mb-5 ${classes.inputName}`}>
+          <label style={{ marginLeft: "32px" }} for="description">
+            Description:
+          </label>
         </div>
-        <div className={`col  mt-4 `}>
+
+        <div className={`col mt-3 `}>
           <InputField>
             <textarea
               id="description"
@@ -88,21 +94,37 @@ const RegisterTechnologyForm = (props) => {
               className={`form-control ${classes.inputField}`}
               onChange={getTechnologyData}
               aria-describedby="descriptionHelpInline"
-              placeholder="Enter Technology Description here..."
-              style={{width:"400px",height:"100px"}}
+              placeholder="Enter Client Description here... "
+              style={{ width: "400px", height: "100px" }}
             ></textarea>
           </InputField>
         </div>
-        <div className="col" style={{ paddingBottom: "25px" }}>
-          <span
-            id="descriptionHelpInline"
-            className="form-text"
-            style={{ paddingBottom: "35px" }}
-          ></span>
+      </div>
+      <div className="row align-items-end">
+      <div className={`col-3 mb-5 ${classes.inputName}`}>
+          <label style={{ marginLeft: "30px" }} for="description">
+          Technology:
+          </label>
+        </div>
+      
+
+        <div className={`col -3`}>
+        <InputField>
+        <Select
+    
+    isMulti
+    name="colors"
+    options={data}
+   
+    classNamePrefix="select"
+    style={{ width: "400px", height: "100px" }}
+    className={`form-control ${classes.inputField}`}
+  />     </InputField>
         </div>
       </div>
+      
     </>
   );
 };
 
-export default RegisterTechnologyForm;
+export default RegisterClientForm;
