@@ -5,30 +5,38 @@ import loginCss from './TrainerRegistration.css'
 import LoginHeader from './LoginHeader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 
 const TrainerRegistration = () => {
     const navigate = useNavigate();
-    const routeToLogin = () => {
-        //Need to write login api call here
-        //  const authToken = 'sdfgdsgfdbjfd.dsfgfggdsfdsafaefreubjb.ergrtgd';
-        //  localStorage.setItem('token', authToken);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const registerTrainer = () => {
+        console.log("email: ", email)
+        let loginData = {
+            email: email,
+            password: password
+        }
+        console.log(loginData);
+        console.log("Login Data: " + loginData.email);
+        //Can call API here to verify the login details:
         toast("Registration Success!");
         setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-
-        
+            navigate('/login');
+        }, 1000);
     }
     return (
         <>
-        <LoginHeader/>
-        <ToastContainer />
+            <LoginHeader />
+            <ToastContainer />
             <div className='login-bg-body'>
                 <div class="container">
                     <div class="row">
                         <div class="col"> </div>
                         <div class="card login-card-body">
                             <div class="card-header">
+                                <Link to='/login'>Back</Link>
                                 <h3 className='text-center'>Trainer Registration</h3>
                             </div>
                             <div class="card-body">
@@ -36,15 +44,15 @@ const TrainerRegistration = () => {
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formGroupEmail">
                                             <Form.Label>Email Address:</Form.Label>
-                                            <Form.Control type="email" placeholder="Enter email" />
+                                            <Form.Control type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formGroupPassword">
                                             <Form.Label>Create Password:</Form.Label>
-                                            <Form.Control type="password" placeholder=" Creat Password" />
+                                            <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} placeholder=" Creat Password" />
                                         </Form.Group>
                                     </Form>
                                     <div className='text-center'>
-                                        <button type='submit' className='btn btn-success login-btn' onClick={routeToLogin}>Register</button>
+                                        <button type='submit' className='btn btn-success login-btn' onClick={registerTrainer}>Register</button>
                                     </div>
                                 </div>
                             </div>

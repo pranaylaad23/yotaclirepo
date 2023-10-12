@@ -25,12 +25,12 @@ const routing = () => {
     <>
       <Routes>
         <Route path="/" element={<TitleDashboard />} />
-        <Route path="batchlist" element={<TitleBatchList />} />
-        <Route path="createbatch" element={<TitleCreateBatch />} />
+        <Route path="/batchlist" element={<TitleBatchList />} />
+        <Route path="/createbatch" element={<TitleCreateBatch />} />
         <Route path="/updatebatch/:id" element={<TitleUpdateBatch />} />
         <Route path="/deletebatch/:id" element={<TitleBatchList />} />
-        <Route path="technologylist" element={<TitleTechnologyList />} />
-        <Route path="addtechnology" element={<TitleAddTechnology />} />
+        <Route path="/technologylist" element={<TitleTechnologyList />} />
+        <Route path="/addtechnology" element={<TitleAddTechnology />} />
         <Route path="/updatetechnology/:name" element={<TitleUpdateTechnology />}/>
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
         {/* <Route path="questionlist" element={<TitleQuestionList />} /> */}
@@ -40,7 +40,7 @@ const routing = () => {
         <Route path="/associatelist" element={<TitleAssociateList />} />
         <Route path="/registerAssociate/" element={<TitleRegisterAssociate />} />
         <Route path="listquestion" element={<TitleQuestionList />} />
-        <Route path="addquestion" element={<TitleAddQuestion />} />
+        <Route path="/addquestion" element={<TitleAddQuestion />} />
         <Route path="/updatequestion/:id" element={<TitleUpdateQuestion/>}/>
         <Route path="/deletequestion/:id" element={<TitleQuestionList />} />
         <Route path="/associatelist" element={<TitleAssociateList />} />

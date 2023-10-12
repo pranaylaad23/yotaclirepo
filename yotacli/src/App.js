@@ -14,6 +14,7 @@ import { Signout } from "./student/pages/Signout";
 import StdDashboard from "./student/pages/Dashboard";
 import Login from "./components/trainer/usermanagement/Login";
 import TrainerRegistration from "./components/trainer/usermanagement/TrainerRegistration";
+import ForgotPassword from "./components/trainer/usermanagement/ForgotPassword";
 
 
 function App() {
@@ -25,8 +26,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<TrainerRegistration />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/student/*" element={<StudentDashboard />}>
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/trainer/*" element={<Dashboard />} />
+        <Route path="/student/*" element={<StudentDashboard />}>
             {/* <Route path="dashboard" element={<StdDashboard />} /> */}
             <Route path="analytics" element={<Analytics />} />
             <Route path="testlinks" element={<TestLinks />} />
