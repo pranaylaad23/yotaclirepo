@@ -12,6 +12,8 @@ import Training from "./student/pages/Training";
 import TrainingSummary from "./student/pages/TrainingSummary";
 import { Signout } from "./student/pages/Signout";
 import StdDashboard from "./student/pages/Dashboard";
+import Login from "./components/trainer/usermanagement/Login";
+import TrainerRegistration from "./components/trainer/usermanagement/TrainerRegistration";
 
 
 function App() {
@@ -19,19 +21,22 @@ function App() {
   return (
     <div>
       <Provider store={store}>
-        
         <Routes>
-        <Route path="/*" element={<Dashboard />}/>
-        <Route path="/student/*" element={<StudentDashboard/>}>
-        
-            <Route path="dashboard" element={<StdDashboard/>}/>
-            <Route path="analytics" element={<Analytics/>}/>
-            <Route path="testlinks" element={<TestLinks/>}/>
-            <Route path="training" element={<Training/>}/>
-            <Route path="trainingsummary" element={<TrainingSummary/>}/>
-            <Route path="signout" element={<Signout/>}/>
-        </Route>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<TrainerRegistration />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/student/*" element={<StudentDashboard />}>
+            {/* <Route path="dashboard" element={<StdDashboard />} /> */}
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="testlinks" element={<TestLinks />} />
+            <Route path="training" element={<Training />} />
+            <Route path="trainingsummary" element={<TrainingSummary />} />
+            <Route path="signout" element={<Signout />} />
+            <Route path="login" element={<Login />} />
+          </Route>
         </Routes>
+        
       </Provider>
     </div>
   )
