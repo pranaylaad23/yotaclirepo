@@ -11,14 +11,17 @@ const BatchForm = (props) => {
     const dispatch = useDispatch();
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
-
+    const [selectedUnit, setSelectedUnit] = useState('');
+    const [selectedCompetency, setSelectedCompetency] = useState('');
+    const [selectedTrainingtype, setSelectedTrainingtype] = useState('');
+    
     const getBatchData = (e) => {
         setBatches({ ...batches, [e.target.name]: e.target.value });
         console.log(batches);
     }
 
     const calculateBatchName = () => {
-        const mergedName = `${selectedMonth}-${selectedYear}`;
+        const mergedName = `${selectedUnit}-${selectedCompetency}-${selectedTrainingtype}-${selectedMonth}-${selectedYear}`;
         return mergedName;
     };
 
@@ -28,7 +31,19 @@ const BatchForm = (props) => {
         'September', 'October', 'November', 'December'
     ];
 
-    const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i);
+    const units = [
+        'unit 1', 'unit 2', 'unit 3', 'unit 4'
+    ];
+
+    const competencies = [
+        'Java', 'React', 'AWS', 'Angular'
+    ];
+
+    const trainingtypes = [
+        'Project specific', 'FRW', 'DRWF', 'On Demand'
+    ];
+
+    const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
 
     const handleMonthChange = (event) => {
         setSelectedMonth(event.target.value);
@@ -36,6 +51,18 @@ const BatchForm = (props) => {
 
     const handleYearChange = (event) => {
         setSelectedYear(event.target.value);
+    };
+
+    const handleUnitChange = (event) => {
+        setSelectedUnit(event.target.value);
+    };
+
+    const handleCompetencyChange = (event) => {
+        setSelectedCompetency(event.target.value);
+    };
+
+    const handleTrainingtypeChange = (event) => {
+        setSelectedTrainingtype(event.target.value);
     };
 
     const handleOnSubmit = (e) => {
@@ -78,12 +105,13 @@ const BatchForm = (props) => {
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "149px" }}>
                                     <InputField >
-                                        <select name="unit" onChange={getBatchData} style={{ height: "33px", width: "300px" }}>
-                                            <option value="Select">select unit</option>
-                                            <option value='unit1'>unit 1</option>
-                                            <option value='unit2'>unit 2</option>
-                                            <option value='unit3'>unit 3</option>
-                                            <option value='unit4'>unit 4</option>
+                                        <select value={selectedUnit} onChange={handleUnitChange} style={{ width: "302px" }}>
+                                            <option value="">Select Unit</option>
+                                            {units.map((unit, index) => (
+                                                <option key={index} value={unit}>
+                                                    {unit}
+                                                </option>
+                                            ))}
                                         </select>
                                     </InputField>
                                 </div>
@@ -98,12 +126,13 @@ const BatchForm = (props) => {
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px" }}>
                                     <InputField>
-                                        <select name="competency" onChange={getBatchData} style={{ width: "319px", height: "35px" }}>
-                                            <option value="Select">select competency</option>
-                                            <option value="competency1">Java</option>
-                                            <option value="competency2">React</option>
-                                            <option value="competency3">AWS</option>
-                                            <option value="competency4">Testing</option>
+                                        <select value={selectedCompetency} onChange={handleCompetencyChange} style={{ width: "319px" }}>
+                                            <option value="">Select Competency</option>
+                                            {competencies.map((competency, index) => (
+                                                <option key={index} value={competency}>
+                                                    {competency}
+                                                </option>
+                                            ))}
                                         </select>
                                     </InputField>
                                 </div>
@@ -120,12 +149,20 @@ const BatchForm = (props) => {
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "91px" }}>
                                     <InputField>
-                                        <select name="trainingtype" onChange={getBatchData} style={{ height: "33px", width: "300px" }}>
+                                        {/* <select name="trainingtype" onChange={getBatchData} style={{ height: "33px", width: "300px" }}>
                                             <option value="Select">select Training Type</option>
                                             <option value='trainingtype1'>On demand</option>
                                             <option value='trainingtype2'>Project specific</option>
                                             <option value='trainingtype3'>FRW</option>
                                             <option value='trainingtype4'>DRWF</option>
+                                        </select> */}
+                                        <select value={selectedTrainingtype} onChange={handleTrainingtypeChange} style={{ width: "302px" }}>
+                                            <option value="">Select Training Type</option>
+                                            {trainingtypes.map((trainingtype, index) => (
+                                                <option key={index} value={trainingtype}>
+                                                    {trainingtype}
+                                                </option>
+                                            ))}
                                         </select>
                                     </InputField>
                                 </div>
@@ -134,11 +171,11 @@ const BatchForm = (props) => {
                         <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px" }}>
                             <td>
                                 <div>
-                                    <label className={classes.label} style={{ marginTop: "10px" }}>Month&Year:&nbsp;</label>
+                                    <label className={classes.label} style={{ marginTop: "10px" }}>Month & Year:</label>
                                 </div>
                             </td>
                             <td>
-                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "14px" }}>
+                                <div className={`col-12`} style={{ marginTop: "10px", }}>
                                     <tr><td>
                                         <InputField>
                                             <select value={selectedMonth} onChange={handleMonthChange} style={{ width: "150px" }}>
@@ -150,9 +187,9 @@ const BatchForm = (props) => {
                                                 ))}
                                             </select>
                                         </InputField></td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;</td>
                                         <td><InputField>
-                                            <select value={selectedYear} onChange={handleYearChange} style={{ width: "145px" }}>
+                                            <select value={selectedYear} onChange={handleYearChange} style={{ width: "158px" }}>
                                                 <option value="">Select Year</option>
                                                 {years.map((year, index) => (
                                                     <option key={index} value={year}>
@@ -231,7 +268,7 @@ const BatchForm = (props) => {
                         </div>
                     </div>
                 </form>
-            </div >
+            </div>
         </Fragment >
     )
 }
