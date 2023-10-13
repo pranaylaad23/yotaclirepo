@@ -20,6 +20,7 @@ import TitleAddClient from "./components/ClientMaster/addClient/TitleAddClient";
 import TitleClientList from "./components/ClientMaster/listClient/TitleClientList";
 import TitleViewQuestion from "./components/ClientMaster/viewQuestion/TitleViewQuestion";
 import TitleTestList from "./components/test/listTest/TitleTestList";
+import TitleAddClientQuestion from "./components/ClientMaster/addClientQuestion/TitleAddClientQuestion";
 const routing = () => {
   return (
     <>
@@ -54,6 +55,7 @@ const routing = () => {
         <Route path="/clientlist" element={<TitleClientList />} /> 
         <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
          {/* <Route path="/testlist" element={<TitleTestList />} /> */}
+         <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
       </Routes>
     </>
   );
