@@ -36,7 +36,7 @@ const Login = () => {
                         <div class="col"> </div>
                         <div class="card login-card-body">
                             <div class="card-header">
-                                <h3 className='text-center'>Trainer Login</h3>
+                                <h3 className='text-center'>Login</h3>
                             </div>
                             <div class="card-body">
                                 <div class="col mt-4">

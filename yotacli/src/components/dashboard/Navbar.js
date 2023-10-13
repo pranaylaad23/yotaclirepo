@@ -15,7 +15,7 @@ function Navbar() {
         <ul className={classes.ulb}>
           <li>
             <span className={classes.nameDesign}>
-              <span className={classes.headeruserName}>Pankaj Sharma</span>
+              <span className={classes.headeruserName}>Ram Verma</span>
               <span className={classes.headeruserRole}>Role_User</span>
             </span>
           </li>
