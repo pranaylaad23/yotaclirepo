@@ -14,7 +14,7 @@ const BatchForm = (props) => {
     const [selectedUnit, setSelectedUnit] = useState('');
     const [selectedCompetency, setSelectedCompetency] = useState('');
     const [selectedTrainingtype, setSelectedTrainingtype] = useState('');
-
+    
     const getBatchData = (e) => {
         setBatches({ ...batches, [e.target.name]: e.target.value });
         console.log(batches);
@@ -43,9 +43,7 @@ const BatchForm = (props) => {
         'Project specific', 'FRW', 'DRWF', 'On Demand'
     ];
 
-    const unit = ['unit 1', 'unit 2', 'unit 3', 'unit 4'];
-
-    const years = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i);
+    const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
 
     const handleMonthChange = (event) => {
         setSelectedMonth(event.target.value);
