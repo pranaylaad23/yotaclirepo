@@ -43,20 +43,7 @@ const RegisterTechnologyForm = (props) => {
       <hr />
       {/*  */}
       <div className="col-10 mt-4">
-        <ul>
-          <li>
-            <p>
-              Create <b>Parent Technologies</b> to better organize and group
-              your <b>Sub Technologies.</b>
-            </p>
-          </li>
-          <li>
-            <p>
-              You can add multiple <b>Sub Technologies</b> under
-              <b> Parent Technology.</b>
-            </p>
-          </li>
-        </ul>
+      
       </div>
       {/*  */}
       <div className="row align-items-end">
@@ -77,6 +64,7 @@ const RegisterTechnologyForm = (props) => {
               onChange={getTechnologyData}
               aria-describedby="nameHelpInline"
               placeholder="Enter Technology Name"
+              style={{width:"400px"}}
             />
           </InputField>
         </div>
@@ -85,16 +73,14 @@ const RegisterTechnologyForm = (props) => {
             id="nameHelpInline"
             className="form-text"
             style={{ paddingBottom: "10px" }}
-          >
-            Maximum 30 Characters
-          </span>
+          ></span>
         </div>
       </div>
       <div className="row align-items-end">
-        <div className={`col-3 mb-3 ${classes.inputName}`}>
+        <div className={`col-3 mb-4 ${classes.inputName}`}>
           <label for="description">Description:</label>
         </div>
-        <div className={`col mt-3 `}>
+        <div className={`col  mt-4 `}>
           <InputField>
             <textarea
               id="description"
@@ -103,6 +89,7 @@ const RegisterTechnologyForm = (props) => {
               onChange={getTechnologyData}
               aria-describedby="descriptionHelpInline"
               placeholder="Enter Technology Description here..."
+              style={{width:"400px",height:"100px"}}
             ></textarea>
           </InputField>
         </div>
@@ -110,10 +97,8 @@ const RegisterTechnologyForm = (props) => {
           <span
             id="descriptionHelpInline"
             className="form-text"
-            style={{ paddingBottom: "25px" }}
-          >
-            Maximum 50 words.
-          </span>
+            style={{ paddingBottom: "35px" }}
+          ></span>
         </div>
       </div>
     </>
