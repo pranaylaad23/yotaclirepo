@@ -15,14 +15,14 @@ const ClientsList = () => {
 
 
     <>
-            {client.map((client, key) => (
+            {client ? client.map((client, key) => (
                 <tr key={key}>
                     
                     <td>
                         {client.clientId}&nbsp;&nbsp;
                         
                     </td>
-                    <td>{client.clientName}</td>
+                    <Link to={'/addClientQuestion'}><td>{client.clientName}</td></Link>
                     <td>{client.shortDescription}</td>
                     <td>
                        <i className="fa fa-edit" title='Edit'></i>&nbsp;&nbsp;
@@ -37,7 +37,7 @@ const ClientsList = () => {
                 
                     </td>
                 </tr>
-            ))}
+            )):null}
         </>
   )
 };
