@@ -1,29 +1,43 @@
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
-import loginCss from './Login.css'
-import LoginHeader from './LoginHeader';
+import loginCss from './UserLogin.css'
+import LoginHeader from './UserHeader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
+import axios from 'axios';
 
-const Login = () => {
+const UserLogin = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const [userCredentail, setUserCredentail] = useState('');
     const loginUser = () => {
-        console.log("email: ", email)
-        let loginData = {
-            email: email,
+        //console.log("email: ", email)
+        let userCredentail = {
+            username: username,
             password: password
         }
-        console.log(loginData);
-        console.log("Login Data: " + loginData.email);
+        console.log(userCredentail);
+        console.log("Login Data: " + userCredentail.username);
         //Can call API here to verify the login details:
-        toast("Login Success!");
-        setTimeout(() => {
-            navigate('/trainer');
-        }, 1000);
+        axios.post('http://localhost:9090/yota/user/authenticate', userCredentail)
+            .then((resp) => {
+                console.log(resp);
+                if (resp.data) {
+                    //   navigate('/home');
+                    toast("Login Success!");
+                    setTimeout(() => {
+                        navigate('/dashboard');
+                    }, 1000);
+                }
+            }).catch((error) => {
+                console.log(error);
+                toast("Invalid Credentail!!");
+                setUserCredentail()
+                navigate('/');
+            });
+
     }
 
     return (
@@ -43,11 +57,11 @@ const Login = () => {
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formGroupEmail">
                                             <Form.Label>Email Address:</Form.Label>
-                                            <Form.Control type="email" onChange={(e)=>{setEmail(e.target.value)}} placeholder="Enter email" />
+                                            <Form.Control type="email" onChange={(e) => { setUsername(e.target.value) }} placeholder="Enter email" />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formGroupPassword">
                                             <Form.Label>Password:</Form.Label>
-                                            <Form.Control type="password" onChange={(e)=>{setPassword(e.target.value)}} placeholder="Password" />
+                                            <Form.Control type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" />
                                         </Form.Group>
                                     </Form>
                                     <div className='text-center'>
@@ -68,4 +82,4 @@ const Login = () => {
         </>
     );
 }
-export default Login;
+export default UserLogin;

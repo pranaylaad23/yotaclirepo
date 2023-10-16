@@ -1,7 +1,7 @@
 import React from "react";
-import loginCss from './LoginHeader.css';
+import loginCss from './UserHeader.css';
 
-function LoginHeader() {
+function UserHeader() {
   return (
     <>
       <nav
@@ -15,4 +15,4 @@ function LoginHeader() {
     </>
   );
 }
-export default LoginHeader;
+export default UserHeader;

@@ -94,8 +94,8 @@ const ClientQuestionForm = (props) => {
           </button> */}
             </li>
           );
-        })}
-
+        })
+      }
         <input style={{width:"25%",alignSelf:"center" ,height:"50px"}} type="submit" />
       </form>
     </>

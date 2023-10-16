@@ -1,30 +1,55 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
-import loginCss from './TrainerRegistration.css'
-import LoginHeader from './LoginHeader';
+import RegistrationCSS from './UserRegistration.css'
+import LoginHeader from './UserHeader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
+import axios from 'axios';
 
-const TrainerRegistration = () => {
+const UserRegistration = () => {
     const navigate = useNavigate();
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const registerTrainer = () => {
+    const registerUser = () => {
         console.log("email: ", email)
-        let loginData = {
-            email: email,
-            password: password
+        let userData = {
+            fullName: fullName,
+            username: email,
+            emailId : email,
+            password: password,
+            roles:'3'
         }
-        console.log(loginData);
-        console.log("Login Data: " + loginData.email);
+        console.log(userData);
+        console.log("userData Data: " + userData.email);
         //Can call API here to verify the login details:
-        toast("Registration Success!");
-        setTimeout(() => {
-            navigate('/login');
-        }, 1000);
+        axios.post('http://localhost:9090/yota/user/register', userData)
+        .then((resp) => {
+            console.log(resp);
+            if (resp.data) {
+                //   navigate('/home');
+                toast("Registration Success!");
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
+            }
+        }).catch((error) => {
+            console.log("ERORR:::::>>>>"+error);
+            toast("Somethig went wrong!!");
+            setFullName('');
+            setEmail('');
+            setPassword('');
+            navigate('/register');
+        });
+
+        // toast("Registration Success!");
+        // setTimeout(() => {
+        //     navigate('/login');
+        // }, 1000);
+
     }
     return (
         <>
@@ -37,14 +62,18 @@ const TrainerRegistration = () => {
                         <div class="card login-card-body">
                             <div class="card-header">
                                 <Link to='/login'>Back</Link>
-                                <h3 className='text-center'>Trainer Registration</h3>
+                                <h3 className='text-center'>Registration</h3>
                             </div>
                             <div class="card-body">
                                 <div class="col mt-4">
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formGroupEmail">
+                                            <Form.Label>Full Name:</Form.Label>
+                                            <Form.Control type="text" onChange={(e) => { setFullName(e.target.value) }} placeholder="Enter Full Name" />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="formGroupEmail">
                                             <Form.Label>Email Address:</Form.Label>
-                                            <Form.Control type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
+                                            <Form.Control type="text" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formGroupPassword">
                                             <Form.Label>Create Password:</Form.Label>
@@ -52,7 +81,7 @@ const TrainerRegistration = () => {
                                         </Form.Group>
                                     </Form>
                                     <div className='text-center'>
-                                        <button type='submit' className='btn btn-success login-btn' onClick={registerTrainer}>Register</button>
+                                        <button type='submit' className='btn btn-success login-btn' onClick={registerUser}>Register</button>
                                     </div>
                                 </div>
                             </div>
@@ -65,4 +94,4 @@ const TrainerRegistration = () => {
         </>
     );
 }
-export default TrainerRegistration;
+export default UserRegistration;

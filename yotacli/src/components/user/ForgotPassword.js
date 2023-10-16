@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
-import loginCss from './Login.css'
-import LoginHeader from './LoginHeader';
+import loginCss from './UserLogin.css'
+import LoginHeader from './UserHeader';
 
 const ForgotPassword = () => {
     return (
