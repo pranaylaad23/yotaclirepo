@@ -10,40 +10,35 @@ import axios from 'axios';
 
 const UserRegistration = () => {
     const navigate = useNavigate();
-    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const registerUser = () => {
         console.log("email: ", email)
         let userData = {
-            fullName: fullName,
             username: email,
-            emailId : email,
-            password: password,
-            roles:'3'
+            password: password
         }
         console.log(userData);
         console.log("userData Data: " + userData.email);
         //Can call API here to verify the login details:
         axios.post('http://localhost:9090/yota/user/register', userData)
-        .then((resp) => {
-            console.log(resp);
-            if (resp.data) {
-                //   navigate('/home');
-                toast("Registration Success!");
-                setTimeout(() => {
-                    navigate('/');
-                }, 1000);
-            }
-        }).catch((error) => {
-            console.log("ERORR:::::>>>>"+error);
-            toast("Somethig went wrong!!");
-            setFullName('');
-            setEmail('');
-            setPassword('');
-            navigate('/register');
-        });
+            .then((resp) => {
+                console.log(resp);
+                if (resp.data) {
+                    //   navigate('/home');
+                    toast("Registration Success!");
+                    setTimeout(() => {
+                        navigate('/');
+                    }, 1000);
+                }
+            }).catch((error) => {
+                console.log("ERORR:::::>>>>" + error);
+                toast("Somethig went wrong!!");
+                setEmail('');
+                setPassword('');
+                navigate('/register');
+            });
 
         // toast("Registration Success!");
         // setTimeout(() => {
@@ -68,16 +63,12 @@ const UserRegistration = () => {
                                 <div class="col mt-4">
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formGroupEmail">
-                                            <Form.Label>Full Name:</Form.Label>
-                                            <Form.Control type="text" onChange={(e) => { setFullName(e.target.value) }} placeholder="Enter Full Name" />
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                                            <Form.Label>Email Address:</Form.Label>
+                                            <Form.Label>User Name:</Form.Label>
                                             <Form.Control type="text" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formGroupPassword">
                                             <Form.Label>Create Password:</Form.Label>
-                                            <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} placeholder=" Creat Password" />
+                                            <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Creat Password" />
                                         </Form.Group>
                                     </Form>
                                     <div className='text-center'>

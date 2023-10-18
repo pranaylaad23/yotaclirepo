@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { batch, useDispatch } from "react-redux";
 import { createBatch } from '../../../redux/features/batch/CreateBatchSlice';
 import Button from '../../../ui/button/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BatchForm = (props) => {
     const [batches, setBatches] = useState({});
@@ -14,7 +16,7 @@ const BatchForm = (props) => {
     const [selectedUnit, setSelectedUnit] = useState('');
     const [selectedCompetency, setSelectedCompetency] = useState('');
     const [selectedTrainingtype, setSelectedTrainingtype] = useState('');
-    
+
     const getBatchData = (e) => {
         setBatches({ ...batches, [e.target.name]: e.target.value });
         console.log(batches);
@@ -66,17 +68,18 @@ const BatchForm = (props) => {
     };
 
     const handleOnSubmit = (e) => {
-
-        alert("Batch created sucessfully...")
         e.preventDefault();
         console.log("batches data---", batches);
+        batches['batchName'] = calculateBatchName();
+        console.log("Batch Request Payload:::>>" + batches);
         dispatch(createBatch(batches));
+        toast("Batch created sucessfully!!")
         window.location.reload();
-
     };
 
     return (
         <Fragment>
+            <ToastContainer />
             <div className="row d-flex justify-content-center">
                 <div className='row mt-3'>
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
@@ -223,10 +226,14 @@ const BatchForm = (props) => {
                                 <label for="BatchDescription" className={classes.label} style={{ marginLeft: "54px" }}>Description:</label>
                             </div>
                             <div className="col-md-9 ">
-                                <textarea style={{ marginLeft: "7px", width: "962px" }}
+                                <textarea style={{
+                                   width: "800px"
+                                }}
                                     name="batchDescription"
                                     onChange={getBatchData}
-                                    className={`form-control ${classes.textArea} ${classes.InputField}`} placeholder="Enter Batch Description here..." id="BatchDescription" rows="3"></textarea>
+                                    className={`form-control ${classes.textArea} ${classes.InputField}`} placeholder="Enter Batch Description here..." id="BatchDescription" rows="3">
+
+                                </textarea>
                             </div>
                         </div>
                     </div>

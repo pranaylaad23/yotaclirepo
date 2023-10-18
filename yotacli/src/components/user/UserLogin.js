@@ -23,9 +23,13 @@ const UserLogin = () => {
         //Can call API here to verify the login details:
         axios.post('http://localhost:9090/yota/user/authenticate', userCredentail)
             .then((resp) => {
-                console.log(resp);
+                console.log("Response token::>>"+resp.data);
+                const respData=resp.data;
+                console.log("AUTH TOKEN:::>>"+respData.authToken);
+                const jwtToken = respData.authToken;
+                localStorage.setItem('token', jwtToken) // storing token in localstorage 
                 if (resp.data) {
-                    //   navigate('/home');
+                    // localStorage.setItem('token', resp.)
                     toast("Login Success!");
                     setTimeout(() => {
                         navigate('/dashboard');
@@ -56,7 +60,7 @@ const UserLogin = () => {
                                 <div class="col mt-4">
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formGroupEmail">
-                                            <Form.Label>Email Address:</Form.Label>
+                                            <Form.Label>User Name:</Form.Label>
                                             <Form.Control type="email" onChange={(e) => { setUsername(e.target.value) }} placeholder="Enter email" />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="formGroupPassword">
