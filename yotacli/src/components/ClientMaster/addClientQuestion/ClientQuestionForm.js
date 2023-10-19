@@ -4,30 +4,37 @@ import classes1 from "./HeaderItem.module.css";
 import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
 import ReactDOM from "react-dom";
 import "./styles.css";
-import { placeholder } from "@babel/types";
+import { createClientQuestion } from "../../../redux/features/client/CreateClientQuestionSlice";
+import { useDispatch } from "react-redux";
 
 const ClientQuestionForm = (props) => {
- 
+
   const { register, control, handleSubmit, reset, watch } = useForm({
     defaultValues: {
-      test: [{ Question: "", Answer: "" }],
+      clientQuestions: [{ Question: "", Answer: "" }],
     },
   });
 
+  const dispatch = useDispatch();
+
+
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "test",
+    name: "clientQuestions",
   });
 
   const onSubmit = (data) => {
-    // window.location.reload();
+
     console.log("data---------", data);
-  
+    dispatch(createClientQuestion(data));
+    window.location.reload();
+    alert("Client Question uploaded successfully");
+
   };
 
   return (
     <>
-      <hr />
+
       <form className="questionForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <div className="row mt-3">
@@ -40,63 +47,57 @@ const ClientQuestionForm = (props) => {
                 <div className={classes1.btn}>
                   <button
                     type="button"
+                    className="add_button"
                     onClick={() => {
                       append({ Question: "", Answer: "" });
                     }}
                   >
                     Add
                   </button>
+
                 </div>
               </form>
             </div>
           </div>
         </div>
-
+        <hr />
         {fields.map((item, index) => {
           return (
             <li
               key={item.id}
-              style={{ display: "flex", flexDirection: "row" ,width:"100%"}}
+              style={{ display: "flex", flexDirection: "row", width: "100%" }}
             >
-              <div style={{display:"flex",flexDirection:"column" ,background:"red",width:"80%"}}>
-              <div >
-                <input
-                style={{width:"100%"}}
-                  placeholder="Enter Interview Question"
-                  {...register(`test.${index}.Question`, { required: true })}
-                />
+              <div style={{ display: "flex", flexDirection: "column", background: "", width: "80%" }}>
+                <div >
+                  <input
+                    className="form-control RegisterTechnologyForm_inputField__kEsDI"
+                    style={{ border: "2px solid grey", marginTop: "40px" }}
+                    placeholder="Enter Interview Question"
+                    {...register(`clientQuestions.${index}.Question`, { required: true })}
+                  />
+                </div>
+                <br />
+                <div>
+                  <Controller
+                    render={({ field }) => (
+                      <input style={{ border: "2px solid grey" }} className="form-control RegisterTechnologyForm_inputField__kEsDI" placeholder="Enter Answer" {...field} />
+                    )}
+                    name={`clientQuestions.${index}.Answer`}
+                    control={control}
+                  />
+                </div>
+                <br />
               </div>
-              <div>
-                <Controller
-                  render={({ field }) => (
-                    <input style={{width:"100%"}} placeholder="Enter Answer" {...field} />
-                  )}
-                  name={`test.${index}.Answer`}
-                  control={control}
-                />
-              </div>
-              </div>
-              <div style={{ display:"flex", width:"20%", justifyContent:"center",alignItems:"center" ,justifyItems:"center"}}>
-                <button type="button" onClick={() => remove(index)}>
+              <div style={{ display: "flex", width: "20%", justifyContent: "center", alignItems: "center", justifyItems: "center" }}>
+                <button className="delete_button" type="button" onClick={() => remove(index)}>
                   Delete
                 </button>
               </div>
-
-              {/* <button
-            type="button"
-            onClick={() =>
-              reset({
-                test: [{ Question: "", Answer: "" }],
-              })
-            }
-          >
-            reset
-          </button> */}
             </li>
           );
         })
-      }
-        <input style={{width:"25%",alignSelf:"center" ,height:"50px"}} type="submit" />
+        }
+        <input className="submit_btn" type="submit" />
       </form>
     </>
   );
