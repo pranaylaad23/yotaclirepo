@@ -131,7 +131,7 @@ const BatchForm = (props) => {
         e.preventDefault();
         batches['batchName'] = calculateBatchName();
         dispatch(createBatch(batches));
-        //window.location.reload();
+        window.location.reload();
 
     };
 
