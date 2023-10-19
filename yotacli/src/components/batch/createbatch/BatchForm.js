@@ -133,7 +133,7 @@ const BatchForm = (props) => {
         batches['batchName'] = calculateBatchName();
         dispatch(createBatch(batches));
         toast("Batch created sucessfully!!")
-        window.location.reload();
+      //  window.location.reload();
     };
     return (
         <Fragment>
