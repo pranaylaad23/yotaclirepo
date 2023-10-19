@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import InputField from '../../../ui/inputField/InputField';
 import classes from "../createbatch/BatchForm.module.css"
 import { useState } from 'react';
@@ -7,23 +7,95 @@ import { createBatch } from '../../../redux/features/batch/CreateBatchSlice';
 import Button from '../../../ui/button/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const BatchForm = (props) => {
     const [batches, setBatches] = useState({});
     const dispatch = useDispatch();
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
-    const [selectedUnit, setSelectedUnit] = useState('');
-    const [selectedCompetency, setSelectedCompetency] = useState('');
-    const [selectedTrainingtype, setSelectedTrainingtype] = useState('');
+    const [selectedUnit, setSelectedUnit] = useState([]);
+    const [unitData, setUnitData] = useState('');
+    const [selectedCompetency, setSelectedCompetency] = useState([]);
+    const [competencyData, setCompetencyData] = useState('');
+    const [selectedTrainingtype, setSelectedTrainingtype] = useState([]);
+    const [trainingtypeData, setTrainingtypeData] = useState('');
 
+    useEffect(
+        () => {
+            axios.get('http://localhost:9090/yota/api/unit')
+                .then(resp => {
+                    if (resp.status == 200) {
+                        if (resp.data && resp.data.length) {
+                            let unitData = resp.data;
+                            let unitDataArray = [];
+                            for (let i = 0; i < unitData.length; i++) {
+                                let countObj = {
+                                    id: unitData[i].id,
+                                    name: unitData[i].name,
+                                };
+                                unitDataArray.push(countObj);
+                            }
+                            setSelectedUnit(unitDataArray);
+                        }
+                    }
+                })
+                .catch(err => console.log(err));
+        }, []
+    )
+
+    useEffect(
+        () => {
+            axios.get('http://localhost:9090/yota/api/competency')
+                .then(resp => {
+                    if (resp.status == 200) {
+                        if (resp.data && resp.data.length) {
+                            let competencyData = resp.data;
+                            let competencyDataArray = [];
+                            for (let i = 0; i < competencyData.length; i++) {
+                                let countObj = {
+                                    id: competencyData[i].id,
+                                    name: competencyData[i].name,
+                                };
+                                competencyDataArray.push(countObj);
+                            }
+                            setSelectedCompetency(competencyDataArray);
+                        }
+                    }
+                })
+                .catch(err => console.log(err));
+        }, []
+    )
+
+    useEffect(
+        () => {
+            axios.get('http://localhost:9090/yota/api/trainingtype')
+                .then(resp => {
+                    if (resp.status == 200) {
+                        if (resp.data && resp.data.length) {
+                            let trainingtypeData = resp.data;
+                            let trainingtypeDataArray = [];
+                            for (let i = 0; i < trainingtypeData.length; i++) {
+                                let countObj = {
+                                    id: trainingtypeData[i].id,
+                                    name: trainingtypeData[i].name,
+                                };
+                                trainingtypeDataArray.push(countObj);
+                            }
+                            setSelectedTrainingtype(trainingtypeDataArray);
+                        }
+                    }
+                })
+                .catch(err => console.log(err));
+        }, []
+    )
     const getBatchData = (e) => {
         setBatches({ ...batches, [e.target.name]: e.target.value });
         console.log(batches);
     }
 
     const calculateBatchName = () => {
-        const mergedName = `${selectedUnit}-${selectedCompetency}-${selectedTrainingtype}-${selectedMonth}-${selectedYear}`;
+        const mergedName = `${unitData}-${competencyData}-${trainingtypeData}-${selectedMonth}-${selectedYear}`;
         return mergedName;
     };
 
@@ -31,18 +103,6 @@ const BatchForm = (props) => {
         'January', 'February', 'March', 'April',
         'May', 'June', 'July', 'August',
         'September', 'October', 'November', 'December'
-    ];
-
-    const units = [
-        'unit 1', 'unit 2', 'unit 3', 'unit 4'
-    ];
-
-    const competencies = [
-        'Java', 'React', 'AWS', 'Angular'
-    ];
-
-    const trainingtypes = [
-        'Project specific', 'FRW', 'DRWF', 'On Demand'
     ];
 
     const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
@@ -56,27 +116,25 @@ const BatchForm = (props) => {
     };
 
     const handleUnitChange = (event) => {
-        setSelectedUnit(event.target.value);
+        setUnitData(event.target.value);
     };
 
     const handleCompetencyChange = (event) => {
-        setSelectedCompetency(event.target.value);
+        setCompetencyData(event.target.value);
     };
 
     const handleTrainingtypeChange = (event) => {
-        setSelectedTrainingtype(event.target.value);
+        setTrainingtypeData(event.target.value);
     };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log("batches data---", batches);
-        batches['batchName'] = calculateBatchName();
         console.log("Batch Request Payload:::>>" + batches);
+        batches['batchName'] = calculateBatchName();
         dispatch(createBatch(batches));
         toast("Batch created sucessfully!!")
         window.location.reload();
     };
-
     return (
         <Fragment>
             <ToastContainer />
@@ -108,13 +166,14 @@ const BatchForm = (props) => {
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "149px" }}>
                                     <InputField >
-                                        <select value={selectedUnit} onChange={handleUnitChange} style={{ width: "302px" }}>
+                                        <select value={unitData} onChange={handleUnitChange} style={{ width: "302px" }}>
                                             <option value="">Select Unit</option>
-                                            {units.map((unit, index) => (
-                                                <option key={index} value={unit}>
-                                                    {unit}
-                                                </option>
-                                            ))}
+                                            {
+                                                selectedUnit.map((unit, index) => (
+                                                    <option key={index} value={unit.name}>
+                                                        {unit.name}
+                                                    </option>
+                                                ))}
                                         </select>
                                     </InputField>
                                 </div>
@@ -129,11 +188,11 @@ const BatchForm = (props) => {
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px" }}>
                                     <InputField>
-                                        <select value={selectedCompetency} onChange={handleCompetencyChange} style={{ width: "319px" }}>
+                                        <select value={competencyData} onChange={handleCompetencyChange} style={{ width: "319px" }}>
                                             <option value="">Select Competency</option>
-                                            {competencies.map((competency, index) => (
-                                                <option key={index} value={competency}>
-                                                    {competency}
+                                            {selectedCompetency.map((competency, index) => (
+                                                <option key={index} value={competency.name}>
+                                                    {competency.name}
                                                 </option>
                                             ))}
                                         </select>
@@ -150,20 +209,13 @@ const BatchForm = (props) => {
                                 </div>
                             </td>
                             <td>
-                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "91px" }}>
+                                <div className={`col-12`} style={{ marginTop: "19px", marginLeft: "91px" }}>
                                     <InputField>
-                                        {/* <select name="trainingtype" onChange={getBatchData} style={{ height: "33px", width: "300px" }}>
-                                            <option value="Select">select Training Type</option>
-                                            <option value='trainingtype1'>On demand</option>
-                                            <option value='trainingtype2'>Project specific</option>
-                                            <option value='trainingtype3'>FRW</option>
-                                            <option value='trainingtype4'>DRWF</option>
-                                        </select> */}
-                                        <select value={selectedTrainingtype} onChange={handleTrainingtypeChange} style={{ width: "302px" }}>
+                                        <select value={trainingtypeData} onChange={handleTrainingtypeChange} style={{ width: "302px" }}>
                                             <option value="">Select Training Type</option>
-                                            {trainingtypes.map((trainingtype, index) => (
-                                                <option key={index} value={trainingtype}>
-                                                    {trainingtype}
+                                            {selectedTrainingtype.map((trainingtype, index) => (
+                                                <option key={index} value={trainingtype.name}>
+                                                    {trainingtype.name}
                                                 </option>
                                             ))}
                                         </select>
@@ -215,7 +267,7 @@ const BatchForm = (props) => {
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "103px" }}>
                                     <InputField>
-                                        <input type="text" value={calculateBatchName()} onClick={getBatchData} name="batchName" className={classes.InputField} id="BatchName" style={{ width: "303px", marginBottom: "10px" }} />
+                                        <input type="text" value={calculateBatchName()} name="batchName" className={classes.InputField} id="BatchName" style={{ width: "337px", marginBottom: "0px" }} disabled />
                                     </InputField>
                                 </div></td></div>
                     </div>
@@ -226,14 +278,10 @@ const BatchForm = (props) => {
                                 <label for="BatchDescription" className={classes.label} style={{ marginLeft: "54px" }}>Description:</label>
                             </div>
                             <div className="col-md-9 ">
-                                <textarea style={{
-                                   width: "800px"
-                                }}
+                                <textarea style={{ marginLeft: "61px", width: "806px" }}
                                     name="batchDescription"
                                     onChange={getBatchData}
-                                    className={`form-control ${classes.textArea} ${classes.InputField}`} placeholder="Enter Batch Description here..." id="BatchDescription" rows="3">
-
-                                </textarea>
+                                    className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
