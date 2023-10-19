@@ -85,6 +85,7 @@ const RegisterAssociateForm = (props) => {
                                 name='password'
                                 className={classes.inputField}
                                 type="password"
+                                placeholder='password'
                                 aria-label='password'
                             /></InputField>
                         </div>
