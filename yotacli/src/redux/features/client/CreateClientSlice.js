@@ -1,37 +1,49 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 export const createClient = createAsyncThunk(
-    "createClient",
-    async (data, { rejectedWithValue }) => {
-      console.log("Create createClient: ", data);
-      const response = await fetch(
-        "http://localhost:9090/yota/api/client/",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-  
-      try {
-        const result = await response.json();
-        console.log(result);
-        return result;
-      } catch (error) {
-        return rejectedWithValue(error);
+  "createClient",
+  async (data, { rejectedWithValue }) => {
+    console.log("Create createClient: ", data);
+    const token = getAuthToken();
+    const response = await fetch(
+      "http://localhost:9090/yota/api/client/",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Authorization": token
+        },
+        body: JSON.stringify(data),
       }
+    );
+
+    try {
+      const result = await response.json();
+      console.log(result);
+      return result;
+    } catch (error) {
+      return rejectedWithValue(error);
     }
-  );
-  //get
-export const fetchClient = createAsyncThunk("client",() => {
+  }
+);
+//get
+export const fetchClient = createAsyncThunk("client", () => {
+  const token = getAuthToken();
   return axios
-    .get(`http://localhost:9090/yota/api/clients`)
-    .then(response =>  response.data)
-    .catch(error=>console.log("ERROR"))
+    .get(`http://localhost:9090/yota/api/clients`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Authorization": token
+        }
+      }
+    )
+    .then(response => response.data)
+    .catch(error => console.log("ERROR"))
 });
 
 export const clientList = createSlice({

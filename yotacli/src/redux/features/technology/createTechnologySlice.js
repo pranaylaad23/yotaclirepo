@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 // export const fetchData = createAsyncThunk("technology", async () => {
 //     return axios
@@ -9,8 +10,14 @@ import axios from "axios";
 //   });
 
 export const fetchData = createAsyncThunk("data/fetchData", async () => {
-  const response = await axios.get(`http://localhost:9090/yota/api/technologies/`);
-
+  const token = getAuthToken();
+  const response = await axios.get(`http://localhost:9090/yota/api/technologies/`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Authorization": token
+    }
+  });
   return response.data;
 });
 

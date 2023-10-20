@@ -1,13 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { getAuthToken } from '../../utils/Authentication';
 
 const QuestionList = () => {
 
     const [list, setList] = useState([]);
-
+    const token = getAuthToken();
     useEffect(() => {
-        axios.get("http://localhost:9090/yota/api/questions/all")
+        axios.get("http://localhost:9090/yota/api/questions/all",
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            }
+        )
             .then(response => {
                 setList(response.data);
                 console.log(response.data);
@@ -39,26 +48,34 @@ const QuestionList = () => {
                             <Link to={`/updatequestion/${list.id}`}>
                                 {" "}
                                 <i className="fa fa-edit"></i>&nbsp;{" "}
-                                
+
                             </Link>
-                        
+
                             <Link
                                 to={`/deletequestion/${list.id}`}
-                                onClick={() => 
-                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`)
-                                    .then(response => {
-                                        console.log("deleted successfully");
-                                        alert("Item Deleted Succesfully");
-                                        window.location.reload();   
-                                    })
-                                    .catch(error => {
-                                        console.error("Error deleting this object", error);
-                                    })
+                                onClick={() =>
+                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`,
+                                        {
+                                            headers: {
+                                                Accept: "application/json",
+                                                "Content-Type": "application/json",
+                                                "Authorization": token
+                                            }
+                                        }
+                                    )
+                                        .then(response => {
+                                            console.log("deleted successfully");
+                                            alert("Item Deleted Succesfully");
+                                            window.location.reload();
+                                        })
+                                        .catch(error => {
+                                            console.error("Error deleting this object", error);
+                                        })
                                 }
                             >
                                 <i className="fa fa-trash-can"></i>
                             </Link>
-                        </td>    
+                        </td>
                     </tr>
                 ))
             }

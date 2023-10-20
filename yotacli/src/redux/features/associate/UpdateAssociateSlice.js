@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 /* Update Associate action */
 export const updateAssociate = createAsyncThunk("updateassociate", async (data, { rejectedWithValue }) => {
+    const token = getAuthToken();
     const response = await fetch('http://localhost:9090/yota/api/associates/', {
         method: "POST",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            "Authorization": token
         },
         body: JSON.stringify(data)
     })
@@ -16,30 +19,30 @@ export const updateAssociate = createAsyncThunk("updateassociate", async (data, 
         console.log(result);
         return result;
     }
-    catch(error){
+    catch (error) {
         return rejectedWithValue(error);
     }
 })
 
-export const associateUpdate = createSlice ({
-    name : "associateUpdate",
-    initialState : {
-        associate : [],
-        loading : false,
-        error : null,
+export const associateUpdate = createSlice({
+    name: "associateUpdate",
+    initialState: {
+        associate: [],
+        loading: false,
+        error: null,
     },
 
-    extraReducers:{
-        [updateAssociate.pending] : (state) => {
+    extraReducers: {
+        [updateAssociate.pending]: (state) => {
             state.loading = true;
         },
 
-        [updateAssociate.fulfilled] : (state, action) => {
+        [updateAssociate.fulfilled]: (state, action) => {
             state.loading = false;
             state.associate = action.payload;
         },
 
-        [updateAssociate.rejected] : (state, action) => {
+        [updateAssociate.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },

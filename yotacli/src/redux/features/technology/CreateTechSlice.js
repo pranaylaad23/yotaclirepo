@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
+const token = getAuthToken();
 //create bach
 export const createTech = createAsyncThunk(
   "createtech",
@@ -13,6 +15,7 @@ export const createTech = createAsyncThunk(
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          "Authorization": token
         },
         body: JSON.stringify(data),
       }
@@ -29,28 +32,42 @@ export const createTech = createAsyncThunk(
 );
 
 //update
-export const UpdateTech = createAsyncThunk(
-  "updateBatch",
-  async ({ id, data }, { rejectWithValue }) => {
-    try {
-      alert(id);
+export const UpdateTech = createAsyncThunk("updateBatch", async ({ id, data }, { rejectWithValue }) => {
+  try {
+    alert(id);
 
-      axios
-        .put(`http://localhost:9090/yota/api/technologies/`, data)
-        .then((res) => {
-          console.log(res.data);
-        });
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+    axios
+      .put(`http://localhost:9090/yota/api/technologies/`, data,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+  } catch (error) {
+    return rejectWithValue(error);
   }
+}
 );
 
 
 //get
 export const fetchTechnology = createAsyncThunk("technology", async () => {
   return axios
-    .get(`http://localhost:9090/yota/api/technologies/`)
+    .get(`http://localhost:9090/yota/api/technologies/`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Authorization": token
+        }
+      }
+    )
     .then((response) => response.data.map((technology) => technology));
 });
 
@@ -65,43 +82,63 @@ export const fetchTechnology = createAsyncThunk("technology", async () => {
 
 
 //delete
-export const deleteTechnology = createAsyncThunk(
-  "deleteAssociate",
-  async (id, { rejectWithValue }) => {
-    if (window.confirm("Do you want to remove"))
-      try {
-        const response = await fetch(
-          `http://localhost:9090/yota/api/technologies/${id}`,
-          {
-            method: "DELETE",
+export const deleteTechnology = createAsyncThunk("deleteAssociate", async (id, { rejectWithValue }) => {
+  if (window.confirm("Do you want to remove"))
+    try {
+      const response = await fetch(
+        `http://localhost:9090/yota/api/technologies/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": token
           }
-        ).then((res) => {
-          alert("Removed Succesfully");
-          window.location.reload();
-        });
+        }
+      ).then((res) => {
+        alert("Removed Succesfully");
+        window.location.reload();
+      });
 
-        const result = await response.json();
+      const result = await response.json();
 
-        return result;
-      } catch (error) {
-        console.log(error);
+      return result;
+    } catch (error) {
+      console.log(error);
 
-        return rejectWithValue(error.response.data);
-      }
-  }
+      return rejectWithValue(error.response.data);
+    }
+}
 );
 
 // Get Test Number API
 export const fetchTechnologyTestNumber = createAsyncThunk("technologyTestNumber", async () => {
   return axios
-    .get(`http://localhost:9090/yota/api/technologies/tests`)
+    .get(`http://localhost:9090/yota/api/technologies/tests`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Authorization": token
+        }
+      }
+    )
     .then((response) => response.data);
 });
 
 // Get Test Deatils of Technology API
 export const fetchTechnologyTestDetails = createAsyncThunk("fetchTechnologyTestDetails", async (name) => {
+  const token = getAuthToken();
   return axios
-    .get(`http://localhost:9090/yota/api/technologies/tests/${name}`)
+    .get(`http://localhost:9090/yota/api/technologies/tests/${name}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Authorization": token
+        }
+      }
+    )
     .then((response) => response.data);
 });
 
@@ -110,9 +147,9 @@ export const techCreate = createSlice({
   name: "techCreate",
   initialState: {
     technologies: [],
-    searchTech:[],
-    testNumberArray:[],
-    testDetailsArray:[],
+    searchTech: [],
+    testNumberArray: [],
+    testDetailsArray: [],
     loading: false,
     // searchError: false,
     error: null,
@@ -120,10 +157,10 @@ export const techCreate = createSlice({
 
   reducers: {
     handleSearchTech: (state, action) => {
-        state.searchTech = [];
-        state.searchTech.push(action.payload)
+      state.searchTech = [];
+      state.searchTech.push(action.payload)
     },
-},
+  },
 
   extraReducers: {
     // create
@@ -215,7 +252,7 @@ export const techCreate = createSlice({
     [fetchTechnologyTestNumber.pending]: (state) => {
       state.loading = true;
       // state.searchError = false;
-      console.log("in Create Slice.js",state.testNumberArray);
+      console.log("in Create Slice.js", state.testNumberArray);
     },
 
     [fetchTechnologyTestNumber.fulfilled]: (state, action) => {
@@ -223,7 +260,7 @@ export const techCreate = createSlice({
       // state.searchError = false;
       state.testNumberArray = [action.payload];
       // state.searchTech = action.payload;
-      console.log("in Create Slice.js",state.testNumberArray);
+      console.log("in Create Slice.js", state.testNumberArray);
     },
 
     [fetchTechnologyTestNumber.rejected]: (state, action) => {
@@ -242,7 +279,7 @@ export const techCreate = createSlice({
       // state.searchError = false;
       state.testDetailsArray = [action.payload];
       // state.searchTech = action.payload;
-      console.log("in Create Slice.js",state.testDetailsArray);
+      console.log("in Create Slice.js", state.testDetailsArray);
     },
 
     [fetchTechnologyTestDetails.rejected]: (state, action) => {

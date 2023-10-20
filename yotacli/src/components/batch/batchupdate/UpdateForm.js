@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import { createBatch } from '../../../redux/features/batch/CreateBatchSlice'
+import { getAuthToken } from '../../utils/Authentication'
 
 
 const UpdateForm = (props) => {
@@ -21,15 +22,22 @@ const UpdateForm = (props) => {
         batchDescription: "",
         startDate: "",
         endDate: "",
-        createdAt:""
+        createdAt: ""
     };
 
     const [updateBatchData, setUpdateBatchData] = useState(initialState);
-
-
+    const token = getAuthToken();
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:9090/yota/api/batches/${id}`).then(
+            axios.get(`http://localhost:9090/yota/api/batches/${id}`,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": token
+                    }
+                }
+            ).then(
                 res => {
                     console.log(res.data);
                     setUpdateBatchData(res.data)
@@ -48,7 +56,7 @@ const UpdateForm = (props) => {
             [e.target.name]: e.target.value,
         });
     }
-   
+
     const onHandleUpdate = async (e) => {
         e.preventDefault();
         console.log("Updated data", updateBatchData);
@@ -60,18 +68,18 @@ const UpdateForm = (props) => {
             batchIdentifier: updateBatchData.batchIdentifier,
             batchName: updateBatchData.batchName,
             batchDescription:
-            updateBatchData.batchDescription,
+                updateBatchData.batchDescription,
             startDate: updateBatchData.startDate,
             endDate: updateBatchData.endDate,
-            createdAt:updateBatchData.createdAt,
+            createdAt: updateBatchData.createdAt,
         }))
-    
+
             .unwrap()
             .then(response => {
                 window.alert(`"Batch details with Identifier: " ${updateBatchData.batchIdentifier} " updated Sucessfully"`);
             })
 
-        
+
             .catch(e => {
                 alert(e.data.error);
             });
@@ -97,7 +105,7 @@ const UpdateForm = (props) => {
                     <div className='col-6 col-lg-4'>
 
                         <form className="form-inline" onSubmit={onHandleUpdate}>
-                          
+
                             <div className={classes.btn}>
                                 <Button className={classes.button} type="submit" >Update</Button>
                             </div>
@@ -119,7 +127,7 @@ const UpdateForm = (props) => {
                             <input type="text" name="batchIdentifier"
                                 value={updateBatchData.batchIdentifier}
                                 onChange={newBatchData}
-                                className={classes.InputField} id="BatchIdentifier" required  readOnly="readonly"/>
+                                className={classes.InputField} id="BatchIdentifier" required readOnly="readonly" />
                         </InputField>
                     </div>
                     <div className="col-md-5">

@@ -1,10 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 export const fetchAssociate = createAsyncThunk("associate", () => {
-
+    const token = getAuthToken();
     return axios
-        .get(`http://localhost:9090/yota/api/associates/all`)
+        .get(`http://localhost:9090/yota/api/associates/all`,
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            }
+        )
         .then((response) => response.data.map((associate) => associate));
 
 });

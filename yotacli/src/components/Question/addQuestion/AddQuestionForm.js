@@ -8,28 +8,35 @@ import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Select from "react-select";
-import  { fetchData } from "../../../redux/features/technology/createTechnologySlice";
+import { fetchData } from "../../../redux/features/technology/createTechnologySlice";
 import fetchTechnologyTestDetails from "../../../redux/features/technology/CreateTechSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getAuthToken } from "../../utils/Authentication";
 const AddQuestionForm = () => {
   const dispatch = useDispatch();
-  const technology= useSelector((state) => state.technology.testDetailsArray);
+  const technology = useSelector((state) => state.technology.testDetailsArray);
   console.log("searchTech array to search Technology:", technology.name);
   console.log("Original Array List:", technology.technologies);
 
-  
+  const token = getAuthToken();
 
   useEffect(() => {
-     // fetchData();
+    // fetchData();
     // dispatch(fetchTechnologyTestDetails("java"));
     // console.log("response"+fetchData());
     const fetchTechnologyTestDetails = createAsyncThunk("fetchTechnologyTestDetails", async () => {
-      return axios
-        .get(`http://localhost:9090/yota/api/technologies/`)
+      return axios.get(`http://localhost:9090/yota/api/technologies/`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        }
+      )
         .then((response) => response.data);
-
     });
-    console.log("response =>>>>"+ fetchTechnologyTestDetails());
+    console.log("response =>>>>" + fetchTechnologyTestDetails());
     dispatch(fetchTechnologyTestDetails());
   }, [dispatch]);
 
@@ -59,7 +66,15 @@ const AddQuestionForm = () => {
     event.preventDefault();
     console.log("--------");
     axios
-      .post("http://localhost:9090/yota/api/questions/", newQuestion)
+      .post("http://localhost:9090/yota/api/questions/", newQuestion,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })
@@ -82,7 +97,14 @@ const AddQuestionForm = () => {
       axios
         .post(
           "http://localhost:9090/yota/api/questions/questionUpload",
-          formData
+          formData,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "Authorization": token
+            }
+          }
         )
         .then((response) => {
           // Handle success response here
@@ -164,7 +186,7 @@ const AddQuestionForm = () => {
             <Select options={data} onChange={handleSelectData} />
           </div>
         </div>
-       
+
       </div>
 
       <div className="row align-items-end" style={{}}>
