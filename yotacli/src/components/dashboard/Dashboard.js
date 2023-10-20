@@ -19,7 +19,7 @@ function Dashboard() {
       <div className="row" style={{ height: "38.1rem"}}>
         <Sidebar sideBarOpen={isOpen}/>
         {/* <div className="col-xl-10 col-lg-10" style={{ padding: "0px 0px", width: isSideOpen ? "1050px" : "1200px" }}> */}
-        <div className={`${isSideOpen ? 'col-xl-10' : 'col-11'}`}>
+        <div className={`${isSideOpen ? 'col-xl-10' : 'col-11'}`} style={{paddingLeft:0,paddingRight:0}}>
           {console.log(isSideOpen)}
           <Navbar />
           <div style={{ marginBottom: 70 }}>
