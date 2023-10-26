@@ -19,12 +19,10 @@ const ListQuestions = () => {
           <table className="table table-bordered table-hover">
             <thead>
               <tr>
-                {/* <th>Sr.</th> */}
-                <th>ID</th>
-                <th>Question Type</th>
-                <th>Question Level</th>
+               
+                <th>S.No</th>
                 <th>Question</th>
-                <th>Answer Type</th>
+                <th>Question Level</th>
                 <th>Option A</th>
                 <th>Option B</th>
                 <th>Option C</th>
@@ -32,12 +30,11 @@ const ListQuestions = () => {
                 <th>Correct Answer</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
+                <th>Action</th>
                 
               </tr>
-            </thead>
-           
-              <QuestionList />
-           
+            </thead> 
+              <QuestionList />      
           </table>
         </div>
       </Card>
