@@ -48,14 +48,18 @@ const routing = () => {
         <Route path="/registerAssociate/" element={<TitleRegisterAssociate />}/>
         <Route path="/updateAssociate/:id" element={<TitleUpdateAssociate />} />
         <Route path="/deleteAssociate/:id" element={<TitleAssociateList />} />
-        <Route path="testList" element={<TitleAssignTest/> } />
+        <Route path="testList1" element={<TitleAssignTest/> } />
         <Route path="/assignTest" element={<TestAssign/>}/>
         <Route path="/student" element={<Dashboard/>}/>
         <Route path="/addclient"element={<TitleAddClient/>} />
         <Route path="/clientlist" element={<TitleClientList />} /> 
         <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
+
          {/* <Route path="/testlist" element={<TitleTestList />} /> */}
          <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
+
+         <Route path="/testlist" element={<TitleTestList />} />
+
       </Routes>
     </>
   );

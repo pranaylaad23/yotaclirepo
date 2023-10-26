@@ -133,23 +133,7 @@ function Sidebar(props) {
                 >
                   <Link to="technologylist">List Technology</Link>
                 </Dropdown.Item>
-
-
-                <Dropdown.Item
-                  style={{ backgroundColor: "#88b4ba", color: "white" }}
-                  eventKey="2"
-                >
-                  <Link to="updatetechnology">update Technology</Link>
-                </Dropdown.Item>
-
-                <Dropdown.Item
-                  style={{ backgroundColor: "#88b4ba", color: "white" }}
-                  eventKey="4"
-                >
-                  <Link to="recordTechnology">Record Technology</Link>
-                </Dropdown.Item>
-
-              </DropdownButton>
+                </DropdownButton>
             </div>
           </li>          
           <li>
