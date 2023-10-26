@@ -10,10 +10,11 @@ import classes1 from "../addTechnology/HeaderItem.module.css";
 import axios from "axios";
 import Button from "../../../ui/button/Button";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const  UpdateTechnologyForm = (props) => {
-  const { name } = useParams();
-  console.log(name);
+  const nevigate = useNavigate();
+  const { id } = useParams();
 
   const dispatch = useDispatch();
 
@@ -26,9 +27,9 @@ const  UpdateTechnologyForm = (props) => {
   const [updateDescriptionValue, setUpdateDescription] = useState(initialState);
 
   useEffect(() => {
-    if (name) {
+    if (id) {
       axios
-        .get(`http://localhost:9090/yota/api/technologies/${name}`)
+        .get(`http://localhost:9090/yota/api/technologies/}`)
         .then((res) => {
           console.log(res.data);
           setUpdateTechData(res.data);
@@ -70,6 +71,7 @@ const  UpdateTechnologyForm = (props) => {
         );
       })
       .catch((e) => {
+        nevigate(0)
         alert(e);
       });
   };
@@ -79,7 +81,7 @@ const  UpdateTechnologyForm = (props) => {
       <div className="row">
         <div className="row mt-3">
           <div className="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-            <h5 className={classes1.boxtitle}>Update Parent Technology</h5>
+            <h5 className={classes1.boxtitle}>UpdateTechnology</h5>
           </div>
 
           <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8">
@@ -111,8 +113,10 @@ const  UpdateTechnologyForm = (props) => {
               value={updateTechData.name}
               name="name"
               id="inputName"
+              placeholder="Update Technology Name"
               className={`form-control ${classes.inputField}`}
               aria-describedby="nameHelpInline"
+              style={{width:"400px"}}
             />
           </InputField>
         </div>
@@ -122,11 +126,10 @@ const  UpdateTechnologyForm = (props) => {
             className="form-text"
             style={{ paddingBottom: "10px" }}
           >
-            Maximum 30 Characters
           </span>
         </div>
       </div>
-      <div className="row align-items-end mb-3">
+      <div className="row align-items-end ">
         <div className={`col-3 mb-3 ${classes.inputName}`}>
           <label for="description">Description:</label>
         </div>
@@ -134,23 +137,23 @@ const  UpdateTechnologyForm = (props) => {
           <InputField>
             <input
               type="textarea"
-              value={updateDescriptionValue}
-              // onChange={updateDescription.bind(this)}
-              onChange={(e) => updateDescription(e.target.value)}
-              name="shortDescription  "
+              onChange={updateDescription }
+              value={updateDescriptionValue.shortDescription}
+              name="shortDescription"
               id="descriptionShortDescription"
+              placeholder="Update Technology Description"
               className={`form-control ${classes.inputField}`}
               aria-describedby="descriptionHelpInline"
+              style={{width:"400px",height:"100px"}}
             ></input>
           </InputField>
         </div>
-        <div className="col" style={{ paddingBottom: "25px" }}>
+        <div className="col" style={{ paddingBottom: "10px" }}>
           <span
             id="descriptionHelpInline"
             className="form-text"
-            style={{ paddingBottom: "25px" }}
+            style={{ paddingBottom: "10px" }}
           >
-            Maximum 50 words.
           </span>
         </div>
       </div>

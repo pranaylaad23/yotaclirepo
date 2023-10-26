@@ -134,44 +134,6 @@ const TechnologyList = ({currentPage, dataPerPage}) => {
     );
   }
 
-  
-  // }
-// Old Logic......
-  //     return (
-  //       // <>
-  //       //   {technology.searchError ? <tr>
-  //       //           <td></td>
-  //       //           <td><h3>Search Not found</h3></td>
-  //       //           <td></td>
-  //       //           <td></td>
-  //       //           </tr>: technology.technologies.map((tech, key) => (
-  //       //     <tr key={key}>
-  //       //       <td>
-  //       //         <b>{key+1}</b>
-  //       //       </td>
-  //       //       <td>{tech.name}</td>
-  //       //       <td>{tech.shortDescription}</td>
-  //       //       <td>
-  //       //         <Link to={`/updatetechnology/${tech.name}`}>
-  //       //           {" "}
-  //       //           <i className="fa fa-edit"></i>&nbsp;{" "}
-  //       //         </Link>
-  //       //         {/* onClick={(event) => handleEditClick(event, list)} */}
-  //       //         <Link
-  //       //           to={`/deletetechnology/${tech.id}`}
-  //       //           onClick={() => dispatch(deleteTechnology(tech.id))}
-  //       //         >
-  //       //           <i className="fa fa-trash-can"></i>{" "}
-  //       //         </Link>
-  //       //         {/* onClick={() => handleDeleteClick(tech.id)} */}
-  //       //       </td>
-  //       //     </tr>
-  //       //   ))}
-  //       // </>
-
-  //     );
-  //   }
-
 };
 
 export default TechnologyList;

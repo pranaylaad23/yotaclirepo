@@ -39,6 +39,9 @@ export const UpdateTech = createAsyncThunk(
         .put(`http://localhost:9090/yota/api/technologies/`, data)
         .then((res) => {
           console.log(res.data);
+          // setUpdateTechData(res.data);
+          // setUpdateDescription(res.data.shortDescription);
+          console.log(res.data);
         });
     } catch (error) {
       return rejectWithValue(error);
@@ -77,7 +80,7 @@ export const deleteTechnology = createAsyncThunk(
           }
         ).then((res) => {
           alert("Removed Succesfully");
-          window.location.reload();
+          window.location.reload(false);
         });
 
         const result = await response.json();

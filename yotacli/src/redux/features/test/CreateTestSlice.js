@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchTest = createAsyncThunk("test", () => {
   return (
     axios
-      .get(`  http://localhost:5000/testList`)
+      .get(`http://localhost:5000/testList`)
       //.then(response=>console.log( "----------"+response.data))
       .then((response) => response.data)
       .catch((error) => console.log("ERROR"))
