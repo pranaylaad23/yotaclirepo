@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +36,7 @@ const TechnologyList = ({currentPage, dataPerPage}) => {
       <tr>
         <td></td>
         <td>
-          <h3>Loading Tech Details....</h3>
+          <h5>Loading Tech Details....</h5>
         </td>
         <td></td>
         <td></td>

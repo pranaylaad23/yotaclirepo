@@ -12,10 +12,10 @@ import Button from "../../../ui/button/Button";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const  UpdateTechnologyForm = (props) => {
+const UpdateTechnologyForm = (props) => {
   const nevigate = useNavigate();
-  const { id } = useParams();
-
+  const { name } = useParams();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const initialState = {
@@ -24,39 +24,31 @@ const  UpdateTechnologyForm = (props) => {
   };
 
   const [updateTechData, setUpdateTechData] = useState(initialState);
-  const [updateDescriptionValue, setUpdateDescription] = useState(initialState);
-
   useEffect(() => {
-    if (id) {
+    if (name) {
       axios
-        .get(`http://localhost:9090/yota/api/technologies/}`)
+        .get(`http://localhost:9090/yota/api/technologies/${name}`)
         .then((res) => {
           console.log(res.data);
           setUpdateTechData(res.data);
-          setUpdateDescription(res.data.shortDescription);
         });
     }
   }, []);
   console.log(updateTechData);
 
-  const newTechData = (e) => {
-    console.log(e.target.value);
+  const getNewTechData = (event) => {
     setUpdateTechData({
       ...updateTechData,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
-  };
-
-  const updateDescription = (e) => {
-    console.log(e);
-    setUpdateDescription(e);
+    console.log(updateTechData);
   };
 
   const onHandleUpdate = async (event) => {
     event.preventDefault();
     console.log("Updated data", updateTechData);
-    updateTechData.shortDescription = updateDescriptionValue;
     setUpdateTechData(updateTechData);
+    window.location.reload(false);
     dispatch(
       createTech({
         id: updateTechData.id,
@@ -66,22 +58,23 @@ const  UpdateTechnologyForm = (props) => {
     )
       .unwrap()
       .then((response) => {
-        alert(
-          `"Technology with" ${updateTechData.shortDescription} "successfully updated"`
-        );
+        window.alert("Technology Successfully Updated");
+        //  nevigate("/updatetechnology/:name");
       })
-      .catch((e) => {
-        nevigate(0)
-        alert(e);
+      .catch((error) => {
+        console.error(error);
+        alert(error);
       });
+    
   };
-
+  console.log(updateTechData);
+ 
   return (
     <>
       <div className="row">
         <div className="row mt-3">
           <div className="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-            <h5 className={classes1.boxtitle}>UpdateTechnology</h5>
+            <h5 className={classes1.boxtitle}>Update Technology</h5>
           </div>
 
           <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8">
@@ -100,7 +93,7 @@ const  UpdateTechnologyForm = (props) => {
       <div className="row align-items-end mt-5 mb-5">
         <div className={`col-3 ${classes.inputName}`}>
           <div>
-            <label for="inputTechnologyName" className="col-form-label">
+            <label for="name" className="col-form-label">
               Name:
             </label>
           </div>
@@ -108,53 +101,49 @@ const  UpdateTechnologyForm = (props) => {
         <div className={`col `}>
           <InputField>
             <input
-              type="text"
-              onChange={newTechData}
-              value={updateTechData.name}
               name="name"
-              id="inputName"
-              placeholder="Update Technology Name"
+              type="text"
+              value={updateTechData.name}
+              onChange={getNewTechData}
+              id="name"
               className={`form-control ${classes.inputField}`}
-              aria-describedby="nameHelpInline"
-              style={{width:"400px"}}
+              aria-describedby="name"
+              style={{ width: "400px" }}
             />
           </InputField>
         </div>
         <div className="col" style={{ paddingBottom: "10px" }}>
           <span
-            id="nameHelpInline"
+            id="name"
             className="form-text"
             style={{ paddingBottom: "10px" }}
-          >
-          </span>
+          ></span>
         </div>
       </div>
       <div className="row align-items-end ">
         <div className={`col-3 mb-3 ${classes.inputName}`}>
-          <label for="description">Description:</label>
+          <label for="shortDescription">Description:</label>
         </div>
         <div className={`col mt-3 `}>
           <InputField>
             <input
               type="textarea"
-              onChange={updateDescription }
-              value={updateDescriptionValue.shortDescription}
+              onChange={getNewTechData}
+              value={updateTechData.shortDescription}
               name="shortDescription"
-              id="descriptionShortDescription"
-              placeholder="Update Technology Description"
+              id="shortDescription"
               className={`form-control ${classes.inputField}`}
-              aria-describedby="descriptionHelpInline"
-              style={{width:"400px",height:"100px"}}
+              aria-describedby="shortDescription"
+              style={{ width: "400px", height: "100px" }}
             ></input>
           </InputField>
         </div>
         <div className="col" style={{ paddingBottom: "10px" }}>
           <span
-            id="descriptionHelpInline"
+            id="shortDescription"
             className="form-text"
             style={{ paddingBottom: "10px" }}
-          >
-          </span>
+          ></span>
         </div>
       </div>
     </>
