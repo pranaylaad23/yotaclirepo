@@ -13,13 +13,13 @@ const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
   const dispatch = useDispatch();
   const test = useSelector((state) => state.test.tests);
 
-  const pageDataOptions = [
-    {value: 5, label: "React"},
-    {value: 10, label: "Java  "},
-    {value: 15, label: "AWS"},
-    {value: 25, label: "Python"},
-    {value: 100, label: "C#"},
-];
+//   const pageDataOptions = [
+//     {value: 5, label: "React"},
+//     {value: 10, label: "Java  "},
+//     {value: 15, label: "AWS"},
+//     {value: 25, label: "Python"},
+//     {value: 100, label: "C#"},
+// ];
 
   const handleSelectData = (selectOption) => {
     console.log("handleSelectData", selectOption);
@@ -67,7 +67,7 @@ const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
           </h6>
 
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-8 ms-3">
-          <Select options={pageDataOptions} onChange={handleSelectData} />
+          <Select  onChange={handleSelectData} />
           </div>
 
         </div>

@@ -198,9 +198,7 @@ const UpdateForm = (props) => {
                         <h5 className={classes.boxtitle}>Update Batch </h5>
 
                     </div>
-
-
-                    <div className='col-6 col-lg-4'>
+                     <div className='col-6 col-lg-4'>
 
                         <form className="form-inline" onSubmit={onHandleUpdate}>
                           

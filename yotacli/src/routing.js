@@ -54,8 +54,12 @@ const routing = () => {
         <Route path="/addclient"element={<TitleAddClient/>} />
         <Route path="/clientlist" element={<TitleClientList />} /> 
         <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
+
          {/* <Route path="/testlist" element={<TitleTestList />} /> */}
          <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
+
+         <Route path="/test" element={<TitleTestList />} />
+
       </Routes>
     </>
   );

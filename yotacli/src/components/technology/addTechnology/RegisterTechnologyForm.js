@@ -5,11 +5,12 @@ import { useDispatch } from "react-redux";
 import { createTech } from "../../../redux/features/technology/CreateTechSlice";
 import classes1 from "./HeaderItem.module.css";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import Button from "../../../ui/button/Button";
 const RegisterTechnologyForm = (props) => {
   const [technologies, setTechnologies] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getTechnologyData = (e) => {
     setTechnologies({ ...technologies, [e.target.name]: e.target.value });
@@ -20,15 +21,18 @@ const RegisterTechnologyForm = (props) => {
     e.preventDefault();
     console.log(technologies);
     dispatch(createTech(technologies));
+    window.location.reload(false);
     alert("technology created successfully");
+    // navigate('/technologylist')
+   
   };
-
+ 
   return (
     <>
       <div className="row">
         <div className="row mt-3">
           <div className="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-            <h5 className={classes1.boxtitle}>Add Parent Technology</h5>
+            <h5 className={classes1.boxtitle}>Add Technology</h5>
           </div>
 
           <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8">
@@ -80,7 +84,7 @@ const RegisterTechnologyForm = (props) => {
         <div className={`col-3 mb-4 ${classes.inputName}`}>
           <label for="description">Description:</label>
         </div>
-        <div className={`col  mt-4 `}>
+        <div className={`col mt-3 `}>
           <InputField>
             <textarea
               id="description"
