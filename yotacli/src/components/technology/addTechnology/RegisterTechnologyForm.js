@@ -21,11 +21,12 @@ const RegisterTechnologyForm = (props) => {
     e.preventDefault();
     console.log(technologies);
     dispatch(createTech(technologies));
-    // window.location.reload(false);
-    navigate(0);
+    window.location.reload(false);
     alert("technology created successfully");
+    // navigate('/technologylist')
+   
   };
-
+ 
   return (
     <>
       <div className="row">
