@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import batchDelete from "../../../redux/features/batch/deleteBatchSlice";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classes from "../batchlist/ListBatchItem.module.css";
 import { fetchBatch } from "../../../redux/features/batch/batchListSlice";
 
@@ -15,7 +15,8 @@ const BatchList = () => {
 
   return (
     <>
-      {batch.batches.map((result, key) => (
+      {batch.batches.map((result, key) => (  
+      
         <tr key={key}>
           {/* <td>{result.id}</td> */}
           <td>{result.batchIdentifier}</td>
