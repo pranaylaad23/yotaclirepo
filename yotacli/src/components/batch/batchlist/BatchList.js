@@ -17,8 +17,8 @@ const BatchList = () => {
     <>
       {batch.batches.map((result, key) => (
         <tr key={key}>
-          {/* <td>{result.id}</td> */}
-          <td>{result.batchIdentifier}</td>
+          <td>{result.id}</td>
+          {/* <td>{result.batchIdentifier}</td> */}
           <td>{result.batchName}</td>
           <td>{result.batchDescription}</td>
           <td>{result.startDate}</td>

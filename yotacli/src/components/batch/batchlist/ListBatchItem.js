@@ -8,8 +8,8 @@ const ListBatchItem = (props) => {
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
-            {/* <th>Sr.</th> */}
-            <th>Identifier</th>
+            <th>S.No.</th>
+            {/* <th>Identifier</th> */}
             <th>Name</th>
             <th>Description</th>
             <th>StartDate</th>

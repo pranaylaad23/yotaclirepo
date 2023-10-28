@@ -26,6 +26,7 @@ const routing = () => {
     <>
       <Routes>
         <Route path="/" element={<TitleDashboard />} />
+        
         <Route path="/batchlist" element={<TitleBatchList />} />
         <Route path="/createbatch" element={<TitleCreateBatch />} />
         <Route path="/updatebatch/:id" element={<TitleUpdateBatch />} />
@@ -55,7 +56,7 @@ const routing = () => {
         <Route path="/clientlist" element={<TitleClientList />} /> 
         <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
          {/* <Route path="/testlist" element={<TitleTestList />} /> */}
-         <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
+         <Route path="/dashboard/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
       </Routes>
     </>
   );

@@ -27,7 +27,8 @@ const UserLogin = () => {
                 const respData=resp.data;
                 console.log("AUTH TOKEN:::>>"+respData.authToken);
                 const jwtToken = respData.authToken;
-                localStorage.setItem('token', jwtToken) // storing token in localstorage 
+            //  localStorage.setItem('token', jwtToken) // storing token in localstorage 
+                sessionStorage.setItem('token',jwtToken);
                 if (resp.data) {
                     // localStorage.setItem('token', resp.)
                     toast("Login Success!");

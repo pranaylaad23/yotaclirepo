@@ -17,6 +17,7 @@
 }
 .imageRole{
     margin-left: 5px;
+    cursor: pointer;
 }
 .headeruserName {
     display: block;

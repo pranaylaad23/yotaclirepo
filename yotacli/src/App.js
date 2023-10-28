@@ -15,6 +15,7 @@ import StdDashboard from "./student/pages/Dashboard";
 import UserLogin from "./components/user/UserLogin";
 import UserRegistration from "./components/user/UserRegistration";
 import ForgotPassword from "./components/user/ForgotPassword";
+import ProtectedRoute from "./components/utils/ProtectedRoute";
 
 
 function App() {
@@ -26,7 +27,11 @@ function App() {
           <Route path="/login" element={<UserLogin />} />
           <Route path="/register" element={<UserRegistration />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/dashboard/*" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
           <Route path="/student/*" element={<StudentDashboard />}>
             <Route path="analytics" element={<Analytics />} />
             <Route path="testlinks" element={<TestLinks />} />
