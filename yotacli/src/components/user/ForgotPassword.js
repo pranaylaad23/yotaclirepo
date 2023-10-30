@@ -7,7 +7,7 @@ const ForgotPassword = () => {
     return (
         <>
             <LoginHeader />
-            <div className='login-bg-body'>
+            <div className='center-form'>
                 <div class="container">
                     <div class="row">
                         <div class="col"> </div>
@@ -21,23 +21,6 @@ const ForgotPassword = () => {
                                         <h3>In Progress...</h3>
                                         <Link to='/login'>Back</Link>
                                     </div>
-                                    {/* <Form>
-                                        <Form.Group className="mb-3" controlId="formGroupEmail">
-                                            <Form.Label>Email Address:</Form.Label>
-                                            <Form.Control type="email" placeholder="Enter email" />
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" controlId="formGroupPassword">
-                                            <Form.Label>Password:</Form.Label>
-                                            <Form.Control type="password" placeholder="Password" />
-                                        </Form.Group>
-                                    </Form>
-                                    <div className='text-center'>
-                                        <button type='submit' className='btn btn-success login-btn' onClick={dashboard}>Login</button>
-                                        <span className='d-flex justify-content-center'>
-                                            <Link to='#'>Forgot Password</Link>&nbsp;&nbsp;|
-                                            New User?&nbsp;<Link to='/register'>Register</Link>
-                                        </span>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>

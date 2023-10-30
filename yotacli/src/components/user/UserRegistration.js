@@ -50,17 +50,17 @@ const UserRegistration = () => {
         <>
             <LoginHeader />
             <ToastContainer />
-            <div className='login-bg-body'>
-                <div class="container">
-                    <div class="row">
-                        <div class="col"> </div>
-                        <div class="card login-card-body">
-                            <div class="card-header">
+            <div className='login-bg-body center-form' >
+                <div className="container">
+                    <div className="row">
+                        <div className="col"> </div>
+                        <div className="card login-card-body">
+                            <div className="card-header">
                                 <Link to='/login'>Back</Link>
                                 <h3 className='text-center'>Registration</h3>
                             </div>
-                            <div class="card-body">
-                                <div class="col mt-4">
+                            <div className="card-body">
+                                <div className="col mt-4">
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formGroupEmail">
                                             <Form.Label>User Name:</Form.Label>
@@ -77,7 +77,7 @@ const UserRegistration = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="col"> </div>
+                        <div className="col"> </div>
                     </div>
                 </div>
             </div>
