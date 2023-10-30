@@ -108,9 +108,9 @@ const UpdateForm = (props) => {
     };
 
     const months = [
-        'JANUARY', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
+        'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL',
+        'MAY', 'JUNE', 'JULY', 'AUGUST',
+        'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
     ];
 
     const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
@@ -145,6 +145,7 @@ const UpdateForm = (props) => {
     const onHandleUpdate = async (e) => {
         e.preventDefault();
         // console.log("Updated data", updateBatchData);
+        updateBatchData['batchName'] = calculateBatchName();
         setUpdateBatchData(updateBatchData);
 
 
@@ -152,8 +153,7 @@ const UpdateForm = (props) => {
             id: updateBatchData.id,
             batchIdentifier: updateBatchData.batchIdentifier,
             batchName: updateBatchData.batchName,
-            batchDescription:
-            updateBatchData.batchDescription,
+            batchDescription: updateBatchData.batchDescription,
             startDate: updateBatchData.startDate,
             endDate: updateBatchData.endDate,
             createdAt:updateBatchData.createdAt,
@@ -185,12 +185,10 @@ const UpdateForm = (props) => {
         setSelectedYear(array[4]);
     }
 
-    // console.log("after",updateBatchData);
-
     return (
 
         <Fragment>
-            <div className="row d-flex justify-content-center">
+           <div className="row d-flex justify-content-center">
                 <div className='row mt-3'>
 
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
@@ -198,7 +196,9 @@ const UpdateForm = (props) => {
                         <h5 className={classes.boxtitle}>Update Batch </h5>
 
                     </div>
-                     <div className='col-6 col-lg-4'>
+
+
+                    <div className='col-6 col-lg-4'>
 
                         <form className="form-inline" onSubmit={onHandleUpdate}>
                           
@@ -214,7 +214,7 @@ const UpdateForm = (props) => {
             <hr />
             {/*  */}
             <div>
-                <form className="row gy-3">
+                <form className="row gy-1 form-control-md">
                     {/* 1st row  */}
                     <div style={{ display: "flex", flexDirection: "row" }}>
                         <div className={`col-6 ${classes.inputName}`} >
@@ -239,7 +239,7 @@ const UpdateForm = (props) => {
                                 </div>
                             </td>
                         </div>
-                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "19px" }}>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "25px" }}>
                             <td >
                                 <div>
                                     <label className={classes.label} style={{ marginTop: "10px" }}>Competency:&nbsp;</label>
@@ -335,21 +335,24 @@ const UpdateForm = (props) => {
                                 </td>
                             </div>
                         </div>
+                    </div>
                         {/* 2nd row  */}
-                        <div className="col-md-12">
-                            <div className="row mt-4 mb-4">
-                                <div className="col-md-2" style={{ padding: "26px 0px 0px 16px" }}>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px" }} >
                                     <label for="BatchDescription" className={classes.label}>Description</label>
                                 </div>
-                                <div className={`col-md-9`} style={{ padding: "0px" }}>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "17px" }}>
                                     <textarea
                                         name="batchDescription"
                                         value={updateBatchData.batchDescription}
                                         onChange={newBatchData}
                                         className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" placeholder="Enter Batch Description here..." id="BatchDescription" rows="3"></textarea>
-
-                                </div>
-                            </div>
+                                </div></td>
+                            
                         </div>
                     </div>
                     {/* 3rd row */}
