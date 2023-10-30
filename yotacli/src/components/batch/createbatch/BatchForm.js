@@ -130,7 +130,7 @@ const BatchForm = (props) => {
         alert("Batch created sucessfully...")
         e.preventDefault();
         batches['batchName'] = calculateBatchName();
-        batches['batchIdentifier'] = "Pankaj Sharma";
+        batches['userName'] = "Pankaj Sharma";
         dispatch(createBatch(batches));
         window.location.href = '/batchlist';
     };
