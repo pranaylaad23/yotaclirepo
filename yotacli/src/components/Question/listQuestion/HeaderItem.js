@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import "./List.css";
 import InputField from "../../../ui/inputField/InputField";
-import Button from "../../../ui/button/Button";
 import classes from "../../../components/Question/listQuestion/HeaderItem.module.css";
 
-const HeaderItem = () => {
+
+const HeaderItem = (props) => {
+  const handleSearchInput = (e) => {
+    props.handleSearchInput(e.target.value);
+  };
+
   return (
     <div className="row">
       <div className="row mt-3">
@@ -35,12 +39,10 @@ const HeaderItem = () => {
                   className={classes.inputField}
                   type="search"
                   placeholder="Search keyword..."
-                  aria-label="Search"
+                  aria-label="Search" 
+                  onChange={handleSearchInput}
                 />
               </InputField>
-              <Button>
-                <i className="fa fa-search" style={{ color: "white" }}></i>
-              </Button>
             </div>
           </form>
         </div>
