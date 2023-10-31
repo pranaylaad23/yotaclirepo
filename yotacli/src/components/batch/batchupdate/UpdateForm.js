@@ -25,23 +25,116 @@ const UpdateForm = (props) => {
     };
 
     const [updateBatchData, setUpdateBatchData] = useState(initialState);
+    const [selectedMonth, setSelectedMonth] = useState('');
+    const [selectedYear, setSelectedYear] = useState('');
+    const [selectedUnit, setSelectedUnit] = useState([]);
+    const [unitData, setUnitData] = useState('');
+    const [selectedCompetency, setSelectedCompetency] = useState([]);
+    const [competencyData, setCompetencyData] = useState('');
+    const [selectedTrainingtype, setSelectedTrainingtype] = useState([]);
+    const [trainingtypeData, setTrainingtypeData] = useState('');
 
 
     useEffect(() => {
         if (id) {
             axios.get(`http://localhost:9090/yota/api/batches/${id}`).then(
                 res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setUpdateBatchData(res.data)
+                    splitUnitCompetencyTrainingMonthYear(res.data)
+                   ;
                 });
         }
-
-
-
+        axios.get('http://localhost:9090/yota/api/unit')
+        .then(resp => {
+            if (resp.status == 200) {
+                if (resp.data && resp.data.length) {
+                    let unitData = resp.data;
+                    let unitDataArray = [];
+                    for (let i = 0; i < unitData.length; i++) {
+                        let countObj = {
+                            id: unitData[i].id,
+                            name: unitData[i].name,
+                        };
+                        unitDataArray.push(countObj);
+                    }
+                    setSelectedUnit(unitDataArray);
+                }
+            }
+        })
+        .catch(err => console.log(err));
+        axios.get('http://localhost:9090/yota/api/competency')
+        .then(resp => {
+            if (resp.status == 200) {
+                if (resp.data && resp.data.length) {
+                    let competencyData = resp.data;
+                    let competencyDataArray = [];
+                    for (let i = 0; i < competencyData.length; i++) {
+                        let countObj = {
+                            id: competencyData[i].id,
+                            name: competencyData[i].name,
+                        };
+                        competencyDataArray.push(countObj);
+                    }
+                    setSelectedCompetency(competencyDataArray);
+                }
+            }
+        })
+        .catch(err => console.log(err));
+        axios.get('http://localhost:9090/yota/api/trainingtype')
+        .then(resp => {
+            if (resp.status == 200) {
+                if (resp.data && resp.data.length) {
+                    let trainingtypeData = resp.data;
+                    let trainingtypeDataArray = [];
+                    for (let i = 0; i < trainingtypeData.length; i++) {
+                        let countObj = {
+                            id: trainingtypeData[i].id,
+                            name: trainingtypeData[i].name,
+                        };
+                        trainingtypeDataArray.push(countObj);
+                    }
+                    setSelectedTrainingtype(trainingtypeDataArray);
+                }
+            }
+        })
+        .catch(err => console.log(err));
+        
     }, []);
 
-    console.log(updateBatchData);
+    const calculateBatchName = () => {
+        const mergedName = `${unitData}-${competencyData}-${trainingtypeData}-${selectedMonth}-${selectedYear}`;
+        return mergedName;
+    };
 
+    const months = [
+        'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL',
+        'MAY', 'JUNE', 'JULY', 'AUGUST',
+        'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
+    ];
+
+    const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
+
+    const handleMonthChange = (event) => {
+        setSelectedMonth(event.target.value);
+    };
+
+    const handleYearChange = (event) => {
+        setSelectedYear(event.target.value);
+    };
+
+    const handleUnitChange = (event) => {
+        console.log("event.target.value",event.target.value)
+        setUnitData(event.target.value);
+    };
+
+    const handleCompetencyChange = (event) => {
+        setCompetencyData(event.target.value);
+    };
+
+    const handleTrainingtypeChange = (event) => {
+        setTrainingtypeData(event.target.value);
+    };
     const newBatchData = (e) => {
         setUpdateBatchData({
             ...updateBatchData,
@@ -51,7 +144,8 @@ const UpdateForm = (props) => {
    
     const onHandleUpdate = async (e) => {
         e.preventDefault();
-        console.log("Updated data", updateBatchData);
+        // console.log("Updated data", updateBatchData);
+        updateBatchData['batchName'] = calculateBatchName();
         setUpdateBatchData(updateBatchData);
 
 
@@ -59,8 +153,7 @@ const UpdateForm = (props) => {
             id: updateBatchData.id,
             batchIdentifier: updateBatchData.batchIdentifier,
             batchName: updateBatchData.batchName,
-            batchDescription:
-            updateBatchData.batchDescription,
+            batchDescription: updateBatchData.batchDescription,
             startDate: updateBatchData.startDate,
             endDate: updateBatchData.endDate,
             createdAt:updateBatchData.createdAt,
@@ -79,12 +172,23 @@ const UpdateForm = (props) => {
 
     }
 
-    console.log(updateBatchData);
+    const splitUnitCompetencyTrainingMonthYear =(data)=>{
+        
+        console.log("Batch Data ",data.batchName);
+        let array =(data.batchName).split("-");
+        console.log(array);
+        updateBatchData['batchName'] = data.batchName;
+        setUnitData(array[0]);
+        setCompetencyData(array[1]);
+        setTrainingtypeData(array[2]);
+        setSelectedMonth(array[3]);
+        setSelectedYear(array[4]);
+    }
 
     return (
 
         <Fragment>
-            <div className="row d-flex justify-content-center">
+           <div className="row d-flex justify-content-center">
                 <div className='row mt-3'>
 
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
@@ -92,7 +196,9 @@ const UpdateForm = (props) => {
                         <h5 className={classes.boxtitle}>Update Batch </h5>
 
                     </div>
-                     <div className='col-6 col-lg-4'>
+
+
+                    <div className='col-6 col-lg-4'>
 
                         <form className="form-inline" onSubmit={onHandleUpdate}>
                           
@@ -108,42 +214,145 @@ const UpdateForm = (props) => {
             <hr />
             {/*  */}
             <div>
-                <form className="row gy-3">
+                <form className="row gy-1 form-control-md">
                     {/* 1st row  */}
-
-                    <div className="col-md-5 gap">
-                        <label for="BatchIdentifier" className={classes.label}>Batch Identifer</label>
-                        <InputField>
-                            <input type="text" name="batchIdentifier"
-                                value={updateBatchData.batchIdentifier}
-                                onChange={newBatchData}
-                                className={classes.InputField} id="BatchIdentifier" required  readOnly="readonly"/>
-                        </InputField>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div className={`col-6 ${classes.inputName}`} >
+                            <td>
+                                <div>
+                                    <label className={classes.label} style={{ marginTop: "40px", marginLeft: "63px" }}>Unit:&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "149px" }}>
+                                    <InputField >
+                                        <select value={unitData} onChange={handleUnitChange} style={{ width: "302px" }}>
+                                            <option value="">Select Unit</option>
+                                            {
+                                                selectedUnit.map((unit, index) => (
+                                                    <option key={index} value={unit.name}>
+                                                        {unit.name}
+                                                    </option>
+                                                ))}
+                                        </select>
+                                    </InputField>
+                                </div>
+                            </td>
+                        </div>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "25px" }}>
+                            <td >
+                                <div>
+                                    <label className={classes.label} style={{ marginTop: "10px" }}>Competency:&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px" }}>
+                                    <InputField>
+                                        <select value={competencyData} onChange={handleCompetencyChange} style={{ width: "319px" }}>
+                                            <option value="">Select Competency</option>
+                                            {selectedCompetency.map((competency, index) => (
+                                                <option key={index} value={competency.name}>
+                                                    {competency.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </InputField>
+                                </div>
+                            </td>
+                        </div>
                     </div>
-                    <div className="col-md-5">
-                        <label for="BatchName" className={classes.label}>Batch Name</label>
-                        <InputField>
-                            <input type="text" name="batchName"
-                                value={updateBatchData.batchName}
-                                onChange={newBatchData}
-                                className={classes.InputField} id="BatchName" required />
-                        </InputField>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div className={`col-6 ${classes.inputName}`} >
+                            <td >
+                                <div>
+                                    <label className={classes.label} style={{ marginTop: "10px", marginLeft: "58px" }}>Training Type:&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "19px", marginLeft: "91px" }}>
+                                    <InputField>
+                                        <select value={trainingtypeData} onChange={handleTrainingtypeChange} style={{ width: "302px" }}>
+                                            <option value="">Select Training Type</option>
+                                            {selectedTrainingtype.map((trainingtype, index) => (
+                                                <option key={index} value={trainingtype.name}>
+                                                    {trainingtype.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </InputField>
+                                </div>
+                            </td>
+                        </div>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px" }}>
+                            <td>
+                                <div>
+                                    <label className={classes.label} style={{ marginTop: "10px" }}>Month & Year:</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px", }}>
+                                    <tr><td>
+                                        <InputField>
+                                            <select value={selectedMonth} onChange={handleMonthChange} style={{ width: "150px" }}>
+                                                <option value="">Select Month</option>
+                                                {months.map((month, index) => (
+                                                    <option key={index} value={month}>
+                                                        {month}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </InputField></td>
+                                        <td>&nbsp;</td>
+                                        <td><InputField>
+                                            <select value={selectedYear} onChange={handleYearChange} style={{ width: "158px" }}>
+                                                <option value="">Select Year</option>
+                                                {years.map((year, index) => (
+                                                    <option key={index} value={year}>
+                                                        {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </InputField></td>
+                                    </tr>
+                                </div>
+                            </td>
+                        </div>
                     </div>
-                    {/* 2nd row  */}
-                    <div className="col-md-12">
-                        <div className="row mt-4 mb-4">
-                            <div className="col-md-2" style={{ padding: "26px 0px 0px 16px" }}>
-                                <label for="BatchDescription" className={classes.label}>Description</label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div className={`col-6 ${classes.inputName}`} >
+                            <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px" }}>
+                                <td>
+                                    <div style={{ marginLeft: "40px" }}>
+                                        <label for="BatchName" className={classes.label}>Batch Name</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "103px" }}>
+                                        <InputField>
+                                            <input type="text" value={calculateBatchName()}  name="batchName" className={classes.InputField} id="BatchName" style={{ width: "337px", marginBottom: "0px" }} disabled/>
+                                        </InputField>
+                                    </div>
+                                </td>
                             </div>
-                            <div className={`col-md-9`} style={{ padding: "0px" }}>
-                                <textarea
-                                    name="batchDescription"
-                                    value={updateBatchData.batchDescription}
-                                    onChange={newBatchData}
-
-                                    className={`form-control ${classes.textArea} ${classes.InputField} ${classes.label}`} placeholder="Enter Batch Description here..." id="BatchDescription" rows="3"></textarea>
-
-                            </div>
+                        </div>
+                    </div>
+                        {/* 2nd row  */}
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px" }} >
+                                    <label for="BatchDescription" className={classes.label}>Description</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "17px" }}>
+                                    <textarea
+                                        name="batchDescription"
+                                        value={updateBatchData.batchDescription}
+                                        onChange={newBatchData}
+                                        className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" placeholder="Enter Batch Description here..." id="BatchDescription" rows="3"></textarea>
+                                </div></td>
+                            
                         </div>
                     </div>
                     {/* 3rd row */}
@@ -171,7 +380,6 @@ const UpdateForm = (props) => {
                 </form>
             </div>
         </Fragment>
-
     )
 }
 
