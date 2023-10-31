@@ -4,39 +4,50 @@ import classes1 from "./HeaderItem.module.css";
 import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
 import ReactDOM from "react-dom";
 import "./styles.css";
-import { createClientQuestion } from "../../../redux/features/client/CreateClientQuestionSlice"; 
+import { createClientQuestion } from "../../../redux/features/client/CreateClientQuestionSlice";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
+const ClientQuestionForm = ({ cId }) => {
+  const { id } = useParams();
 
-const ClientQuestionForm = (props) => {
+  const ClientId = id;
  
+
   const { register, control, handleSubmit, reset, watch } = useForm({
     defaultValues: {
-      clientQuestions: [{ Question: "", Answer: "" }],
+      clientQuestions: [{ Question: "", Answer: "" ,ClientId:ClientId}],
     },
   });
 
   const dispatch = useDispatch();
- 
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "clientQuestions",
   });
-  
 
+  const appendNewField = () => {
+    const newField = {
+      Question: "",
+
+      Answer: "",
+
+      ClientId: ClientId,
+    };
+
+    append(newField);
+  };
   const onSubmit = (data) => {
-  
     console.log("data---------", data);
     dispatch(createClientQuestion(data));
     window.location.reload();
     alert("Client Question uploaded successfully");
-  
   };
 
   return (
     <>
-     
       <form className="questionForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <div className="row mt-3">
@@ -49,51 +60,85 @@ const ClientQuestionForm = (props) => {
                 <div className={classes1.btn}>
                   <button
                     type="button"
-                    className="add_button"
-                    onClick={() => {
-                      append({ Question: "", Answer: "" });
-                    }}
+                    className="client_button"
+                    onClick={appendNewField}
                   >
-                    Add
+                    <AiOutlinePlusCircle /> Create Question
                   </button>
-                  
                 </div>
               </form>
             </div>
           </div>
         </div>
-        <hr/>
+        <hr />
         {fields.map((item, index) => {
           return (
             <li
               key={item.id}
-              style={{ display: "flex", flexDirection: "row" ,width:"100%"}}
+              style={{ display: "flex", flexDirection: "row", width: "100%" }}
             >
-              <div style={{display:"flex",flexDirection:"column" ,background:"",width:"80%"}}>
-              <div >
-                <input
-                className="form-control RegisterTechnologyForm_inputField__kEsDI"
-                style={{border:"2px solid grey" ,marginTop:"40px"}}
-                  placeholder="Enter Interview Question"
-                  {...register(`clientQuestions.${index}.Question`, { required: true })}
-                />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  background: "",
+                  width: "80%",
+                }}
+              >
+                <div>
+                  <input
+                    type="hidden"
+                    className="form-control RegisterTechnologyForm_inputField__kEsDI"
+                    name={`clientQuestions.${index}.ClientId`}
+                    defaultValue={ClientId}
+                  />
+                </div>
+                <div>
+                  <input
+                    className="form-control RegisterTechnologyForm_inputField__kEsDI mx-4" 
+                    style={{ border: "2px solid grey", marginTop: "40px" }}
+                    placeholder="Enter Interview Question"
+                    {...register(`clientQuestions.${index}.Question`, {
+                      required: true,
+                    })}
+                  />
+                </div>
+                <br />
+                <div>
+                  <Controller
+                    render={({ field }) => (
+                      <input
+                        style={{ border: "2px solid grey" }}
+                        className="form-control RegisterTechnologyForm_inputField__kEsDI mx-4"
+                        placeholder="Enter Answer"
+                        {...field}
+                      />
+                    )}
+                    name={`clientQuestions.${index}.Answer`}
+                    control={control}
+                  />
+                </div>
+                <br />
               </div>
-              <br />
-              <div>
-                <Controller
-                  render={({ field }) => (
-                    <input  style={{border:"2px solid grey" }} className="form-control RegisterTechnologyForm_inputField__kEsDI" placeholder="Enter Answer" {...field} />
-                  )}
-                  name={`clientQuestions.${index}.Answer`}
-                  control={control}
-                />
-              </div>
-              <br />
-              </div>
-              <div style={{ display:"flex", width:"20%", justifyContent:"center",alignItems:"center" ,justifyItems:"center"}}>
-                <button className="delete_button" type="button" onClick={() => remove(index)}>
-                  Delete
-                </button>
+              <div
+                style={{
+                  display: "flex",
+                  width: "20%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  justifyItems: "center",
+                }}
+              >
+                {/* <button
+                  className="delete_button"
+                  type="button"
+                  onClick={() => remove(index)}
+                >
+                  Delete 
+                </button> */}
+                <div>
+                <a className="dropdown-item" onClick={() => remove(index)}><i class="fa-solid fa-trash" title="Delete"></i></a>
+                </div>
               </div>
             </li>
           );

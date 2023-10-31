@@ -73,6 +73,8 @@ h1 {
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
   background: #fff;
   padding: 5px;
+  text-align:center;
+  font-weight: 800;
 }
 
 .answers {
@@ -94,4 +96,6 @@ h1 {
   flex-wrap: wrap;
    text-wrap: wrap;
    width:85%;
+  text-align: center;
+  margin-top: 8px;
 }

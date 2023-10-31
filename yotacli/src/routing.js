@@ -21,10 +21,12 @@ import TitleClientList from "./components/ClientMaster/listClient/TitleClientLis
 import TitleViewQuestion from "./components/ClientMaster/viewQuestion/TitleViewQuestion";
 import TitleTestList from "./components/test/listTest/TitleTestList";
 import TitleAddClientQuestion from "./components/ClientMaster/addClientQuestion/TitleAddClientQuestion";
+import TitleUpdateClient from "./components/ClientMaster/updateClient/TitleUpdateClient";
 const routing = () => {
   return (
     <>
       <Routes>
+
         <Route path="/" element={<TitleDashboard />} />
         <Route path="batchlist" element={<TitleBatchList />} />
         <Route path="createbatch" element={<TitleCreateBatch />} />
@@ -34,7 +36,6 @@ const routing = () => {
         <Route path="addtechnology" element={<TitleAddTechnology />} />
         <Route path="/updatetechnology/:name" element={<TitleUpdateTechnology />}/>
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
-        {/* <Route path="questionlist" element={<TitleQuestionList />} /> */}
         <Route path="/recordTechnology" element={<TitleRecordTechnology />} />
         <Route path="/recordTechDetails/:name" element={<TitleRecordTechnology />} />
         <Route path="/associatelist" element={<TitleAssociateList />} />
@@ -53,12 +54,12 @@ const routing = () => {
         <Route path="/student" element={<Dashboard/>}/>
         <Route path="/addclient"element={<TitleAddClient/>} />
         <Route path="/clientlist" element={<TitleClientList />} /> 
-        <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
-
-         {/* <Route path="/testlist" element={<TitleTestList />} /> */}
-         <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
-
-         <Route path="/test" element={<TitleTestList />} />
+        <Route path="/viewQuestion/:clientId" element={<TitleViewQuestion />} /> 
+        <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
+        <Route path="/test" element={<TitleTestList />} />
+        <Route path="/addClientQuestion/:id" element={<TitleAddClientQuestion />} /> 
+        <Route path="/deleteclient/:id" element={<TitleClientList />} />
+        <Route path="/updateclient/:id" element={<TitleUpdateClient />} />
 
       </Routes>
     </>

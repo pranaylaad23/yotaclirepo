@@ -10,6 +10,7 @@ return (
           <tr>
             <th>Sr.No.</th>
             <th>Name Of Client</th>
+            <th>Technology</th>
             <th>Description</th>
             <th>Action</th>
           </tr>
