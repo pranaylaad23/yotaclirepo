@@ -47,7 +47,7 @@ const UpdateForm = (props) => {
         }
         axios.get('http://localhost:9090/yota/api/unit')
         .then(resp => {
-            if (resp.status == 200) {
+            if (resp.status === 200) {
                 if (resp.data && resp.data.length) {
                     let unitData = resp.data;
                     let unitDataArray = [];
@@ -65,7 +65,7 @@ const UpdateForm = (props) => {
         .catch(err => console.log(err));
         axios.get('http://localhost:9090/yota/api/competency')
         .then(resp => {
-            if (resp.status == 200) {
+            if (resp.status === 200) {
                 if (resp.data && resp.data.length) {
                     let competencyData = resp.data;
                     let competencyDataArray = [];
@@ -83,7 +83,7 @@ const UpdateForm = (props) => {
         .catch(err => console.log(err));
         axios.get('http://localhost:9090/yota/api/trainingtype')
         .then(resp => {
-            if (resp.status == 200) {
+            if (resp.status === 200) {
                 if (resp.data && resp.data.length) {
                     let trainingtypeData = resp.data;
                     let trainingtypeDataArray = [];
@@ -350,7 +350,7 @@ const UpdateForm = (props) => {
                                         name="batchDescription"
                                         value={updateBatchData.batchDescription}
                                         onChange={newBatchData}
-                                        className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" placeholder="Enter Batch Description here..." id="BatchDescription" rows="3"></textarea>
+                                        className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" placeholder="Enter Batch Description here..." rows="3"></textarea>
                                 </div></td>
                             
                         </div>
