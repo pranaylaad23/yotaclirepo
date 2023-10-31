@@ -21,7 +21,7 @@ const UpdateForm = (props) => {
         batchDescription: "",
         startDate: "",
         endDate: "",
-        createdAt:""
+        createdAt: ""
     };
 
     const [updateBatchData, setUpdateBatchData] = useState(initialState);
@@ -42,64 +42,64 @@ const UpdateForm = (props) => {
                     // console.log(res.data);
                     setUpdateBatchData(res.data)
                     splitUnitCompetencyTrainingMonthYear(res.data)
-                   ;
+                        ;
                 });
         }
         axios.get('http://localhost:9090/yota/api/unit')
-        .then(resp => {
-            if (resp.status == 200) {
-                if (resp.data && resp.data.length) {
-                    let unitData = resp.data;
-                    let unitDataArray = [];
-                    for (let i = 0; i < unitData.length; i++) {
-                        let countObj = {
-                            id: unitData[i].id,
-                            name: unitData[i].name,
-                        };
-                        unitDataArray.push(countObj);
+            .then(resp => {
+                if (resp.status === 200) {
+                    if (resp.data && resp.data.length) {
+                        let unitData = resp.data;
+                        let unitDataArray = [];
+                        for (let i = 0; i < unitData.length; i++) {
+                            let countObj = {
+                                id: unitData[i].id,
+                                name: unitData[i].name,
+                            };
+                            unitDataArray.push(countObj);
+                        }
+                        setSelectedUnit(unitDataArray);
                     }
-                    setSelectedUnit(unitDataArray);
                 }
-            }
-        })
-        .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
         axios.get('http://localhost:9090/yota/api/competency')
-        .then(resp => {
-            if (resp.status == 200) {
-                if (resp.data && resp.data.length) {
-                    let competencyData = resp.data;
-                    let competencyDataArray = [];
-                    for (let i = 0; i < competencyData.length; i++) {
-                        let countObj = {
-                            id: competencyData[i].id,
-                            name: competencyData[i].name,
-                        };
-                        competencyDataArray.push(countObj);
+            .then(resp => {
+                if (resp.status === 200) {
+                    if (resp.data && resp.data.length) {
+                        let competencyData = resp.data;
+                        let competencyDataArray = [];
+                        for (let i = 0; i < competencyData.length; i++) {
+                            let countObj = {
+                                id: competencyData[i].id,
+                                name: competencyData[i].name,
+                            };
+                            competencyDataArray.push(countObj);
+                        }
+                        setSelectedCompetency(competencyDataArray);
                     }
-                    setSelectedCompetency(competencyDataArray);
                 }
-            }
-        })
-        .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
         axios.get('http://localhost:9090/yota/api/trainingtype')
-        .then(resp => {
-            if (resp.status == 200) {
-                if (resp.data && resp.data.length) {
-                    let trainingtypeData = resp.data;
-                    let trainingtypeDataArray = [];
-                    for (let i = 0; i < trainingtypeData.length; i++) {
-                        let countObj = {
-                            id: trainingtypeData[i].id,
-                            name: trainingtypeData[i].name,
-                        };
-                        trainingtypeDataArray.push(countObj);
+            .then(resp => {
+                if (resp.status === 200) {
+                    if (resp.data && resp.data.length) {
+                        let trainingtypeData = resp.data;
+                        let trainingtypeDataArray = [];
+                        for (let i = 0; i < trainingtypeData.length; i++) {
+                            let countObj = {
+                                id: trainingtypeData[i].id,
+                                name: trainingtypeData[i].name,
+                            };
+                            trainingtypeDataArray.push(countObj);
+                        }
+                        setSelectedTrainingtype(trainingtypeDataArray);
                     }
-                    setSelectedTrainingtype(trainingtypeDataArray);
                 }
-            }
-        })
-        .catch(err => console.log(err));
-        
+            })
+            .catch(err => console.log(err));
+
     }, []);
 
     const calculateBatchName = () => {
@@ -124,7 +124,7 @@ const UpdateForm = (props) => {
     };
 
     const handleUnitChange = (event) => {
-        console.log("event.target.value",event.target.value)
+        console.log("event.target.value", event.target.value)
         setUnitData(event.target.value);
     };
 
@@ -141,7 +141,7 @@ const UpdateForm = (props) => {
             [e.target.name]: e.target.value,
         });
     }
-   
+
     const onHandleUpdate = async (e) => {
         e.preventDefault();
         // console.log("Updated data", updateBatchData);
@@ -156,26 +156,26 @@ const UpdateForm = (props) => {
             batchDescription: updateBatchData.batchDescription,
             startDate: updateBatchData.startDate,
             endDate: updateBatchData.endDate,
-            createdAt:updateBatchData.createdAt,
+            createdAt: updateBatchData.createdAt,
         }))
-    
-            .unwrap()
-            .then(response => {
-                window.alert(`"Batch details with Identifier: " ${updateBatchData.batchIdentifier} " updated Sucessfully"`);
-            })
 
-        
-            .catch(e => {
-                alert(e.data.error);
-            });
+        .unwrap()
+        .then(response => {
+            window.alert(`"Batch details with Identifier: " ${updateBatchData.batchIdentifier} " updated Sucessfully"`);
+        })
 
+
+        .catch(e => {
+            alert(e.data.error);
+        });
+        window.location.href = '/batchlist';
 
     }
 
-    const splitUnitCompetencyTrainingMonthYear =(data)=>{
-        
-        console.log("Batch Data ",data.batchName);
-        let array =(data.batchName).split("-");
+    const splitUnitCompetencyTrainingMonthYear = (data) => {
+
+        console.log("Batch Data ", data.batchName);
+        let array = (data.batchName).split("-");
         console.log(array);
         updateBatchData['batchName'] = data.batchName;
         setUnitData(array[0]);
@@ -188,7 +188,7 @@ const UpdateForm = (props) => {
     return (
 
         <Fragment>
-           <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center">
                 <div className='row mt-3'>
 
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
@@ -201,7 +201,7 @@ const UpdateForm = (props) => {
                     <div className='col-6 col-lg-4'>
 
                         <form className="form-inline" onSubmit={onHandleUpdate}>
-                          
+
                             <div className={classes.btn}>
                                 <Button className={classes.button} type="submit" >Update</Button>
                             </div>
@@ -318,64 +318,81 @@ const UpdateForm = (props) => {
                             </td>
                         </div>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ display: "flex", flexDirection: "row", marginTop: "14px" }}>
                         <div className={`col-6 ${classes.inputName}`} >
-                            <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px" }}>
-                                <td>
-                                    <div style={{ marginLeft: "40px" }}>
-                                        <label for="BatchName" className={classes.label}>Batch Name</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "103px" }}>
-                                        <InputField>
-                                            <input type="text" value={calculateBatchName()}  name="batchName" className={classes.InputField} id="BatchName" style={{ width: "337px", marginBottom: "0px" }} disabled/>
-                                        </InputField>
-                                    </div>
-                                </td>
-                            </div>
+                            <td>
+                                <div style={{ marginLeft: "40px" }}>
+
+                                    <label for="BatchName" className={classes.label}>Batch Name</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "103px" }}>
+                                    <InputField>
+                                        <input type="text" value={calculateBatchName()} name="batchName" className={classes.InputField} id="BatchName" style={{ width: "337px", marginBottom: "0px" }} disabled />
+                                    </InputField>
+                                </div>
+                            </td>
                         </div>
                     </div>
-                        {/* 2nd row  */}
-                    <div style={{ display: "flex", flexDirection: "row" }}>
+                    {/* 2nd row  */}
+                    <div style={{ marginTop: "14px" }}>
                         <div>
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px" }} >
-                                    <label for="BatchDescription" className={classes.label}>Description</label>
+                                    <label style={{ marginLeft: "63px" }} for="BatchDescription" className={classes.label}>Description</label>
                                 </div>
                             </td>
                             <td>
                                 <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "17px" }}>
-                                    <textarea
+                                    <textarea style={{ marginLeft: "99px", width: "810px", height: "65px" }}
                                         name="batchDescription"
                                         value={updateBatchData.batchDescription}
                                         onChange={newBatchData}
-                                        className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" placeholder="Enter Batch Description here..." id="BatchDescription" rows="3"></textarea>
+                                        className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" rows="3"></textarea>
                                 </div></td>
-                            
+
                         </div>
                     </div>
                     {/* 3rd row */}
-                    <div className="col-md-4 gap">
-                        <label for="StartDate" className={classes.label}>Start Date</label>
-                        <InputField>
-                            <input type="date"
-                                name="startDate"
-                                value={updateBatchData.startDate}
-                                onChange={newBatchData}
-                                className={classes.InputField} id="StartDate" required />
-                        </InputField>
-                    </div>
-                    <div className="col-md-4">
-                        <label for="EndDate" className={classes.label}>End Date</label>
-                        <InputField >
-                            <input type="date"
-                                name="endDate"
-                                value={updateBatchData.endDate}
-                                onChange={newBatchData}
-                                className={classes.InputField} id="EndDate" required />
-                        </InputField>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                        <div className={` col-6 ${classes.inputName}`} >
+                            <td>
+                                <div>
+                                    <label for="StartDate" className={classes.label} style={{ marginTop: "24px", marginLeft: "63px" }}>Start Date</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px", marginLeft: "115px" }}>
+                                    <InputField>
+                                        <input type="date" style={{ width: "300px" }}
+                                            name="startDate"
+                                            value={updateBatchData.startDate}
+                                            onChange={newBatchData}
+                                            className={classes.InputField} id="StartDate" required />
+                                    </InputField>
 
+                                </div>
+                            </td>
+                        </div>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px", marginLeft: "6px" }}>
+                            <td >
+                                <div>
+                                    <label for="EndDate" className={classes.label} style={{ marginTop: "10px" }}>End Date</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-6`} style={{ marginTop: "10px", marginLeft: "24px" }}>
+                                    <InputField >
+                                        <input type="date" style={{ width: "319px" }}
+                                            name="endDate"
+                                            value={updateBatchData.endDate}
+                                            onChange={newBatchData}
+                                            className={classes.InputField} id="EndDate" required />
+                                    </InputField>
+                                </div>
+                            </td>
+                        </div>
                     </div>
                 </form>
             </div>

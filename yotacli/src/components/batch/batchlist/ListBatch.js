@@ -2,17 +2,30 @@ import React from "react";
 import Card from "../../../ui/card/Card";
 import ListBatchItem from "./ListBatchItem";
 import HeaderItem from "./HeaderItem";
-import Pagination from "../../../ui/pagination/Pagination";
-
+import Pagination from "../pagination/Pagination";
+import { useRef,useState } from "react";
 const ListBatch = () => {
+  const [currentPage, setCurrentPage] = useState(1); //Pagination
+  const [dataPerPage, setDataPerPage] = useState(5); //Pagination
   return (
     <div className="justify-content-centre ">
       <Card>
-        <HeaderItem />
+        <HeaderItem 
+         currentPage={currentPage}
+         setCurrentPage={setCurrentPage}
+         setDataPerPage={setDataPerPage}
+        />
         <hr />
-        <ListBatchItem />
+        <ListBatchItem 
+          currentPage={currentPage}
+          dataPerPage={dataPerPage}
+        />
       </Card>
-      <Pagination />
+      <Pagination 
+        dataPerPage={dataPerPage}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
