@@ -169,20 +169,6 @@ const TestList = (props) => {
   ];
 
   console.log(Data);
-  // var btn;
-  // if (columns.label !== "Action"){
-  //    btn = <button
-  //   type="button"
-  //   onClick={() => requestSort(columns.field)}
-  //   className={getClassNamesFor(columns.field)}
-  // >
-  //   {columns.label}
-
-  //   <i class="fa-solid fa-sort"></i>
-
-  // </button>
-  // }
-
   return (
     <div className={`table-responsive ${classes.table}`}>
       <table className="table table-bordered table-hover">
@@ -222,25 +208,12 @@ const TestList = (props) => {
                 <td>{item.endDate}</td>
                 <td>{item.status}</td>
                 <td>{item.testType}</td>
-                {/* <td  onClick={<Action/>}>
-                  <Link to={`/assignTest`}>
-                    <i class="fa-solid fa-plus"></i>
-                  </Link>
-                  &nbsp;&nbsp;
-                 <i class="fa-solid fa-ellipsis-vertical"></i>
-                </td> */}
                 <td>
-                  
-                <div className="dropdown">
+                  <div className="dropdown">
                   <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="fa-solid fa-ellipsis-vertical"></i>
                   </button>
-
                   <ul  style={{backgroundColor:"lightgrey",color:"black"}}className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  {/* <Link to={`/assignTest`}>
-                    <i class="fa-solid fa-plus"></i>
-                  </Link> */}
-                
                   <li> &nbsp; &nbsp; <Link to={`/assignTest`}>
                     <i className="fa-solid fa-plus"></i>
                   </Link>Add</li>
@@ -251,10 +224,8 @@ const TestList = (props) => {
                 <li><a className="dropdown-item" href="#"><i class="fa-solid fa-gear"></i>Setting</a></li>
                 <li><a className="dropdown-item" href="#"><i class="fa-solid fa-trash"></i>Delete</a></li>
                   </ul>
-          
-                </div>
-
-                </td>
+                   </div>
+                   </td>
               </tr>
             );
           })}

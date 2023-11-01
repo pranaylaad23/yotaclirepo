@@ -8,6 +8,7 @@ import  testList  from "../redux/features/test/CreateTestSlice";
 import CreateClientSlice, {clientList, createClient} from "../redux/features/client/CreateClientSlice";
 import techList  from "../redux/features/technology/createTechnologySlice";
 import ClientQuestionListSlice from "../redux/features/client/ClientQuestionListSlice";
+import techCreate from "../redux/features/technology/CreateTechSlice"
 export const store = configureStore({
   reducer: {
     batch: batchReducer,
@@ -21,7 +22,8 @@ export const store = configureStore({
     clients:CreateClientSlice,
     questionList:ClientQuestionListSlice, 
     clientQuestionsList:ClientQuestionListSlice, // fetch client interview questions
-    updateClient:clientList
+    updateClient:clientList,
+    updateTech:techCreate,
 
   },
 });
