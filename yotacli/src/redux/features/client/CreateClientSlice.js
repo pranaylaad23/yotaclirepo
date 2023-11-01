@@ -30,7 +30,7 @@ export const updateClient = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       axios
-        .put(`http://localhost:9090/yota/api/${data.clientId}`, data)
+        .put(`http://localhost:9090/yota/api/client/${data.clientId}`, data)
         .then((res) => {
           console.log(res.data);
         });
@@ -100,7 +100,7 @@ export const deleteClient = createAsyncThunk(
     //const native = useNavigate();
     if (window.confirm("Do you want to remove"))
       try {
-        const response = await fetch(`http://localhost:9090/yota/api/${id}`, {
+        const response = await fetch(`http://localhost:9090/yota/api/client/${id}`, {
           method: "DELETE",
         }).then((res) => {
           window.location.reload();
