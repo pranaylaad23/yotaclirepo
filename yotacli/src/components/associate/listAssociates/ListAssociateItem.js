@@ -12,8 +12,9 @@ const ListAssociateItem = () => {
           <tr>
             <th>Sr.No.</th>
             <th>Associate Name</th>
-            <th>Technology Name</th>
+            {/* <th>Technology Name</th> */}
             <th>Email Id</th>
+            <th>Password</th>
             <th>Action</th>
           </tr>
         </thead>

@@ -154,7 +154,7 @@ const BatchForm = (props) => {
         batches['batchName'] = calculateBatchName();
         dispatch(createBatch(batches));
         toast("Batch created sucessfully!!")
-        //  window.location.reload();
+        // window.location.href = '/batchlist';
     };
     return (
         <Fragment>
@@ -175,10 +175,10 @@ const BatchForm = (props) => {
             </div>
             <hr />
             <div>
-                <form className="row gy-3">
+                <form className="row gy-1 form-control-md ">
                     {/* 1st row */}
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div className={`col-6 ${classes.inputName}`} >
+                        <div className={` col-6 ${classes.inputName}`} >
                             <td>
                                 <div>
                                     <label className={classes.label} style={{ marginTop: "40px", marginLeft: "63px" }}>Unit:&nbsp;</label>
@@ -200,7 +200,7 @@ const BatchForm = (props) => {
                                 </div>
                             </td>
                         </div>
-                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "19px" }}>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "25px" }}>
                             <td >
                                 <div>
                                     <label className={classes.label} style={{ marginTop: "10px" }}>Competency:&nbsp;</label>
@@ -279,7 +279,7 @@ const BatchForm = (props) => {
                             </td>
                         </div>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ display: "flex", flexDirection: "row", marginTop: "14px" }}>
                         <div className={`col-6 ${classes.inputName}`} >
                             <td>
                                 <div style={{ marginLeft: "40px" }}>
@@ -293,22 +293,64 @@ const BatchForm = (props) => {
                                 </div></td></div>
                     </div>
                     {/* 2nd row  */}
-                    <div className="col-md-12">
-                        <div className="row mt-4 mb-4">
-                            <div className="col-md-2" style={{ padding: "26px 0px 0px 16px" }}>
-                                <label for="BatchDescription" className={classes.label} style={{ marginLeft: "54px" }}>Description:</label>
-                            </div>
-                            <div className="col-md-9 ">
-                                <textarea style={{ marginLeft: "61px", width: "806px" }}
-                                    name="batchDescription"
-                                    onChange={getBatchData}
-                                    className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" rows="3"></textarea>
-                            </div>
+                    <div style={{ marginTop: "14px" }}>
+                        <div >
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px" }} >
+                                    <label for="BatchDescription" className={classes.label} style={{ marginLeft: "63px" }}>Description:</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-12`} style={{ marginTop: "10px", marginLeft: "17px" }}>
+                                    <textarea style={{ marginLeft: "99px", width: "810px", height: "65px" }}
+                                        name="batchDescription"
+                                        onChange={getBatchData}
+                                        className={`form-control ${classes.textArea} ${classes.InputField}`} id="BatchDescription" rows="3"></textarea>
+                                </div></td>
                         </div>
                     </div>
                     {/* 3rd row */}
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div className={`col-6 ${classes.inputName}`} >
+                        <div className={` col-6 ${classes.inputName}`} >
+                            <td>
+                                <div>
+                                    <label for="StartDate" className={classes.label} style={{ marginTop: "24px", marginLeft: "63px" }}>Start Date:&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px", marginLeft: "115px" }}>
+                                    <InputField>
+                                        <input type="date" style={{ width: "300px" }}
+                                            name="startDate"
+                                            onChange={getBatchData}
+                                            className={classes.InputField} id="StartDate" required />
+                                    </InputField>
+
+                                </div>
+                            </td>
+                        </div>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px", marginLeft: "6px" }}>
+                            <td >
+                                <div>
+                                    <label for="EndDate" className={classes.label} style={{ marginTop: "10px" }}>End Date:&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`col-6`} style={{ marginTop: "10px", marginLeft: "24px" }}>
+                                    <InputField>
+
+                                        <input type="date" style={{ width: "319px" }}
+                                            name="endDate"
+                                            onChange={getBatchData}
+                                            className={classes.InputField} id="EndDate" required />
+
+                                    </InputField>
+                                </div>
+                            </td>
+                        </div>
+                    </div>
+                    {/* <div style={{ display: "flex",marginTop: "0px"}}>
+                        <div >
                             <td>
                                 <div>
                                     <label for="StartDate" className={classes.label} style={{ marginTop: "40px", marginLeft: "63px" }}>Start Date:</label>
@@ -325,7 +367,7 @@ const BatchForm = (props) => {
                                 </div>
                             </td>
                         </div>
-                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "19px" }}>
+                        <div className={`col-6 ${classes.inputName}`} style={{ marginTop: "10px" }}>
                             <td>
                                 <div>
                                     <label for="EndDate" className={classes.label} style={{ marginTop: "10px" }}>End Date:</label>
@@ -342,7 +384,7 @@ const BatchForm = (props) => {
                                 </div>
                             </td>
                         </div>
-                    </div>
+                    </div> */}
                 </form>
             </div>
         </Fragment >

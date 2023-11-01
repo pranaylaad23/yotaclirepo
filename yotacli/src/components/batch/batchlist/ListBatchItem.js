@@ -5,7 +5,7 @@ import BatchList from "./BatchList";
 const ListBatchItem = (props) => {
   return (
     <div className={`table-responsive ${classes.table}`}>
-      <table className="table table-bordered table-hover">
+      <table className="table table-bordered table-hover" style={{fontSize:"small"}}>
         <thead>
           <tr>
             <th>S.No.</th>

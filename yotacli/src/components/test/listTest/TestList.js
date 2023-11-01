@@ -12,12 +12,12 @@ const TestList = () => {
   }, []);
   return (
     <>
-      {test.map((test, key) => (
+      {test ? test.map((test, key) => (
         <tr key={key}>
           <td>{test.id}&nbsp;&nbsp;</td>
           <td>{test.testName}</td>
           <td>{test.assignTest}</td>
-          <td>{test.testTekan}</td>
+          <td>{test.testTakan}</td>
           <td>{test.shortlisted}</td>
           <td>{test.createdOn}</td>
           <td>{test.endDate}</td>
@@ -38,7 +38,7 @@ const TestList = () => {
                 </button>
 
                 <ul
-                  style={{ backgroundColor: "lightgrey", color: "black" }}
+                  style={{ backgroundColor: "lightgrey", color: "black",minWidth:"6rem" }}
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton1"
                 >
@@ -89,7 +89,7 @@ const TestList = () => {
             </td>
           </td>
         </tr>
-      ))}
+      )):null}
     </>
   );
 };

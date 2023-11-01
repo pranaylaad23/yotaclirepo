@@ -19,7 +19,9 @@ export const createBatch = createAsyncThunk("createbatch", async (data, { reject
 
     try {
         const result = await response.json();
-        console.log(result);
+        if(response.data.status===200){
+            alert("Batch created sucessfully...")
+        }
         return result;
     }
     catch (error) {

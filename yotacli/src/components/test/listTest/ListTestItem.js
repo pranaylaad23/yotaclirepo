@@ -18,7 +18,7 @@ const ListTestItem = ({currentPage, dataPerPage}) => {
             <th>Id</th>
             <th>TestName</th>
             <th>AssignTest</th>
-            <th>TestTekan</th>
+            <th>TestTakan</th>
             <th>Shortlisted</th>
             <th>CreatedOn</th>
             <th>EndDate</th>

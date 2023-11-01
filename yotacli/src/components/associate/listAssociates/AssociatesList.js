@@ -25,8 +25,9 @@ const AssociatesList = (props) => {
                         {associate.firstName}&nbsp;&nbsp;
                         {associate.lastName}
                     </td>
-                    <td>{associate.technologyName}</td>
+                    {/* <td>{associate.technologyName}</td> */}
                     <td>{associate.emailId}</td>
+                    <td>{associate.password}</td>
                     <td>
                         <Link to={`/updateAssociate/${associate.id}`}><i className="fa fa-edit"></i></Link>&nbsp;&nbsp;
                         <Link to={`/deleteAssociate/${associate.id}`}

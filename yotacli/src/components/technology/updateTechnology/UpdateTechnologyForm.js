@@ -10,11 +10,12 @@ import classes1 from "../addTechnology/HeaderItem.module.css";
 import axios from "axios";
 import Button from "../../../ui/button/Button";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const  UpdateTechnologyForm = (props) => {
+const UpdateTechnologyForm = (props) => {
+  const nevigate = useNavigate();
   const { name } = useParams();
-  console.log(name);
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const initialState = {
@@ -23,8 +24,6 @@ const  UpdateTechnologyForm = (props) => {
   };
 
   const [updateTechData, setUpdateTechData] = useState(initialState);
-  const [updateDescriptionValue, setUpdateDescription] = useState(initialState);
-
   useEffect(() => {
     if (name) {
       axios
@@ -32,30 +31,24 @@ const  UpdateTechnologyForm = (props) => {
         .then((res) => {
           console.log(res.data);
           setUpdateTechData(res.data);
-          setUpdateDescription(res.data.shortDescription);
         });
     }
   }, []);
   console.log(updateTechData);
 
-  const newTechData = (e) => {
-    console.log(e.target.value);
+  const getNewTechData = (event) => {
     setUpdateTechData({
       ...updateTechData,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
-  };
-
-  const updateDescription = (e) => {
-    console.log(e);
-    setUpdateDescription(e);
+    console.log(updateTechData);
   };
 
   const onHandleUpdate = async (event) => {
     event.preventDefault();
     console.log("Updated data", updateTechData);
-    updateTechData.shortDescription = updateDescriptionValue;
     setUpdateTechData(updateTechData);
+    window.location.reload(false);
     dispatch(
       createTech({
         id: updateTechData.id,
@@ -65,21 +58,23 @@ const  UpdateTechnologyForm = (props) => {
     )
       .unwrap()
       .then((response) => {
-        alert(
-          `"Technology with" ${updateTechData.shortDescription} "successfully updated"`
-        );
+        window.alert("Technology Successfully Updated");
+        //  nevigate("/updatetechnology/:name");
       })
-      .catch((e) => {
-        alert(e);
+      .catch((error) => {
+        console.error(error);
+        alert(error);
       });
+    
   };
-
+  console.log(updateTechData);
+ 
   return (
     <>
       <div className="row">
         <div className="row mt-3">
           <div className="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-            <h5 className={classes1.boxtitle}>Update Parent Technology</h5>
+            <h5 className={classes1.boxtitle}>Update Technology</h5>
           </div>
 
           <div className="col-xl-4 col-lg-5 col-md-6 col-sm-8">
@@ -98,7 +93,7 @@ const  UpdateTechnologyForm = (props) => {
       <div className="row align-items-end mt-5 mb-5">
         <div className={`col-3 ${classes.inputName}`}>
           <div>
-            <label for="inputTechnologyName" className="col-form-label">
+            <label for="name" className="col-form-label">
               Name:
             </label>
           </div>
@@ -106,52 +101,49 @@ const  UpdateTechnologyForm = (props) => {
         <div className={`col `}>
           <InputField>
             <input
-              type="text"
-              onChange={newTechData}
-              value={updateTechData.name}
               name="name"
-              id="inputName"
+              type="text"
+              value={updateTechData.name}
+              onChange={getNewTechData}
+              id="name"
               className={`form-control ${classes.inputField}`}
-              aria-describedby="nameHelpInline"
+              aria-describedby="name"
+              style={{ width: "400px" }}
             />
           </InputField>
         </div>
         <div className="col" style={{ paddingBottom: "10px" }}>
           <span
-            id="nameHelpInline"
+            id="name"
             className="form-text"
             style={{ paddingBottom: "10px" }}
-          >
-            Maximum 30 Characters
-          </span>
+          ></span>
         </div>
       </div>
-      <div className="row align-items-end mb-3">
+      <div className="row align-items-end ">
         <div className={`col-3 mb-3 ${classes.inputName}`}>
-          <label for="description">Description:</label>
+          <label for="shortDescription">Description:</label>
         </div>
         <div className={`col mt-3 `}>
           <InputField>
             <input
               type="textarea"
-              value={updateDescriptionValue}
-              // onChange={updateDescription.bind(this)}
-              onChange={(e) => updateDescription(e.target.value)}
-              name="shortDescription  "
-              id="descriptionShortDescription"
+              onChange={getNewTechData}
+              value={updateTechData.shortDescription}
+              name="shortDescription"
+              id="shortDescription"
               className={`form-control ${classes.inputField}`}
-              aria-describedby="descriptionHelpInline"
+              aria-describedby="shortDescription"
+              style={{ width: "400px", height: "100px" }}
             ></input>
           </InputField>
         </div>
-        <div className="col" style={{ paddingBottom: "25px" }}>
+        <div className="col" style={{ paddingBottom: "10px" }}>
           <span
-            id="descriptionHelpInline"
+            id="shortDescription"
             className="form-text"
-            style={{ paddingBottom: "25px" }}
-          >
-            Maximum 50 words.
-          </span>
+            style={{ paddingBottom: "10px" }}
+          ></span>
         </div>
       </div>
     </>

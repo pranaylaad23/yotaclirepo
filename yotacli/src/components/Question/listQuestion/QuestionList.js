@@ -33,10 +33,8 @@ const QuestionList = () => {
                 list.map((list, index) => (
                     <tr key={index}>
                         <td>{list.id}</td>
-                        <td>{list.questionType}</td>
-                        <td>{list.questionLevel}</td>
                         <td>{list.question}</td>
-                        <td>{list.answerType}</td>
+                        <td>{list.questionLevel}</td>
                         <td>{list.a}</td>
                         <td>{list.b}</td>
                         <td>{list.c}</td>

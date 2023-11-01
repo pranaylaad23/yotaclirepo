@@ -1,52 +1,39 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getAuthToken } from "../../../components/utils/Authentication";
 
-// export const fetchData = createAsyncThunk("technology", async () => {
-//     return axios
-//       .get(`http://localhost:9090/yota/api/technologies/`)
-//       .then((response) => response.data.map((technology) => technology  ));
-
-//   });
-
-export const fetchData = createAsyncThunk("data/fetchData", async () => {
+export const fetchTechnology = createAsyncThunk("technology", async () => {
   const token = getAuthToken();
-  const response = await axios.get(`http://localhost:9090/yota/api/technologies/`, {
+  return await axios.get(`http://localhost:9090/yota/api/technologies/`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       "Authorization": token
     }
-  });
-  return response.data;
+  }).then((response) => response.data.map((technology) => technology));
 });
 
-const dataSlice = createSlice({
-  name: "data",
+export const techList = createSlice({
+  name: "techList",
   initialState: {
-    data: [],
-    status: "idle",
+    technologies: [],
+    loading: false,
+    error: null,
   },
+  extraReducers: {
+    [fetchTechnology.pending]: (state) => {
+      state.loading = true;
+    },
 
-  reducers: {},
+    [fetchTechnology.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.technologies = action.payload;
+    },
 
-  extraReducers: (builder) => {
-    builder
-
-      .addCase(fetchData.pending, (state) => {
-        state.status = "loading";
-      })
-
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.status = "succeeded";
-
-        state.data = action.payload;
-      })
-
-      .addCase(fetchData.rejected, (state) => {
-        state.status = "failed";
-      });
+    [fetchTechnology.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
-
-export default dataSlice.reducer;
+export default techList.reducer;
