@@ -57,20 +57,27 @@ const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
 }
 
   return (
-    <div className="row d-flex justify-content-between">
+
+    <div className="row">
       <div className="row mt-3">
-        <div className="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-          <h5 className={classes.boxtitle}>
+        <div className="col-xl-5 col-lg-5 col-md-4 col-sm-4 d-flex">
+          <h6 className={classes.boxtitle}>
             Batch List
-          </h5>
+            
+          </h6>
+
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-8 ms-3">
           <Select options={pageDataOptions} onChange={handleSelectData} />
           </div>
+
         </div>
-        <div className="col-6 col-lg-4">
+
+
+          {/* {search} */}
+        <div className="col-xl-5 col-lg-5 col-md-4 col-sm-8 ms-5">
           <form className="form-inline" onSubmit={handleSearchButton}>
-            <div className="d-flex">
-            <InputField>
+            <div className="d-flex justify-content-end">
+              <InputField>
                 <input
                   className={classes.inputField}
                   type="search"
@@ -80,13 +87,13 @@ const HeaderItem = ({currentPage, setCurrentPage, setDataPerPage}) => {
                   aria-label="Search"
                 />
               </InputField>
-
-              <Button className="button col-1">
+              <Button>
                 <i className="fa fa-search" style={{ color: "white" }}></i>
               </Button>
             </div>
           </form>
         </div>
+
       </div>
     </div>
   );
