@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ListAssociateItem.module.css";
 import AssociatesList from "./AssociatesList";
 
-const ListAssociateItem = () => {
+const ListAssociateItem = ({currentPage, dataPerPage}) => {
   
   return (
 
@@ -19,7 +19,10 @@ const ListAssociateItem = () => {
           </tr>
         </thead>
         <tbody>
-          <AssociatesList/>
+          <AssociatesList
+          currentPage={currentPage}
+          dataPerPage={dataPerPage}
+          />
         </tbody>
       </table>
     </div>

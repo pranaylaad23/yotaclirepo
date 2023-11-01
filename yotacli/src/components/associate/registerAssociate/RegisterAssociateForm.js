@@ -43,7 +43,7 @@ const RegisterAssociateForm = (props) => {
             <div className='row'>
                 <div className='row mt-3'>
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
-                        <h5 className={classes1.boxtitle}>Registration Form</h5>
+                        <h5 className={classes1.boxtitle}>Add Associate</h5>
                     </div>
 
                     <div className='col-xl-4 col-lg-5 col-md-6 col-sm-8'>
@@ -68,7 +68,7 @@ const RegisterAssociateForm = (props) => {
                                 name='emailId'
                                 className={classes.inputField}
                                 type="email"
-                                placeholder="Email Id"
+                                placeholder="Enter Email Id"
                                 aria-label='emailId'
                             /></InputField>
                         </div>
@@ -85,6 +85,7 @@ const RegisterAssociateForm = (props) => {
                                 name='password'
                                 className={classes.inputField}
                                 type="password"
+                                placeholder="Enter Password"
                                 aria-label='password'
                             /></InputField>
                         </div>
