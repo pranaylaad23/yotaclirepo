@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "../../../components/Question/listQuestion/ListQuestion.module.css";
 import Button from "../../../ui/button/Button";
-// import FilterQuestion from "./FilterQuestion";
+
 
 import HeaderItem from "./HeaderItem";
 import QuestionList from "./QuestionList";
 import Pagination from "../../../ui/pagination/Pagination";
 import Card from "../../../ui/card/Card";
-// import ItemQuestion from "./ItemQuestion";
+
 
 const ListQuestions = () => {
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSearchInput = (searched) => {
+    setSearchInput(searched);
+  };
   return (
     <div className="justify-content-centre ">
       <Card>
-        <HeaderItem />
+        <HeaderItem  handleSearchInput={handleSearchInput}/>
         <hr />
         <div className={`table-responsive ${classes.table}`}>
           <table className="table table-bordered table-hover">
@@ -34,7 +39,7 @@ const ListQuestions = () => {
                 
               </tr>
             </thead> 
-              <QuestionList />      
+              <QuestionList  searchInput={searchInput}/>      
           </table>
         </div>
       </Card>

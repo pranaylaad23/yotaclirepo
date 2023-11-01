@@ -20,8 +20,17 @@ export const batchList = createSlice({
   name: "batchList",
   initialState: {
     batches: [],
+    searchBatch:[],
+    testNumberArray:[],
+    testDetailsArray:[],
     loading: false,
     error: null,
+  },
+  reducers: {
+    handleSearchBatch: (state, action) => {
+        state.searchBatch = [];
+        state.searchBatch.push(action.payload)
+    },
   },
   extraReducers: {
     [fetchBatch.pending]: (state) => {
@@ -31,6 +40,9 @@ export const batchList = createSlice({
     [fetchBatch.fulfilled]: (state, action) => {
       state.loading = false;
       state.batches = action.payload;
+      state.searchBatch.push(action.payload)
+      state.testDetailsArray = [action.payload];
+      state.testNumberArray = [action.payload];
     },
 
     [fetchBatch.rejected]: (state, action) => {
@@ -39,4 +51,5 @@ export const batchList = createSlice({
     },
   },
 });
+export const { handleSearchBatch } = batchList.actions;
 export default batchList.reducer;

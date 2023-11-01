@@ -121,9 +121,9 @@ const BatchForm = (props) => {
     };
 
     const months = [
-        'January', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
+        'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL',
+        'MAY', 'JUNE', 'JULY', 'AUGUST',
+        'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
     ];
 
     const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i);
@@ -152,6 +152,7 @@ const BatchForm = (props) => {
         e.preventDefault();
         console.log("Batch Request Payload:::>>" + batches);
         batches['batchName'] = calculateBatchName();
+        batches['userName'] = "Pankaj Sharma";
         dispatch(createBatch(batches));
         toast("Batch created sucessfully!!")
         // window.location.href = '/batchlist';

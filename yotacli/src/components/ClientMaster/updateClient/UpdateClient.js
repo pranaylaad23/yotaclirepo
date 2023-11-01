@@ -1,17 +1,15 @@
 import React from "react";
 import Card from "../../../ui/card/Card";
 import classes from "./AddClient.module.css";
-import ClientQuestionForm from "./ClientQuestionForm";
-// import { useLocation } from "react-router";
+import UpdateClientForm from "./UpdateClientForm";
 
-const AddClientQuestion = () => {
-  
+const UpdateClient = () => {
   return (
     <div className={classes.card}>
       <Card>
-        <ClientQuestionForm  />
+        <UpdateClientForm />
       </Card>
     </div>
   );
 };
-export default AddClientQuestion;
+export default UpdateClient;

@@ -2,7 +2,7 @@ import classes from "../batchlist/ListBatchItem.module.css";
 
 import BatchList from "./BatchList";
 
-const ListBatchItem = (props) => {
+const ListBatchItem = ({currentPage,dataPerPage}) => {
   return (
     <div className={`table-responsive ${classes.table}`}>
       <table className="table table-bordered table-hover" style={{fontSize:"small"}}>
@@ -20,7 +20,8 @@ const ListBatchItem = (props) => {
           </tr>
         </thead>
         <tbody>
-          <BatchList />
+          <BatchList currentPage={currentPage}
+          dataPerPage={dataPerPage}/>
         </tbody>
       </table>
     </div>

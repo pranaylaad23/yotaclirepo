@@ -1,49 +1,50 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getAuthToken } from "../../../components/utils/Authentication";
+import { useNavigate } from "react-router";
+import {getAuthToken } from "../../../components/utils/Authentication";
 
-export const createClient = createAsyncThunk(
-  "createClient",
+export const createClient = createAsyncThunk("createClient",
   async (data, { rejectedWithValue }) => {
-    console.log("Create createClient: ", data);
     const token = getAuthToken();
-    const response = await fetch(
-      "http://localhost:9090/yota/api/client/",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Authorization": token
-        },
-        body: JSON.stringify(data),
-      }
-    );
-
+    const response = await fetch("http://localhost:9090/yota/api/client/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token
+      },
+      body: JSON.stringify(data),
+    });
     try {
       const result = await response.json();
-      console.log(result);
+
       return result;
     } catch (error) {
       return rejectedWithValue(error);
     }
   }
 );
+//update
+export const updateClient = createAsyncThunk(
+  "updateClient",
+  async (data, { rejectWithValue }) => {
+    try {
+      axios
+        .put(`http://localhost:9090/yota/api/client/${data.clientId}`, data)
+        .then((res) => {
+          console.log(res.data);
+        });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 //get
 export const fetchClient = createAsyncThunk("client", () => {
-  const token = getAuthToken();
   return axios
-    .get(`http://localhost:9090/yota/api/clients`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Authorization": token
-        }
-      }
-    )
-    .then(response => response.data)
-    .catch(error => console.log("ERROR"))
+    .get(`http://localhost:9090/yota/api/clients`)
+    .then((response) => response.data)
+    .catch((error) => console.log("ERROR"));
 });
 
 export const clientList = createSlice({
@@ -61,13 +62,60 @@ export const clientList = createSlice({
     [fetchClient.fulfilled]: (state, action) => {
       state.loading = false;
       state.clients = action.payload;
-      console.log(action.payload)
+      console.log(action.payload);
     },
 
     [fetchClient.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
+    // Update Client Data
+    [updateClient.pending]: (state) => {
+      state.loading = true;
+    },
+
+    [updateClient.fulfilled]: (state, action) => {
+      state.loading = false;
+      const {
+        arg: { clientId },
+      } = action.meta;
+      if (clientId) {
+        state.clients = state.clients.map((item) =>
+          item._id === clientId ? action.payload : item
+        );
+      }
+    },
+    [updateClient.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
+
+//delete
+export const deleteClient = createAsyncThunk(
+  "deleteClient",
+
+  async (id, { rejectWithValue }) => {
+    //const native = useNavigate();
+    if (window.confirm("Do you want to remove"))
+      try {
+        const response = await fetch(`http://localhost:9090/yota/api/client/${id}`, {
+          method: "DELETE",
+        }).then((res) => {
+          window.location.reload();
+          //native(0)
+
+          alert("Removed Succesfully");
+        });
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.log(error);
+
+        return rejectWithValue(error.response.data);
+      }
+  }
+);
+
 export default clientList.reducer;

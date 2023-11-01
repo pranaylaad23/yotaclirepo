@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAuthToken } from '../../../components/utils/Authentication';
 
+
 export const createClientQuestion = createAsyncThunk(
   "clientQuestion",
   async (data, { rejectedWithValue }) => {
@@ -18,7 +19,6 @@ export const createClientQuestion = createAsyncThunk(
         body: JSON.stringify(data),
       }
     );
-
     try {
       const result = await response.json();
       console.log(result);
@@ -54,5 +54,4 @@ export const clientQuestionList = createSlice({
     },
   },
 });
-
-export default clientQuestionList.reducer;
+export default createClientQuestion.reducer;
