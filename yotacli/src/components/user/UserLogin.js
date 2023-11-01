@@ -23,18 +23,29 @@ const UserLogin = () => {
         //Can call API here to verify the login details:
         axios.post('http://localhost:9090/yota/user/authenticate', userCredentail)
             .then((resp) => {
-                console.log("Response token::>>"+resp.data);
-                const respData=resp.data;
-                console.log("AUTH TOKEN:::>>"+respData.authToken);
+                console.log("Response token::>>" + resp.data);
+                const respData = resp.data;
+                console.log("AUTH TOKEN:::>>" + respData.authToken);
+                console.log("User Role:::>>" + respData.userRole);
                 const jwtToken = respData.authToken;
-            //  localStorage.setItem('token', jwtToken) // storing token in localstorage 
-                sessionStorage.setItem('token',jwtToken);
+                //  localStorage.setItem('token', jwtToken) // storing token in localstorage 
+                sessionStorage.setItem('token', jwtToken);
                 if (resp.data) {
                     // localStorage.setItem('token', resp.)
                     toast("Login Success!");
-                    setTimeout(() => {
-                        navigate('/dashboard');
-                    }, 1000);
+                    if (respData.userRole == 'Admin') {
+                        setTimeout(() => {
+                            navigate('/admin');
+                        }, 1000);
+                    } else if (respData.userRole == 'Trainer') {
+                        setTimeout(() => {
+                            navigate('/trainer');
+                        }, 1000);
+                    } else if (respData.userRole == 'Associate') {
+                        setTimeout(() => {
+                            navigate('/associate');
+                        }, 1000);
+                    }
                 }
             }).catch((error) => {
                 console.log(error);
