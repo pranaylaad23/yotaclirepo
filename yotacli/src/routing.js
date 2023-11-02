@@ -34,7 +34,7 @@ const routing = () => {
         <Route path="/deletebatch/:id" element={<TitleBatchList />} />
         <Route path="technologylist" element={<TitleTechnologyList />} />
         <Route path="addtechnology" element={<TitleAddTechnology />} />
-        <Route path="/updatetechnology/:name" element={<TitleUpdateTechnology />}/>
+        <Route path="/updatetechnology/:id" element={<TitleUpdateTechnology />}/>
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
         <Route path="/recordTechnology" element={<TitleRecordTechnology />} />
         <Route path="/recordTechDetails/:name" element={<TitleRecordTechnology />} />
