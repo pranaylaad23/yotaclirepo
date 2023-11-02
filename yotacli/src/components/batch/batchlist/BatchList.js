@@ -81,13 +81,13 @@ const BatchList = ({currentPage,dataPerPage}) => {
             <td>{result.createdAt}</td>
             <td>{result.updatedAt}</td>
             <td>
-              <Link to={`/updatebatch/${result.id}`} className={classes.link}>
+              <Link to={`/trainer/updatebatch/${result.id}`} className={classes.link}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
 
               <Link
-                to={`/deletebatch/${result.id}`}
+                to={`/trainer/deletebatch/${result.id}`}
                 onClick={() => dispatch(batchDelete(result.id))}
               >
                 <i className="fa fa-trash-can"></i>
@@ -110,13 +110,13 @@ const BatchList = ({currentPage,dataPerPage}) => {
             <td>{result.createdAt}</td>
             <td>{result.updatedAt}</td>
             <td>
-              <Link to={`/updatebatch/${result.id}`} className={classes.link}>
+              <Link to={`/trainer/updatebatch/${result.id}`} className={classes.link}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
 
               <Link
-                to={`/deletebatch/${result.id}`}
+                to={`/trainer/deletebatch/${result.id}`}
                 onClick={() => dispatch(batchDelete(result.id))}
               >
                 <i className="fa fa-trash-can"></i>

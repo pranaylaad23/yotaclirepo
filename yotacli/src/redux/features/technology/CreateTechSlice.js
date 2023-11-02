@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getAuthToken } from "../../../components/utils/Authentication";
+import { headerContents} from "../../../components/utils/Authentication";
 
-const token = getAuthToken();
+const headerContent = headerContents();
 //create bach
+//create Technology by pragati
 export const createTech = createAsyncThunk(
   "createtech",
   async (data, { rejectedWithValue }) => {
@@ -12,15 +13,10 @@ export const createTech = createAsyncThunk(
       "http://localhost:9090/yota/api/technologies/",
       {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Authorization": token
-        },
+        headers: headerContent,
         body: JSON.stringify(data),
       }
     );
-
     try {
       const result = await response.json();
       console.log(result);
@@ -31,116 +27,85 @@ export const createTech = createAsyncThunk(
   }
 );
 
-//update
-export const UpdateTech = createAsyncThunk("updateBatch", async ({ id, data }, { rejectWithValue }) => {
-  try {
-    alert(id);
-
-    axios
-      .put(`http://localhost:9090/yota/api/technologies/`, data,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Authorization": token
-          }
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      });
-  } catch (error) {
-    return rejectWithValue(error);
+//update technology by pragati
+export const UpdateTech = createAsyncThunk(
+  "UpdateTech",
+  async (data, { rejectWithValue }) => {
+    try {
+      debugger;
+      console.log("testt==" + data.shortDescription);
+      axios
+        .put(`http://localhost:9090/yota/api/technologies/${data.id}`, data, {
+          headers: headerContent,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
-}
 );
-
 
 //get
 export const fetchTechnology = createAsyncThunk("technology", async () => {
   return axios
     .get(`http://localhost:9090/yota/api/technologies/`,
       {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Authorization": token
-        }
+        headers: headerContent,
       }
     )
     .then((response) => response.data.map((technology) => technology));
 });
 
-
-//Search
-// export const searchTechnology = createAsyncThunk("searchTech", async (keyword) => {
-//   console.log("Keyword:", keyword);
-//   return axios
-//     .get(`http://localhost:9090/yota/api/technologies/search/${keyword}`)
-//     .then((response) => response.data.map((technology) => technology));
-// });
-
-
-//delete
-export const deleteTechnology = createAsyncThunk("deleteAssociate", async (id, { rejectWithValue }) => {
-  if (window.confirm("Do you want to remove"))
-    try {
-      const response = await fetch(
-        `http://localhost:9090/yota/api/technologies/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Authorization": token
+//delete tech by pragati
+export const deleteTechnology = createAsyncThunk(
+  "deleteAssociate",
+  async (id, { rejectWithValue }) => {
+    if (window.confirm("Do you want to remove"))
+      try {
+        const response = await fetch(
+          `http://localhost:9090/yota/api/technologies/${id}`,
+          {
+            method: "DELETE",
+            headers: headerContent,
           }
-        }
-      ).then((res) => {
-        alert("Removed Succesfully");
-        window.location.reload();
-      });
-
-      const result = await response.json();
-
-      return result;
-    } catch (error) {
-      console.log(error);
-
-      return rejectWithValue(error.response.data);
-    }
-}
+        ).then((res) => {
+          alert("Removed Succesfully");
+          window.location.reload();
+        });
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.log(error);
+        return rejectWithValue(error.response.data);
+      }
+  }
 );
 
 // Get Test Number API
-export const fetchTechnologyTestNumber = createAsyncThunk("technologyTestNumber", async () => {
-  return axios
-    .get(`http://localhost:9090/yota/api/technologies/tests`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Authorization": token
-        }
-      }
-    )
-    .then((response) => response.data);
-});
+export const fetchTechnologyTestNumber = createAsyncThunk(
+  "technologyTestNumber",
+  async () => {
+    return axios
+      .get(`http://localhost:9090/yota/api/technologies/tests`, {
+        headers: headerContent,
+      })
+      .then((response) => response.data);
+  }
+);
 
 // Get Test Deatils of Technology API
-export const fetchTechnologyTestDetails = createAsyncThunk("fetchTechnologyTestDetails", async (name) => {
-  const token = getAuthToken();
-  return axios
-    .get(`http://localhost:9090/yota/api/technologies/tests/${name}`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Authorization": token
-        }
-      }
-    )
-    .then((response) => response.data);
-});
+export const fetchTechnologyTestDetails = createAsyncThunk(
+  "fetchTechnologyTestDetails",
+  async (name) => {
+    return axios
+      .get(`http://localhost:9090/yota/api/technologies/tests/${name}`, {
+        headers: headerContent,
+      })
+      .then((response) => response.data);
+  }
+);
 
 // --------------------------------------------------------------------------------------
 export const techCreate = createSlice({
@@ -151,14 +116,13 @@ export const techCreate = createSlice({
     testNumberArray: [],
     testDetailsArray: [],
     loading: false,
-    // searchError: false,
     error: null,
   },
 
   reducers: {
     handleSearchTech: (state, action) => {
       state.searchTech = [];
-      state.searchTech.push(action.payload)
+      state.searchTech.push(action.payload);
     },
   },
 
@@ -181,12 +145,10 @@ export const techCreate = createSlice({
     //get
     [fetchTechnology.pending]: (state) => {
       state.loading = true;
-      // state.searchError = false;
     },
 
     [fetchTechnology.fulfilled]: (state, action) => {
       state.loading = false;
-      // state.searchError = false;
       state.technologies = action.payload;
       state.searchTech = action.payload;
     },
@@ -196,40 +158,27 @@ export const techCreate = createSlice({
       state.error = action.payload;
     },
 
-    //search
-    // [searchTechnology.pending]: (state) => {
-    //   state.loading = true;
-    //   state.searchError = false;
-    // },
+    //updated Pragati
 
-    // [searchTechnology.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   state.searchError = false;
-    //   state.technologies = action.payload;
-    // },
-
-    // [searchTechnology.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.searchError = true;
-    //   state.error = action.payload;
-    // },
-
-    // Update Data
     [UpdateTech.pending]: (state) => {
       state.loading = true;
     },
     [UpdateTech.fulfilled]: (state, action) => {
       state.loading = false;
-      state.batch = state.batch.map((ele) =>
-        ele.name === action.payload.name ? action.payload : ele
-      );
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.technologies = state.technologies.map((item) =>
+          item._id === id ? action.payload : item
+        );
+      }
     },
     [UpdateTech.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
 
-    // delete
     [deleteTechnology.pending]: (state) => {
       state.loading = true;
     },
@@ -247,19 +196,15 @@ export const techCreate = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
-
     //get Test Number
     [fetchTechnologyTestNumber.pending]: (state) => {
       state.loading = true;
-      // state.searchError = false;
       console.log("in Create Slice.js", state.testNumberArray);
     },
 
     [fetchTechnologyTestNumber.fulfilled]: (state, action) => {
       state.loading = false;
-      // state.searchError = false;
       state.testNumberArray = [action.payload];
-      // state.searchTech = action.payload;
       console.log("in Create Slice.js", state.testNumberArray);
     },
 
@@ -271,14 +216,11 @@ export const techCreate = createSlice({
     //get Test Details
     [fetchTechnologyTestDetails.pending]: (state) => {
       state.loading = true;
-      // state.searchError = false;
     },
 
     [fetchTechnologyTestDetails.fulfilled]: (state, action) => {
       state.loading = false;
-      // state.searchError = false;
       state.testDetailsArray = [action.payload];
-      // state.searchTech = action.payload;
       console.log("in Create Slice.js", state.testDetailsArray);
     },
 
@@ -286,7 +228,6 @@ export const techCreate = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-
   },
 });
 

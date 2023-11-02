@@ -186,16 +186,11 @@ const UpdateForm = (props) => {
                 <div className='row mt-3'>
 
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>
-
                         <h5 className={classes.boxtitle}>Update Batch </h5>
-
                     </div>
-
-
                     <div className='col-6 col-lg-4'>
 
                         <form className="form-inline" onSubmit={onHandleUpdate}>
-
                             <div className={classes.btn}>
                                 <Button className={classes.button} type="submit" >Update</Button>
                             </div>
