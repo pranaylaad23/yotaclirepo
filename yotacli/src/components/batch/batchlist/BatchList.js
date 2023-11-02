@@ -21,10 +21,6 @@ const BatchList = ({currentPage,dataPerPage}) => {
   const lastDataIndex =  currentPage * dataPerPage;
   const firstDataIndex =  lastDataIndex - dataPerPage;
 
-  const paginatedData =  batch.searchBatch.slice(firstDataIndex,lastDataIndex);
-  console.log("Data per page to show:", paginatedData);
-
-
   //Loading Data
   if (batch.loading) {
     console.log("Loading...");
@@ -97,35 +93,6 @@ const BatchList = ({currentPage,dataPerPage}) => {
         ))
       );
     }
-    return (
-      <>
-        {paginatedData.map((result, key) => (  
-          <tr key={key}>
-            {/* <td>{result.id}</td> */}
-            <td>{result.batchIdentifier}</td>
-            <td>{result.batchName}</td>
-            <td>{result.batchDescription}</td>
-            <td>{result.startDate}</td>
-            <td>{result.endDate}</td>
-            <td>{result.createdAt}</td>
-            <td>{result.updatedAt}</td>
-            <td>
-              <Link to={`/updatebatch/${result.id}`} className={classes.link}>
-                {" "}
-                <i className="fa fa-edit"></i>&nbsp;{" "}
-              </Link>
-
-              <Link
-                to={`/deletebatch/${result.id}`}
-                onClick={() => dispatch(batchDelete(result.id))}
-              >
-                <i className="fa fa-trash-can"></i>
-              </Link>
-            </td>
-          </tr>
-        ))}
-      </>
-    );
   }
 };
 
