@@ -15,11 +15,14 @@ const UpdateAssociateForm = () => {
     const dispatch = useDispatch();
 
         const initialState = {
-            firstName: "",
-            middleName: "",
-            lastName: "",
-            contactNo: "",
-            emailId: ""
+            //firstName: "",
+            //middleName: "",
+            //lastName: "",
+            //contactNo: "",
+            associateName: "",
+            emailId: "",
+            //password: ""
+        
         };
 
         const [updateAssociateData, setUpdateAssociateData] = useState(initialState);
@@ -38,7 +41,7 @@ const UpdateAssociateForm = () => {
         console.log(updateAssociateData);
 
         const newAssociateData = (e) => {
-            setUpdateAssociateData({ ...updateAssociateData, [e.target.name]: e.target.value });
+            setUpdateAssociateData({ ...updateAssociateData, [e.target.emailId]: e.target.value });
         }
 
         const handleOnUpdate = async (e) => {
@@ -46,12 +49,14 @@ const UpdateAssociateForm = () => {
             console.log("updated data ", updateAssociateData);
             setUpdateAssociateData(updateAssociateData);
             dispatch(updateAssociate({
-                id: updateAssociateData.id,
-                firstName: updateAssociateData.firstName,
-                middleName: updateAssociateData.middleName,
-                lastName: updateAssociateData.lastName,
-                contactNo: updateAssociateData.contactNo,
+                //id: updateAssociateData.id,
+                //firstName: updateAssociateData.firstName,
+                //middleName: updateAssociateData.middleName,
+                //lastName: updateAssociateData.lastName,
+                //contactNo: updateAssociateData.contactNo,
+                associateName: updateAssociate.associateName,
                 emailId: updateAssociateData.emailId
+                //password: updateAssociateData.password
             }))
                 .unwrap()
                 .then(response => {
@@ -93,7 +98,7 @@ const UpdateAssociateForm = () => {
                 <div className={classes.form}>
                     {/* 1st row */}
                     <div className="row">
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>First Name</b></h6>
                             <InputField><input
                                 name='firstName'
@@ -101,8 +106,8 @@ const UpdateAssociateForm = () => {
                                 onChange={newAssociateData}
                                 className={classes.inputField} />
                             </InputField>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        </div> */}
+                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Middle Name</b></h6>
                             <InputField><input
                                 name='middleName'
@@ -110,13 +115,34 @@ const UpdateAssociateForm = () => {
                                 onChange={newAssociateData}
                                 className={classes.inputField} />
                             </InputField>
+                        </div> */}
+                        <div className="col-xl-5 col-lg-6 col-md-6 col-sm-12 mt-3">
+                            <h6><b>Associate Name</b></h6>
+                            <InputField><input
+                                name='associateName'
+                                value={updateAssociateData.associateName}
+                                onChange={newAssociateData}
+                                className={classes.inputField} />
+                            </InputField>
+                        </div>
+                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                            <h6><b>Email ID</b></h6>
+                            <InputField ><input
+                                id='emailId'
+                                name='emailId'
+                                value={updateAssociateData.emailId}
+                                onChange={newAssociateData}
+                                className={classes.inputField}
+                                type="email"
+                                aria-label='emailId' />
+                            </InputField>
                         </div>
                     </div>
                 </div>
                 <div className={classes.form}>
                     {/* 2nd row */}
                     <div className="row">
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Last Name</b></h6>
                             <InputField><input
                                 name='lastName'
@@ -124,8 +150,8 @@ const UpdateAssociateForm = () => {
                                 onChange={newAssociateData}
                                 className={classes.inputField} />
                             </InputField>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        </div> */}
+                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Contact No.</b></h6>
                             <InputField><input
                                 name='contactNo'
@@ -133,14 +159,14 @@ const UpdateAssociateForm = () => {
                                 onChange={newAssociateData}
                                 className={classes.inputField} />
                             </InputField>
-                            {/* <p className={classes.errormsg}>Contact No. should be exactly 10 digit.</p> */}
-                        </div>
+                            <p className={classes.errormsg}>Contact No. should be exactly 10 digit.</p>
+                        </div> */}
                     </div>
                 </div>
                 <div className={classes.form}>
                     {/* 3rd row */}
                     <div className="row">
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Email ID</b></h6>
                             <InputField ><input
                                 id='emailId'
@@ -152,7 +178,7 @@ const UpdateAssociateForm = () => {
                                 aria-label='emailId'
                                 readOnly='readOnly' />
                             </InputField>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </>
