@@ -38,7 +38,7 @@ function Sidebar(props) {
 
         <ul className={classes.menucontainer}>
           <li>
-            <Link to="/dashboard">
+            <Link to="/trainer">
               <i
                 className="fa-solid fa-gauge-high "
                 style={{ color: "white" }}

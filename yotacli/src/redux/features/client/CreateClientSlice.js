@@ -2,10 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import {getAuthToken } from "../../../components/utils/Authentication";
-
+const token = getAuthToken();
 export const createClient = createAsyncThunk("createClient",
   async (data, { rejectedWithValue }) => {
-    const token = getAuthToken();
     const response = await fetch("http://localhost:9090/yota/api/client/", {
       method: "POST",
       headers: {
@@ -30,7 +29,13 @@ export const updateClient = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       axios
-        .put(`http://localhost:9090/yota/api/client/${data.clientId}`, data)
+        .put(`http://localhost:9090/yota/api/client/${data.clientId}`, data, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        })
         .then((res) => {
           console.log(res.data);
         });
@@ -42,7 +47,13 @@ export const updateClient = createAsyncThunk(
 //get
 export const fetchClient = createAsyncThunk("client", () => {
   return axios
-    .get(`http://localhost:9090/yota/api/clients`)
+    .get(`http://localhost:9090/yota/api/clients`,{
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token
+      }
+    })
     .then((response) => response.data)
     .catch((error) => console.log("ERROR"));
 });

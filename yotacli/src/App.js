@@ -16,7 +16,8 @@ import UserLogin from "./components/user/UserLogin";
 import UserRegistration from "./components/user/UserRegistration";
 import ForgotPassword from "./components/user/ForgotPassword";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
-
+import Associate from "./components/user/Associate";
+import Admin from "./components/user/Admin";
 
 function App() {
   return (
@@ -30,6 +31,16 @@ function App() {
           <Route path="/trainer/*" element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/associate/*" element={
+            <ProtectedRoute>
+              <Associate />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/*" element={
+            <ProtectedRoute>
+              <Admin />
             </ProtectedRoute>
           } />
           <Route path="/student/*" element={<StudentDashboard />}>

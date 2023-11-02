@@ -29,14 +29,13 @@ const RegisterAssociateForm = (props) => {
         console.log(associates);
         dispatch(registerAssociate(associates));
         alert("Associate registered successfully...");
-        nevigate("/registerAssociate");
+        nevigate("/trainer/registerAssociate");
         setAssociates({
             emailId: "",
             password: ""
         })
         
     };
-
 
     return (
         <>
