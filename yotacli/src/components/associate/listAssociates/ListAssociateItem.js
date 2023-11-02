@@ -10,7 +10,7 @@ const ListAssociateItem = ({currentPage, dataPerPage}) => {
       <table className="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>Sr.No.</th>
+            <th>#</th>
             <th>Associate Name</th>
             {/* <th>Technology Name</th> */}
             <th>Email Id</th>

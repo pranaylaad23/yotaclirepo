@@ -5,30 +5,29 @@ import { deleteAssociate } from '../../../redux/features/associate/DeleteAssocia
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAssociate } from '../../../redux/features/associate/ListAssociateSlice';
 
+const AssociatesList = ({ currentPage, dataPerPage }) => {
 
-const AssociatesList = ({currentPage, dataPerPage}) => {
+  //let count = 1;
 
-    //let count = 1;
-    
-    const dispatch = useDispatch();
-    const associate = useSelector((state) => state.associate);
+  const dispatch = useDispatch();
+  const associate = useSelector((state) => state.associate);
 
-    console.log("searchAssociate array to search Associate:", associate.searchAssociate);
-    console.log("Original Array List:", associate.associates);
+  console.log("searchAssociate array to search Associate:", associate.searchAssociate);
+  console.log("Original Array List:", associate.associates);
 
-    useEffect(() => {
-        dispatch(fetchAssociate());
-    }, []);
+  useEffect(() => {
+    dispatch(fetchAssociate());
+  }, []);
 
-     //Pagination
-    console.log("currentPage:", currentPage);
-    const lastDataIndex =  currentPage * dataPerPage;
-    const firstDataIndex =  lastDataIndex - dataPerPage;
+  //Pagination
+  console.log("currentPage:", currentPage);
+  const lastDataIndex = currentPage * dataPerPage;
+  const firstDataIndex = lastDataIndex - dataPerPage;
 
-    const paginatedData =  associate.searchAssociate.slice(firstDataIndex,lastDataIndex);
-    console.log("Data per page to show:", paginatedData);
+  const paginatedData = associate.searchAssociate.slice(firstDataIndex, lastDataIndex);
+  console.log("Data per page to show:", paginatedData);
 
-      //Loading Data
+  //Loading Data
   if (associate.loading) {
     console.log("Loading...");
     return (
@@ -43,12 +42,14 @@ const AssociatesList = ({currentPage, dataPerPage}) => {
     );
   }
 
-  
-    //Search Data not found
+
+  //Search Data not found
   if (associate.searchAssociate.length !== 0) {
     console.log("associate.searchAssociate.length !== 0");
 
     if (associate.searchAssociate[0].length === 0) {
+      //history.push('/associates-list');
+
       return (
         <tr>
           <td></td>
@@ -63,18 +64,18 @@ const AssociatesList = ({currentPage, dataPerPage}) => {
 
 
     //Search Data Found
-    if(associate.searchAssociate[0].length > 0){
-        console.log("associate.searchAssociate[0].length > 0");
-  
-        const searchPaginatedSlice =  associate.searchAssociate[0];
-        console.log("searchPaginatedSlice:", searchPaginatedSlice);
-  
-        console.log("firstDataIndex:", firstDataIndex);
-        console.log("lastDataIndex:", lastDataIndex);
-  
-        const searchPaginatedData =  searchPaginatedSlice.slice(firstDataIndex,lastDataIndex);
-        console.log("searchPaginatedData to show:", searchPaginatedData);
-  
+    if (associate.searchAssociate[0].length > 0) {
+      console.log("associate.searchAssociate[0].length > 0");
+
+      const searchPaginatedSlice = associate.searchAssociate[0];
+      console.log("searchPaginatedSlice:", searchPaginatedSlice);
+
+      console.log("firstDataIndex:", firstDataIndex);
+      console.log("lastDataIndex:", lastDataIndex);
+
+      const searchPaginatedData = searchPaginatedSlice.slice(firstDataIndex, lastDataIndex);
+      console.log("searchPaginatedData to show:", searchPaginatedData);
+
       return (
         searchPaginatedData.map((associate, key) => (
           <tr key={key}>
@@ -105,20 +106,20 @@ const AssociatesList = ({currentPage, dataPerPage}) => {
 
 
     return (
-        <>
-            {paginatedData.map((associate, key) => (
-                <tr key={key}>
-                    <td><b>{key + firstDataIndex + 1}
-                    </b></td>
-                    {/* <td>
+      <>
+        {paginatedData.map((associate, key) => (
+          <tr key={key}>
+            <td><b>{key + firstDataIndex + 1}
+            </b></td>
+            {/* <td>
                         {associate.firstName}&nbsp;&nbsp;
                         {associate.lastName}
                     </td> */}
-                    {/* <td>{associate.technologyName}</td> */}
-                    <td>{associate.name}</td>
-                    <td>{associate.emailId}</td>
-                    <td>******</td>
-                    <td>
+            {/* <td>{associate.technologyName}</td> */}
+            <td>{associate.name}</td>
+            <td>{associate.emailId}</td>
+            <td>******</td>
+            <td>
               <Link to={`/updateAssociate/${associate.name}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
@@ -132,11 +133,11 @@ const AssociatesList = ({currentPage, dataPerPage}) => {
               </Link>
               {/* onClick={() => handleDeleteClick(tech.id)} */}
             </td>
-                </tr>
-            ))}
-        </>
+          </tr>
+        ))}
+      </>
     )
-}
+  }
 };
 
 export default AssociatesList;

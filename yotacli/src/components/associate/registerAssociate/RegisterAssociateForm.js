@@ -28,6 +28,7 @@ const RegisterAssociateForm = (props) => {
         e.preventDefault();
         console.log(associates);
         dispatch(registerAssociate(associates));
+        window.location.reload(false);
         alert("Associate registered successfully...");
         nevigate("/registerAssociate");
         setAssociates({
