@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ListTechnologyItem.module.css";
-import axios from "axios";
-
 import TechnologyList from "./TechnologyList";
-import { useSelector } from "react-redux";
 
-const ListTechnologyItem = ({currentPage, dataPerPage}) => {
-  // const technology = useSelector((state) => state.technology);
-  // console.log("State Error:",technology.searchError);
-
-
+const ListTechnologyItem = ({ currentPage, dataPerPage }) => {
   return (
     <div className={`table-responsive ${classes.table}`}>
       <table className="table table-bordered table-hover">
@@ -22,10 +15,7 @@ const ListTechnologyItem = ({currentPage, dataPerPage}) => {
           </tr>
         </thead>
         <tbody>
-            <TechnologyList 
-            currentPage={currentPage}
-            dataPerPage={dataPerPage}
-            />
+          <TechnologyList currentPage={currentPage} dataPerPage={dataPerPage} />
         </tbody>
       </table>
     </div>
