@@ -4,7 +4,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAuthToken } from "../../../components/utils/Authentication";
 
-
 export const deleteAssociate = createAsyncThunk("deleteAssociate", async (id, { rejectWithValue }) => {
     if (window.confirm("Do you want to remove associate?"))
         try {
@@ -21,7 +20,6 @@ export const deleteAssociate = createAsyncThunk("deleteAssociate", async (id, { 
             ).then(() => {
                 alert("Removed Successfully..!");
                 window.location.reload();
-
             });
             const result = await response.json();
 

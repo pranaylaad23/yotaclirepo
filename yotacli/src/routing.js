@@ -37,8 +37,6 @@ const routing = () => {
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
         <Route path="/recordTechnology" element={<TitleRecordTechnology />} />
         <Route path="/recordTechDetails/:name" element={<TitleRecordTechnology />} />
-        <Route path="/associatelist" element={<TitleAssociateList />} />
-        <Route path="/associatelist" element={<TitleAssociateList />} />
         <Route path="/registerAssociate/" element={<TitleRegisterAssociate />} />
         <Route path="listquestion" element={<TitleQuestionList />} />
         <Route path="/addquestion" element={<TitleAddQuestion />} />

@@ -1,11 +1,14 @@
-.table{
+.table {
     margin-left: 2%;
     border: 1px solid #98abb4;
     width: 95%;
 }
-th{
-    border-bottom: 1px solid black;
+
+th {
+    border-bottom: 2rem solid black;
 }
-i{
+
+i {
     color: #144358;
+    cursor: pointer;
 }
