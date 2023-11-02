@@ -11,6 +11,7 @@ import axios from "axios";
 import Button from "../../../ui/button/Button";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { headerContents } from "../../utils/Authentication";
 
 const UpdateTechnologyForm = (props) => {
   const { id } = useParams();
@@ -26,7 +27,9 @@ const UpdateTechnologyForm = (props) => {
     if (id) {
       console.log("iidd==" + id);
       axios
-        .get(`http://localhost:9090/yota/api/technologies/${id}`)
+        .get(`http://localhost:9090/yota/api/technologies/${id}`, {
+          headers: headerContents()
+        })
         .then((res) => {
           console.log("test data--" + res.data);
           setUpdateTechData(res.data);

@@ -29,8 +29,8 @@ const AssociatesList = (props) => {
                     <td>{associate.emailId}</td>
                     <td>{associate.password}</td>
                     <td>
-                        <Link to={`/updateAssociate/${associate.id}`}><i className="fa fa-edit"></i></Link>&nbsp;&nbsp;
-                        <Link to={`/deleteAssociate/${associate.id}`}
+                        <Link to={`/trainer/updateAssociate/${associate.id}`}><i className="fa fa-edit"></i></Link>&nbsp;&nbsp;
+                        <Link to={`/trainer/deleteAssociate/${associate.id}`}
                             onClick={() => dispatch(deleteAssociate(associate.id))}>
                             <i className="fa fa-trash-can">
                             </i></Link>&nbsp;&nbsp;

@@ -155,7 +155,7 @@ const BatchForm = (props) => {
         batches['userName'] = "Pankaj Sharma";
         dispatch(createBatch(batches));
         toast("Batch created sucessfully!!")
-        // window.location.href = '/batchlist';
+        window.location.href = '/trainer/batchlist';
     };
     return (
         <Fragment>

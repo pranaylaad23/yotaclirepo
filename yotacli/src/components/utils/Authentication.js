@@ -13,7 +13,7 @@ export function logout() {
 
 export function headerContents() {
     const headerContent = {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
         "Authorization": getAuthToken()
     }

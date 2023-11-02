@@ -12,7 +12,7 @@ const UserProfilePhoto = () => {
 
     }
     const profile = () => {
-        navigate('/dashboard')
+        navigate('/trainer')
     }
 
     return (

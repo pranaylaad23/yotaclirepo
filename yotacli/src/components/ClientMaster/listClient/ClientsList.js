@@ -39,7 +39,7 @@ const ClientsList = () => {
           <tr key={key}>
             <td>{client.clientId}&nbsp;&nbsp;</td>
 
-            <Link to={`/addClientQuestion/${client.clientId}`}>
+            <Link to={`/trainer/addClientQuestion/${client.clientId}`}>
               <td>{client.clientName}</td>
             </Link>
 
@@ -47,18 +47,18 @@ const ClientsList = () => {
             <td>{client.shortDescription}</td>
             <td>
               {/* <i className="fa fa-edit" title="Edit"></i>&nbsp;&nbsp; */}
-              <Link to={`/updateclient/${client.clientId}`}>
+              <Link to={`/trainer/updateclient/${client.clientId}`}>
                 {" "}
                 <i className="fa fa-edit" title="Update"></i>&nbsp;{" "}
               </Link>
               <Link
-                to={`/deleteclient/${client.clientId}`}
+                to={`/trainer/deleteclient/${client.clientId}`}
                 onClick={() => dispatch(deleteClient(client.clientId))}
               >
                 <i className="fa fa-trash-can" title="Delete"></i>&nbsp;&nbsp;
               </Link>
 
-              <Link to={`/viewQuestion/${client.clientId}`}>
+              <Link to={`/trainer/viewQuestion/${client.clientId}`}>
                 {" "}
                 <i className="fa fa-eye" title="View"></i>
               </Link>

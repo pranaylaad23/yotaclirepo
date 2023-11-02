@@ -30,8 +30,6 @@ export const createBatch = createAsyncThunk("createbatch", async (data, { reject
 })
 
 
-
-
 export const batchCreate = createSlice({
 
     name: "batchCreate",

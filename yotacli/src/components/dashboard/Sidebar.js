@@ -30,7 +30,7 @@ function Sidebar(props) {
             className={`fa-solid fa-bars ${classes.iconhead}`}
             onClick={collapseSideBar}
           ></i>
-          {isOpen && <p style={{ padding: "0px", width: "109.27px" }}>YOTA App</p>}
+          {isOpen && <p style={{ padding: "0px", width: "109.27px" }}>YOTA</p>}
         </div>
       </div>
 

@@ -38,18 +38,14 @@ const TestList = () => {
                 </button>
 
                 <ul
-                  style={{ backgroundColor: "lightgrey", color: "black",minWidth:"6rem" }}
+                  style={{ backgroundColor: "lightgrey", color: "black", minWidth: "6rem" }}
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton1"
                 >
-                  {/* <Link to={`/assignTest`}>
-                      <i class="fa-solid fa-plus"></i>
-                    </Link> */}
-
                   <li>
                     {" "}
                     &nbsp; &nbsp;{" "}
-                    <Link to={`/assignTest`}>
+                    <Link to={`/trainer/assignTest`}>
                       <i className="fa-solid fa-plus"></i>
                     </Link>
                     Add
@@ -89,7 +85,7 @@ const TestList = () => {
             </td>
           </td>
         </tr>
-      )):null}
+      )) : null}
     </>
   );
 };
