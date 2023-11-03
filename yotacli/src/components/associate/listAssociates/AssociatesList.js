@@ -86,7 +86,7 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
             <td>{associate.emailId}</td>
             <td>******</td>
             <td>
-              <Link to={`/updateAssociate/${associate.name}`}>
+              <Link to={`/updateAssociate/${associate.id}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
@@ -120,7 +120,7 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
             <td>{associate.emailId}</td>
             <td>******</td>
             <td>
-              <Link to={`/updateAssociate/${associate.name}`}>
+              <Link to={`/updateAssociate/${associate.id}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
