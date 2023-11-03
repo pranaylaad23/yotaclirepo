@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import {getAuthToken } from "../../../components/utils/Authentication";
+import {getAuthToken, headerContents } from "../../../components/utils/Authentication";
 const token = getAuthToken();
 export const createClient = createAsyncThunk("createClient",
   async (data, { rejectedWithValue }) => {
@@ -113,10 +113,10 @@ export const deleteClient = createAsyncThunk(
       try {
         const response = await fetch(`http://localhost:9090/yota/api/client/${id}`, {
           method: "DELETE",
+          headers: headerContents()
         }).then((res) => {
           window.location.reload();
           //native(0)
-
           alert("Removed Succesfully");
         });
         const result = await response.json();

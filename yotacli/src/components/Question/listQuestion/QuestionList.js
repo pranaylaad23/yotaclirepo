@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { getAuthToken } from '../../utils/Authentication';
+import { getAuthToken, headerContents } from '../../utils/Authentication';
 
 const QuestionList = (props) => {
 
@@ -36,22 +36,22 @@ const QuestionList = (props) => {
                         <td>{list.id}</td>
                         <td>{list.question}</td>
                         <td>{list.questionLevel}</td>
-                        <td>{list.a}</td>
-                        <td>{list.b}</td>
-                        <td>{list.c}</td>
-                        <td>{list.d}</td>
+                        <td>{list.option_A}</td>
+                        <td>{list.option_B}</td>
+                        <td>{list.option_C}</td>
+                        <td>{list.option_D}</td>
                         <td>{list.correctAnswer}</td>
                         <td>{list.created_At}</td>
                         <td>{list.updated_At}</td>
                         <td>
-                            <Link to={`/updatequestion/${list.id}`}>
+                            <Link to={`/trainer/updatequestion/${list.id}`}>
                                 {" "}
                                 <i className="fa fa-edit"></i>&nbsp;{" "}
 
                             </Link>
 
                             <Link
-                                to={`/deletequestion/${list.id}`}
+                                to={`/trainer/deletequestion/${list.id}`}
                                 onClick={() =>
                                     axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`,
                                         {
@@ -84,24 +84,26 @@ const QuestionList = (props) => {
                         <td>{list.id}</td>
                         <td>{list.question}</td>
                         <td>{list.questionLevel}</td>
-                        <td>{list.a}</td>
-                        <td>{list.b}</td>
-                        <td>{list.c}</td>
-                        <td>{list.d}</td>
+                        <td>{list.option_A}</td>
+                        <td>{list.option_B}</td>
+                        <td>{list.option_C}</td>
+                        <td>{list.option_D}</td>
                         <td>{list.correctAnswer}</td>
                         <td>{list.created_At}</td>
                         <td>{list.updated_At}</td>
                         <td>
-                            <Link to={`/updatequestion/${list.id}`}>
+                            <Link to={`/trainer/updatequestion/${list.id}`}>
                                 {" "}
                                 <i className="fa fa-edit"></i>&nbsp;{" "}
                                 
                             </Link>
                         
                             <Link
-                                to={`/deletequestion/${list.id}`}
+                                to={`/trainer/deletequestion/${list.id}`}
                                 onClick={() => 
-                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`)
+                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`, {
+                                        headers:headerContents()
+                                    })
                                     .then(response => {
                                         console.log("deleted successfully");
                                         alert("Item Deleted Succesfully");
