@@ -12,6 +12,7 @@ import Training from "./student/pages/Training";
 import TrainingSummary from "./student/pages/TrainingSummary";
 import { Signout } from "./student/pages/Signout";
 import StdDashboard from "./student/pages/Dashboard";
+import TraineeDashboardLayout from "./components/trainee/dashboard-layout/TraineeDashboardLayout";
 
 
 function App() {
@@ -19,11 +20,10 @@ function App() {
   return (
     <div>
       <Provider store={store}>
-        
         <Routes>
         <Route path="/*" element={<Dashboard />}/>
+        <Route path="/associate" element={<TraineeDashboardLayout/>}/>
         <Route path="/student/*" element={<StudentDashboard/>}>
-        
             <Route path="dashboard" element={<StdDashboard/>}/>
             <Route path="analytics" element={<Analytics/>}/>
             <Route path="testlinks" element={<TestLinks/>}/>
