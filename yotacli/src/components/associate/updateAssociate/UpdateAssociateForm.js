@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../../ui/button/Button'
-import InputField from '../../../ui/inputField/InputField'
+import InputField2 from '../../../ui/inputField2/InputField2'
 import classes from './UpdateAssociateForm.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -134,7 +134,7 @@ const UpdateAssociateForm = () => {
                         </div> */}
                         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Email ID</b></h6>
-                            <InputField ><input
+                            <InputField2 ><input
                                 id='emailId'
                                 name='emailId'
                                 value={updateAssociateData.emailId}
@@ -142,11 +142,11 @@ const UpdateAssociateForm = () => {
                                 className={classes.inputField}
                                 type="email"
                                 aria-label='emailId' />
-                            </InputField>
+                            </InputField2>
                         </div>
                         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Password</b></h6>
-                            <InputField ><input
+                            <InputField2 ><input
                                 id='password'
                                 name='password'
                                 value={updateAssociateData.password}
@@ -154,7 +154,7 @@ const UpdateAssociateForm = () => {
                                 className={classes.inputField}
                                 type="password"
                                 aria-label='password' />
-                            </InputField>
+                            </InputField2>
                         </div>
                     </div>
                 </div>
