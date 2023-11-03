@@ -18,6 +18,7 @@ import ForgotPassword from "./components/user/ForgotPassword";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import Associate from "./components/user/Associate";
 import Admin from "./components/user/Admin";
+import TraineeDashboardLayout from "./components/trainee/dashboard-layout/TraineeDashboardLayout";
 
 function App() {
   return (
@@ -35,7 +36,8 @@ function App() {
           } />
           <Route path="/associate/*" element={
             <ProtectedRoute>
-              <Associate />
+              {/* <Associate /> */}
+              <TraineeDashboardLayout/>
             </ProtectedRoute>
           } />
           <Route path="/admin/*" element={
