@@ -55,37 +55,37 @@ const RegisterAssociateForm = (props) => {
             <hr />
             <div className={classes.form}>
                 {/* 1st row */}
-                <div className={classes.field}>
-                    <div className="row justify-content-center">
-                        <div className="col-6">
+                <div className="row">
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-6"> */}
                             <h6><b>Email ID</b></h6>
                             <InputField><input
                                 onChange={getAssociateData}
-                                style={{ width: "100%" }}
+                                //style={{ width: "100%" }}
                                 name='emailId'
                                 className={classes.inputField}
                                 type="email"
                                 placeholder="Enter Email Id"
                                 aria-label='emailId'
                             /></InputField>
-                        </div>
+                        {/* </div> */}
                     </div>
-                </div>
+                {/* </div> */}
                 {/*2nd Row*/}
-                <div className={classes.field}>
-                    <div className="row justify-content-center">
-                        <div className="col-6">
+                {/* <div className={classes.field}> */}
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-6"> */}
                             <h6><b>Password</b></h6>
                             <InputField><input
                                 onChange={getAssociateData}
-                                style={{ width: "100%" }}
+                                //style={{ width: "100%" }}
                                 name='password'
                                 className={classes.inputField}
                                 type="password"
                                 placeholder="Enter Password"
                                 aria-label='password'
                             /></InputField>
-                        </div>
+                        {/* </div> */}
                     </div>
                 </div>
             </div>

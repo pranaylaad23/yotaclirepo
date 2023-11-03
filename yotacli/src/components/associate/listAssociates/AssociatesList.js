@@ -86,7 +86,7 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
             <td>{associate.emailId}</td>
             <td>******</td>
             <td>
-              <Link to={`/updateAssociate/${associate.name}`}>
+              <Link to={`/updateAssociate/${associate.id}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
@@ -104,7 +104,6 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
       );
     }
 
-
     return (
       <>
         {paginatedData.map((associate, key) => (
@@ -120,7 +119,7 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
             <td>{associate.emailId}</td>
             <td>******</td>
             <td>
-              <Link to={`/trainer/updateAssociate/${associate.name}`}>
+              <Link to={`/trainer/updateAssociate/${associate.id}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>

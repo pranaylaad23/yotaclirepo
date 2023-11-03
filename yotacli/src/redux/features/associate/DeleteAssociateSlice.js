@@ -19,7 +19,8 @@ export const deleteAssociate = createAsyncThunk("deleteAssociate", async (id, { 
                 }
             ).then(() => {
                 alert("Removed Successfully..!");
-                window.location.reload();
+                window.location.reload(false);
+                        
             });
             const result = await response.json();
 
