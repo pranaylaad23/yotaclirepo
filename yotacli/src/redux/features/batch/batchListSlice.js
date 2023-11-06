@@ -31,7 +31,8 @@ export const batchList = createSlice({
     [fetchBatch.fulfilled]: (state, action) => {
       state.loading = false;
       state.batches = action.payload;
-      state.searchBatch.push(action.payload)
+      state.searchBatch=[];
+      state.searchBatch.push(action.payload);
       state.testDetailsArray = [action.payload];
       state.testNumberArray = [action.payload];
     },

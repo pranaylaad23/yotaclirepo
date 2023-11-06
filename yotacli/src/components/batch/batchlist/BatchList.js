@@ -5,19 +5,18 @@ import React, { useEffect } from "react";
 import classes from "../batchlist/ListBatchItem.module.css";
 import { fetchBatch,handleSearchBatch } from "../../../redux/features/batch/batchListSlice";
 import { batchDelete } from "../../../redux/features/batch/deleteBatchSlice";
+import { useLocation } from 'react-router';
 
 const BatchList = ({currentPage,dataPerPage}) => {
   const dispatch = useDispatch();
   const batch = useSelector((state) => state.batch);
-  console.log("searchTech array to search Batch:", batch.searchBatch);
-  console.log("Original Array List:", batch.batches);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchBatch());
-  }, []);
+  }, [location.key]);
   
   //Pagination
-  console.log("currentPage:", currentPage);
   const lastDataIndex =  currentPage * dataPerPage;
   const firstDataIndex =  lastDataIndex - dataPerPage;
 
@@ -38,8 +37,6 @@ const BatchList = ({currentPage,dataPerPage}) => {
 
   //Search Data not found
   if (batch.searchBatch.length !== 0) {
-    console.log("batch.searchBatch.length !== 0");
-
     if (batch.searchBatch[0].length === 0) {
       return (
         <tr>
