@@ -7,6 +7,7 @@ import {
   fetchTechnology,
   handleSearchTech,
 } from "../../../redux/features/technology/CreateTechSlice";
+import { useLocation } from 'react-router'
 
 const TechnologyList = ({ currentPage, dataPerPage }) => {
   const dispatch = useDispatch();
@@ -14,10 +15,11 @@ const TechnologyList = ({ currentPage, dataPerPage }) => {
   // console.log("State Error:",technology.searchError);
   console.log("searchTech array to search Technology:", technology.searchTech);
   console.log("Original Array List:", technology.technologies);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchTechnology());
-  }, []);
+  }, [location.key]);
 
   //Pagination
   console.log("currentPage:", currentPage);

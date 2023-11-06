@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputField from '../../../ui/inputField/InputField';
+import InputField2 from '../../../ui/inputField2/InputField2';
 import classes from './RegisterAssociateForm.module.css';
 import { registerAssociate } from '../../../redux/features/associate/RegisterAssociateSlice';
 import { useDispatch } from 'react-redux';
@@ -59,7 +59,7 @@ const RegisterAssociateForm = (props) => {
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                         {/* <div className="col-6"> */}
                             <h6><b>Email ID</b></h6>
-                            <InputField><input
+                            <InputField2><input
                                 onChange={getAssociateData}
                                 //style={{ width: "100%" }}
                                 name='emailId'
@@ -67,7 +67,7 @@ const RegisterAssociateForm = (props) => {
                                 type="email"
                                 placeholder="Enter Email Id"
                                 aria-label='emailId'
-                            /></InputField>
+                            /></InputField2>
                         {/* </div> */}
                     </div>
                 {/* </div> */}
@@ -76,7 +76,7 @@ const RegisterAssociateForm = (props) => {
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                         {/* <div className="col-6"> */}
                             <h6><b>Password</b></h6>
-                            <InputField><input
+                            <InputField2><input
                                 onChange={getAssociateData}
                                 //style={{ width: "100%" }}
                                 name='password'
@@ -84,7 +84,7 @@ const RegisterAssociateForm = (props) => {
                                 type="password"
                                 placeholder="Enter Password"
                                 aria-label='password'
-                            /></InputField>
+                            /></InputField2>
                         {/* </div> */}
                     </div>
                 </div>

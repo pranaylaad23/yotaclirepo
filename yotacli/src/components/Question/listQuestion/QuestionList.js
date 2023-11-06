@@ -1,32 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { getAuthToken, headerContents } from '../../utils/Authentication';
+import { useLocation } from 'react-router';
+import { headerContents } from '../../utils/Authentication';
 
 const QuestionList = (props) => {
-
     const [list, setList] = useState([]);
-    const token = getAuthToken();
+    const location = useLocation();
     useEffect(() => {
-        axios.get("http://localhost:9090/yota/api/questions/all",
-            {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": token
-                }
-            }
-        )
-            .then(response => {
-                setList(response.data);
-                console.log(response.data);
-                console.log(list[0])
-            })
+        axios.get("http://localhost:9090/yota/api/questions/all", {
+            headers: headerContents()
+        }
+        ).then(response => {
+            setList(response.data);
+            console.log(response.data);
+            console.log(list[0])
+        })
             .catch(error => {
                 console.error(error);
             })
-    }, []);
-    
+    }, [location.key]);
 
     return (
         <tbody>
@@ -55,11 +48,7 @@ const QuestionList = (props) => {
                                 onClick={() =>
                                     axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`,
                                         {
-                                            headers: {
-                                                Accept: "application/json",
-                                                "Content-Type": "application/json",
-                                                "Authorization": token
-                                            }
+                                            headers: headerContents()
                                         }
                                     )
                                         .then(response => {
@@ -78,8 +67,8 @@ const QuestionList = (props) => {
                     </tr>
                 ))
             }
-             {props.searchInput  &&
-             list.filter(data => data.question.includes(props.searchInput)).map((list, index) => (
+            {props.searchInput &&
+                list.filter(data => data.question.includes(props.searchInput)).map((list, index) => (
                     <tr key={index}>
                         <td>{list.id}</td>
                         <td>{list.question}</td>
@@ -95,28 +84,28 @@ const QuestionList = (props) => {
                             <Link to={`/trainer/updatequestion/${list.id}`}>
                                 {" "}
                                 <i className="fa fa-edit"></i>&nbsp;{" "}
-                                
+
                             </Link>
-                        
+
                             <Link
                                 to={`/trainer/deletequestion/${list.id}`}
-                                onClick={() => 
+                                onClick={() =>
                                     axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`, {
-                                        headers:headerContents()
+                                        headers: headerContents()
                                     })
-                                    .then(response => {
-                                        console.log("deleted successfully");
-                                        alert("Item Deleted Succesfully");
-                                        window.location.reload();   
-                                    })
-                                    .catch(error => {
-                                        console.error("Error deleting this object", error);
-                                    })
+                                        .then(response => {
+                                            console.log("deleted successfully");
+                                            alert("Item Deleted Succesfully");
+                                            window.location.reload();
+                                        })
+                                        .catch(error => {
+                                            console.error("Error deleting this object", error);
+                                        })
                                 }
                             >
                                 <i className="fa fa-trash-can"></i>
                             </Link>
-                        </td>    
+                        </td>
                     </tr>
                 ))
             }
