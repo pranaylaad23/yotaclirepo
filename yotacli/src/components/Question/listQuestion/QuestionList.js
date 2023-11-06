@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import { useLocation } from 'react-router';
 const QuestionList = (props) => {
 
     const [list, setList] = useState([]);
+    const location = useLocation();
 
     useEffect(() => {
         axios.get("http://localhost:9090/yota/api/questions/all")
@@ -16,7 +17,7 @@ const QuestionList = (props) => {
             .catch(error => {
                 console.error(error);
             })
-    }, []);
+    }, [location.key]);
     
 
     return (
