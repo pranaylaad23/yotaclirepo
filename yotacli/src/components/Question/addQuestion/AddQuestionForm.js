@@ -29,13 +29,35 @@ const AddQuestionForm = () => {
   const dispatch = useDispatch();
 
   const technology= useSelector((state) => state.technology.testDetailsArray);
+  const [techList, setTechList] = useState([]);
 
   console.log("searchTech array to search Technology:", technology.name);
 
   console.log("Original Array List:", technology.technologies);
 
  
-
+  useEffect(() => {
+    axios
+      .get("http://localhost:9090/yota/api/technologies/")
+      .then((resp) => {
+        if (resp.status == 200) {
+          if (resp.data && resp.data.length) {
+            let unitData = resp.data;
+            let unitDataArray = [];
+            for (let i = 0; i < unitData.length; i++) {
+              let countObj = {
+                value: unitData[i].name,
+                label: unitData[i].name,
+              };
+              unitDataArray.push(countObj);
+            }
+            console.log('----mk log----', unitDataArray)
+            setTechList(unitDataArray);
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
  
 
  
@@ -46,11 +68,13 @@ const AddQuestionForm = () => {
 
     // dispatch(fetchTechnologyTestDetails("java"));
 
-    // console.log("response"+fetchData());
+     //console.log("response"+fetchData());
 
     const fetchTechnologyTestDetails = createAsyncThunk("fetchTechnologyTestDetails", async () => {
 
       return axios
+
+       // .get(`${app.env.REACT_APP_HOST_NAME}yota/api/technologies/`)
 
         .get(`http://localhost:9090/yota/api/technologies/`)
 
@@ -93,12 +117,26 @@ const AddQuestionForm = () => {
  
 
   const getNewQuestionData = (event) => {
+    console.log("event:",event.target)
 
     setNewQuestion({ ...newQuestion, [event.target.name]: event.target.value });
 
     console.log(newQuestion);
 
   };
+
+  //Backend add question API
+
+  useEffect(() => {
+    axios.get('http://localhost:9090/yota/api/questions/questionCode')
+      .then(response => {
+
+         console.log("111111111",response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
  
 
@@ -116,7 +154,7 @@ const AddQuestionForm = () => {
 
     event.preventDefault();
 
-    console.log("--------");
+    console.log("----newQuestion----",JSON.stringify(newQuestion));
 
     axios
 
@@ -125,18 +163,21 @@ const AddQuestionForm = () => {
       .then((response) => {
 
         console.log(response.data);
+        alert("question added successfully");
 
-      })
+        window.location.href = "/listquestion"; //redirecting to question list
+
+      },[])
 
       .catch((error) => {
 
-        console.error(error);
+        console.log(error);
 
       });
 
-    // dispatch(createTech(technologies));
+    // dispatch(createTech(technologies)); 
 
-    alert("question added successfully");
+    
 
   };
 
@@ -194,13 +235,15 @@ const AddQuestionForm = () => {
 
   const data = [
 
-    { value: "java", label: "JAVA" },
+   { value: "java", label: "JAVA" },
 
     { value: "reactjs", label: "REACTJS" },
 
     { value: "aws", label: "AWS" },
 
-  ];
+    { value: "hibernate", label: "HIBERNATE" }
+
+  ]; 
 
   const handleSelectData = (selectOption) => {
 
@@ -306,7 +349,7 @@ const AddQuestionForm = () => {
 
           <div style={{ width: "40%", marginLeft: "5px" }}>
 
-            {/* <Select value={technology} onChange={handleSelectData}>
+            { /*<Select value={technology} onChange={handleSelectData}>
 
               <div>Select Technology</div>
 
@@ -322,9 +365,15 @@ const AddQuestionForm = () => {
 
                 ))}
 
-            </Select> */}
+            </Select>*/
+            //chane
 
-            <Select options={data} onChange={handleSelectData} />
+            <Select 
+            // options={data} 
+            options={techList} 
+            onChange={handleSelectData} />
+
+               }
 
           </div>
 
@@ -426,7 +475,7 @@ const AddQuestionForm = () => {
 
                         id="inputName"
 
-                        name="a"
+                        name="option_A"
 
                         className={`form-control ${classes.inputField}`}
 
@@ -484,7 +533,7 @@ const AddQuestionForm = () => {
 
                         id="inputName"
 
-                        name="b"
+                        name="option_B"
 
                         className={`form-control ${classes.inputField}`}
 
@@ -550,7 +599,7 @@ const AddQuestionForm = () => {
 
                         id="inputName"
 
-                        name="c"
+                        name="option_C"
 
                         className={`form-control ${classes.inputField}`}
 
@@ -607,7 +656,7 @@ const AddQuestionForm = () => {
 
                         id="inputName"
 
-                        name="d"
+                        name="option_D"
 
                         className={`form-control ${classes.inputField}`}
 

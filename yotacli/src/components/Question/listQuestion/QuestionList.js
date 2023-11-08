@@ -14,7 +14,7 @@ const QuestionList = (props) => {
                 console.log(list[0])
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
             })
     }, []);
     
@@ -25,12 +25,12 @@ const QuestionList = (props) => {
                 list.map((list, index) => (
                     <tr key={index}>
                         <td>{list.id}</td>
-                        <td>{list.question}</td>
+                        <td><code>{list.question}</code></td>
                         <td>{list.questionLevel}</td>
-                        <td>{list.a}</td>
-                        <td>{list.b}</td>
-                        <td>{list.c}</td>
-                        <td>{list.d}</td>
+                        <td>{list.option_A}</td>
+                        <td>{list.option_B}</td>
+                        <td>{list.option_C}</td>
+                        <td>{list.option_D}</td>
                         <td>{list.correctAnswer}</td>
                         <td>{list.created_At}</td>
                         <td>{list.updated_At}</td>
@@ -67,10 +67,10 @@ const QuestionList = (props) => {
                         <td>{list.id}</td>
                         <td>{list.question}</td>
                         <td>{list.questionLevel}</td>
-                        <td>{list.a}</td>
-                        <td>{list.b}</td>
-                        <td>{list.c}</td>
-                        <td>{list.d}</td>
+                        <td>{list.option_A}</td>
+                        <td>{list.option_B}</td>
+                        <td>{list.option_C}</td>
+                        <td>{list.option_D}</td>
                         <td>{list.correctAnswer}</td>
                         <td>{list.created_At}</td>
                         <td>{list.updated_At}</td>
