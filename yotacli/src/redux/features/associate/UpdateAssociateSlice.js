@@ -1,26 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-/* Update Associate action */
-// export const updateAssociate = createAsyncThunk("updateassociate", async (data, { rejectedWithValue }) => {
-//     const response = await fetch('http://localhost:9090/yota/api/associates/', {
-//         method: "POST",
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data)
-//     })
-
-//     try {
-//         const result = await response.json();
-//         console.log(result);
-//         return result;
-//     }
-//     catch(error){
-//         return rejectedWithValue(error);
-//     }
-// })
+import { headerContents } from "../../../components/utils/Authentication";
 
 export const UpdateAssociate = createAsyncThunk(
     "UpdateAssociate",
@@ -29,7 +9,9 @@ export const UpdateAssociate = createAsyncThunk(
         debugger;
         console.log("testt==" + data.shortDescription);
         axios
-          .put(`http://localhost:9090/yota/api/associates/${data.id}`, data)
+          .put(`http://localhost:9090/yota/api/associates/${data.id}`, data,{
+            headers:headerContents()
+          })
           .then((res) => {
             console.log(res.data);
           });

@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { headerContents} from "../../../components/utils/Authentication";
 
+const headerContent = headerContents();
+//create bach
 //create Technology by pragati
 export const createTech = createAsyncThunk(
   "createtech",
@@ -10,14 +13,10 @@ export const createTech = createAsyncThunk(
       "http://localhost:9090/yota/api/technologies/",
       {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        headers: headerContent,
         body: JSON.stringify(data),
       }
     );
-
     try {
       const result = await response.json();
       console.log(result);
@@ -29,7 +28,6 @@ export const createTech = createAsyncThunk(
 );
 
 //update technology by pragati
-
 export const UpdateTech = createAsyncThunk(
   "UpdateTech",
   async (data, { rejectWithValue }) => {
@@ -37,7 +35,9 @@ export const UpdateTech = createAsyncThunk(
       debugger;
       console.log("testt==" + data.shortDescription);
       axios
-        .put(`http://localhost:9090/yota/api/technologies/${data.id}`, data)
+        .put(`http://localhost:9090/yota/api/technologies/${data.id}`, data, {
+          headers: headerContent,
+        })
         .then((res) => {
           console.log(res.data);
         });
@@ -50,7 +50,11 @@ export const UpdateTech = createAsyncThunk(
 //get
 export const fetchTechnology = createAsyncThunk("technology", async () => {
   return axios
-    .get(`http://localhost:9090/yota/api/technologies/`)
+    .get(`http://localhost:9090/yota/api/technologies/`,
+      {
+        headers: headerContent,
+      }
+    )
     .then((response) => response.data.map((technology) => technology));
 });
 
@@ -64,6 +68,7 @@ export const deleteTechnology = createAsyncThunk(
           `http://localhost:9090/yota/api/technologies/${id}`,
           {
             method: "DELETE",
+            headers: headerContent,
           }
         ).then((res) => {
           alert("Removed Succesfully");
@@ -83,7 +88,9 @@ export const fetchTechnologyTestNumber = createAsyncThunk(
   "technologyTestNumber",
   async () => {
     return axios
-      .get(`http://localhost:9090/yota/api/technologies/tests`)
+      .get(`http://localhost:9090/yota/api/technologies/tests`, {
+        headers: headerContent,
+      })
       .then((response) => response.data);
   }
 );
@@ -93,7 +100,9 @@ export const fetchTechnologyTestDetails = createAsyncThunk(
   "fetchTechnologyTestDetails",
   async (name) => {
     return axios
-      .get(`http://localhost:9090/yota/api/technologies/tests/${name}`)
+      .get(`http://localhost:9090/yota/api/technologies/tests/${name}`, {
+        headers: headerContent,
+      })
       .then((response) => response.data);
   }
 );

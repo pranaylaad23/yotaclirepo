@@ -12,30 +12,50 @@ import Training from "./student/pages/Training";
 import TrainingSummary from "./student/pages/TrainingSummary";
 import { Signout } from "./student/pages/Signout";
 import StdDashboard from "./student/pages/Dashboard";
+import UserLogin from "./components/user/UserLogin";
+import UserRegistration from "./components/user/UserRegistration";
+import ForgotPassword from "./components/user/ForgotPassword";
+import ProtectedRoute from "./components/utils/ProtectedRoute";
+import Associate from "./components/user/Associate";
+import Admin from "./components/user/Admin";
 import TraineeDashboardLayout from "./components/trainee/dashboard-layout/TraineeDashboardLayout";
 
-
 function App() {
-
   return (
     <div>
       <Provider store={store}>
         <Routes>
-        <Route path="/*" element={<Dashboard />}/>
-        <Route path="/associate" element={<TraineeDashboardLayout/>}/>
-        <Route path="/student/*" element={<StudentDashboard/>}>
-            <Route path="dashboard" element={<StdDashboard/>}/>
-            <Route path="analytics" element={<Analytics/>}/>
-            <Route path="testlinks" element={<TestLinks/>}/>
-            <Route path="training" element={<Training/>}/>
-            <Route path="trainingsummary" element={<TrainingSummary/>}/>
-            <Route path="signout" element={<Signout/>}/>
-        </Route>
+          <Route path="/" element={<UserLogin />} />
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/register" element={<UserRegistration />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/trainer/*" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/associate/*" element={
+            <ProtectedRoute>
+              {/* <Associate /> */}
+              <TraineeDashboardLayout/>
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/*" element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          } />
+          <Route path="/student/*" element={<StudentDashboard />}>
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="testlinks" element={<TestLinks />} />
+            <Route path="training" element={<Training />} />
+            <Route path="trainingsummary" element={<TrainingSummary />} />
+            <Route path="signout" element={<Signout />} />
+          </Route>
         </Routes>
       </Provider>
     </div>
   )
-
 }
 
 export default App;

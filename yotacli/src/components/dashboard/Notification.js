@@ -13,7 +13,7 @@ const Notification=()=>{
     const number = useSelector(state=>state.notification.count);
     useEffect(()=>{
         const timeout = setTimeout(()=>{
-            store.dispatch(fetchNotification('sai@gmail.com'))
+            store.dispatch(fetchNotification(''))
             // console.log("count")
         },1000);
 
@@ -23,7 +23,7 @@ const Notification=()=>{
     const clickHandler=()=>{
         setValue(true)
         if(number>0){
-          store.dispatch(updateNotification('sai@gmail.com'))
+          store.dispatch(updateNotification('ram@gmail.com'))
         }
      }
 

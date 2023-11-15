@@ -1,17 +1,20 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 //create batch action
 export const createBatch = createAsyncThunk("createbatch", async (data, { rejectWithValue }) => {
-
+    const token = getAuthToken();
+    console.log("Token::::>" + token)
     const response = await fetch("http://localhost:9090/yota/api/batches/", {
-      method: "POST",
+        method: "POST",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            "Authorization": token
         },
-       body: JSON.stringify(data)
+        body: JSON.stringify(data)
     })
 
     try {
@@ -27,8 +30,6 @@ export const createBatch = createAsyncThunk("createbatch", async (data, { reject
 })
 
 
-
-
 export const batchCreate = createSlice({
 
     name: "batchCreate",
@@ -38,7 +39,7 @@ export const batchCreate = createSlice({
         error: null,
     },
 
-        extraReducers: {
+    extraReducers: {
 
         [createBatch.pending]: (state) => {
             state.loading = true;
@@ -46,8 +47,8 @@ export const batchCreate = createSlice({
 
         [createBatch.fulfilled]: (state, action) => {
             state.loading = false;
-            state.batch=[action.payload];
-        }, 
+            state.batch = [action.payload];
+        },
 
         [createBatch.rejected]: (state, action) => {
             state.loading = false;

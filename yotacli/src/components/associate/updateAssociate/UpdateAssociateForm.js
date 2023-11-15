@@ -6,14 +6,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios';
 import { UpdateAssociate } from '../../../redux/features/associate/UpdateAssociateSlice'
-
+import { headerContents } from '../../utils/Authentication'
 
 const UpdateAssociateForm = () => {
     const nevigate = useNavigate();
-
     const { id } = useParams();
     const dispatch = useDispatch();
-
         const initialState = {
             //firstName: "",
             //middleName: "",
@@ -27,10 +25,11 @@ const UpdateAssociateForm = () => {
         };
 
         const [updateAssociateData, setUpdateAssociateData] = useState(initialState);
-
         useEffect(() => {
             if (id) {
-                axios.get(`http://localhost:9090/yota/api/associates/${id}`).then(
+                axios.get(`http://localhost:9090/yota/api/associates/${id}`,{
+                    headers:headerContents()
+                }).then(
                     res => {
                         console.log(res.data);
                         setUpdateAssociateData(res.data)
@@ -66,7 +65,7 @@ const UpdateAssociateForm = () => {
                     //  nevigate("/updatetechnology/:name");
                     setUpdateAssociateData(initialState);
                     // alert(response.data);
-                    nevigate("/associatelist");
+                    nevigate("/trainer/associatelist");
 
                 })
                 .catch((error) => {
@@ -74,13 +73,9 @@ const UpdateAssociateForm = () => {
                     alert(error);
                     //window.alert(err.massage);
                 });
-
             //window.alert("Associate updated successfully..!")
-            
         };
         console.log("LASTT---" + updateAssociateData);
-
-
         return (
             <>
                 <div className='row'>

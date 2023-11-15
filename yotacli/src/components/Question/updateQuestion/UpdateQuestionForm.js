@@ -7,6 +7,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import { getAuthToken } from '../../utils/Authentication';
 
 const UpdateQuestionForm = () => {
 
@@ -27,10 +28,18 @@ const UpdateQuestionForm = () => {
   };
 
   const [updateQuestionData, setUpdateQuestionData] = useState(initialState);
-
+  const token = getAuthToken();
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:9090/yota/api/questions/${id}`).then(
+      axios.get(`http://localhost:9090/yota/api/questions/${id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        }
+      ).then(
         res => {
           console.log(res.data);
           setUpdateQuestionData(res.data);
@@ -46,7 +55,15 @@ const UpdateQuestionForm = () => {
   }
 
   const onHandleUpdate = () => {
-    axios.put(`http://localhost:9090/yota/api/questions/`, updateQuestionData)
+    axios.put(`http://localhost:9090/yota/api/questions/`, updateQuestionData,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Authorization": token
+        }
+      }
+    )
       .then(
         res => {
           console.log(updateQuestionData);
@@ -55,7 +72,7 @@ const UpdateQuestionForm = () => {
       )
       .catch(error => {
         console.error(error);
-    })
+      })
     alert("question updated successfully");
     nevigate("/listquestion");
   }

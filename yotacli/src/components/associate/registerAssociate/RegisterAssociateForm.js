@@ -8,15 +8,12 @@ import classes1 from './HeaderItem.module.css'
 import { useNavigate } from 'react-router-dom';
 
 const RegisterAssociateForm = (props) => {
-
     const nevigate = useNavigate();
-
     const [associates, setAssociates] = useState({
         emailId: "",
         password: ""
     });
     const dispatch = useDispatch();
-
     const getAssociateData = (e) => {
         setAssociates({
             ...associates, [e.target.name]: e.target.value
@@ -30,14 +27,13 @@ const RegisterAssociateForm = (props) => {
         dispatch(registerAssociate(associates));
         window.location.reload(false);
         alert("Associate registered successfully...");
-        nevigate("/registerAssociate");
+        nevigate("/trainer/registerAssociate");
         setAssociates({
             emailId: "",
             password: ""
         })
         
     };
-
 
     return (
         <>

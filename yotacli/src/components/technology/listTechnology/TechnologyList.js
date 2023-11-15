@@ -86,13 +86,13 @@ const TechnologyList = ({ currentPage, dataPerPage }) => {
           <td>{tech.name}</td>
           <td>{tech.shortDescription}</td>
           <td>
-            <Link to={`/updatetechnology/${tech.id}`}>
+            <Link to={`/trainer/updatetechnology/${tech.id}`}>
               {" "}
               <i className="fa fa-edit"></i>&nbsp;{" "}
             </Link>
             {/* onClick={(event) => handleEditClick(event, list)} */}
             <Link
-              to={`/deletetechnology/${tech.id}`}
+              to={`/trainer/deletetechnology/${tech.id}`}
               onClick={() => dispatch(deleteTechnology(tech.id))}
             >
               <i className="fa fa-trash-can"></i>{" "}
@@ -114,13 +114,14 @@ const TechnologyList = ({ currentPage, dataPerPage }) => {
             <td>{tech.name}</td>
             <td>{tech.shortDescription}</td>
             <td>
-              <Link to={`/updatetechnology/${tech.id}`}>
-                {" "}
-                <i className="fa fa-edit"></i>&nbsp;{" "}
-              </Link>
+              <Link to={`/trainer/updatetechnology/${tech.id}`}>
+              {" "}
+              <i className="fa fa-edit"></i>&nbsp;{" "}
+            </Link>
+
               {/* onClick={(event) => handleEditClick(event, list)} */}
               <Link
-                to={`/deletetechnology/${tech.id}`}
+                to={`/trainer/deletetechnology/${tech.id}`}
                 onClick={() => dispatch(deleteTechnology(tech.id))}
               >
                 <i className="fa fa-trash-can"></i>{" "}

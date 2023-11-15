@@ -8,7 +8,6 @@ const ListBatchItem = ({currentPage,dataPerPage}) => {
       <table className="table table-bordered table-hover" style={{fontSize:"small"}}>
         <thead>
           <tr>
-            {/* <th>Sr.</th> */}
             <th>Identifier</th>
             <th>Name</th>
             <th>Description</th>

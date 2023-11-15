@@ -214,7 +214,7 @@ const TestList = (props) => {
                   <i className="fa-solid fa-ellipsis-vertical"></i>
                   </button>
                   <ul  style={{backgroundColor:"lightgrey",color:"black"}}className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li> &nbsp; &nbsp; <Link to={`/assignTest`}>
+                  <li> &nbsp; &nbsp; <Link to={`/trainer/assignTest`}>
                     <i className="fa-solid fa-plus"></i>
                   </Link>Add</li>
                 <li ><a className="dropdown-item" href="#"><i class="fa-solid fa-eye"></i>View</a></li>
