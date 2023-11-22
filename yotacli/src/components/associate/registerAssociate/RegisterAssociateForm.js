@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputField from '../../../ui/inputField/InputField';
+import InputField2 from '../../../ui/inputField2/InputField2';
 import classes from './RegisterAssociateForm.module.css';
 import { registerAssociate } from '../../../redux/features/associate/RegisterAssociateSlice';
 import { useDispatch } from 'react-redux';
@@ -8,15 +8,12 @@ import classes1 from './HeaderItem.module.css'
 import { useNavigate } from 'react-router-dom';
 
 const RegisterAssociateForm = (props) => {
-
     const nevigate = useNavigate();
-
     const [associates, setAssociates] = useState({
         emailId: "",
         password: ""
     });
     const dispatch = useDispatch();
-
     const getAssociateData = (e) => {
         setAssociates({
             ...associates, [e.target.name]: e.target.value
@@ -30,14 +27,13 @@ const RegisterAssociateForm = (props) => {
         dispatch(registerAssociate(associates));
         window.location.reload(false);
         alert("Associate registered successfully...");
-        nevigate("/registerAssociate");
+        nevigate("/trainer/registerAssociate");
         setAssociates({
             emailId: "",
             password: ""
         })
         
     };
-
 
     return (
         <>
@@ -59,37 +55,37 @@ const RegisterAssociateForm = (props) => {
             <hr />
             <div className={classes.form}>
                 {/* 1st row */}
-                <div className={classes.field}>
-                    <div className="row justify-content-center">
-                        <div className="col-6">
+                <div className="row">
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-6"> */}
                             <h6><b>Email ID</b></h6>
-                            <InputField><input
+                            <InputField2><input
                                 onChange={getAssociateData}
-                                style={{ width: "100%" }}
+                                //style={{ width: "100%" }}
                                 name='emailId'
                                 className={classes.inputField}
                                 type="email"
                                 placeholder="Enter Email Id"
                                 aria-label='emailId'
-                            /></InputField>
-                        </div>
+                            /></InputField2>
+                        {/* </div> */}
                     </div>
-                </div>
+                {/* </div> */}
                 {/*2nd Row*/}
-                <div className={classes.field}>
-                    <div className="row justify-content-center">
-                        <div className="col-6">
+                {/* <div className={classes.field}> */}
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-6"> */}
                             <h6><b>Password</b></h6>
-                            <InputField><input
+                            <InputField2><input
                                 onChange={getAssociateData}
-                                style={{ width: "100%" }}
+                                //style={{ width: "100%" }}
                                 name='password'
                                 className={classes.inputField}
                                 type="password"
                                 placeholder="Enter Password"
                                 aria-label='password'
-                            /></InputField>
-                        </div>
+                            /></InputField2>
+                        {/* </div> */}
                     </div>
                 </div>
             </div>

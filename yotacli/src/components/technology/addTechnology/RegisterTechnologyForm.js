@@ -19,7 +19,7 @@ const RegisterTechnologyForm = (props) => {
     console.log(technologies);
     dispatch(createTech(technologies));
     alert("technology created successfully");
-    navigate("/technologylist");
+    navigate("/trainer/technologylist");
   };
   return (
     <>

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken, headerContents } from "../../../components/utils/Authentication";
 
+const headerContent = headerContents();
 //create associate
 export const createAssociate = createAsyncThunk(
   "createAssociate",
@@ -10,10 +12,7 @@ export const createAssociate = createAsyncThunk(
       "http://localhost:9090/yota/api/associates/",
       {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        headers: headerContent,
         body: JSON.stringify(data),
       }
     );
@@ -36,7 +35,9 @@ export const UpdateAsso = createAsyncThunk(
       alert(id);
 
       axios
-        .put(`http://localhost:9090/yota/api/associates/`, data)
+        .put(`http://localhost:9090/yota/api/associates/`, data,{
+          headers: headerContent
+        })
         .then((res) => {
           console.log(res.data);
         });
@@ -47,11 +48,11 @@ export const UpdateAsso = createAsyncThunk(
 );
 
 export const fetchAssociate = createAsyncThunk("associate", () => {
-
   return axios
-    .get(`http://localhost:9090/yota/api/associates/all`)
+    .get(`http://localhost:9090/yota/api/associates/all`,{
+      headers: headerContent
+    })
     .then((response) => response.data.map((associate) => associate));
-
 });
 
 // //delete
@@ -84,14 +85,18 @@ export const fetchAssociate = createAsyncThunk("associate", () => {
 // Get Test Number API
 export const fetchAssociateTestNumber = createAsyncThunk("associateTestNumber", async () => {
   return axios
-    .get(`http://localhost:9090/yota/api/associates/tests`)
+    .get(`http://localhost:9090/yota/api/associates/tests`,{
+      headers:headerContent
+    })
     .then((response) => response.data);
 });
 
 // Get Test Deatils of Technology API
 export const fetchAssociateTestDetails = createAsyncThunk("fetchAssociateTestDetails", async (name) => {
   return axios
-    .get(`http://localhost:9090/yota/api/associates/tests/${name}`)
+    .get(`http://localhost:9090/yota/api/associates/tests/${name}`,{
+      headers:headerContent
+    })
     .then((response) => response.data);
 });
 

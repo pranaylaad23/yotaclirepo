@@ -6,16 +6,12 @@ import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import { createBatch } from '../../../redux/features/batch/CreateBatchSlice'
-
+import { headerContents } from '../../utils/Authentication'
 
 const UpdateForm = (props) => {
-
     const { id } = useParams();
     const dispatch = useDispatch();
-
-
     const initialState = {
-
         batchIdentifier: "",
         batchName: "",
         batchDescription: "",
@@ -33,11 +29,12 @@ const UpdateForm = (props) => {
     const [competencyData, setCompetencyData] = useState('');
     const [selectedTrainingtype, setSelectedTrainingtype] = useState([]);
     const [trainingtypeData, setTrainingtypeData] = useState('');
-
-
+    const headerContent = headerContents();
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:9090/yota/api/batches/${id}`).then(
+            axios.get(`http://localhost:9090/yota/api/batches/${id}`, {
+                headers: headerContent
+            }).then(
                 res => {
                     // console.log(res.data);
                     setUpdateBatchData(res.data)
@@ -45,7 +42,9 @@ const UpdateForm = (props) => {
                         ;
                 });
         }
-        axios.get('http://localhost:9090/yota/api/unit')
+        axios.get('http://localhost:9090/yota/api/unit', {
+            headers: headerContent
+        })
             .then(resp => {
                 if (resp.status === 200) {
                     if (resp.data && resp.data.length) {
@@ -63,7 +62,9 @@ const UpdateForm = (props) => {
                 }
             })
             .catch(err => console.log(err));
-        axios.get('http://localhost:9090/yota/api/competency')
+        axios.get('http://localhost:9090/yota/api/competency', {
+            headers: headerContent
+        })
             .then(resp => {
                 if (resp.status === 200) {
                     if (resp.data && resp.data.length) {
@@ -81,7 +82,9 @@ const UpdateForm = (props) => {
                 }
             })
             .catch(err => console.log(err));
-        axios.get('http://localhost:9090/yota/api/trainingtype')
+        axios.get('http://localhost:9090/yota/api/trainingtype', {
+            headers: headerContent
+        })
             .then(resp => {
                 if (resp.status === 200) {
                     if (resp.data && resp.data.length) {
@@ -158,17 +161,15 @@ const UpdateForm = (props) => {
             endDate: updateBatchData.endDate,
             createdAt: updateBatchData.createdAt,
         }))
+            .unwrap()
+            .then(response => {
+                window.alert(`"Batch details with Identifier: " ${updateBatchData.batchIdentifier} " updated Sucessfully"`);
+            })
 
-        .unwrap()
-        .then(response => {
-            window.alert(`"Batch details with Identifier: " ${updateBatchData.batchIdentifier} " updated Sucessfully"`);
-        })
-
-
-        .catch(e => {
-            alert(e.data.error);
-        });
-        window.location.href = '/batchlist';
+            .catch(e => {
+                alert(e.data.error);
+            });
+        window.location.href = '/trainer/batchlist';
 
     }
 

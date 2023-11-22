@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color:aliceblue;
+    font-family: 'Montserrat', sans-serif;
+  }
+  /* Main  */  
+  .mainContainer {
+    margin-left: 12px;
+    grid-area: main;
+    overflow-y: auto;
+    padding: 5px 20px;
+  }
+
+  .mainContainerstyle{
+    margin-left: 235px;
+    grid-area: main;
+    overflow-y: auto;
+    padding: 5px 20px;
+  }
+  
+  .mainTitle {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .mainCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 2px 0;
+  }
+  
+  .card {
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #90a4ae;
+    border-radius: 5px;
+    height: 85px;
+  } 
+
+  .cardInner {
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+    font-weight: bold;
+  }
+  .cardFisrt{
+    background-color: #7e57c2  ;
+  }
+  .cardSecond{
+    background-color: #9575cd  ;
+  }
+  .cardThird{
+    background-color: #b39ddb  ;
+  }
+  .cardFourth{
+    background-color: #d1c4e9  ;
+  }
+  
+  /* .cardInner .cardIcon {
+    font-size: 25px;
+  } */
+  
+  .charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 35px;
+    height: 300px;
+  }
+  
+  /* End Main  */
+  
+  
+  /* Medium <= 992px */
+    
+  @media screen and (max-width: 992px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.2fr 3fr;
+      grid-template-areas:
+        'header'
+        'main';
+    }
+  
+    #sidebar {
+      display: none;
+    }
+  
+    .menu-icon {
+      display: inline;
+    }
+  
+    .sidebar-title > span {
+      display: inline;
+    }
+  }
+  /* Small <= 768px */
+    
+  @media screen and (max-width: 768px) {
+    .main-cards {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 0;
+    }
+  
+    .charts {
+      grid-template-columns: 1fr;
+      margin-top: 30px;
+    }
+  }
+  
+  /* Extra Small <= 576px */
+  
+  @media screen and (max-width: 576px) {
+    .hedaer-left {
+      display: none;
+    }
+  }

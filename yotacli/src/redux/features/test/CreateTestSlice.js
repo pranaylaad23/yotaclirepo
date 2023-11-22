@@ -1,13 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 export const fetchTest = createAsyncThunk("test", () => {
-  return (
-    axios
-      .get(`http://localhost:5000/testList`)
-      //.then(response=>console.log( "----------"+response.data))
-      .then((response) => response.data)
-      .catch((error) => console.log("ERROR"))
+  const token = getAuthToken();
+  return (axios.get(`  http://localhost:5000/testList`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Authorization": token
+    }
+  }
+  ).then((response) => response.data)
+    .catch((error) => console.log("ERROR"))
   );
 });
 

@@ -7,6 +7,7 @@ import {
   fetchTechnology,
   handleSearchTech,
 } from "../../../redux/features/technology/CreateTechSlice";
+import { useLocation } from 'react-router'
 
 const TechnologyList = ({ currentPage, dataPerPage }) => {
   const dispatch = useDispatch();
@@ -14,10 +15,11 @@ const TechnologyList = ({ currentPage, dataPerPage }) => {
   // console.log("State Error:",technology.searchError);
   console.log("searchTech array to search Technology:", technology.searchTech);
   console.log("Original Array List:", technology.technologies);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchTechnology());
-  }, []);
+  }, [location.key]);
 
   //Pagination
   console.log("currentPage:", currentPage);
@@ -84,13 +86,13 @@ const TechnologyList = ({ currentPage, dataPerPage }) => {
           <td>{tech.name}</td>
           <td>{tech.shortDescription}</td>
           <td>
-            <Link to={`/updatetechnology/${tech.id}`}>
+            <Link to={`/trainer/updatetechnology/${tech.id}`}>
               {" "}
               <i className="fa fa-edit"></i>&nbsp;{" "}
             </Link>
             {/* onClick={(event) => handleEditClick(event, list)} */}
             <Link
-              to={`/deletetechnology/${tech.id}`}
+              to={`/trainer/deletetechnology/${tech.id}`}
               onClick={() => dispatch(deleteTechnology(tech.id))}
             >
               <i className="fa fa-trash-can"></i>{" "}
@@ -112,13 +114,14 @@ const TechnologyList = ({ currentPage, dataPerPage }) => {
             <td>{tech.name}</td>
             <td>{tech.shortDescription}</td>
             <td>
-              <Link to={`/updatetechnology/${tech.id}`}>
-                {" "}
-                <i className="fa fa-edit"></i>&nbsp;{" "}
-              </Link>
+              <Link to={`/trainer/updatetechnology/${tech.id}`}>
+              {" "}
+              <i className="fa fa-edit"></i>&nbsp;{" "}
+            </Link>
+
               {/* onClick={(event) => handleEditClick(event, list)} */}
               <Link
-                to={`/deletetechnology/${tech.id}`}
+                to={`/trainer/deletetechnology/${tech.id}`}
                 onClick={() => dispatch(deleteTechnology(tech.id))}
               >
                 <i className="fa fa-trash-can"></i>{" "}

@@ -4,13 +4,9 @@ import Pagination from "../../../ui/pagination/Pagination";
 import HeaderItem from "./HeaderItem";
 import ListClientItem from "./ListClientItem";
 
-
 const ListClient = () => {
   const [currentPage, setCurrentPage] = useState(1); //Pagination
   const [dataPerPage, setDataPerPage] = useState(5); //Pagination
-
-
-
   return (
     <div className="col-12">
       <Card>

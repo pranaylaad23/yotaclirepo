@@ -86,13 +86,13 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
             <td>{associate.emailId}</td>
             <td>******</td>
             <td>
-              <Link to={`/updateAssociate/${associate.name}`}>
+              <Link to={`/trainer/updateAssociate/${associate.id}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
               {/* onClick={(event) => handleEditClick(event, list)} */}
               <Link
-                to={`/deleteAssociate/${associate.id}`}
+                to={`/trainer/deleteAssociate/${associate.id}`}
                 onClick={() => dispatch(deleteAssociate(associate.id))}
               >
                 <i className="fa fa-trash-can"></i>{" "}
@@ -103,7 +103,6 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
         ))
       );
     }
-
 
     return (
       <>
@@ -120,13 +119,13 @@ const AssociatesList = ({ currentPage, dataPerPage }) => {
             <td>{associate.emailId}</td>
             <td>******</td>
             <td>
-              <Link to={`/updateAssociate/${associate.name}`}>
+              <Link to={`/trainer/updateAssociate/${associate.id}`}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
               {/* onClick={(event) => handleEditClick(event, list)} */}
               <Link
-                to={`/deleteAssociate/${associate.id}`}
+                to={`/trainer/deleteAssociate/${associate.id}`}
                 onClick={() => dispatch(deleteAssociate(associate.id))}
               >
                 <i className="fa fa-trash-can"></i>{" "}

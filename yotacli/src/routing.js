@@ -26,9 +26,8 @@ const routing = () => {
   return (
     <>
       <Routes>
-
         <Route path="/" element={<TitleDashboard />} />
-        <Route path="batchlist" element={<TitleBatchList />} />
+        <Route path="/batchlist" element={<TitleBatchList />} />
         <Route path="createbatch" element={<TitleCreateBatch />} />
         <Route path="/updatebatch/:id" element={<TitleUpdateBatch />} />
         <Route path="/deletebatch/:id" element={<TitleBatchList />} />
@@ -38,11 +37,9 @@ const routing = () => {
         <Route path="/deletetechnology/:id" element={<TitleTechnologyList />} />
         <Route path="/recordTechnology" element={<TitleRecordTechnology />} />
         <Route path="/recordTechDetails/:name" element={<TitleRecordTechnology />} />
-        <Route path="/associatelist" element={<TitleAssociateList />} />
-        <Route path="/associatelist" element={<TitleAssociateList />} />
         <Route path="/registerAssociate/" element={<TitleRegisterAssociate />} />
         <Route path="listquestion" element={<TitleQuestionList />} />
-        <Route path="addquestion" element={<TitleAddQuestion />} />
+        <Route path="/addquestion" element={<TitleAddQuestion />} />
         <Route path="/updatequestion/:id" element={<TitleUpdateQuestion/>}/>
         <Route path="/deletequestion/:id" element={<TitleQuestionList />} />
         <Route path="/associatelist" element={<TitleAssociateList />} />
@@ -54,13 +51,16 @@ const routing = () => {
         <Route path="/student" element={<Dashboard/>}/>
         <Route path="/addclient"element={<TitleAddClient/>} />
         <Route path="/clientlist" element={<TitleClientList />} /> 
+        <Route path="/viewQuestion" element={<TitleViewQuestion />} /> 
+         {/* <Route path="/testlist" element={<TitleTestList />} /> */}
+         <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
+         <Route path="/test" element={<TitleTestList />} />
         <Route path="/viewQuestion/:clientId" element={<TitleViewQuestion />} /> 
         <Route path="/addClientQuestion" element={<TitleAddClientQuestion/>} /> 
         <Route path="/test" element={<TitleTestList />} />
         <Route path="/addClientQuestion/:id" element={<TitleAddClientQuestion />} /> 
         <Route path="/deleteclient/:id" element={<TitleClientList />} />
         <Route path="/updateclient/:id" element={<TitleUpdateClient />} />
-
       </Routes>
     </>
   );

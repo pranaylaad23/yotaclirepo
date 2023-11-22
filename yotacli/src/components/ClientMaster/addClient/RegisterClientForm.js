@@ -7,6 +7,7 @@ import Button from "../../../ui/button/Button";
 import { createClient } from "../../../redux/features/client/CreateClientSlice";
 
 import axios from "axios";
+import { headerContents } from "../../utils/Authentication";
 
 const RegisterClientForm = (props) => {
   const [technologies, setTechnologies] = useState({});
@@ -35,7 +36,9 @@ const RegisterClientForm = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9090/yota/api/technologies/")
+      .get("http://localhost:9090/yota/api/technologies/", {
+        headers:headerContents()
+      })
       .then((resp) => {
         if (resp.status == 200) {
           if (resp.data && resp.data.length) {

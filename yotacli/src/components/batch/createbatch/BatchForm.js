@@ -5,7 +5,10 @@ import { useState } from 'react';
 import { batch, useDispatch } from "react-redux";
 import { createBatch } from '../../../redux/features/batch/CreateBatchSlice';
 import Button from '../../../ui/button/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { getAuthToken } from '../../utils/Authentication';
 
 const BatchForm = (props) => {
     const [batches, setBatches] = useState({});
@@ -18,10 +21,16 @@ const BatchForm = (props) => {
     const [competencyData, setCompetencyData] = useState('');
     const [selectedTrainingtype, setSelectedTrainingtype] = useState([]);
     const [trainingtypeData, setTrainingtypeData] = useState('');
-
+    const token = getAuthToken();
     useEffect(
         () => {
-            axios.get('http://localhost:9090/yota/api/unit')
+            axios.get('http://localhost:9090/yota/api/unit', {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                },
+            })
                 .then(resp => {
                     if (resp.status == 200) {
                         if (resp.data && resp.data.length) {
@@ -44,7 +53,14 @@ const BatchForm = (props) => {
 
     useEffect(
         () => {
-            axios.get('http://localhost:9090/yota/api/competency')
+            axios.get('http://localhost:9090/yota/api/competency',
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": token
+                    }
+                })
                 .then(resp => {
                     if (resp.status == 200) {
                         if (resp.data && resp.data.length) {
@@ -67,7 +83,14 @@ const BatchForm = (props) => {
 
     useEffect(
         () => {
-            axios.get('http://localhost:9090/yota/api/trainingtype')
+            axios.get('http://localhost:9090/yota/api/trainingtype',
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": token
+                    }
+                })
                 .then(resp => {
                     if (resp.status == 200) {
                         if (resp.data && resp.data.length) {
@@ -126,17 +149,17 @@ const BatchForm = (props) => {
     };
 
     const handleOnSubmit = (e) => {
-
-        alert("Batch created sucessfully...")
         e.preventDefault();
+        console.log("Batch Request Payload:::>>" + batches);
         batches['batchName'] = calculateBatchName();
         batches['userName'] = "Pankaj Sharma";
         dispatch(createBatch(batches));
-        window.location.href = '/batchlist';
+        toast("Batch created sucessfully!!")
+        window.location.href = '/trainer/batchlist';
     };
-
     return (
         <Fragment>
+            <ToastContainer />
             <div className="row d-flex justify-content-center">
                 <div className='row mt-3'>
                     <div className='col-xl-8 col-lg-7 col-md-6 col-sm-4'>

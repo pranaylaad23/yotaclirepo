@@ -1,79 +1,81 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../../ui/button/Button'
-import InputField from '../../../ui/inputField/InputField'
+import InputField2 from '../../../ui/inputField2/InputField2'
 import classes from './UpdateAssociateForm.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios';
-import { updateAssociate } from '../../../redux/features/associate/UpdateAssociateSlice'
-
+import { UpdateAssociate } from '../../../redux/features/associate/UpdateAssociateSlice'
+import { headerContents } from '../../utils/Authentication'
 
 const UpdateAssociateForm = () => {
     const nevigate = useNavigate();
-
     const { id } = useParams();
     const dispatch = useDispatch();
-
         const initialState = {
             //firstName: "",
             //middleName: "",
             //lastName: "",
             //contactNo: "",
-            associateName: "",
+            //associateName: "",
+            id: "",
             emailId: "",
-            //password: ""
+            password: "",
         
         };
 
         const [updateAssociateData, setUpdateAssociateData] = useState(initialState);
-
         useEffect(() => {
             if (id) {
-                axios.get(`http://localhost:9090/yota/api/associates/${id}`).then(
+                axios.get(`http://localhost:9090/yota/api/associates/${id}`,{
+                    headers:headerContents()
+                }).then(
                     res => {
                         console.log(res.data);
                         setUpdateAssociateData(res.data)
-                    });
+                    })
+                    .catch((err) => console.log(err));
             }
-        },
-            [id]);
+        }, []);
 
         console.log(updateAssociateData);
 
         const newAssociateData = (e) => {
-            setUpdateAssociateData({ ...updateAssociateData, [e.target.emailId]: e.target.value });
+            setUpdateAssociateData({ ...updateAssociateData, [e.target.name]: e.target.value });
+            console.log(updateAssociateData);
         }
 
         const handleOnUpdate = async (e) => {
             e.preventDefault();
             console.log("updated data ", updateAssociateData);
             setUpdateAssociateData(updateAssociateData);
-            dispatch(updateAssociate({
-                //id: updateAssociateData.id,
+            dispatch(UpdateAssociate({
+                id: updateAssociateData.id,
                 //firstName: updateAssociateData.firstName,
                 //middleName: updateAssociateData.middleName,
                 //lastName: updateAssociateData.lastName,
                 //contactNo: updateAssociateData.contactNo,
-                associateName: updateAssociate.associateName,
-                emailId: updateAssociateData.emailId
-                //password: updateAssociateData.password
+                //associateName: updateAssociate.associateName,
+                emailId: updateAssociateData.emailId,
+                password: updateAssociateData.password
             }))
                 .unwrap()
                 .then(response => {
+                    window.alert("Associate Successfully Updated");
+                    //  nevigate("/updatetechnology/:name");
+                    setUpdateAssociateData(initialState);
                     // alert(response.data);
-                    nevigate("/associatelist");
+                    nevigate("/trainer/associatelist");
 
                 })
-                .catch(err => {
-                    window.alert(err.massage);
+                .catch((error) => {
+                    console.error(error);
+                    alert(error);
+                    //window.alert(err.massage);
                 });
-
-            window.alert("Associate updated successfully..!")
-            
-        }
-        console.log(updateAssociateData);
-
-
+            //window.alert("Associate updated successfully..!")
+        };
+        console.log("LASTT---" + updateAssociateData);
         return (
             <>
                 <div className='row'>
@@ -116,7 +118,7 @@ const UpdateAssociateForm = () => {
                                 className={classes.inputField} />
                             </InputField>
                         </div> */}
-                        <div className="col-xl-5 col-lg-6 col-md-6 col-sm-12 mt-3">
+                        {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Associate Name</b></h6>
                             <InputField><input
                                 name='associateName'
@@ -124,10 +126,10 @@ const UpdateAssociateForm = () => {
                                 onChange={newAssociateData}
                                 className={classes.inputField} />
                             </InputField>
-                        </div>
+                        </div> */}
                         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
                             <h6><b>Email ID</b></h6>
-                            <InputField ><input
+                            <InputField2 ><input
                                 id='emailId'
                                 name='emailId'
                                 value={updateAssociateData.emailId}
@@ -135,7 +137,19 @@ const UpdateAssociateForm = () => {
                                 className={classes.inputField}
                                 type="email"
                                 aria-label='emailId' />
-                            </InputField>
+                            </InputField2>
+                        </div>
+                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-3">
+                            <h6><b>Password</b></h6>
+                            <InputField2 ><input
+                                id='password'
+                                name='password'
+                                value={updateAssociateData.password}
+                                onChange={newAssociateData}
+                                className={classes.inputField}
+                                type="password"
+                                aria-label='password' />
+                            </InputField2>
                         </div>
                     </div>
                 </div>

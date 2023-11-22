@@ -8,6 +8,7 @@ import { updateClient } from "../../../redux/features/client/CreateClientSlice";
 import Select from "react-select";
 import axios from "axios";
 import { useParams } from "react-router";
+import { headerContents } from "../../utils/Authentication";
 
 const UpdateClientForm = (props) => {
   const { id } = useParams();
@@ -24,13 +25,17 @@ const UpdateClientForm = (props) => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:9090/yota/api/${id}`).then((res) => {
+      axios.get(`http://localhost:9090/yota/api/${id}`,{
+        headers:headerContents()
+      }).then((res) => {
         console.log(" Get data By Id  -" + res.data);
         setUpdateClientData(res.data);
       });
     }
     axios
-      .get("http://localhost:9090/yota/api/technologies/")
+      .get("http://localhost:9090/yota/api/technologies/",{
+        headers:headerContents()
+      })
       .then((resp) => {
         if (resp.status == 200) {
           if (resp.data && resp.data.length) {
@@ -96,7 +101,9 @@ const UpdateClientForm = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9090/yota/api/technologies/")
+      .get("http://localhost:9090/yota/api/technologies/",{
+        headers:headerContents()
+      })
       .then((resp) => {
         if (resp.status == 200) {
           if (resp.data && resp.data.length) {

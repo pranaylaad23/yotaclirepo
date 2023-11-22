@@ -1,11 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAuthToken } from "../../../components/utils/Authentication";
 
 export const fetchTechnology = createAsyncThunk("technology", async () => {
-  return axios
-    .get(`http://localhost:9090/yota/api/technologies/`)
-    .then((response) => response.data.map((technology) => technology));
+  const token = getAuthToken();
+  return await axios.get(`http://localhost:9090/yota/api/technologies/`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Authorization": token
+    }
+  }).then((response) => response.data.map((technology) => technology));
 });
+
 export const techList = createSlice({
   name: "techList",
   initialState: {

@@ -5,25 +5,20 @@ import React, { useEffect } from "react";
 import classes from "../batchlist/ListBatchItem.module.css";
 import { fetchBatch,handleSearchBatch } from "../../../redux/features/batch/batchListSlice";
 import { batchDelete } from "../../../redux/features/batch/deleteBatchSlice";
+import { useLocation } from 'react-router';
 
 const BatchList = ({currentPage,dataPerPage}) => {
   const dispatch = useDispatch();
   const batch = useSelector((state) => state.batch);
-  console.log("searchTech array to search Batch:", batch.searchBatch);
-  console.log("Original Array List:", batch.batches);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchBatch());
-  }, []);
+  }, [location.key]);
   
   //Pagination
-  console.log("currentPage:", currentPage);
   const lastDataIndex =  currentPage * dataPerPage;
   const firstDataIndex =  lastDataIndex - dataPerPage;
-
-  const paginatedData =  batch.searchBatch.slice(firstDataIndex,lastDataIndex);
-  console.log("Data per page to show:", paginatedData);
-
 
   //Loading Data
   if (batch.loading) {
@@ -42,8 +37,6 @@ const BatchList = ({currentPage,dataPerPage}) => {
 
   //Search Data not found
   if (batch.searchBatch.length !== 0) {
-    console.log("batch.searchBatch.length !== 0");
-
     if (batch.searchBatch[0].length === 0) {
       return (
         <tr>
@@ -81,13 +74,13 @@ const BatchList = ({currentPage,dataPerPage}) => {
             <td>{result.createdAt}</td>
             <td>{result.updatedAt}</td>
             <td>
-              <Link to={`/updatebatch/${result.id}`} className={classes.link}>
+              <Link to={`/trainer/updatebatch/${result.id}`} className={classes.link}>
                 {" "}
                 <i className="fa fa-edit"></i>&nbsp;{" "}
               </Link>
 
               <Link
-                to={`/deletebatch/${result.id}`}
+                to={`/trainer/deletebatch/${result.id}`}
                 onClick={() => dispatch(batchDelete(result.id))}
               >
                 <i className="fa fa-trash-can"></i>
@@ -97,35 +90,6 @@ const BatchList = ({currentPage,dataPerPage}) => {
         ))
       );
     }
-    return (
-      <>
-        {paginatedData.map((result, key) => (  
-          <tr key={key}>
-            {/* <td>{result.id}</td> */}
-            <td>{result.batchIdentifier}</td>
-            <td>{result.batchName}</td>
-            <td>{result.batchDescription}</td>
-            <td>{result.startDate}</td>
-            <td>{result.endDate}</td>
-            <td>{result.createdAt}</td>
-            <td>{result.updatedAt}</td>
-            <td>
-              <Link to={`/updatebatch/${result.id}`} className={classes.link}>
-                {" "}
-                <i className="fa fa-edit"></i>&nbsp;{" "}
-              </Link>
-
-              <Link
-                to={`/deletebatch/${result.id}`}
-                onClick={() => dispatch(batchDelete(result.id))}
-              >
-                <i className="fa fa-trash-can"></i>
-              </Link>
-            </td>
-          </tr>
-        ))}
-      </>
-    );
   }
 };
 

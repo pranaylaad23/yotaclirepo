@@ -1,17 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { headerContents } from "../../../components/utils/Authentication";
 
 export const assignTestToCandidate = createAsyncThunk(
   "assignEmail",
   async (test) => {
-    const response = await fetch(
-      "http://localhost:9090/sendingEmail",
-
-      {
+    const response = await fetch("http://localhost:9090/sendingEmail",{
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headerContents(),
         body: JSON.stringify(test),
       }
     );

@@ -1,23 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router';
+import { headerContents } from '../../utils/Authentication';
 
 const QuestionList = (props) => {
-
     const [list, setList] = useState([]);
-
+    const location = useLocation();
     useEffect(() => {
-        axios.get("http://localhost:9090/yota/api/questions/all")
-            .then(response => {
-                setList(response.data);
-                console.log(response.data);
-                console.log(list[0])
-            })
+        axios.get("http://localhost:9090/yota/api/questions/all", {
+            headers: headerContents()
+        }
+        ).then(response => {
+            setList(response.data);
+            console.log(response.data);
+            console.log(list[0])
+        })
             .catch(error => {
                 console.log(error);
             })
-    }, []);
-    
+    }, [location.key]);
 
     return (
         <tbody>
@@ -35,34 +37,38 @@ const QuestionList = (props) => {
                         <td>{list.created_At}</td>
                         <td>{list.updated_At}</td>
                         <td>
-                            <Link to={`/updatequestion/${list.id}`}>
+                            <Link to={`/trainer/updatequestion/${list.id}`}>
                                 {" "}
                                 <i className="fa fa-edit"></i>&nbsp;{" "}
-                                
+
                             </Link>
-                        
+
                             <Link
-                                to={`/deletequestion/${list.id}`}
-                                onClick={() => 
-                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`)
-                                    .then(response => {
-                                        console.log("deleted successfully");
-                                        alert("Item Deleted Succesfully");
-                                        window.location.reload();   
-                                    })
-                                    .catch(error => {
-                                        console.error("Error deleting this object", error);
-                                    })
+                                to={`/trainer/deletequestion/${list.id}`}
+                                onClick={() =>
+                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`,
+                                        {
+                                            headers: headerContents()
+                                        }
+                                    )
+                                        .then(response => {
+                                            console.log("deleted successfully");
+                                            alert("Item Deleted Succesfully");
+                                            window.location.reload();
+                                        })
+                                        .catch(error => {
+                                            console.error("Error deleting this object", error);
+                                        })
                                 }
                             >
                                 <i className="fa fa-trash-can"></i>
                             </Link>
-                        </td>    
+                        </td>
                     </tr>
                 ))
             }
-             {props.searchInput  &&
-             list.filter(data => data.question.includes(props.searchInput)).map((list, index) => (
+            {props.searchInput &&
+                list.filter(data => data.question.includes(props.searchInput)).map((list, index) => (
                     <tr key={index}>
                         <td>{list.id}</td>
                         <td>{list.question}</td>
@@ -75,29 +81,31 @@ const QuestionList = (props) => {
                         <td>{list.created_At}</td>
                         <td>{list.updated_At}</td>
                         <td>
-                            <Link to={`/updatequestion/${list.id}`}>
+                            <Link to={`/trainer/updatequestion/${list.id}`}>
                                 {" "}
                                 <i className="fa fa-edit"></i>&nbsp;{" "}
-                                
+
                             </Link>
-                        
+
                             <Link
-                                to={`/deletequestion/${list.id}`}
-                                onClick={() => 
-                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`)
-                                    .then(response => {
-                                        console.log("deleted successfully");
-                                        alert("Item Deleted Succesfully");
-                                        window.location.reload();   
+                                to={`/trainer/deletequestion/${list.id}`}
+                                onClick={() =>
+                                    axios.delete(`http://localhost:9090/yota/api/questions/${list.id}`, {
+                                        headers: headerContents()
                                     })
-                                    .catch(error => {
-                                        console.error("Error deleting this object", error);
-                                    })
+                                        .then(response => {
+                                            console.log("deleted successfully");
+                                            alert("Item Deleted Succesfully");
+                                            window.location.reload();
+                                        })
+                                        .catch(error => {
+                                            console.error("Error deleting this object", error);
+                                        })
                                 }
                             >
                                 <i className="fa fa-trash-can"></i>
                             </Link>
-                        </td>    
+                        </td>
                     </tr>
                 ))
             }
