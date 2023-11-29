@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./Hamburger.module.css";
 function HamBurger() {
 return (
     <>
@@ -16,3 +17,4 @@ return (
         </div>
     </>)
 }
+export default HamBurger;
