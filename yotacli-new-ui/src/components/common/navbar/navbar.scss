@@ -1,0 +1,44 @@
+@import "../../styles/responsive.scss";
+ 
+ 
+.navbar{
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    color: black;
+ 
+.icons{
+    display: flex;
+    align-items: center;
+    gap:20px
+}
+.logo{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap:10px;
+ 
+    .icon{
+        @include sm{
+            display: none;
+        }
+    }
+ 
+    .sidebar-toggle{
+        background-color: white;
+        border:0;
+        margin-left: 80px;
+      
+ 
+        &.hover{
+            border:2px solid black
+        }
+        @include md{
+            display: none;
+        }
+    }
+  
+}
+}
