@@ -1,0 +1,164 @@
+.horizontal-menu {
+  height: 71px;
+  z-index: 10001;
+  position: fixed;
+
+  background-color: #fafbff;
+}
+
+.navbar-header {
+  height: 100% !important;
+}
+
+.page-topbar {
+  background-color: white !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  position: sticky !important;
+  top: 0px !important;
+  height: 71px !important;
+  z-index: 999999 !important;
+
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 4px -1px;
+}
+
+.SearchMain {
+  margin-left: 400px;
+  margin-top: 10px;
+}
+.search-container {
+  position: relative;
+  display: inline-block;
+  margin: 4px 2px;
+  height: 45px;
+  width: 35px;
+  vertical-align: bottom;
+}
+
+.mglass {
+  display: inline-block;
+  pointer-events: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+}
+
+.searchbutton {
+  position: absolute;
+  font-size: 22px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 50px;
+  margin: 4px 2px;
+  width: 32px;
+  height: 40px;
+}
+
+.search:focus + .searchbutton {
+  transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: rgb(0, 0, 0);
+}
+
+.search {
+  position: absolute;
+  left: 40px;
+  background-color: white;
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 0;
+  height: 100%;
+  z-index: 10;
+  transition-duration: 0.4s;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.search:focus {
+  width: 350px;
+  padding: 0 16px 0 0;
+}
+
+.expandright {
+  left: auto;
+  right: 0px;
+}
+
+.expandright:focus {
+  padding: 0 0 0 16px;
+}
+.Profile {
+  margin-left: 400px;
+  padding: -10px;
+}
+.dropdown-menu {
+  height: 300px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: -75px;
+  overflow: hidden;
+}
+
+.UpperHalf {
+  display: flex;
+  justify-content: center;
+  background-image: url("https://picsum.photos/210");
+  background-color: #cccccc;
+  height: 90px;
+  width: 112%;
+  margin-left: -16px;
+  margin-top: -40px;
+}
+.UpperHalfContent{
+
+}
+.ProfilePic {
+  margin-right: 139px;
+  border: 3px solid #000000;
+  border-radius: 50px;
+  height: 50.8px;
+
+  margin-top: 28px;
+}
+.card-title {
+  font-weight: bold;
+  margin-top: 54px;
+  margin-left: 50px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4); 
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+}
+.card-text {
+  display: inline;
+}
+.btn {
+  text-align: center;
+  border-radius: 50px;
+}
+.Button {
+  align-items: center;
+  margin-top: 35px;
+  margin-right: 80px;
+  height: 20px;
+  width: 0px;
+}
+.ChangePassoword {
+  margin-top: 20px;
+  margin-left: 20px;
+  color: rgb(0, 0, 0);
+}
+.MyAccount {
+  margin-top: 20px;
+  margin-left: 20px;
+  color: rgb(0, 0, 0);
+}

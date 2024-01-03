@@ -1,141 +1,262 @@
-import React, { useState } from "react";
-import "./sidebar.scss";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useWindowSize } from "../dashboard-layout/useWindowSize";
+import "./sidebar.style.css";
 
-const Sidebar = () => {
-  const [isSubMenuOpen, setIsSubMenuOpen] = useState({});
-  const toggleSubMenu = (sectionId) => {
-    setIsSubMenuOpen((prevState) => ({
-      ...prevState,
-      [sectionId]: !prevState[sectionId],
-    }));
-  };
-  return (
-    <div className="sidebar">
-      <div className="item">
-        <button
-          className="listItem listmenu-toggle"
-          onClick={() => toggleSubMenu("list-submenu1")}
-        >
-          <i className="fa-solid fa-list-ul icon-color"></i>
-          <span className="listItemTitle1">Dashboard</span>
-        </button>
-      </div>
-      <div className="item">
-        <button
-          className="listItem listmenu-toggle"
-          onClick={() => toggleSubMenu("list-submenu2")}
-        >
-          <i class="fa-solid fa-id-badge icon-color"></i>
-          <span className="listItemTitle2">Training Management</span>
-          {isSubMenuOpen["list-submenu2"] && (
-            <i className="fa-solid fa-angle-down"></i>
-          )}
-        </button>
-        {isSubMenuOpen["list-submenu2"] && (
-          <ul className="listmenu2">
-            <li>
-              <Link to="/requestTraining">Request Training</Link>
-            </li>
-            <li>
-              <Link to="/trainingList">Training List</Link>
-            </li>
-          </ul>
-        )}
-      </div>
-      <div className="item">
-        <button
-          className="listItem listmenu-toggle"
-          onClick={() => toggleSubMenu("list-submenu3")}
-        >
-          <i className="fas fa-pencil-square icon-color"></i>
-          <span className="listItemTitle3">Test Management</span>
-          {isSubMenuOpen["list-submenu3"] && (
-            <i className="fa-solid fa-angle-down"></i>
-          )}
-        </button>
-        {isSubMenuOpen["list-submenu3"] && (
-          <ul className="listmenu3">
-            <li>
-              <Link to="/createTest">Create Test</Link>
-            </li>
-            <li>
-              <Link to="/testList">Test List</Link>
-            </li>
-          </ul>
-        )}
-      </div>
-      <div className="item">
-        <button
-          className="listItem listmenu-toggle"
-          onClick={() => toggleSubMenu("list-submenu4")}
-        >
-          <i className="fa-solid fa-laptop-code icon-color"></i>
-          <span className="listItemTitle4">Technology Managment</span>
-          {isSubMenuOpen["list-submenu4"] && (
-            <i className="fa-solid fa-angle-down"></i>
-          )}
-        </button>
-        {isSubMenuOpen["list-submenu4"] && (
-          <ul className="listmenu4">
-            <li>
-              <Link to="/createTechnology">Create Technology</Link>
-            </li>
-            <li>
-              <Link to="/technologyList">Technology List</Link>
-            </li>
-          </ul>
-        )}
-      </div>
-      <div className="item">
-        <button
-          className="listItem listmenu-toggle"
-          onClick={() => toggleSubMenu("list-submenu5")}
-        >
-          <i className="fa-solid fa-people-roof icon-color"></i>
-          <span className="listItemTitle5"> Associate Managment</span>
-          {isSubMenuOpen["list-submenu5"] && (
-            <i className="fa-solid fa-angle-down"></i>
-          )}
-        </button>
-        {isSubMenuOpen["list-submenu5"] && (
-          <ul className="listmenu5">
-            <li>
-              <Link to="/addAssociate">Add Associate</Link>
-            </li>
-            <li>
-              <Link to="/associateList">Associate List</Link>
-            </li>
-            <li>
-              <Link to="/assignTest">Assign Test</Link>
-            </li>
-          </ul>
-        )}
-      </div>
-      <div className="item">
-        <button
-          className="listItem listmenu-toggle"
-          onClick={() => toggleSubMenu("list-submenu6")}
-        >
-          <i className="fas fa-sitemap icon-color"></i>
-          <span className="listItemTitle6"> Client Managment</span>
-          {isSubMenuOpen["list-submenu6"] && (
-            <i className="fa-solid fa-angle-down"></i>
-          )}
-        </button>
-        {isSubMenuOpen["list-submenu6"] && (
-          <ul className="listmenu6">
-            <li>
-              <Link to="/createClient">Create Client</Link>
-            </li>
-            <li>
-              <Link to="/client">Client List</Link>
-            </li>
-          </ul>
-        )}
-      </div>
-    </div>
+export default function Sidebar(props) {
+  const { open, onClose } = props;
+  const { width } = useWindowSize();
+
+  const routes = [
+    {
+      name: "Dashboard",
+      path: "/",
+      iconClass: "fa-solid fa-house-user",
+      show: true,
+      showSubRoutes: false,
+      subRoutes: [
+        {
+          name: "Default",
+          subPath: "/sub-dashboard",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+
+    {
+      name: "Training Management",
+      path: "/training",
+      iconClass: "fa-solid fa-id-badge icon-color",
+
+      show: true,
+      showSubRoutes: true,
+      subRoutes: [
+        {
+          name: "Request Training",
+          subPath: "/training-createTraining",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Training List",
+          subPath: "/training-trainingList",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+
+    {
+      name: "Test Management",
+      path: "/test",
+      iconClass: "fas fa-pencil-square icon-color",
+
+      show: true,
+      showSubRoutes: true,
+      subRoutes: [
+        {
+          name: "CreateTest",
+          subPath: "/test-createTest",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Test List",
+          subPath: "/test-testList",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+
+    {
+      name: "Technology Managment",
+      path: "/technology",
+      iconClass: "fa-solid fa-laptop-code icon-color",
+
+      show: true,
+      showSubRoutes: true,
+      subRoutes: [
+        {
+          name: "Create Technology",
+          subPath: "/technology-createTechnology",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Technology List",
+          subPath: "/technology-technologyList",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+    {
+      name: "Associate Managment",
+      path: "/associate",
+      iconClass: "fa-solid fa-people-roof icon-color",
+
+      show: true,
+      showSubRoutes: true,
+      subRoutes: [
+        {
+          name: "Add Associate",
+          subPath: "/associate-addAssociate",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Associate List",
+          subPath: "/associate-associateList",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Assign Test",
+          subPath: "/assignTest",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+    {
+      name: "Client Managment",
+      path: "/client",
+      iconClass: "fas fa-sitemap icon-color",
+
+      show: true,
+      showSubRoutes: true,
+      subRoutes: [
+        {
+          name: "Create Client",
+          subPath: "/client-createClient",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Client List",
+          subPath: "/client-clientList",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+
+    {
+      name: "Report",
+      path: "/report",
+      iconClass: "fa-solid fa-user",
+      show: true,
+    },
+  ];
+  const [openedSubNav, setOpenedSubNav] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(false);
+  const handleClose = React.useCallback(
+    () => open && width < 992 && onClose(),
+    [open, onClose, width]
   );
-};
 
-export default Sidebar;
+  const handleSubNavToggle = (event) => {
+    event.stopPropagation();
+    const { dataset } = event.target;
+    const { routeindex } = dataset;
+    setOpenedSubNav((prevState) =>
+      prevState === parseInt(routeindex) ? null : parseInt(routeindex)
+    );
+  };
+
+  const handleHighlightMenu = (event) => {
+    event.stopPropagation();
+    console.log("event is", event.currentTarget.dataset);
+    let { dataset } = event.currentTarget;
+    let { index } = dataset;
+    setActiveIndex((prevState) =>
+      prevState === parseInt(index) ? null : parseInt(index)
+    );
+    setOpenedSubNav((prevState) =>
+      prevState === parseInt(index) ? null : parseInt(index)
+    );
+  };
+
+  return (
+    <>
+      <div className={`vertical-menu d-block ${open ? "" : "sidebar-close"}`}>
+        <div className="h-100">
+          <div
+            id="sidebar-menu"
+            className="h-10  d-flex flex-column justify-content-between"
+          >
+            <div>
+              <ul className="list-style-none padding-0">
+                {routes.map(
+                  (route, index) =>
+                    route.show && (
+                      <li key={route.path} className=" menu-link-wrapper">
+                        <div
+                          className={`d-flex justify-content-between align-items-center menu-class ${
+                            activeIndex === index ? "active-tab" : ""
+                          }`}
+                          onClick={handleHighlightMenu}
+                          data-index={index}
+                        >
+                          <Link
+                            to={route.path}
+                            className="text-decoration-none menu-link"
+                            exact={route.path === "/"}
+                            data-routeindex={index}
+                          >
+                            <i className={`${route.iconClass} padding-10 ${open ? "" : "sidebar-close"}`}></i>
+                            <span className={`menu-text font-size-16 padding-10 ${open ? "" : "sidebar-close"}`}>
+                              {route.name}
+                            </span>
+                          </Link>
+                          {route.showSubRoutes &&
+                            route.subRoutes.length > 0 && (
+                              <i
+                                className={`fa-solid fa-angle-${
+                                  openedSubNav === index ? "up" : "down"
+                                } color-grey cursor-pointer margin-right-15 submenu-class`}
+                                role="button"
+                                data-routeindex={index}
+                                onClick={handleSubNavToggle}
+                              ></i>
+                            )}
+                        </div>
+                        {route.showSubRoutes && route.subRoutes.length > 0 && (
+                          <ul
+                            className={`list-style-none ${
+                              openedSubNav === index ? "submenu" : "d-none"
+                            }`}
+                          >
+                            {route.subRoutes.map(
+                              (subRoute) =>
+                                subRoute.show && (
+                                  <li
+                                    key={subRoute.subPath}
+                                    className="margin-15 submenu"
+                                  >
+                                    <Link
+                                      to={subRoute.subPath}
+                                      className="text-decoration-none color-grey menu-link"
+                                    >
+                                      <span className="menu-text font-size-16 padding-10">
+                                        {subRoute.name}
+                                      </span>
+                                    </Link>
+                                  </li>
+                                )
+                            )}
+                          </ul>
+                        )}
+                      </li>
+                    )
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
