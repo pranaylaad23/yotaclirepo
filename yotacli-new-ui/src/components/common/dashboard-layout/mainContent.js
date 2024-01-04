@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+import Sidebar from "../sidebar/Sidebar";
 import "./mainContent.style.css";
 import { useWindowSize } from "./useWindowSize";
 
