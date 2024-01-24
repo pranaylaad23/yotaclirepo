@@ -11,6 +11,7 @@ import MainContent from "../components/common/dashboard-layout/mainContent";
 import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
 import { TrainingList } from "../components/training/TrainingList.jsx";
+import {TechnologyForm } from"../components/technology/TechnologyForm.js";
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Route path="/" element={<LoginUser setLoggedIn={setLoggedIn} />} />
       <Route path="/" element={<RegisterUser />} />
       <Route path="/dashboard" element={<MainContent />} />
+      {/* <Route path="/technology-createTechnology" element={<TechnologyForm/>}></Route> */}
 
       <Route
         path="/test-createTest"
@@ -42,6 +44,14 @@ export default function AppRoutes() {
         element={
           <MainContent>
             <TrainingList />
+          </MainContent>
+        }
+      />
+       <Route
+        path="/technology-createTechnology"
+        element={
+          <MainContent>
+            < TechnologyForm/>
           </MainContent>
         }
       />
