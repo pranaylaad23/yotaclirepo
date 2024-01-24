@@ -107,10 +107,10 @@
 .UpperHalf {
   display: flex;
   justify-content: center;
-  background-image: url("https://picsum.photos/210");
+  background-image: url("D:\YOTA\YotaNewDashboard\yotaclirepo\yotacli-new-ui\public\backgroud.png");
   background-color: #cccccc;
   height: 90px;
-  width: 112%;
+  width: 113%;
   margin-left: -16px;
   margin-top: -40px;
 }
@@ -161,4 +161,11 @@
   margin-top: 20px;
   margin-left: 20px;
   color: rgb(0, 0, 0);
+}
+.LoginLink{
+    margin-top: 23px;
+    margin-left: 1000px;
+    font-weight: bold;
+    cursor: pointer;
+
 }

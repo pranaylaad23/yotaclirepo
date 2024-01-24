@@ -6,6 +6,8 @@ import "./sidebar.style.css";
 export default function Sidebar(props) {
   const { open, onClose } = props;
   const { width } = useWindowSize();
+  const [openedSubNav, setOpenedSubNav] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const routes = [
     {
@@ -26,7 +28,7 @@ export default function Sidebar(props) {
 
     {
       name: "Training Management",
-      path: "/training",
+      path: "/Dashboard",
       iconClass: "fa-solid fa-id-badge icon-color",
 
       show: true,
@@ -49,7 +51,7 @@ export default function Sidebar(props) {
 
     {
       name: "Test Management",
-      path: "/test",
+      path: "/Dashboard",
       iconClass: "fas fa-pencil-square icon-color",
 
       show: true,
@@ -72,7 +74,7 @@ export default function Sidebar(props) {
 
     {
       name: "Technology Managment",
-      path: "/technology",
+      path: "/Dashboard",
       iconClass: "fa-solid fa-laptop-code icon-color",
 
       show: true,
@@ -94,7 +96,7 @@ export default function Sidebar(props) {
     },
     {
       name: "Associate Managment",
-      path: "/associate",
+      path: "/Dashboard",
       iconClass: "fa-solid fa-people-roof icon-color",
 
       show: true,
@@ -122,7 +124,7 @@ export default function Sidebar(props) {
     },
     {
       name: "Client Managment",
-      path: "/client",
+      path: "/Dashboard",
       iconClass: "fas fa-sitemap icon-color",
 
       show: true,
@@ -150,8 +152,7 @@ export default function Sidebar(props) {
       show: true,
     },
   ];
-  const [openedSubNav, setOpenedSubNav] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(false);
+
   const handleClose = React.useCallback(
     () => open && width < 992 && onClose(),
     [open, onClose, width]
@@ -159,8 +160,7 @@ export default function Sidebar(props) {
 
   const handleSubNavToggle = (event) => {
     event.stopPropagation();
-    const { dataset } = event.target;
-    const { routeindex } = dataset;
+    const { routeindex } = event.target.dataset;
     setOpenedSubNav((prevState) =>
       prevState === parseInt(routeindex) ? null : parseInt(routeindex)
     );
@@ -168,9 +168,7 @@ export default function Sidebar(props) {
 
   const handleHighlightMenu = (event) => {
     event.stopPropagation();
-    console.log("event is", event.currentTarget.dataset);
-    let { dataset } = event.currentTarget;
-    let { index } = dataset;
+    const { index } = event.currentTarget.dataset;
     setActiveIndex((prevState) =>
       prevState === parseInt(index) ? null : parseInt(index)
     );
@@ -206,8 +204,16 @@ export default function Sidebar(props) {
                             exact={route.path === "/"}
                             data-routeindex={index}
                           >
-                            <i className={`${route.iconClass} padding-10 ${open ? "" : "sidebar-close"}`}></i>
-                            <span className={`menu-text font-size-16 padding-10 ${open ? "" : "sidebar-close"}`}>
+                            <i
+                              className={`${route.iconClass} padding-10 ${
+                                open ? "" : "sidebar-close"
+                              }`}
+                            ></i>
+                            <span
+                              className={`menu-text font-size-16 padding-10 ${
+                                open ? "" : "sidebar-close"
+                              }`}
+                            >
                               {route.name}
                             </span>
                           </Link>

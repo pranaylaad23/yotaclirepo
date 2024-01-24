@@ -1,0 +1,36 @@
+.main {
+  height: 100%;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+}
+.signbutton {
+  margin-left: 280px;
+  border-radius: 3px !important;
+}
+  .login {
+  margin-left: 332px;
+  margin-top: 70px;
+  margin-right: 369px;
+  font-weight: 400;
+  overflow: hidden;
+  background-color: #ffffff;
+  padding: 41px !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 4px -1px;
+}
+
+.form {
+  margin-left: 59px;
+  padding-top: 18px;
+  margin-right: -485px;
+}
