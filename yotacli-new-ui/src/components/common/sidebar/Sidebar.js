@@ -36,13 +36,13 @@ export default function Sidebar(props) {
       subRoutes: [
         {
           name: "Request Training",
-          subPath: "/training-createTraining",
+          subPath: "/requestTraining",
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
         {
           name: "Training List",
-          subPath: "/training-trainingList",
+          subPath: "/trainingList",
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
