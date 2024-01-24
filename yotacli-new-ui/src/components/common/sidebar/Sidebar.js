@@ -132,7 +132,7 @@ export default function Sidebar(props) {
       subRoutes: [
         {
           name: "Create Client",
-          subPath: "/client-createClient",
+          subPath: "/client-management-createClient",
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
