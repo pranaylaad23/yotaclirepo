@@ -1,0 +1,76 @@
+
+.modal-dialog{
+    margin-top: 15%;
+    margin-left: 40%;
+    width: 100%;
+}
+
+.col-sm-2 {
+    padding-left: 3px;
+}
+
+.modal-header{
+    padding: 10px !important;
+}
+.modal-body{
+    padding: 22px !important;
+}
+.submit-button{
+    margin-left: 327px;
+    margin-top: 10px;
+    
+}
+.btn {
+    margin-left: 4px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* // import React from 'react'
+// import '../technology/TechnologyForm.css'
+
+// export const TechnologyForm = () => {
+//     const handleOnSubmit = (e) => {
+//         e.preventDefault();
+
+//         alert("technology created successfully");
+       
+//       };
+  
+//     return (
+//     <div>
+//       <div className='d-flex p-2 justify-content-between'> 
+//         <h5>
+//             Add Technology
+//         </h5>
+//         <button type='submit' className='tech-btn' onClick={handleOnSubmit}>
+//             Add 
+//         </button>
+//         </div>  
+        
+//         <form>
+//     <div class="form-group row">
+//     <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+//     <div class="col-sm-10">
+//     <input placeholder="Name" type="text" class="mb-2 form-control-sm form-control"/>    </div>
+//     </div>
+//     <div class="form-group row">
+//     <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+//     <div class="col-sm-10">
+//     <textarea name="" placeholder="Enter description here " id="exampleText" class="form-control"></textarea>
+//     </div>
+//     </div>
+//     </form></div>
+//   )
+// } */
