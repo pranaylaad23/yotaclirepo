@@ -12,6 +12,8 @@ import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
 import { ListTechnology } from "../components/technology-management/listTechnology.jsx";
 import { TrainingList } from "../components/training/TrainingList.jsx";
+import { AddAssociate } from "../components/associate/AddAssociate.jsx";
+import  ListAssociateForm  from "../components/associate/associateList/listassociateform.jsx";
 import {AddAssociate} from "../components/associate/AddAssociate.jsx";
 import { ListQuestions } from "../components/question-management/list-questions/ListQuestions.jsx";
 export default function AppRoutes() {
@@ -33,6 +35,16 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
+
+      <Route
+        path="/associate-associateList"
+        element={
+          <MainContent>
+            <ListAssociateForm />
+          </MainContent>
+        }
+      />
+
       <Route
         path="/test-testList"
         element={
