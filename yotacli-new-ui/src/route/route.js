@@ -10,8 +10,9 @@ import { LoginUser } from "../components/user/LoginUser.jsx";
 import MainContent from "../components/common/dashboard-layout/mainContent";
 import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
-  import ListTechnology from "../components/technology-management/listTechnology.jsx";
-  
+import { ListTechnology } from "../components/technology-management/listTechnology.jsx";
+import { TrainingList } from "../components/training/TrainingList.jsx";
+import {AddAssociate} from "../components/associate/AddAssociate.jsx";
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -49,8 +50,15 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-      
-      
+
+      <Route
+        path="/associate-addAssociate"
+        element={
+          <MainContent>
+            <AddAssociate />
+          </MainContent>
+        }
+      />
     </Routes>
   );
 }
