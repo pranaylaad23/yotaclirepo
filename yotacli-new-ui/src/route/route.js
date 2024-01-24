@@ -11,7 +11,8 @@ import MainContent from "../components/common/dashboard-layout/mainContent";
 import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
 import { TrainingList } from "../components/training/TrainingList.jsx";
-import {AddAssociate} from "../components/associate/AddAssociate.jsx";
+import { AddAssociate } from "../components/associate/AddAssociate.jsx";
+import { ListAssociateForm } from "../components/associate/associateList/listassociateform.jsx";
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -30,6 +31,16 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
+
+      <Route
+        path="/associate-associateList"
+        element={
+          <MainContent>
+            <ListAssociateForm />
+          </MainContent>
+        }
+      />
+
       <Route
         path="/requestTraining"
         element={
