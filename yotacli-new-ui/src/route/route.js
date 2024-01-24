@@ -10,7 +10,8 @@ import { LoginUser } from "../components/user/LoginUser.jsx";
 import MainContent from "../components/common/dashboard-layout/mainContent";
 import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
-import { TrainingList } from "../components/training/TrainingList.jsx";
+  import ListTechnology from "../components/technology-management/listTechnology.jsx";
+  
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Route path="/" element={<LoginUser setLoggedIn={setLoggedIn} />} />
       <Route path="/" element={<RegisterUser />} />
       <Route path="/dashboard" element={<MainContent />} />
+      
 
       <Route
         path="/test-createTest"
@@ -37,14 +39,18 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
+
+
       <Route
-        path="/trainingList"
+        path="/technology-technologyList"
         element={
           <MainContent>
-            <TrainingList />
+            <ListTechnology />
           </MainContent>
         }
       />
+      
+      
     </Routes>
   );
 }
