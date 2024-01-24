@@ -107,15 +107,14 @@
 .UpperHalf {
   display: flex;
   justify-content: center;
-  background-image: url("D:\YOTA\YotaNewDashboard\yotaclirepo\yotacli-new-ui\public\backgroud.png");
+  background-image: url("../../../../public/backgroud.png");
   background-color: #cccccc;
   height: 90px;
   width: 113%;
   margin-left: -16px;
   margin-top: -40px;
 }
-.UpperHalfContent{
-
+.UpperHalfContent {
 }
 .ProfilePic {
   margin-right: 139px;
@@ -130,7 +129,7 @@
   margin-top: 54px;
   margin-left: 70px;
   background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4); 
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
   font-weight: bold;
   position: absolute;
@@ -162,10 +161,9 @@
   margin-left: 20px;
   color: rgb(0, 0, 0);
 }
-.LoginLink{
-    margin-top: 23px;
-    margin-left: 1000px;
-    font-weight: bold;
-    cursor: pointer;
-
+.LoginLink {
+  margin-top: 23px;
+  margin-left: 1000px;
+  font-weight: bold;
+  cursor: pointer;
 }

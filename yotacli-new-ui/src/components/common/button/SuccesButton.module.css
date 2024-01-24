@@ -1,12 +1,13 @@
 .btn{
     border-radius: 3px;
     border: none;
-    background-color: #0c66e4;
+    background-color: #0aa548;
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
     font-size: 14px;
     font-weight: 500;
+    color: var(--ds-text,#172b4d);
    
 
 }
