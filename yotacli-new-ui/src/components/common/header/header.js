@@ -2,7 +2,7 @@ import React from "react";
 import "./header.style.css";
 import { useSelector } from "react-redux";
 import "../../../features/security/securitySlice";
-
+import Notif from "../../Notification/notif";
 const Header = (props) => {
   const { onSidebarToggle } = props;
   const jwtToken = localStorage.getItem("jwtToken");
@@ -98,6 +98,7 @@ const Header = (props) => {
           </div>
         </div>
       </div>
+      <Notif/>
     </>
   );
 
