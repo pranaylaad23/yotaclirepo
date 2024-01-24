@@ -12,6 +12,7 @@ import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
 import { TrainingList } from "../components/training/TrainingList.jsx";
 import {AddAssociate} from "../components/associate/AddAssociate.jsx";
+import { ListQuestions } from "../components/question-management/list-questions/ListQuestions.jsx";
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -27,6 +28,14 @@ export default function AppRoutes() {
         element={
           <MainContent>
             <AddQuestion />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/test-testList"
+        element={
+          <MainContent>
+            <ListQuestions/>
           </MainContent>
         }
       />
