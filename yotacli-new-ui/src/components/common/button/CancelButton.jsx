@@ -5,7 +5,8 @@ const CancelButton = (props) => {
 
   return (
     <>
-    <button type="submit" className={`btn btn-secondary ${classes.btn}`}>{props.children}</button>
+    <button type="button" 
+    className={`btn btn-secondary ${classes.btn}`}>{props.children}</button>
     </>
   );
 
