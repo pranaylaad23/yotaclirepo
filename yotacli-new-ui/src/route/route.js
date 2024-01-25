@@ -12,7 +12,17 @@ import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
 import { CreateTraining } from "../components/training/CreateTraining.jsx";
 import CreateUnitForm from "../components/Unit Management/CreateUnitForm.jsx";
 import ListUnit from "../components/Unit Management/ListUnit.jsx";
+import { ListTechnology } from "../components/technology-management/listTechnology.jsx";
+import { TrainingList } from "../components/training/TrainingList.jsx";
+import { ClientForm } from "../components/client-management/ClientForm.js";
 
+
+import {TechnologyForm } from"../components/technology/TechnologyForm.js";
+
+import { AddAssociate } from "../components/associate/AddAssociate.jsx";
+import  ListAssociateForm  from "../components/associate/associateList/listassociateform.jsx";
+import {AddAssociate} from "../components/associate/AddAssociate.jsx";
+import { ListQuestions } from "../components/question-management/list-questions/ListQuestions.jsx";
 
 
 
@@ -26,11 +36,30 @@ export default function AppRoutes() {
       <Route path="/" element={<RegisterUser />} />
       <Route path="/dashboard" element={<MainContent />} />
 
+
       <Route
         path="/test-createTest"
         element={
           <MainContent>
             <AddQuestion />
+          </MainContent>
+        }
+      />
+
+      <Route
+        path="/associate-associateList"
+        element={
+          <MainContent>
+            <ListAssociateForm />
+          </MainContent>
+        }
+      />
+
+      <Route
+        path="/test-testList"
+        element={
+          <MainContent>
+            <ListQuestions/>
           </MainContent>
         }
       />
@@ -42,11 +71,39 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
+
+
       <Route
-        path="/Unit-createUnit"
+        path="/technology-technologyList"
         element={
           <MainContent>
-            <CreateUnitForm />
+            <ListTechnology />
+          </MainContent>
+        }
+      />
+
+      <Route
+        path="/associate-addAssociate"
+        element={
+          <MainContent>
+            <AddAssociate />
+          </MainContent>
+        }
+      />
+       <Route
+        path="/technology-createTechnology"
+        element={
+          <MainContent>
+            < TechnologyForm/>
+          </MainContent>
+        }
+      />
+
+      <Route
+        path="/client-management-createClient"
+        element={
+          <MainContent>
+            <ClientForm />
           </MainContent>
         }
       />
