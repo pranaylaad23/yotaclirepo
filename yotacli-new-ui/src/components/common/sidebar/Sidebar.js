@@ -145,6 +145,33 @@ export default function Sidebar(props) {
       ],
     },
 
+// unit
+    {
+      name: "Unit Managment",
+      path: "/Dashboard",
+      iconClass: "fa-solid fa-laptop-code icon-color",
+
+      show: true,
+      showSubRoutes: true,
+      subRoutes: [
+        {
+          name: "Create Unit",
+          subPath: "/Unit-createUnit",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+        {
+          name: "Unit List",
+          subPath: "/Unit-unitList",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
+    },
+
+
+
+
     {
       name: "Report",
       path: "/report",

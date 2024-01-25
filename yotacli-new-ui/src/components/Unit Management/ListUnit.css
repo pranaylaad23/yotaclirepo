@@ -1,0 +1,12 @@
+.create-unit-button{
+    border-radius: 3px;
+    border: none;
+    background-color: #0c66e4;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 750px;
+    margin-top: -70px;
+}
