@@ -22,7 +22,6 @@ export const registerUser = createAsyncThunk(
         config
       );
     } catch (error) {
-      //return custom error message from backend if present
       if (error.response) {
         return rejectWithValue(error.response);
       } else {
@@ -36,7 +35,6 @@ export const loginUser = createAsyncThunk(
   "security/loginuser",
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      //Configure header's Content type as json
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -49,12 +47,10 @@ export const loginUser = createAsyncThunk(
         config
       );
       console.log("loginUser->data", data);
-      //store user's token in local storage
       localStorage.setItem("jwtToken", data.authToken);
 
       return data;
     } catch (error) {
-      //return custom error message from API if any
       if (error.response) {
         return rejectWithValue(error.response);
       }

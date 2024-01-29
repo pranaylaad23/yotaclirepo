@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { postQuestion } from "../../../features/redux/questions/questionAction";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import "./CreateQuestion.css";
 import AddTest from "./addTest";
+import "./CreateQuestion.css";
 
 export const CreateQuestion = () => {
-  const questionTextRef = useRef("");
+  const dispatch = useDispatch();
+  const question = useRef("");
   const technologyRef = useRef("");
   const optionARef = useRef("");
   const optionBRef = useRef("");
@@ -15,7 +18,7 @@ export const CreateQuestion = () => {
   const [isAddTestModalOpen, setIsAddTestModalOpen] = useState(false);
 
   const handleQuestionChange = (value) => {
-    questionTextRef.current = value;
+    question.current = value;
   };
 
   const handleTechnologyChange = (event) => {
@@ -35,34 +38,33 @@ export const CreateQuestion = () => {
 
   const getRefByOption = (option) => {
     switch (option) {
-      case "A":
+      case "option_A":
         return optionARef;
-      case "B":
+      case "option_B":
         return optionBRef;
-      case "C":
+      case "option_C":
         return optionCRef;
-      case "D":
+      case "option_D":
         return optionDRef;
+      default:
+        return null;
     }
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("form is here")
     const newQuestion = {
-      questionText: questionTextRef.current,
-      technology: technologyRef.current,
-      options: {
-        A: optionARef.current,
-        B: optionBRef.current,
-        C: optionCRef.current,
-        D: optionDRef.current,
-      },
+      question: question,
+
+      option_A: optionARef.current,
+      option_B: optionBRef.current,
+      option_C: optionCRef.current,
+      option_D: optionDRef.current,
       correctOption: correctOptionRef.current,
     };
-    console.log("----newQuestion----", newQuestion);
+    console.log(newQuestion);
+    dispatch(postQuestion(newQuestion));
   };
-
   const toggleAddTestModal = () => {
     setIsAddTestModalOpen(!isAddTestModalOpen);
   };
@@ -127,6 +129,7 @@ export const CreateQuestion = () => {
             </div>
             <ReactQuill
               className="QuestionTextbox"
+              name="question"
               onChange={handleQuestionChange}
               modules={{
                 toolbar: [
@@ -157,22 +160,26 @@ export const CreateQuestion = () => {
               <div className="form-group">
                 <label htmlFor="Textarea1">Option A</label>
                 <textarea
+                  ref={optionARef}
                   className="form-control h-50"
+                  name="option_A"
                   id="Textarea1"
                   rows="3"
                   style={{ width: "35%" }}
-                  onChange={(e) => handleOptionChange("A", e)}
+                  onChange={(e) => handleOptionChange("option_A", e)}
                 ></textarea>
               </div>
               <br />
               <div className="form-group optionc">
                 <label htmlFor="Textarea2">Option C</label>
                 <textarea
+                  ref={optionCRef}
                   className="form-control h-50 "
                   id="Textarea2"
+                  name="option_C"
                   rows="3"
                   style={{ width: "35%" }}
-                  onChange={(e) => handleOptionChange("C", e)}
+                  onChange={(e) => handleOptionChange("option_C", e)}
                 ></textarea>
               </div>
             </div>
@@ -180,22 +187,26 @@ export const CreateQuestion = () => {
               <div className="form-group">
                 <label htmlFor="Textarea3">Option B</label>
                 <textarea
+                  ref={optionBRef}
                   className="form-control h-50"
                   id="Textarea3"
+                  name="option_B"
                   rows="3"
                   style={{ width: "35%" }}
-                  onChange={(e) => handleOptionChange("B", e)}
+                  onChange={(e) => handleOptionChange("option_B", e)}
                 ></textarea>
               </div>
               <br />
               <div className="form-group ">
                 <label htmlFor="Textarea4">Option D</label>
                 <textarea
+                  ref={optionDRef}
                   className="form-control h-50 "
                   id="Textarea4"
+                  name="option_D"
                   rows="3"
                   style={{ width: "35%" }}
-                  onChange={(e) => handleOptionChange("D", e)}
+                  onChange={(e) => handleOptionChange("option_D", e)}
                 ></textarea>
               </div>
             </div>
@@ -210,6 +221,7 @@ export const CreateQuestion = () => {
                   className="form-select form-select-sm w-25"
                   aria-label=".form-select-sm example"
                   onChange={handleCorrectOptionChange}
+                  name="correctAnswer"
                 >
                   <option value="" disabled selected></option>
                   <option value="Option A">Option A</option>
