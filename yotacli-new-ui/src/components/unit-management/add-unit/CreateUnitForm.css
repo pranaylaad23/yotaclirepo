@@ -1,0 +1,32 @@
+.modal-dialog {
+  margin-top: 15%;
+  margin-left: 40%;
+  width: 100%;
+}
+.button-submit {
+  margin-left: 19rem;
+  margin-top: 10px;
+}
+.modal-header {
+  padding: 10px !important;
+}
+.modal-body {
+  padding: 22px !important;
+}
+.col-sm-2 {
+  padding-left: 2px;
+  margin-top: 15px;
+}
+
+.cancel-button {
+  border-radius: 3px;
+  border: none;
+  background-color: initial;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: var(--ds-text, #172b4d);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+}

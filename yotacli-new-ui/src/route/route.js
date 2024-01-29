@@ -1,31 +1,19 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import RegisterUser from "../components/user/RegisterUser.jsx";
+import { Routes, Route } from "react-router-dom";
 import { LoginUser } from "../components/user/LoginUser.jsx";
 import MainContent from "../components/common/dashboard-layout/mainContent";
-import { AddQuestion } from "../components/question-management/AddQuestion.jsx";
-import { CreateTraining } from "../components/training/CreateTraining.jsx";
-import CreateUnitForm from "../components/Unit Management/CreateUnitForm.jsx";
-import ListUnit from "../components/Unit Management/ListUnit.jsx";
-import { ListTechnology } from "../components/technology-management/listTechnology.jsx";
-import { TrainingList } from "../components/training/TrainingList.jsx";
-import { ClientForm } from "../components/client-management/ClientForm.js";
-
-
-import {TechnologyForm } from"../components/technology/TechnologyForm.js";
-
-import { AddAssociate } from "../components/associate/AddAssociate.jsx";
-import  ListAssociateForm  from "../components/associate/associateList/listassociateform.jsx";
-import {AddAssociate} from "../components/associate/AddAssociate.jsx";
+import  Dashboard  from "../components/dashboard/dashboard.js";
+import { AddQuestion } from "../components/question-management/add-questions/AddQuestion.jsx";
+import { CreateTraining } from "../components/training-management/CreateTraining.jsx";
+import ListUnit from "../components/unit-management/list-unit/ListUnit.jsx";
+import ListTechnology from "../components/technology-management/list-technology/listTechnology.jsx";
+import { TrainingList } from "../components/training-management/TrainingList.jsx";
+import { ClientForm } from "../components/client-management/add-client/ClientForm.jsx";
+import { TechnologyForm } from "../components/technology-management/add-technology/TechnologyForm.jsx";
+import { AddAssociate } from "../components/associate-management/add-associate/AddAssociate.jsx";
+import { ListAssociateForm } from "../components/associate-management/list-associate/listassociateform.jsx";
 import { ListQuestions } from "../components/question-management/list-questions/ListQuestions.jsx";
-
-
-
+import ListClient from "../components/client-management/list-client/ListClient.jsx";
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -33,9 +21,15 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginUser setLoggedIn={setLoggedIn} />} />
       <Route path="/" element={<LoginUser setLoggedIn={setLoggedIn} />} />
-      <Route path="/" element={<RegisterUser />} />
-      <Route path="/dashboard" element={<MainContent />} />
 
+      <Route
+        path="/dashboard"
+        element={
+          <MainContent>
+            <Dashboard />
+          </MainContent>
+        }
+      />
 
       <Route
         path="/test-createTest"
@@ -45,21 +39,11 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-
-      <Route
-        path="/associate-associateList"
-        element={
-          <MainContent>
-            <ListAssociateForm />
-          </MainContent>
-        }
-      />
-
       <Route
         path="/test-testList"
         element={
           <MainContent>
-            <ListQuestions/>
+            <ListQuestions />
           </MainContent>
         }
       />
@@ -71,13 +55,11 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-
-
       <Route
-        path="/technology-technologyList"
+        path="/trainingList"
         element={
           <MainContent>
-            <ListTechnology />
+            <TrainingList />
           </MainContent>
         }
       />
@@ -90,11 +72,27 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-       <Route
+      <Route
+        path="/associate-associateList"
+        element={
+          <MainContent>
+            <ListAssociateForm />
+          </MainContent>
+        }
+      />
+      <Route
         path="/technology-createTechnology"
         element={
           <MainContent>
-            < TechnologyForm/>
+            <TechnologyForm />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/technology-technologyList"
+        element={
+          <MainContent>
+            <ListTechnology />
           </MainContent>
         }
       />
@@ -108,6 +106,22 @@ export default function AppRoutes() {
         }
       />
       <Route
+        path="/client-clientList"
+        element={
+          <MainContent>
+            <ListClient />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/Unit-createUnit"
+        element={
+          <MainContent>
+            <ListUnit />
+          </MainContent>
+        }
+      />
+      <Route
         path="/Unit-unitList"
         element={
           <MainContent>
@@ -115,8 +129,6 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-
-<Route path="/Unit-createUnit" element={<CreateUnitForm></CreateUnitForm>}></Route>
     </Routes>
   );
 }

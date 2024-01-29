@@ -1,0 +1,21 @@
+.modal-dialog {
+  margin-top: 15%;
+  margin-left: 40%;
+  width: 100%;
+}
+
+.col-sm-2 {
+  padding-left: 3px;
+}
+
+.modal-header {
+  padding: 10px !important;
+}
+.modal-body {
+  padding: 22px !important;
+}
+.submit-button {
+  margin-left: 327px;
+  margin-top: 10px;
+}
+

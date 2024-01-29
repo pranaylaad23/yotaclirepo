@@ -26,8 +26,8 @@ export const ShowFilters = () => {
           onChange={handleItemsPerPageChange}
           value={itemsPerPage}
           aria-controls="example"
-          className="form-select form-select-sm"
-          aria-label=".form-select-sm example"
+          className="htmlForm-select htmlForm-select-sm"
+          aria-label=".htmlForm-select-sm example"
         >
           {renderPageNumbers()}
         </select>

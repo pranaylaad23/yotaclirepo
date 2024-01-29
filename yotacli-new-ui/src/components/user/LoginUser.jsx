@@ -10,6 +10,7 @@ export const LoginUser = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onSubmit = (event) => {
     event.preventDefault();
     const loginRequest = {
@@ -19,11 +20,17 @@ export const LoginUser = () => {
     dispatch(loginUser(loginRequest));
   };
   useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      window.location.href = "/dashboard"; // Redirect to dashboard if token exists
+    }
+  }, []);
+  useEffect(() => {
     if (user) {
       navigate("/dashboard");
     }
   }, [navigate, user]);
-  
+
   return (
     <>
       <div>

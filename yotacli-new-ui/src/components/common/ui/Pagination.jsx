@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../../training/Training.module.css";
+import classes from "../../training-management/Training.module.css";
 export const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
   const pageNumbers = [...Array(nPages + 1).keys()].slice(1);
 

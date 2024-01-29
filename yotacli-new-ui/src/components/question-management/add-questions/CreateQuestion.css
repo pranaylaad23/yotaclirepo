@@ -1,0 +1,101 @@
+
+.SaveButton {
+  margin-left: 800px;
+  margin-top: -39px;
+}
+.savebutton {
+  margin-left: -40px;
+  width: 130px;
+  border-radius: 3px;
+}
+.technology {
+  margin-left: 30px;
+  font-size: small;
+}
+.technologyDrop {
+  margin-left: 120px;
+  margin-top: -30px;
+}
+.test {
+  margin-top: 20px;
+  margin-left: 30px;
+  font-size: small;
+}
+.testDrop {
+  margin-left: 120px;
+  margin-top: -30px;
+}
+.addnewTest{
+  margin-left: 600px;
+  margin-top: -35px;
+}
+.addtestbutton{
+  border: none;
+  border-radius: 3px;
+  background-color: #fff;
+}
+.Question {
+  margin-left: 30px;
+  padding-top: 50px;
+  margin-top: 5px;
+}
+.QuestionHeading {
+  margin-bottom: -50px;
+}
+.QuestionText {
+  margin-left: 120px;
+  margin-top: 40px;
+  width: 588px;
+}
+.QuestionHeading {
+  margin-left: -90px;
+}
+.QuestionTextbox {
+  height: 100px;
+}
+.Option {
+  margin-top: 50px;
+  margin-left: 120px;
+}
+.OptionLeft {
+  width: 100%;
+}
+.OptionRight {
+  margin-left: 300px;
+  margin-top: -243px;
+  padding-left: 20px;
+  width: 100%;
+}
+.EndhtmlForm {
+  margin-top: 20px;
+}
+.UploadFile {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+.uploadfilebox {
+  margin-top: -33px;
+  margin-left: 90px;
+}
+.LeftSide {
+  margin-left: 300px;
+  width: 100%;
+  margin-top: 0px;
+}
+.OptionLeftHeading {
+  margin-left: -115px;
+  margin-top: 45px;
+}
+.OptionLeftAnswer {
+  margin-top: -33px;
+}
+.UploadButton {
+  margin-top: -40px;
+}
+.uploadbutton {
+  margin-top: 10px;
+  user-select: auto;
+  margin-left: 420px;
+  border-radius: 3px;
+  padding: 3px;
+}

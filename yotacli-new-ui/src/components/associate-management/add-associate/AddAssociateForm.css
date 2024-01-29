@@ -1,0 +1,19 @@
+.main-div {
+  align-content: start;
+  align-content: "inline";
+  margin-left: 5%;
+}
+#exampleFile {
+  border: 1px solid #a8a29e;
+  margin-left: 10px;
+  margin-right: 24px;
+}
+.col-sm-2 {
+  font-weight: 600;
+  font-size: 15px;
+}
+.addassociatelableemial {
+  margin-top: -2px;
+  width: 80px;
+  margin-left: 20px;
+}

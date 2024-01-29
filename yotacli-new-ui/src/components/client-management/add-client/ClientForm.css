@@ -1,0 +1,17 @@
+.modal-dialog {
+  margin-top: 15%;
+  margin-left: 40%;
+  width: 100%;
+}
+.col-sm-2 {
+  font-size: 0.9rem;
+}
+
+.create-button {
+  margin-left: 310px;
+  margin-top: 10px;
+}
+.clientCancle{
+  margin-top: 10px;
+  margin-left: 2px;
+}

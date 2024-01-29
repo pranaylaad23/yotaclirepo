@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "tech_name": "JAVA",
+      "tech_dsc": "A class-based, object-oriented programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 2,
+      "tech_name": "Python",
+      "tech_dsc": "A general-purpose programming language",
+      "action": "Rejected"
+    },
+    {
+      "id": 3,
+      "tech_name": "React",
+      "tech_dsc": "A JavaScript library htmlFor building user interfaces",
+      "action": "Approved"
+    },
+    {
+      "id": 4,
+      "tech_name": "Node.js",
+      "tech_dsc": "A JavaScript runtime environment htmlFor building server-side applications",
+      "action": "Pending"
+    },
+    {
+      "id": 5,
+      "tech_name": "Docker",
+      "tech_dsc": "A plathtmlForm htmlFor building, deploying, and managing containerized applications",
+      "icons": "..\\Action.PNG" 
+    },
+    {
+      "id": 6,
+      "tech_name": "C#",
+      "tech_dsc": "A web development programming language",
+      "action": "Pending"
+    },
+    {
+      "id": 7,
+      "tech_name": "Kotlin",
+      "last_name": "A mobile development programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 8,
+      "tech_name": "PHP",
+      "tech_dsc": "A general-purpose programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 9,
+      "tech_name": "Swift",
+      "tech_dsc": "A mobile development programming language",
+      "action": "Pending"
+    },
+    {
+      "id": 10,
+      "tech_name": "Swift",
+      "ltech_dsc": "A general-purpose programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 11,
+      "tech_name": "Ruby",
+      "tech_dsc": "A data science programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 12,
+      "tech_name": "PHP",
+      "tech_dsc": "A general-purpose programming language",
+      "action": "Rejected"
+    },
+    {
+      "id": 13,
+      "tech_name": "Go",
+      "tech_dsc": "A mobile development programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 14,
+      "tech_name": "C++",
+      "tech_dsc": "A data science programming language",
+      "action": "Approved"
+    },
+    {
+      "id": 15,
+      "tech_name": "Ruby",
+      "tech_dsc": "A general-purpose programming language",
+      "action": "Approved"
+    }
+   
+  ]

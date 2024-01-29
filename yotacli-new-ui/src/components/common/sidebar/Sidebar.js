@@ -12,25 +12,14 @@ export default function Sidebar(props) {
   const routes = [
     {
       name: "Dashboard",
-      path: "/",
+      path: "/dashboard",
       iconClass: "fa-solid fa-house-user",
       show: true,
-      showSubRoutes: false,
-      subRoutes: [
-        {
-          name: "Default",
-          subPath: "/sub-dashboard",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-      ],
     },
 
     {
       name: "Training Management",
-      path: "/Dashboard",
       iconClass: "fa-solid fa-id-badge icon-color",
-
       show: true,
       showSubRoutes: true,
       subRoutes: [
@@ -51,9 +40,7 @@ export default function Sidebar(props) {
 
     {
       name: "Test Management",
-      path: "/Dashboard",
       iconClass: "fas fa-pencil-square icon-color",
-
       show: true,
       showSubRoutes: true,
       subRoutes: [
@@ -74,9 +61,7 @@ export default function Sidebar(props) {
 
     {
       name: "Technology Managment",
-      path: "/Dashboard",
       iconClass: "fa-solid fa-laptop-code icon-color",
-
       show: true,
       showSubRoutes: true,
       subRoutes: [
@@ -96,9 +81,7 @@ export default function Sidebar(props) {
     },
     {
       name: "Associate Managment",
-      path: "/Dashboard",
       iconClass: "fa-solid fa-people-roof icon-color",
-
       show: true,
       showSubRoutes: true,
       subRoutes: [
@@ -118,15 +101,13 @@ export default function Sidebar(props) {
           name: "Assign Test",
           subPath: "/assignTest",
           iconClass: "fa-solid fa-house-user",
-          show: true,
+          show: false,
         },
       ],
     },
     {
       name: "Client Managment",
-      path: "/Dashboard",
       iconClass: "fas fa-sitemap icon-color",
-
       show: true,
       showSubRoutes: true,
       subRoutes: [
@@ -145,12 +126,9 @@ export default function Sidebar(props) {
       ],
     },
 
-// unit
     {
       name: "Unit Managment",
-      path: "/Dashboard",
       iconClass: "fa-solid fa-laptop-code icon-color",
-
       show: true,
       showSubRoutes: true,
       subRoutes: [
@@ -168,9 +146,6 @@ export default function Sidebar(props) {
         },
       ],
     },
-
-
-
 
     {
       name: "Report",

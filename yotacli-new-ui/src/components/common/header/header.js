@@ -2,16 +2,16 @@ import React from "react";
 import "./header.style.css";
 import { useSelector } from "react-redux";
 import "../../../features/security/securitySlice";
-import Notif from "../../Notification/notif";
+import Notif from "../Notification/notif";
+import { loginUser } from "../../../features/security/securtiyAction";
 const Header = (props) => {
   const { onSidebarToggle } = props;
   const jwtToken = localStorage.getItem("jwtToken");
-  console.log("JWT Token:", jwtToken);
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     localStorage.removeItem("jwtToken");
-    window.location.href ="/login";
-  }
+    window.location.href = "/login";
+  };
 
   const showOptionForLoginUser = () => (
     <>
@@ -72,7 +72,7 @@ const Header = (props) => {
                   />
                 </div>
                 <div className="card-title">
-                  <h5>UserName</h5>
+                  <h6 className="username">{loginUser.username}</h6>
                 </div>
                 <div className="Button">
                   <button
@@ -80,7 +80,6 @@ const Header = (props) => {
                     className="btn btn-dark btn-rounded"
                     data-mdb-ripple-init
                     onClick={handleLogout}
-                    
                   >
                     Logout
                   </button>
@@ -98,7 +97,7 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-      <Notif/>
+      <Notif />
     </>
   );
 
