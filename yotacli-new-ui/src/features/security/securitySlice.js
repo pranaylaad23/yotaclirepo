@@ -4,8 +4,8 @@ const initialState = {
   validToken: false,
   error: null,
   loading: false,
-  jwtToken: null, // htmlFor storing the JWT
-  success: false, //htmlFor monitoring the registration process.
+  jwtToken: null,
+  success: false,
 };
 
 const securitySlice = createSlice({
