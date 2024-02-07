@@ -6,8 +6,9 @@ const initialState = {
   loading: false,
   jwtToken: null,
   success: false,
+  role: null, // Property to store the role
 };
-
+ 
 const securitySlice = createSlice({
   name: "security",
   initialState,
@@ -21,12 +22,13 @@ const securitySlice = createSlice({
     builder.addCase("security/registeruser/fulfilled", (state, action) => {
       state.loading = false;
       state.success = true; // registration successfull
+      state.role = action.payload.role; // Store the role in the state
     });
     builder.addCase("security/registeruser/rejected", (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
-
+ 
     //login
     builder.addCase("security/loginuser/pending", (state) => {
       state.loading = true;
@@ -36,6 +38,7 @@ const securitySlice = createSlice({
       state.loading = false;
       state.user = action.payload;
       state.jwtToken = action.payload.jwtToken;
+      state.role = action.payload.role; // Store the role in the state
     });
     builder.addCase("security/loginuser/rejected", (state, action) => {
       state.loading = false;
@@ -44,5 +47,6 @@ const securitySlice = createSlice({
     //logout
   },
 });
-
+ 
 export default securitySlice.reducer;
+ 

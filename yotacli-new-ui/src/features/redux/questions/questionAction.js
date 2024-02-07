@@ -26,3 +26,24 @@ export const postQuestion = createAsyncThunk(
     }
   }
 );
+
+export const fetchQuestions = createAsyncThunk(
+  "questions/fetchQuestions",
+
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      };
+      const response = await axios.get("/yota-api/questions/all", config);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

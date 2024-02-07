@@ -1,30 +1,44 @@
-import React, { useRef } from "react";
-import { Modal } from "react-bootstrap";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 import "./ClientForm.css";
 import Button from "../../common/button/Button";
 import CancelButton from "../../common/button/CancelButton";
+import { useDispatch, useSelector } from "react-redux";
+import { createClient } from "../../../features/redux/client/clientAction";
+import { fetchTechnologies } from "../../../features/redux/technology/technologyAction";
 
 export const ClientForm = () => {
-  const history = useNavigate();
+  const cancelref = useNavigate();
+  const dispatch = useDispatch();
   const showModalRef = useRef(true);
-  const nameRef = useRef(null);
-  const descriptionRef = useRef(null);
-  const technologiesRef = useRef(null);
+  const nameRef = useRef("");
+  const descriptionRef = useRef("");
+  const technologyRef = useRef("");
+  const techList = useSelector((state) => state.technology.techList);
+
+  useEffect(() => {
+    dispatch(fetchTechnologies());
+  }, [dispatch]);
+
+  const handleTechnologyChange = (event) => {
+    technologyRef.current = event.target.value;
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      name: nameRef.current.value,
-      description: descriptionRef.current.value,
-      technologies: Array.from(
-        technologiesRef.current.selectedOptions,
-        (option) => option.value
-      ),
+      clientName: nameRef.current.value,
+      shortDescription: descriptionRef.current.value,
+      technology: Array.from(
+        technologyRef.current,
+        (option) => option.value,
+      ).join(","),
     };
+    dispatch(createClient(formData));
     console.log("Form Data:", formData);
     alert("client created successfully");
-    showModalRef.current = false;
+    hideModal();
   };
 
   const handleCancel = () => {
@@ -36,7 +50,7 @@ export const ClientForm = () => {
     if (modals.length > 0) {
       const modal = modals[0];
       modal.style.display = "none";
-      history("/dashboard");
+      cancelref("/dashboard");
     }
   };
 
@@ -51,7 +65,10 @@ export const ClientForm = () => {
         <Modal.Body>
           <form onSubmit={handleOnSubmit}>
             <div className="form-group row">
-              <label for="inputName" className="col-sm-2 col-form-label">
+              <label
+                for="inputName"
+                className="createclientlabelname col-sm-2 col-form-label"
+              >
                 Name:
               </label>
               <div className="col-sm-10">
@@ -65,7 +82,10 @@ export const ClientForm = () => {
             </div>
 
             <div className="form-group row">
-              <label for="inputDescription" className="col-sm-2 col-form-label">
+              <label
+                for="inputDescription"
+                className="createclientdescription col-sm-2 col-form-label"
+              >
                 Description:
               </label>
               <div className="col-sm-10">
@@ -84,16 +104,21 @@ export const ClientForm = () => {
               </label>
               <div className="col-sm-10">
                 <select
-                  ref={technologiesRef}
+                  ref={technologyRef}
                   aria-controls="example"
                   className="form-control-sm form-control"
                   aria-label=".form-select-sm example"
                   multiple
                 >
-                  <option selected>Select</option>
-                  <option value="Java">Java</option>
-                  <option value="React">React</option>
-                  <option value="Bootstrap">Bootstrap</option>
+                  <option value="" disabled selected>
+                    Select Technology
+                  </option>
+                  {techList &&
+                    techList.map((tech, index) => (
+                      <option key={index} value={tech.name}>
+                        {tech.name}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>

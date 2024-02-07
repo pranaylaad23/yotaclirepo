@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/header/header";
 import "./LoginUser.css";
+ 
 export const LoginUser = () => {
-  const { loading, user, error } = useSelector((state) => state.security);
+  const { loading, user, error, role } = useSelector((state) => state.security);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+ 
   const onSubmit = (event) => {
     event.preventDefault();
     const loginRequest = {
@@ -19,18 +20,21 @@ export const LoginUser = () => {
     };
     dispatch(loginUser(loginRequest));
   };
+ 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
-      window.location.href = "/dashboard"; // Redirect to dashboard if token exists
+      window.location.href = "/dashboard";
     }
   }, []);
+ 
   useEffect(() => {
     if (user) {
+      alert(`Logged in successfully as a ${role} !`);
       navigate("/dashboard");
     }
-  }, [navigate, user]);
-
+  }, [navigate, user, role]);
+ 
   return (
     <>
       <div>
@@ -45,7 +49,7 @@ export const LoginUser = () => {
                 <label for="inputPassword" class="col-sm-1 col-form-label">
                   Email:
                 </label>
-
+ 
                 <div class="col-sm-4">
                   <input
                     type="username"
@@ -84,3 +88,4 @@ export const LoginUser = () => {
     </>
   );
 };
+ 

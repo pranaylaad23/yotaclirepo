@@ -4,8 +4,12 @@ import { Modal } from "react-bootstrap";
 import "./TechnologyForm.css";
 import Button from "../../common/button/Button";
 import CancelButton from "../../common/button/CancelButton";
+import { useDispatch } from "react-redux";
+import { createTechnology } from "../../../features/redux/technology/technologyAction";
 export const TechnologyForm = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+ 
   const showModalRef = useRef(true);
   const nameRef = useRef("");
   const descriptionRef = useRef("");
@@ -13,8 +17,9 @@ export const TechnologyForm = () => {
     e.preventDefault();
     const formData = {
       name: nameRef.current.value,
-      description: descriptionRef.current.value,
+      shortDescription: descriptionRef.current.value,
     };
+    dispatch(createTechnology(formData));
     console.log("Form Data:", formData);
     alert("Technology created successfully");
     hideModal();
@@ -27,7 +32,7 @@ export const TechnologyForm = () => {
     if (modals.length > 0) {
       const modal = modals[0];
       modal.style.display = "none";
-      history("/Dashboard");
+      navigate("/Dashboard");
     }
   };
   return (
@@ -61,22 +66,24 @@ export const TechnologyForm = () => {
               <div className="col-sm-10">
                 <textarea
                   ref={descriptionRef}
-                  name="description"
-                  placeholder="Enter Description"
+                  name="shortDescription"
+                  placeholder="Enter shortDescription"
                   id="exampleText"
                   className="mb-2 form-control-sm form-control"
                 ></textarea>
               </div>
             </div>
-            <div className="submit-button">
-              <Button type="submit">Add</Button>
-              <CancelButton
+            <div className="d-flex p-2 justify-content-between">
+              <div className="Add-button"><Button type="submit">Add</Button></div>
+             
+              <div className="Tech-button"><CancelButton
                 type="reset"
                 className="cancel"
                 onClick={handleCancel}
               >
                 Cancel
-              </CancelButton>
+              </CancelButton></div>
+             
             </div>
           </form>
         </Modal.Body>
@@ -84,3 +91,4 @@ export const TechnologyForm = () => {
     </div>
   );
 };
+ 

@@ -1,34 +1,28 @@
-import React, { useState } from "react";
-import mockdata from "./mockdata.json";
+import React, { useState, useEffect } from "react";
+import { fetchTechnologies } from "../../../features/redux/technology/technologyAction";
+import { useSelector, useDispatch } from "react-redux";
+//import mocktechList from "./mocktechList.json";
 import "../../common/button/Button";
 import "./listTechnology.css";
 
-const ASC = "ASC";
-const DSC = "DSC";
+const ListTechnology = ({ order, setorder }) => {
+  const techList = useSelector((state) => state.technology.techList);
+  const [settechList] = useState([]);
+  const dispatch = useDispatch();
 
-const ListTechnology = () => {
-  const [data, setdata] = useState(mockdata);
-  const [order, setorder] = useState("ASC");
+  useEffect(() => {
+    dispatch(fetchTechnologies());
+  }, [dispatch]);
 
   const sorting = (col) => {
-    if (order === ASC) {
-      const sorted = [...data].sort((a, b) => (a[col] > b[col] ? 1 : -1));
-      setdata(sorted);
-      setorder(DSC);
+    if (order === "ASC") {
+      const sorted = [...techList].sort((a, b) => (a[col] > b[col] ? 1 : -1));
+      settechList(sorted);
+      setorder("DSC");
     } else {
-      const sorted = [...data].sort((a, b) => (a[col] < b[col] ? 1 : -1));
-      setdata(sorted);
-      setorder(ASC);
-    }
-
-    if (order === DSC) {
-      const sorted = [...data].sort((a, b) => (a[col] > b[col] ? 1 : -1));
-      setdata(sorted);
-      setorder(ASC);
-    } else {
-      const sorted = [...data].sort((a, b) => (a[col] < b[col] ? 1 : -1));
-      setdata(sorted);
-      setorder(DSC);
+      const sorted = [...techList].sort((a, b) => (a[col] < b[col] ? 1 : -1));
+      settechList(sorted);
+      setorder("ASC");
     }
   };
 
@@ -73,10 +67,13 @@ const ListTechnology = () => {
             <th className="table-columns" onClick={() => sorting("id")}>
               # ⇅
             </th>
-            <th className="table-columns" onClick={() => sorting("tech_name")}>
+            <th className="table-columns" onClick={() => sorting("name")}>
               Technology Name ⇅
             </th>
-            <th className="table-columns" onClick={() => sorting("tech_dsc")}>
+            <th
+              className="table-columns"
+              onClick={() => sorting("shortDescription")}
+            >
               Technology Description ⇅
             </th>
             <th> Action</th>
@@ -84,22 +81,28 @@ const ListTechnology = () => {
         </thead>
 
         <tbody>
-          {data.map((d) => (
-            <tr className="table-rows" key={d.id}>
-              <td>{d.id}</td>
-              <td>{d.tech_name}</td>
-              <td>{d.tech_dsc}</td>
-              <td>
-                <i className="fa-solid fa-trash" id="icons">
-                  _
-                </i>
-                <i className="fa-solid fa-pen-to-square" id="icons">
-                  _
-                </i>
-                <i className="fa-solid fa-eye" id="icons"></i>
-              </td>
+          {techList.length > 0 ? (
+            techList.map((d) => (
+              <tr className="table-rows" key={d.id}>
+                <td>{d.id}</td>
+                <td>{d.name}</td>
+                <td>{d.shortDescription}</td>
+                <td>
+                  <i className="fa-solid fa-trash" id="icons">
+                    _
+                  </i>
+                  <i className="fa-solid fa-pen-to-square" id="icons">
+                    _
+                  </i>
+                  <i className="fa-solid fa-eye" id="icons"></i>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No techList available</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 

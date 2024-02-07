@@ -1,109 +1,106 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState ,useEffect } from "react";
+import {useSelector,useDispatch } from "react-redux";
 import "./ListUnit.css";
-import CreateUnitForm from "../add-unit/CreateUnitForm.jsx";
-import "../../common/button/Button.jsx";
-import Table from "react-bootstrap/Table";
-import Select from "react-select";
-
-const ListUnit = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const pageDataOptions = [
-    { value: 5, label: "5" },
-    { value: 10, label: "10" },
-    { value: 15, label: "15" },
-    { value: 25, label: "25" },
-    { value: 100, label: "100" },
-  ];
-
-  const openModal = () => {
-    setModalOpen(true);
+import { fetchUnits } from "../../../features/redux/unit/unitAction";
+ 
+const ASC = "ASC";
+const DSC = "DSC";
+ 
+const ListUnit = ({ order, setorder }) => {
+  const data = useSelector((state) => state.unit.units);
+  const [ setdata] = useState([]);
+  const dispatch = useDispatch();
+ 
+ 
+  useEffect(() => {
+    dispatch(fetchUnits());
+  }, [dispatch]);
+ 
+  const sorting = (col) => {
+    const sorted = [...data].sort((a, b) =>
+      order === "ASC" ? (a[col] > b[col] ? 1 : -1) : a[col] < b[col] ? 1 : -1
+    );
+    setdata(sorted);
+    setorder(order === "ASC" ? "DSC" : "ASC");
   };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
+ 
   return (
     <div>
-      <span className="heading">Unit List</span>
-      <div>
-        <Button className="create-unit-button" onClick={openModal}>
-          Create Unit
-        </Button>
-        {isModalOpen && <CreateUnitForm closeModal={closeModal} />}
-      </div>
-      <div>
-        <br />
-        <div className="row">
-          <div className="col-md-4">
-            <Select options={pageDataOptions} onChange="" />
-          </div>
-          <div className="col-md-3" />
-          <div className="col-md-3 justify-content-end">
-            <input class="form-control" id="" placeholder="Search..." />
-          </div>
-          <div className="col-md-2">
-            <button type="button" class="btn btn-primary btn-1-unit search1">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
+      <div className="show-sort">
+        <label>Show Entries</label>
+        <br></br>
+        <select className="sort-option">
+          <option selected>0</option>
+          <option value="1">5</option>
+          <option value="2">10</option>
+          <option value="3">15</option>
+        </select>
+ 
+        <label className="Search-label">Search</label>
+        <div className="input-group">
+          <input
+            type="search"
+            class="form-control rounded"
+            id="myInput"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <span class="input-group-text border-0" id="search-addon">
+            <i class="fas fa-search"></i>
+          </span>
         </div>
       </div>
-      <hr></hr>
-      <Table striped bordered hover>
+ 
+      <hr className="divider" />
+ 
+      <table
+        id="myTable"
+        className="table table-striped table-bordered table-sm"
+        cellspacing="0"
+        width="100%"
+      >
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Action</th>
+            <th className="table-columns" onClick={() => sorting("id")}>
+              # ⇅
+            </th>
+            <th className="table-columns" onClick={() => sorting("unit_name")}>
+              Unit Name ⇅
+            </th>
+            <th className="table-columns" onClick={() => sorting("unit_dsc")}>
+              Unit Description ⇅
+            </th>
+            <th> Action</th>
           </tr>
         </thead>
+ 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>BG1BU2</td>
-            <td>Description1</td>
-            <td>
-              <i class="fa-solid fa-pen-to-square"></i>_
-              <i class="fa-solid fa-trash-can"></i>_
-              <i class="fa-solid fa-eye"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>BG1BU3</td>
-            <td>Description2</td>
-            <td>
-              <i class="fa-solid fa-pen-to-square"></i>_
-              <i class="fa-solid fa-trash-can"></i>_
-              <i class="fa-solid fa-eye"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>BG1BU4</td>
-            <td>Description3</td>
-            <td>
-              <i class="fa-solid fa-pen-to-square"></i>_
-              <i class="fa-solid fa-trash-can"></i>_
-              <i class="fa-solid fa-eye"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>BG1BU5</td>
-            <td>Description4</td>
-            <td>
-              <i class="fa-solid fa-pen-to-square"></i>_
-              <i class="fa-solid fa-trash-can"></i>_
-              <i class="fa-solid fa-eye"></i>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+  {data.length > 0 ? (
+    data.map((d) => (
+      <tr className="table-rows" key={d.id}>
+        <td>{d.id}</td>
+        <td>{d.unitName}</td>
+        <td>{d.shortDescription}</td>
+        <td>
+          <i className="fa-solid fa-trash" id="icons">
+            _
+          </i>
+          <i className="fa-solid fa-pen-to-square" id="icons">
+            _
+          </i>
+          <i className="fa-solid fa-eye" id="icons"></i>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="4">No data available</td>
+    </tr>
+  )}
+</tbody>
+      </table>
+ 
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
           <li class="page-item disabled">
@@ -136,5 +133,5 @@ const ListUnit = () => {
     </div>
   );
 };
-
+ 
 export default ListUnit;
