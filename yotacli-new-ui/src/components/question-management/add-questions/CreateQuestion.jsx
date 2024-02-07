@@ -1,21 +1,33 @@
-import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTechnologies } from "../../../features/redux/technology/technologyAction";
+import { fetchTestList } from "../../../features/redux/test/testAction";
 import { postQuestion } from "../../../features/redux/questions/questionAction";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import AddTest from "./addTest";
 import "./CreateQuestion.css";
+import sanitizeHtml from "sanitize-html";
 
 export const CreateQuestion = () => {
   const dispatch = useDispatch();
   const question = useRef("");
   const technologyRef = useRef("");
+  const testRef = useRef("");
   const optionARef = useRef("");
   const optionBRef = useRef("");
   const optionCRef = useRef("");
   const optionDRef = useRef("");
-  const correctOptionRef = useRef("");
-  const [isAddTestModalOpen, setIsAddTestModalOpen] = useState(false);
+  const correctAnswerRef = useRef("");
+  const [showAddTest, setShowAddTest] = useState(false);
+
+  const techList = useSelector((state) => state.technology.techList);
+  const testList = useSelector((state) => state.test.testList);
+
+  useEffect(() => {
+    dispatch(fetchTechnologies());
+    dispatch(fetchTestList());
+  }, [dispatch]);
 
   const handleQuestionChange = (value) => {
     question.current = value;
@@ -23,6 +35,9 @@ export const CreateQuestion = () => {
 
   const handleTechnologyChange = (event) => {
     technologyRef.current = event.target.value;
+  };
+  const handleTestChange = (event) => {
+    testRef.current = event.target.value;
   };
 
   const handleOptionChange = (option, event) => {
@@ -32,8 +47,8 @@ export const CreateQuestion = () => {
     }
   };
 
-  const handleCorrectOptionChange = (event) => {
-    correctOptionRef.current = event.target.value;
+  const handleCorrectAnswerChange = (event) => {
+    correctAnswerRef.current = event.target.value;
   };
 
   const getRefByOption = (option) => {
@@ -46,29 +61,32 @@ export const CreateQuestion = () => {
         return optionCRef;
       case "option_D":
         return optionDRef;
-      default:
-        return null;
     }
   };
 
+  const handleButtonClick = () => {
+    setShowAddTest(true);
+  };
   const onSubmit = (event) => {
-    event.preventDefault();
+    const cleanQuestionText = sanitizeHtml(question.current, {
+      allowedTags: [],
+      allowedAttributes: {},
+    });
     const newQuestion = {
-      question: question,
-
+      question: cleanQuestionText,
+      technologyId: technologyRef.current,
+      test: { id: testRef.current },
       option_A: optionARef.current,
       option_B: optionBRef.current,
       option_C: optionCRef.current,
       option_D: optionDRef.current,
-      correctOption: correctOptionRef.current,
+      correctAnswer: correctAnswerRef.current,
     };
     console.log(newQuestion);
-    dispatch(postQuestion(newQuestion));
+    alert("Question created successfully");
+    dispatch(postQuestion(JSON.stringify(newQuestion)));
+    event.preventDefault();
   };
-  const toggleAddTestModal = () => {
-    setIsAddTestModalOpen(!isAddTestModalOpen);
-  };
-
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -92,10 +110,15 @@ export const CreateQuestion = () => {
               aria-label=".form-select-sm example"
               onChange={handleTechnologyChange}
             >
-              <option value="" disabled selected></option>
-              <option value="JAVA">JAVA</option>
-              <option value="AWS">AWS</option>
-              <option value="REACT">REACT</option>
+              <option value="" disabled selected>
+                Select Technology
+              </option>
+              {techList &&
+                techList.map((tech, index) => (
+                  <option key={index} value={tech.id}>
+                    {tech.name}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="test">
@@ -105,22 +128,29 @@ export const CreateQuestion = () => {
             <select
               className="form-select form-select-sm w-75"
               aria-label=".form-select-sm example"
+              onChange={handleTestChange}
             >
-              <option value="" disabled selected></option>
-              <option value="JAVA">JAVA</option>
-              <option value="AWS">AWS</option>
-              <option value="REACT">REACT</option>
+              <option value="" disabled selected>
+                Select Test
+              </option>
+              {testList &&
+                testList.map((test, index) => (
+                  <option key={index} value={test.id}>
+                    {test.name}
+                  </option>
+                ))}
             </select>
             <div className="addnewTest">
               <button
                 type="button"
-                onClick={toggleAddTestModal}
                 className="addtestbutton"
-                data-bs-toggle="modal"
-                data-bs-target="#addTestModal"
+                onClick={handleButtonClick}
               >
-                <i className="fa-solid fa-plus"></i>
+                <i className="fas fa-plus"></i>
               </button>
+              {showAddTest && (
+                <AddTest closeModal={() => setShowAddTest(false)} />
+              )}
             </div>
           </div>
           <div className="QuestionText">
@@ -220,21 +250,23 @@ export const CreateQuestion = () => {
                 <select
                   className="form-select form-select-sm w-25"
                   aria-label=".form-select-sm example"
-                  onChange={handleCorrectOptionChange}
+                  onChange={handleCorrectAnswerChange}
                   name="correctAnswer"
+                  ref={correctAnswerRef}
                 >
-                  <option value="" disabled selected></option>
-                  <option value="Option A">Option A</option>
-                  <option value="Option B">Option B</option>
-                  <option value="Option C">Option C</option>
-                  <option value="Option D">Option D</option>
+                  <option value="" disabled selected>
+                    Select Option
+                  </option>
+                  <option value="Option_A">Option A</option>
+                  <option value="Option_B">Option B</option>
+                  <option value="Option_C">Option C</option>
+                  <option value="Option_D">Option D</option>
                 </select>
               </div>
             </div>
           </div>
           <hr />
         </div>
-        {isAddTestModalOpen && <AddTest closeModal={toggleAddTestModal} />}
       </form>
     </div>
   );

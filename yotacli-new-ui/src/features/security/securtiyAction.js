@@ -1,8 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const backendURL = "http://localhost:8080";
-
 export const registerUser = createAsyncThunk(
   "security/registeruser",
   async (
@@ -17,7 +15,7 @@ export const registerUser = createAsyncThunk(
         },
       };
       await axios.post(
-        `${backendURL}/yota-api/users/register`,
+        `/yota-api/users/register`,
         { username, fullName, password, confirmPassword },
         config
       );
@@ -42,11 +40,10 @@ export const loginUser = createAsyncThunk(
       };
       debugger;
       const { data } = await axios.post(
-        `${backendURL}/yota-api/users/authenticate`,
+        "/yota-api/users/authenticate",
         { username, password },
         config
       );
-      console.log("loginUser->data", data);
       localStorage.setItem("jwtToken", data.authToken);
 
       return data;

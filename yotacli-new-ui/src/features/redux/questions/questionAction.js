@@ -1,20 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  postedQuestion: null,
-  loading: false,
-  error: null,
-};
-
-const backendURL = "http://localhost:8080";
-
 export const postQuestion = createAsyncThunk(
   "questions/postQuestion",
-  async ({ newQuestion }, { rejectWithValue }) => {
+  async (questionData, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("jwtToken");
-
+      console.log("service " + questionData);
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -23,8 +15,8 @@ export const postQuestion = createAsyncThunk(
       };
 
       const response = await axios.post(
-        `${backendURL}/yota-api/questions/`,
-        newQuestion,
+        "/yota-api/questions/",
+        questionData,
         config
       );
 
@@ -34,25 +26,3 @@ export const postQuestion = createAsyncThunk(
     }
   }
 );
-
-const questionSlice = createSlice({
-  name: "questions",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(postQuestion.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(postQuestion.fulfilled, (state, action) => {
-      state.loading = false;
-      state.postedQuestion = action.payload;
-    });
-    builder.addCase(postQuestion.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-    });
-  },
-});
-
-export default questionSlice.reducer;

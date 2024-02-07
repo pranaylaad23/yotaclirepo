@@ -34,6 +34,11 @@
   border-radius: 3px;
   background-color: #fff;
 }
+.testAdd{
+  margin-left: 390px;
+  margin-top: 20px;
+  border-radius: 3px;
+}
 .Question {
   margin-left: 30px;
   padding-top: 50px;
@@ -90,7 +95,7 @@
   margin-top: -33px;
 }
 .UploadButton {
-  margin-top: -40px;
+  margin-top: -50px;
 }
 .uploadbutton {
   margin-top: 10px;

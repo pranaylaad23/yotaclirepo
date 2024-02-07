@@ -1,6 +1,6 @@
 import React from "react";
 import "./CreateQuestion.css";
- 
+
 export const UploadQuestion = () => {
   return (
     <div className="UploadFile">
