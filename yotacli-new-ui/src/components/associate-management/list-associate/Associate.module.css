@@ -14,7 +14,7 @@
   
   .table th,
   .table td {
-    border: 2px solid #cfcfcf;
+    border: 2px solid #ffffff;
     padding: 0.5rem;
     text-align: left;
   }
@@ -30,7 +30,7 @@
   }
   
   .table tbody tr:hover {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(255, 255, 255);
   }
   
   .pagination {
@@ -92,7 +92,6 @@
     position: absolute;
     top: 20%;
     right: 55px;
-    transhtmlform: translateY(0%);
     color: white;
     background-color: #bcbcbc;
     border-radius: 5%;
@@ -135,20 +134,21 @@
     cursor: pointer;
   }
   
-  .action-icon {
+  .icon {
+    color: #333;
     font-weight: bold;
-    font-weight: 700;
     margin: 0;
     font-size: 14px;
   }
   
-  .action-icon:hover {
-    color: #3f6ad8;
+  .icon + .icon:before {
+    content: "___";
+    margin-right: 20px;
+    width: 20px;
   }
   
-  .action-divider {
-    font-weight: bold;
-    margin: 0 0px;
+  .icon:hover {
+    color: #3f6ad8;
   }
   
   .horizontal-line {

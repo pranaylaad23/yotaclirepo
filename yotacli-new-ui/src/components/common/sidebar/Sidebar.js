@@ -56,6 +56,12 @@ export default function Sidebar(props) {
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
+        {
+          name: "Test Name",
+          subPath: "/test-testLists",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
       ],
     },
 

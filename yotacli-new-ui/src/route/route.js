@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { LoginUser } from "../components/user/LoginUser.jsx";
 import MainContent from "../components/common/dashboard-layout/mainContent";
-import  Dashboard  from "../components/dashboard/dashboard.js";
+import Dashboard from "../components/dashboard/dashboard.js";
 import { AddQuestion } from "../components/question-management/add-questions/AddQuestion.jsx";
 import { CreateTraining } from "../components/training-management/CreateTraining.jsx";
 import ListUnit from "../components/unit-management/list-unit/ListUnit.jsx";
@@ -11,10 +11,12 @@ import { TrainingList } from "../components/training-management/TrainingList.jsx
 import { ClientForm } from "../components/client-management/add-client/ClientForm.jsx";
 import { TechnologyForm } from "../components/technology-management/add-technology/TechnologyForm.jsx";
 import { AddAssociate } from "../components/associate-management/add-associate/AddAssociate.jsx";
-import { ListAssociateForm } from "../components/associate-management/list-associate/listassociateform.jsx";
 import { ListQuestions } from "../components/question-management/list-questions/ListQuestions.jsx";
 import ListClient from "../components/client-management/list-client/ListClient.jsx";
 import CreateUnitForm from "../components/unit-management/add-unit/CreateUnitForm.jsx";
+import ListElement from "../components/question-management/test-list/ListElement.jsx";
+import { AssociatesList } from "../components/associate-management/list-associate/AssociatesList.jsx";
+
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -49,6 +51,14 @@ export default function AppRoutes() {
         }
       />
       <Route
+        path="/test-testLists"
+        element={
+          <MainContent>
+            <ListElement />
+          </MainContent>
+        }
+      />
+      <Route
         path="/requestTraining"
         element={
           <MainContent>
@@ -73,11 +83,11 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-      <Route
+         <Route
         path="/associate-associateList"
         element={
           <MainContent>
-            <ListAssociateForm />
+            <AssociatesList />
           </MainContent>
         }
       />
@@ -118,7 +128,7 @@ export default function AppRoutes() {
         path="/Unit-createUnit"
         element={
           <MainContent>
-             <CreateUnitForm />
+            <CreateUnitForm />
           </MainContent>
         }
       />

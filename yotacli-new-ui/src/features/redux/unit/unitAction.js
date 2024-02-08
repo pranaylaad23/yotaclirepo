@@ -1,11 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+ 
 export const createUnit = createAsyncThunk(
   "unit/CreateUnitForm",
   async (formData, { rejectWithValue }) => {
     const token = localStorage.getItem("jwtToken");
-
     try {
       const config = {
         headers: {
@@ -28,26 +27,24 @@ export const postUnits = createAsyncThunk(
   async ({ newUnit }, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("jwtToken");
-
       const config = {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,
         },
       };
-
+ 
       const response = await axios.post(`/yota-api/units/`, newUnit, config);
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-
+ 
 export const fetchUnits = createAsyncThunk(
   "units/fetchUnits",
-
+ 
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("jwtToken");
@@ -58,30 +55,10 @@ export const fetchUnits = createAsyncThunk(
         },
       };
       const response = await axios.get(`/yota-api/units/`, config);
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-export const fetchUnit = createAsyncThunk(
-  "unit/fetchUnit",
-  async (_, { rejectWithValue }) => {
-    try {
-      const token = localStorage.getItem("jwtToken");
-      console.log(token);
-      const response = await axios.get(`/yota-api/masters/unit`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      if (error) {
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
+ 

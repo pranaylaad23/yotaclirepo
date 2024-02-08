@@ -3,11 +3,10 @@ import classes from "./CreateTraining.module.css";
 import Button from "../common/button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { requestTraining } from "../../features/redux/training/trainingAction";
-import { fetchUnit } from "../../features/redux/unit/unitAction";
 import { fetchTechnology } from "../../features/redux/technology/technologyAction";
 import { fetchCompetency } from "../../features/redux/competency/competencyAction";
 import { fetchTrainingType } from "../../features/redux/training/training-type/trainingTypeAction";
-
+import { fetchUnits } from "../../features/redux/unit/unitAction";
 export const CreateTraining = () => {
   const dispatch = useDispatch();
   const training_description = useRef();
@@ -20,13 +19,13 @@ export const CreateTraining = () => {
   const [selectCompetency, setSelectCompetency] = useState("");
   const [selectTrainingType, setSelectTrainingType] = useState("");
   const [trainingName, setTrainingName] = useState("");
-  const unitList = useSelector((state) => state.unit.unitList);
-  const techList = useSelector((state) => state.technology.techList);  
+  const unitList = useSelector((state) => state.unit.units);
+  const techList = useSelector((state) => state.technology.techList);
   const competency = useSelector((state) => state.competency.competencyList);
   const trainingType = useSelector(
     (state) => state.trainigType.trainingTypeList
   );
-
+ 
   const handleUnitChange = (event) => {
     setSelectUnit(event.target.value);
   };
@@ -37,31 +36,31 @@ export const CreateTraining = () => {
     );
     setSelectTechnology(selectedOptions);
   };
-
+ 
   const handleCompetencyChange = (event) => {
     setSelectCompetency(event.target.value);
   };
-
+ 
   const handleTrainingTypeChange = (event) => {
     setSelectTrainingType(event.target.value);
   };
-
+ 
   const handleTrainingNameChange = (event) => {
     setTrainingName(event.target.value);
   };
-
+ 
   const handlestartDateChange = (event) => {
     start_date.current = event.target.value;
   };
-
+ 
   const handleendDateChange = (event) => {
     end_date.current = event.target.value;
   };
-
+ 
   const handleMonthChange = (event) => {
     setMonth(event.target.value);
   };
-
+ 
   const handleYearChange = (event) => {
     setYear(event.target.value);
   };
@@ -86,14 +85,14 @@ export const CreateTraining = () => {
     { length: 10 },
     (_, i) => new Date().getFullYear() + i
   );
-
+ 
   useEffect(() => {
-    dispatch(fetchUnit());
+    dispatch(fetchUnits());
     dispatch(fetchTechnology());
     dispatch(fetchCompetency());
     dispatch(fetchTrainingType());
   }, [dispatch]);
-
+ 
   useEffect(() => {
     const concatenatedName = `${selectUnit}-${selectCompetency}-${selectTrainingType}(${selectTechnology})-${selectMonth}-${selectYear}`;
     setTrainingName(concatenatedName);
@@ -105,7 +104,7 @@ export const CreateTraining = () => {
     selectMonth,
     selectYear,
   ]);
-
+  console.log(unitList);
   const onSubmit = (event) => {
     event.preventDefault();
     const trainingRequest = {
@@ -114,12 +113,12 @@ export const CreateTraining = () => {
       startDate: start_date.current,
       endDate: end_date.current,
     };
-
+ 
     dispatch(requestTraining(JSON.stringify(trainingRequest)));
     console.log("Training Request Data" + JSON.stringify(trainingRequest));
     alert("Request Training Submit Successfully: ");
   };
-
+ 
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -143,8 +142,8 @@ export const CreateTraining = () => {
                 <option value="field">Select Unit</option>
                 {unitList &&
                   unitList.map((unit, index) => (
-                    <option key={index} value={unit.name}>
-                      {unit.name}
+                    <option key={index} value={unit.unitName}>
+                      {unit.unitName}
                     </option>
                   ))}
               </select>
@@ -232,7 +231,7 @@ export const CreateTraining = () => {
               <select
                 name="year"
                 id="year"
-                value={selectMonth}
+                value={selectYear}
                 onChange={handleYearChange}
                 className="form-select form-select-sm"
                 aria-label=".form-select-sm example"
@@ -296,3 +295,4 @@ export const CreateTraining = () => {
     </>
   );
 };
+ 

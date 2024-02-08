@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchAssociates } from "./associateAction";
 
 const initialState = {
   loading: false,
   error: null,
-  associate: null,
+  associate: [],
 };
 const associateSlice = createSlice({
-  name: "associates",
+  name: "associate",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -19,6 +20,19 @@ const associateSlice = createSlice({
       state.associate = action.payload;
     });
     builder.addCase("associates/addAssociate/rejected", (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(fetchAssociates.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(fetchAssociates.fulfilled, (state, action) => {
+      state.loading = false;
+      state.associate = action.payload;
+      state.success = true;
+    });
+    builder.addCase(fetchAssociates.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
