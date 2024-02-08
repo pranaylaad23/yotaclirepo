@@ -45,13 +45,13 @@ export default function Sidebar(props) {
       showSubRoutes: true,
       subRoutes: [
         {
-          name: "CreateTest",
+          name: "CreateQuestion",
           subPath: "/test-createTest",
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
         {
-          name: "Test List",
+          name: "Question List",
           subPath: "/test-testList",
           iconClass: "fa-solid fa-house-user",
           show: true,
