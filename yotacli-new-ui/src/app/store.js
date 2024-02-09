@@ -29,8 +29,6 @@ export const store = configureStore({
     trainigType: trainingTypeReducer,
     training: trainingReducer,
     associate: associateSlice,
-
-
     [securityApi.reducerPath]: securityApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

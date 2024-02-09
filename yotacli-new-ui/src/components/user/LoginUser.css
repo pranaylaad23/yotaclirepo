@@ -18,7 +18,7 @@
   margin-left: 280px;
   border-radius: 3px !important;
 }
-  .login {
+.login {
   margin-left: 332px;
   margin-top: 70px;
   margin-right: 369px;
@@ -33,4 +33,24 @@
   margin-left: 59px;
   padding-top: 18px;
   margin-right: -485px;
+}
+.Register {
+  margin-left: 300px;
+  margin-top: 40px;
+  margin-right: 300px;
+  font-weight: 500;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 4px -1px;
+}
+.Registerform {
+  margin-left: 20px;
+  padding-top: 18px;
+}
+.email {
+  margin-left: -60px;
+}
+.signbuttonre{
+  margin-left: 190px;
+  border-radius: 3px !important;
 }

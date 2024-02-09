@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { LoginUser } from "../components/user/LoginUser.jsx";
+import  RegisterUser  from "../components/user/RegisterUser.jsx";
 import MainContent from "../components/common/dashboard-layout/mainContent";
 import Dashboard from "../components/dashboard/dashboard.js";
 import { AddQuestion } from "../components/question-management/add-questions/AddQuestion.jsx";
@@ -22,6 +23,7 @@ export default function AppRoutes() {
 
   return (
     <Routes>
+      <Route path="/requester-registration" element={<RegisterUser/>} />
       <Route path="/login" element={<LoginUser setLoggedIn={setLoggedIn} />} />
       <Route path="/" element={<LoginUser setLoggedIn={setLoggedIn} />} />
 
@@ -83,7 +85,7 @@ export default function AppRoutes() {
           </MainContent>
         }
       />
-         <Route
+      <Route
         path="/associate-associateList"
         element={
           <MainContent>
