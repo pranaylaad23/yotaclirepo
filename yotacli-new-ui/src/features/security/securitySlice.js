@@ -22,7 +22,6 @@ const securitySlice = createSlice({
     builder.addCase("security/registeruser/fulfilled", (state, action) => {
       state.loading = false;
       state.success = true; // registration successfull
-      state.role = action.payload.role; // Store the role in the state
     });
     builder.addCase("security/registeruser/rejected", (state, action) => {
       state.loading = false;

@@ -19,12 +19,10 @@ const RegisterUser = () => {
     };
 
     dispatch(registerUser(userToRegister));
+    alert(`You have been Registered successfully as a Requester!
+    Login With your UserName and Password`);
+    navigate("/login");
   };
-  useEffect(() => {
-    if (success) navigate("/login");
-
-    if (user) navigate("/dashboard");
-  }, [navigate, user, success]);
   return (
     <>
       <div>
