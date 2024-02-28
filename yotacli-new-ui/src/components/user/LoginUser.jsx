@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/header/header";
 import "./LoginUser.css";
+import Dashboard from "../dashboard/dashboard";
  
 export const LoginUser = () => {
   const { loading, user, error, role } = useSelector((state) => state.security);
@@ -12,6 +13,7 @@ export const LoginUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
  
+console.log("role",role);
   const onSubmit = (event) => {
     event.preventDefault();
     const loginRequest = {
@@ -32,6 +34,7 @@ export const LoginUser = () => {
     if (user) {
       alert(`Logged in successfully as a ${role} !`);
       navigate("/dashboard");
+      <Dashboard role={role}/>
     }
   }, [navigate, user, role]);
  
