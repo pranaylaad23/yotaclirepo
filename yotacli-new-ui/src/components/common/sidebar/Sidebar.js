@@ -85,7 +85,7 @@ export default function Sidebar(props) {
           show: true,
         },
         {
-          name: "Test List",
+          name: "TestList",
           subPath: "/test-testLists",
           iconClass: "fa-solid fa-house-user",
           show: true,
@@ -101,13 +101,13 @@ export default function Sidebar(props) {
       r1: ["Technical Manager"],
       subRoutes: [
         {
-          name: "Add Associate",
+          name: "Add ",
           subPath: "/associate-addAssociate",
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
         {
-          name: "Associate List",
+          name: "List",
           subPath: "/associate-associateList",
           iconClass: "fa-solid fa-house-user",
           show: true,
@@ -122,72 +122,28 @@ export default function Sidebar(props) {
     },
 
     {
-      name: "Client Managment",
-      iconClass: "fas fa-sitemap icon-color",
-      show: r2 !== "Requester",
-      showSubRoutes: true,
-      r1: ["Trainer", "Technical Manager"],
-      subRoutes: [
-        {
-          name: "Create Client",
-          subPath: "/client-management-createClient",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-        {
-          name: "Client List",
-          subPath: "/client-clientList",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-      ],
-    },
-
-    {
-      name: "Unit Managment",
-      iconClass: "fa-solid fa-laptop-code icon-color",
-      show: r2 !== "Requester",
-      showSubRoutes: true,
-      r1: ["Trainer", "Technical Manager"],
-      subRoutes: [
-        {
-          name: "Create Unit",
-          subPath: "/Unit-createUnit",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-        {
-          name: "Unit List",
-          subPath: "/Unit-unitList",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-      ],
-    },
-
-    {
-      name: "Master mangement",
+      name: "Master Mangement",
       iconClass: "fa-solid fa-house-user",
       show: true,
       showSubRoutes: true,
       r1: ["Requester", "Trainer", "Technical Manager"],
       subRoutes: [
         {
-          name: "Technology Managment",
+          name: "Technology ",
           iconClass: "fa-solid fa-laptop-code icon-color",
           show: r2 !== "Requester",
           ishowSubRoutes: true,
           r1: ["Trainer", "Technical Manager"],
           isubRoutes: [
             {
-              name: "Create Technology",
+              name: "Create ",
               path: "/tech-addTech",
               subPath: "/technology-createTechnology",
               iconClass: "fa-solid fa-house-user",
               show: true,
             },
             {
-              name: "Technology List",
+              name: " List",
               subPath: "/technology-technologyList",
               iconClass: "fa-solid fa-house-user",
               show: true,
@@ -195,20 +151,20 @@ export default function Sidebar(props) {
           ],
         },
         {
-          name: "Unit Managment",
+          name: "Unit ",
           iconClass: "fa-solid fa-laptop-code icon-color",
           show: true,
           ishowSubRoutes: true,
           r1: ["Trainer", "Technical Manager"],
           isubRoutes: [
             {
-              name: "Create Unit",
+              name: "Create ",
               subPath: "/Unit-createUnit",
               iconClass: "fa-solid fa-house-user",
               show: true,
             },
             {
-              name: "Unit List",
+              name: "List",
               subPath: "/Unit-unitList",
               iconClass: "fa-solid fa-house-user",
               show: true,
@@ -216,20 +172,20 @@ export default function Sidebar(props) {
           ],
         },
         {
-          name: "Client Managment",
+          name: "Client ",
           iconClass: "fas fa-sitemap icon-color",
           show: true,
           ishowSubRoutes: true,
           r1: ["Trainer", "Technical Manager"],
           isubRoutes: [
             {
-              name: "Create Client",
+              name: "Create",
               subPath: "/client-management-createClient",
               iconClass: "fa-solid fa-house-user",
               show: true,
             },
             {
-              name: "Client List",
+              name: "List",
               subPath: "/client-clientList",
               iconClass: "fa-solid fa-house-user",
               show: true,
