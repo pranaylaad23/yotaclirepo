@@ -16,6 +16,7 @@ export const TrainingList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  console.log("resopse role: ", role);
   const columns = [
     { id: "id", label: "#" },
     { id: "trainingName", label: "Name Of Training" },

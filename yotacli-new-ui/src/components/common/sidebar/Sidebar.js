@@ -2,12 +2,35 @@ import React, { createRef, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "../dashboard-layout/useWindowSize";
 import "./sidebar.style.css";
+import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
 export default function Sidebar(props) {
   const { open, onClose } = props;
   const { width } = useWindowSize();
   const [openedSubNav, setOpenedSubNav] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [openedISubNav, setOpenedISubNav] = useState(null);
+  const [activeIndex, setActiveIndex] = useState([]);
+  const [subActiveIndex, setSubActiveIndex] = useState([]);
+  const [basedOnRoleRoutes, setBasedOnRoleRoutes] = useState([]);
+  const { role } = useSelector((state) => state.security);
+  let r2 = localStorage.getItem("userRole");
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    console.log(token);
+    const r1 = localStorage.getItem("userRole");
+    console.log("role of  =" + r1);
+    if (token != null) {
+      const decodedToken = jwtDecode(token);
+      console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
+    }
+    const filteredRoutes = routes.filter((route) => {
+      if (!route.role) return true; // Show if no roles specified
+      return route.role.includes(role);
+    });
+
+    setBasedOnRoleRoutes(filteredRoutes);
+  }, [role]);
 
   const routes = [
     {
@@ -15,6 +38,7 @@ export default function Sidebar(props) {
       path: "/dashboard",
       iconClass: "fa-solid fa-house-user",
       show: true,
+      r1: ["Requester", "Trainer", "Associate", "Technical Manager"],
     },
 
     {
@@ -22,18 +46,21 @@ export default function Sidebar(props) {
       iconClass: "fa-solid fa-id-badge icon-color",
       show: true,
       showSubRoutes: true,
+      r1: ["Requester", "Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "Request Training",
           subPath: "/requestTraining",
           iconClass: "fa-solid fa-house-user",
-          show: true,
+          show: r2 === "Technical Manager" || r2 === "Requester",
+          r1: ["Trainer", "Technical Manager", "Requester"],
         },
         {
           name: "Training List",
           subPath: "/trainingList",
           iconClass: "fa-solid fa-house-user",
           show: true,
+          r1: ["Requester", "Trainer", "Technical Manager"],
         },
       ],
     },
@@ -41,8 +68,9 @@ export default function Sidebar(props) {
     {
       name: "Test Management",
       iconClass: "fas fa-pencil-square icon-color",
-      show: true,
+      show: r2 !== "Requester",
       showSubRoutes: true,
+      r1: ["Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "CreateQuestion",
@@ -57,7 +85,7 @@ export default function Sidebar(props) {
           show: true,
         },
         {
-          name: "Test Name",
+          name: "Test List",
           subPath: "/test-testLists",
           iconClass: "fa-solid fa-house-user",
           show: true,
@@ -66,30 +94,11 @@ export default function Sidebar(props) {
     },
 
     {
-      name: "Technology Managment",
-      iconClass: "fa-solid fa-laptop-code icon-color",
-      show: true,
-      showSubRoutes: true,
-      subRoutes: [
-        {
-          name: "Create Technology",
-          subPath: "/technology-createTechnology",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-        {
-          name: "Technology List",
-          subPath: "/technology-technologyList",
-          iconClass: "fa-solid fa-house-user",
-          show: true,
-        },
-      ],
-    },
-    {
       name: "Associate Managment",
       iconClass: "fa-solid fa-people-roof icon-color",
-      show: true,
+      show: r2 === "Technical Manager",
       showSubRoutes: true,
+      r1: ["Technical Manager"],
       subRoutes: [
         {
           name: "Add Associate",
@@ -111,11 +120,13 @@ export default function Sidebar(props) {
         },
       ],
     },
+
     {
       name: "Client Managment",
       iconClass: "fas fa-sitemap icon-color",
-      show: true,
+      show: r2 !== "Requester",
       showSubRoutes: true,
+      r1: ["Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "Create Client",
@@ -135,8 +146,9 @@ export default function Sidebar(props) {
     {
       name: "Unit Managment",
       iconClass: "fa-solid fa-laptop-code icon-color",
-      show: true,
+      show: r2 !== "Requester",
       showSubRoutes: true,
+      r1: ["Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "Create Unit",
@@ -154,10 +166,92 @@ export default function Sidebar(props) {
     },
 
     {
-      name: "Report",
-      path: "/report",
-      iconClass: "fa-solid fa-user",
+      name: "Master mangement",
+      iconClass: "fa-solid fa-house-user",
       show: true,
+      showSubRoutes: true,
+      r1: ["Requester", "Trainer", "Technical Manager"],
+      subRoutes: [
+        {
+          name: "Technology Managment",
+          iconClass: "fa-solid fa-laptop-code icon-color",
+          show: r2 !== "Requester",
+          ishowSubRoutes: true,
+          r1: ["Trainer", "Technical Manager"],
+          isubRoutes: [
+            {
+              name: "Create Technology",
+              path: "/tech-addTech",
+              subPath: "/technology-createTechnology",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            },
+            {
+              name: "Technology List",
+              subPath: "/technology-technologyList",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            },
+          ],
+        },
+        {
+          name: "Unit Managment",
+          iconClass: "fa-solid fa-laptop-code icon-color",
+          show: true,
+          ishowSubRoutes: true,
+          r1: ["Trainer", "Technical Manager"],
+          isubRoutes: [
+            {
+              name: "Create Unit",
+              subPath: "/Unit-createUnit",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            },
+            {
+              name: "Unit List",
+              subPath: "/Unit-unitList",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            },
+          ],
+        },
+        {
+          name: "Client Managment",
+          iconClass: "fas fa-sitemap icon-color",
+          show: true,
+          ishowSubRoutes: true,
+          r1: ["Trainer", "Technical Manager"],
+          isubRoutes: [
+            {
+              name: "Create Client",
+              subPath: "/client-management-createClient",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            },
+            {
+              name: "Client List",
+              subPath: "/client-clientList",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Report",
+      iconClass: "fa-solid fa-house-user",
+      show: true,
+      showSubRoutes: true,
+      r1: ["Requester", "Trainer", "Technical Manager"],
+      subRoutes: [
+        {
+          name: "TestReport",
+          subPath: "/testReport",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
+      ],
     },
   ];
 
@@ -173,6 +267,13 @@ export default function Sidebar(props) {
       prevState === parseInt(routeindex) ? null : parseInt(routeindex)
     );
   };
+  const ihandleSubNavToggle = (event) => {
+    event.stopPropagation();
+    const { routeindex } = event.target.dataset;
+    setOpenedISubNav((prevState) =>
+      prevState === parseInt(routeindex) ? null : parseInt(routeindex)
+    );
+  };
 
   const handleHighlightMenu = (event) => {
     event.stopPropagation();
@@ -181,6 +282,17 @@ export default function Sidebar(props) {
       prevState === parseInt(index) ? null : parseInt(index)
     );
     setOpenedSubNav((prevState) =>
+      prevState === parseInt(index) ? null : parseInt(index)
+    );
+  };
+
+  const ihandleHighlightMenu = (event) => {
+    event.stopPropagation();
+    const { index } = event.currentTarget.dataset;
+    setSubActiveIndex((prevState) =>
+      prevState === parseInt(index) ? null : parseInt(index)
+    );
+    setOpenedISubNav((prevState) =>
       prevState === parseInt(index) ? null : parseInt(index)
     );
   };
@@ -195,7 +307,7 @@ export default function Sidebar(props) {
           >
             <div>
               <ul className="list-style-none padding-0">
-                {routes.map(
+                {basedOnRoleRoutes.map(
                   (route, index) =>
                     route.show && (
                       <li key={route.path} className=" menu-link-wrapper">
@@ -244,20 +356,89 @@ export default function Sidebar(props) {
                             }`}
                           >
                             {route.subRoutes.map(
-                              (subRoute) =>
+                              (subRoute, subindex) =>
                                 subRoute.show && (
                                   <li
                                     key={subRoute.subPath}
-                                    className="margin-15 submenu"
+                                    className="margin-11 submenu"
                                   >
-                                    <Link
-                                      to={subRoute.subPath}
-                                      className="text-decoration-none color-grey menu-link"
+                                    <div
+                                      className={`d-flex justify-content-between align-items-center menu-class ${
+                                        subActiveIndex === subindex + 1000
+                                          ? "active-tab"
+                                          : ""
+                                      }`}
+                                      onClick={handleHighlightMenu}
+                                      data-index={subindex + 1000}
                                     >
-                                      <span className="menu-text font-size-16 padding-10">
-                                        {subRoute.name}
-                                      </span>
-                                    </Link>
+                                      <Link
+                                        to={subRoute.subPath}
+                                        className="text-decoration-none color-grey menu-link"
+                                      >
+                                        <span className="menu-text font-size-16 padding-10">
+                                          {subRoute.name}
+                                        </span>
+                                      </Link>
+                                      {subRoute.ishowSubRoutes &&
+                                        subRoute.isubRoutes.length > 0 && (
+                                          <i
+                                            className={`fa-solid fa-angle-${
+                                              openedISubNav === subindex + 1000
+                                                ? "up"
+                                                : "down"
+                                            } color-grey cursor-pointer margin-right-15 submenu-class`}
+                                            role="button"
+                                            data-routeindex={subindex + 1000}
+                                            onClick={ihandleSubNavToggle}
+                                          ></i>
+                                        )}
+                                    </div>
+                                    {/* ---inner sub route start---- */}
+                                    {subRoute.ishowSubRoutes &&
+                                      subRoute.isubRoutes.length > 0 && (
+                                        <ul
+                                          className={`list-style-none ${
+                                            openedISubNav === subindex + 1000
+                                              ? "submenu"
+                                              : "d-none"
+                                          }`}
+                                        >
+                                          {subRoute.isubRoutes.map(
+                                            (isubRoute, isubIndex) =>
+                                              isubRoute.show && (
+                                                <li
+                                                  key={isubRoute.subPath}
+                                                  className="margin-15 submenu"
+                                                >
+                                                  <div
+                                                    className={`d-flex justify-content-between align-items-center menu-class ${
+                                                      activeIndex ===
+                                                      isubIndex + 2000
+                                                        ? "active-tab"
+                                                        : ""
+                                                    }`}
+                                                    onClick={
+                                                      ihandleHighlightMenu
+                                                    }
+                                                    data-index={
+                                                      isubIndex + 2000
+                                                    }
+                                                  >
+                                                    <Link
+                                                      to={isubRoute.subPath}
+                                                      className="text-decoration-none color-grey menu-link"
+                                                    >
+                                                      <span className="menu-text font-size-16 padding-10">
+                                                        {isubRoute.name}
+                                                      </span>
+                                                    </Link>
+                                                  </div>
+                                                </li>
+                                              )
+                                          )}
+                                        </ul>
+                                      )}
+                                    {/* ----inner sub route end---- */}
                                   </li>
                                 )
                             )}
