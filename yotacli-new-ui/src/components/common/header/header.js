@@ -133,7 +133,7 @@ const Header = (props) => {
               <span className="logo logo-light">
                 <span className="logo-lg logo-text-style font-size-24 padding-10 d-block">
                   {" "}
-                  YOTA APP{" "}
+                  YOTA{" "}
                 </span>
               </span>
             </div>

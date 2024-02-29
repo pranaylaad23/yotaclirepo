@@ -13,6 +13,7 @@ import competencyReducer from "../features/redux/competency/competnencySlice";
 import trainingTypeReducer from "../features/redux/training/training-type/trainingTypeSlice";
 import testsReducer from "../features/redux/test/TestListSlice";
 import questionSlices from "../features/redux/questions/questionSlices";
+import { clientApi } from "./services/securtiy/clientService";
 export const store = configureStore({
   reducer: {
     security: securityReducer,
@@ -30,7 +31,8 @@ export const store = configureStore({
     training: trainingReducer,
     associate: associateSlice,
     [securityApi.reducerPath]: securityApi.reducer,
+    [clientApi.reducerPath]: clientApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(securityApi.middleware),
+    getDefaultMiddleware().concat(securityApi.middleware, clientApi.middleware),
 });

@@ -6,15 +6,12 @@ import Header from "../common/header/header";
 import "./LoginUser.css";
 import costomToast from "../common/toast/costomToast";
 import { ToastContainer } from 'react-toastify';
-
 export const LoginUser = () => {
   const { loading, user, error, role } = useSelector((state) => state.security);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
- 
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -41,6 +38,7 @@ export const LoginUser = () => {
     };
     dispatch(loginUser(loginRequest));
   };
+
   return (
     <>
       <div>

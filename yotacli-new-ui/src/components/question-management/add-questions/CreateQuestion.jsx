@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTechnologies } from "../../../features/redux/technology/technologyAction";
 import { fetchTestList } from "../../../features/redux/test/testAction";
-import { postQuestion } from "../../../features/redux/questions/questionAction";
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import AddTest from "./addTest";
 import "./CreateQuestion.css";
 import sanitizeHtml from "sanitize-html";
+import { postQuestion } from "../../../features/redux/questions/questionAction";
 
 export const CreateQuestion = () => {
   const dispatch = useDispatch();
