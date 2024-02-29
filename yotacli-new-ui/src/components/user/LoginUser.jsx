@@ -4,14 +4,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/header/header";
 import "./LoginUser.css";
- 
+import costomToast from "../common/toast/costomToast";
+import { ToastContainer } from 'react-toastify';
+
 export const LoginUser = () => {
   const { loading, user, error, role } = useSelector((state) => state.security);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
  
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      window.location.href = "/dashboard";
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {      
+      costomToast({
+        message:`Logged in successfully as a : ${role}`,
+        autoClose: 2000,
+        onClose : () => navigate("/dashboard"),
+      });
+    }
+  }, [navigate, user, role]);
+
   const onSubmit = (event) => {
     event.preventDefault();
     const loginRequest = {
@@ -20,21 +41,6 @@ export const LoginUser = () => {
     };
     dispatch(loginUser(loginRequest));
   };
- 
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (token) {
-      window.location.href = "/dashboard";
-    }
-  }, []);
- 
-  useEffect(() => {
-    if (user) {
-      alert(`Logged in successfully as a ${role} !`);
-      navigate("/dashboard");
-    }
-  }, [navigate, user, role]);
- 
   return (
     <>
       <div>
@@ -49,7 +55,7 @@ export const LoginUser = () => {
                 <label for="inputPassword" class="col-sm-1 col-form-label">
                   Email:
                 </label>
- 
+
                 <div class="col-sm-4">
                   <input
                     type="username"
@@ -85,7 +91,7 @@ export const LoginUser = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
- 
