@@ -27,6 +27,7 @@ export const CreateQuestion = () => {
   useEffect(() => {
     dispatch(fetchTechnologies());
     dispatch(fetchTestList());
+    dispatch(postQuestion());
   }, [dispatch]);
 
   const handleQuestionChange = (value) => {
