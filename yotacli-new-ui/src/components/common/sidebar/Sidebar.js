@@ -90,6 +90,12 @@ export default function Sidebar(props) {
           iconClass: "fa-solid fa-house-user",
           show: true,
         },
+        {
+          name: "Test Instruction",
+          subPath: "/test-instruction",
+          iconClass: "fa-solid fa-house-user",
+          show: true,
+        },
       ],
     },
 

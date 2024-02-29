@@ -1,0 +1,21 @@
+.testInstruction{
+    border: solid black 2px;
+    padding: 2% 4%;
+}
+
+.instructionCard{
+    margin-top: 4%;
+    padding-left: 5%;
+    padding-top: 3%;
+    border-radius: 20px;
+    background-color: rgb(232, 232, 232);
+    border:solid black 1px;
+}
+
+.goBack{
+    margin-left: 2%;
+}
+
+.start{
+    margin-left: 76%;
+}

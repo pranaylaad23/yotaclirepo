@@ -4,13 +4,25 @@ import { useSelector } from "react-redux";
 import "../../../features/security/securitySlice";
 import Notif from "../Notification/notif";
 import { loginUser } from "../../../features/security/securtiyAction";
+import { ToastContainer } from 'react-toastify';
+import costomToast from "../toast/costomToast";
+
 const Header = (props) => {
   const { onSidebarToggle } = props;
   const jwtToken = localStorage.getItem("jwtToken");
 
-  const handleLogout = () => {
+  const logoutRefresh = () =>{
+    console.log("i'm in logoutR method")
     localStorage.removeItem("jwtToken");
     window.location.href = "/login";
+  }
+  
+  const handleLogout = () => {
+    costomToast({
+      message:'You are logged out!',
+      autoClose: 1500,
+      onClose : logoutRefresh,
+  });
   };
 
   const showOptionForLoginUser = () => (
@@ -130,6 +142,7 @@ const Header = (props) => {
           {jwtToken ? showOptionForLoginUser() : showOptionForGuestUser()}
         </div>
       </div>
+      <ToastContainer />
     </header>
   );
 };

@@ -20,7 +20,6 @@ export const AddAssociateForm = () => {
     };
 
     dispatch(addAssociate(formData));
-
     alert("Associate added successfully");
     navigate("/associate-associateList");
   };
