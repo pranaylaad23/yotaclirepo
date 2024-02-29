@@ -48,6 +48,10 @@ export const loginUser = createAsyncThunk(
       };
     } catch (error) {
       if (error.response) {
+        if (error.response.status === 401) {
+          console.log(error.response.data.errorMessage);
+          alert(error.response.data.errorMessage);
+        }
         return rejectWithValue(error.response);
       }
     }
