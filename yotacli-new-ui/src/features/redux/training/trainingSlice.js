@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getTrainings,
+  requestTraining,
   getTrainingById,
   updateTraining,
   deleteTraining,
@@ -31,17 +32,17 @@ const trainingSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-    builder.addCase("requestTraining/pending", (state) => {
+    builder.addCase(requestTraining.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase("requestTraining/fulfilled", (state, action) => {
+    builder.addCase(requestTraining.fulfilled, (state, action) => {
       state.loading = false;
       state.trainings = action.payload;
     });
-    builder.addCase("requestTraining/rejected", (state, action) => {
+    builder.addCase(requestTraining.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.error.message;
     });
   },
 });
