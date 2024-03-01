@@ -15,12 +15,6 @@ const Dashboard = () => {
       const decodedToken = jwtDecode(token);
       console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
     }
-    // const filteredRoutes = routes.filter((route) => {
-    //   if (!route.role) return true; // Show if no roles specified
-    //   return route.role.includes(role);
-    // });
- 
-    //setBasedOnRoleRoutes(filteredRoutes);
   }, [role]);
  
   console.log('role', role);
