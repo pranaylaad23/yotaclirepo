@@ -4,15 +4,32 @@ import { useSelector } from "react-redux";
 import "../../../features/security/securitySlice";
 import Notif from "../Notification/notif";
 import { loginUser } from "../../../features/security/securtiyAction";
+import { ToastContainer } from 'react-toastify';
+import costomToast from "../toast/costomToast";
+
 const Header = (props) => {
   const { user, role } = useSelector((state) => state.security);
   const { onSidebarToggle } = props;
   const jwtToken = localStorage.getItem("jwtToken");
+
   let r2 = localStorage.getItem("userRole");
   const handleLogout = () => {
+
+
+  const logoutRefresh = () =>{
+    console.log("i'm in logoutR method")
+
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("userRole");
     window.location.href = "/login";
+  }
+  
+  const handleLogout = () => {
+    costomToast({
+      message:'You are logged out!',
+      autoClose: 1500,
+      onClose : logoutRefresh,
+  });
   };
 
   const showOptionForLoginUser = () => (
@@ -123,7 +140,11 @@ const Header = (props) => {
               <span className="logo logo-light">
                 <span className="logo-lg logo-text-style font-size-24 padding-10 d-block">
                   {" "}
+
                   YOTA <span className="font-size-role">{r2!=null?"("+r2+")":''}</span>{" "}
+
+                  YOTA{" "}
+
                 </span>
               </span>
             </div>
@@ -132,6 +153,7 @@ const Header = (props) => {
           {jwtToken ? showOptionForLoginUser() : showOptionForGuestUser()}
         </div>
       </div>
+      <ToastContainer />
     </header>
   );
 };

@@ -3,9 +3,10 @@ import axios from "axios";
 import { postQuestion } from "./questionAction";
 import { fetchQuestions } from "./questionAction";
 const initialState = {
-  postedQuestion: null,
+  postedQuestion: [],
   loading: false,
   error: null,
+  success: false,
 };
 
 const questionSlice = createSlice({
@@ -20,10 +21,11 @@ const questionSlice = createSlice({
     builder.addCase(postQuestion.fulfilled, (state, action) => {
       state.loading = false;
       state.postedQuestion = action.payload;
+      state.success = true;
     });
     builder.addCase(postQuestion.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
     builder.addCase(fetchQuestions.pending, (state) => {
       state.loading = true;

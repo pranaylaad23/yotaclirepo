@@ -5,6 +5,9 @@
 
   background-color: #fafbff;
 }
+.navbar-brand {
+  padding-right: 54px;
+}
 
 .navbar-header {
   height: 100% !important;

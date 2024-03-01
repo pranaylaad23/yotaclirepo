@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { LoginUser } from "../components/user/LoginUser.jsx";
-import  RegisterUser  from "../components/user/RegisterUser.jsx";
+import RegisterUser from "../components/user/RegisterUser.jsx";
 import MainContent from "../components/common/dashboard-layout/mainContent";
 import Dashboard from "../components/dashboard/dashboard.js";
 import { AddQuestion } from "../components/question-management/add-questions/AddQuestion.jsx";
@@ -17,13 +17,14 @@ import ListClient from "../components/client-management/list-client/ListClient.j
 import CreateUnitForm from "../components/unit-management/add-unit/CreateUnitForm.jsx";
 import ListElement from "../components/question-management/test-list/ListElement.jsx";
 import { AssociatesList } from "../components/associate-management/list-associate/AssociatesList.jsx";
+import TestInstruction from "../components/question-management/test-instruction/TestInstruction.js";
 
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   return (
     <Routes>
-      <Route path="/requester-registration" element={<RegisterUser/>} />
+      <Route path="/requester-registration" element={<RegisterUser />} />
       <Route path="/login" element={<LoginUser setLoggedIn={setLoggedIn} />} />
       <Route path="/" element={<LoginUser setLoggedIn={setLoggedIn} />} />
 
@@ -57,6 +58,14 @@ export default function AppRoutes() {
         element={
           <MainContent>
             <ListElement />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/test-instruction"
+        element={
+          <MainContent>
+            <TestInstruction />
           </MainContent>
         }
       />
