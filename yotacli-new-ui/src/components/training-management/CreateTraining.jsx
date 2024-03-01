@@ -7,6 +7,7 @@ import { fetchTechnology } from "../../features/redux/technology/technologyActio
 import { fetchCompetency } from "../../features/redux/competency/competencyAction";
 import { fetchTrainingType } from "../../features/redux/training/training-type/trainingTypeAction";
 import { fetchUnits } from "../../features/redux/unit/unitAction";
+import CreateUnitForm from "../unit-management/add-unit/CreateUnitForm";
 export const CreateTraining = () => {
   const dispatch = useDispatch();
   const training_description = useRef();
@@ -21,12 +22,14 @@ export const CreateTraining = () => {
   const [selectCompetency, setSelectCompetency] = useState("");
   const [selectTrainingType, setSelectTrainingType] = useState("");
   const [trainingName, setTrainingName] = useState("");
+  const [showUnit, setShowUnit] = useState(false);
   const unitList = useSelector((state) => state.unit.units);
   const techList = useSelector((state) => state.technology.techList);
   const competency = useSelector((state) => state.competency.competencyList);
   const trainingType = useSelector(
     (state) => state.trainigType.trainingTypeList
   );
+
   //const error = useSelector((state)=> state.trainings.error);
  
   const handleUnitChange = (event) => {
@@ -39,33 +42,33 @@ export const CreateTraining = () => {
     );
     setSelectTechnology(selectedOptions);
   };
- 
+
   const handleCompetencyChange = (event) => {
     setSelectCompetency(event.target.value);
   };
- 
+
   const handleTrainingTypeChange = (event) => {
     setSelectTrainingType(event.target.value);
   };
- 
+
   const handleTrainingNameChange = (event) => {
     setTrainingName(event.target.value);
   };
- 
+
   const handlestartDateChange = (event) => {
     //setStartDate(event.target.value);
     start_date.current = event.target.value;
   };
- 
+
   const handleendDateChange = (event) => {
     //setEndDate(event.target.value);
     end_date.current = event.target.value;
   };
- 
+
   const handleMonthChange = (event) => {
     setMonth(event.target.value);
   };
- 
+
   const handleYearChange = (event) => {
     setYear(event.target.value);
   };
@@ -90,14 +93,16 @@ export const CreateTraining = () => {
     { length: 10 },
     (_, i) => new Date().getFullYear() + i
   );
- 
+  const handleButtonClick = () => {
+    setShowUnit(true);
+  };
   useEffect(() => {
     dispatch(fetchUnits());
     dispatch(fetchTechnology());
     dispatch(fetchCompetency());
     dispatch(fetchTrainingType());
   }, [dispatch]);
- 
+
   useEffect(() => {
     const concatenatedName = `${selectUnit}-${selectCompetency}-${selectTrainingType}(${selectTechnology})-${selectMonth}-${selectYear}`;
     setTrainingName(concatenatedName);
@@ -118,11 +123,14 @@ export const CreateTraining = () => {
       startDate: start_date.current,
       endDate: end_date.current,
     };
+
     console.log("Payload--",trainingRequest);
     dispatch(requestTraining(JSON.stringify(trainingRequest)))
     .unwrap()
     .then((result) => {
     console.log("Training Request Data" ,result);
+    dispatch(requestTraining(JSON.stringify(trainingRequest)));
+    console.log("Training Request Data" + JSON.stringify(trainingRequest));
     alert("Request Training Submit Successfully: ");
     })
     .catch((error) => {
@@ -139,7 +147,7 @@ export const CreateTraining = () => {
     });
     
   };
- 
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -151,7 +159,7 @@ export const CreateTraining = () => {
         <div className="form-group">
           <div class="row">
             <div className="col-6">
-              <label>Unit:</label>
+              <label className={classes.unit}>Unit:</label>
               <select
                 value={selectUnit}
                 name="unit"
@@ -168,6 +176,18 @@ export const CreateTraining = () => {
                     </option>
                   ))}
               </select>
+              <div className={classes.addnewUnit}>
+                <button
+                  type="button"
+                  className="addtestbutton"
+                  onClick={handleButtonClick}
+                >
+                  <i className="fas fa-plus"></i>
+                </button>
+                {showUnit && (
+                  <CreateUnitForm closeModal={() => setShowUnit(false)} />
+                )}
+              </div>
             </div>
             <div className="col-6">
               <label>Competency:</label>
@@ -318,4 +338,3 @@ export const CreateTraining = () => {
     </>
   );
 };
- 

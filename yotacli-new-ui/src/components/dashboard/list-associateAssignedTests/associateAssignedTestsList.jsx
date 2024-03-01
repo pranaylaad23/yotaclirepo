@@ -1,50 +1,93 @@
+
+
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
-import "./Training.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
-import TrainingTableBody from "./TrainingTableBody";
-import { getTrainings } from "../../features/redux/training/trainingAction";
+import "./AssociateAssignedTests.module.css";
+import AssociateAssignedTestsTableBody from "./associateAssignedTestsTableBody";
+import { fetchAssociateAssignedTests } from "../../../features/redux/associateAssignedTests/associateAssignedTestsAction";
 
-export const TrainingList = () => {
+const AssociateAssignedTestsList = () => {
   const dispatch = useDispatch();
-  const { role } = useSelector((state) => state.security);
   const searchInputRef = useRef(null);
   const rowsPerPageSelectRef = useRef(null);
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState();
+
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  console.log("resopse role: ", role);
   const columns = [
     { id: "id", label: "#" },
-    { id: "trainingName", label: "Name Of Training" },
-    { id: "actualStartDate", label: "Actual Start Date" },
-    { id: "actualEndDate", label: "Actual End Date" },
-    { id: "status", label: "Status" },
+    { id: "name", label: "Test Name" },
+    { id: "startDate", label: "Start date" },
+    { id: "endDate", label: "End date" },
+    { id: "duration", label: "Duration" },
+    { id: "testStatus", label: "Test Status" },
     { id: "action", label: "Action" },
   ];
 
-  const { trainings, loading, error, success } = useSelector(
-    (state) => state.trainings
-  );
+  const { associateAssignedTestsList } = useSelector((state) => state.associateAssignedTests);
+
+  console.log(associateAssignedTestsList);
+
+  // let associateAssignedTestsList = [
+  //   {
+  //     id: '1',
+  //     testName: 'Java Test',
+  //     startDate: '13-01-2024',
+  //     endDate: '13-02-2024',
+  //     duration: '30 min',
+  //     testStatus: 'pending',
+  //   },
+  //   {
+  //     id: '2',
+  //     testName: 'Spring Test',
+  //     startDate: '13-01-2024',
+  //     endDate: '13-02-2024',
+  //     duration: '20 min',
+  //     testStatus: 'pending',
+  //   }
+  // ]
 
   useEffect(() => {
-    dispatch(getTrainings());
+    dispatch(fetchAssociateAssignedTests());
   }, [dispatch]);
 
+
+
   const filteredData = useMemo(() => {
-    return trainings.filter((item) =>
+    let filterData=[];
+    if(associateAssignedTestsList && associateAssignedTestsList.length){
+      
+
+      filterData=associateAssignedTestsList?.filter((item) =>
       Object.values(item).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  }, [trainings, searchTerm]);
+
+    return filterData;
+
+    } 
+  }, [associateAssignedTestsList, searchTerm]);
+
+    
+  useEffect(() => {
+    setData(filteredData)
+    console.log("filterData",filteredData)
+  }, [filteredData]);
 
   const totalPages = useMemo(
-    () => Math.ceil(filteredData.length / rowsPerPage),
-    [filteredData, rowsPerPage]
+    () => {
+      let x=[];
+       if(filteredData && filteredData.length){
+        x=Math.ceil(filteredData.length / rowsPerPage)}
+        return x;
+       },      
+    [(filteredData && filteredData.length > 0 ), rowsPerPage]
   );
 
   const handleChangePage = (newPage) => {
@@ -65,10 +108,10 @@ export const TrainingList = () => {
     setPage(0);
   };
 
-  const paginatedData = filteredData.slice(
+  const paginatedData = filteredData && filteredData.length ? filteredData.slice(
     page * rowsPerPage,
     Math.min((page + 1) * rowsPerPage, filteredData.length)
-  );
+  ) : [];
 
   return (
     <div className="table-container">
@@ -116,7 +159,7 @@ export const TrainingList = () => {
           </tr>
         </thead>
 
-        <TrainingTableBody rows={paginatedData} columns={columns} role={role} />
+        <AssociateAssignedTestsTableBody rows={paginatedData} columns={columns} />
       </table>
 
       <div className="pagination">
@@ -147,3 +190,5 @@ export const TrainingList = () => {
     </div>
   );
 };
+
+export default AssociateAssignedTestsList;
