@@ -17,7 +17,11 @@ import ListClient from "../components/client-management/list-client/ListClient.j
 import CreateUnitForm from "../components/unit-management/add-unit/CreateUnitForm.jsx";
 import ListElement from "../components/question-management/test-list/ListElement.jsx";
 import { AssociatesList } from "../components/associate-management/list-associate/AssociatesList.jsx";
+
+import AssociateAssignedTestsList from "../components/dashboard/list-associateAssignedTests/associateAssignedTestsList.jsx";
+
 import TestInstruction from "../components/question-management/test-instruction/TestInstruction.js";
+
 
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -33,6 +37,14 @@ export default function AppRoutes() {
         element={
           <MainContent>
             <Dashboard />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/dashboard/assigned-tests-list"
+        element={
+          <MainContent>
+            <AssociateAssignedTestsList />
           </MainContent>
         }
       />

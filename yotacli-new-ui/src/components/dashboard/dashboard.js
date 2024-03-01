@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import "./dashboard.css";
 import { jwtDecode } from 'jwt-decode';
@@ -19,7 +21,13 @@ const Dashboard = () => {
  
   console.log('role', role);
   return (
-    <div className="font-size-16"> Welcome To {r2} Dashboard</div>
+    <div className="font-size-16">
+    <h2> Welcome To {r2} Dashboard</h2>
+    <button onClick={()=> {
+        navigate("/dashboard/assigned-tests-list");
+       }}>Show Tests</button>
+   </div>
+
   )
 }
 
