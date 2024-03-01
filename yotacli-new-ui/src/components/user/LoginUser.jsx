@@ -4,14 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/header/header";
 import "./LoginUser.css";
+
+import Dashboard from "../dashboard/dashboard";
+ 
+
 import costomToast from "../common/toast/costomToast";
 import { ToastContainer } from 'react-toastify';
+
 export const LoginUser = () => {
   const { loading, user, error, role } = useSelector((state) => state.security);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+ 
+console.log("role",role);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const loginRequest = {
+      username,
+      password,
+    };
+    dispatch(loginUser(loginRequest));
+  };
+ 
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -21,12 +38,19 @@ export const LoginUser = () => {
   }, []);
 
   useEffect(() => {
+
+    if (user) {
+      alert(`Logged in successfully as a ${role} !`);
+      navigate("/dashboard");
+      <Dashboard role={role}/>
+
     if (user) {      
       costomToast({
         message:`Logged in successfully as a : ${role}`,
         autoClose: 2000,
         onClose : () => navigate("/dashboard"),
       });
+
     }
   }, [navigate, user, role]);
 
