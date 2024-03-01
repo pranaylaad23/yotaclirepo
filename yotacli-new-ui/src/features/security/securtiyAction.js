@@ -42,12 +42,17 @@ export const loginUser = createAsyncThunk(
       );
       localStorage.setItem("jwtToken", data.authToken);
       const role = data.userRole;
+      localStorage.setItem("userRole", role);
       return {
         ...data,
         role,
       };
     } catch (error) {
       if (error.response) {
+        if (error.response.status === 401) {
+          console.log(error.response.data.errorMessage);
+          alert(error.response.data.errorMessage);
+        }
         return rejectWithValue(error.response);
       }
     }
