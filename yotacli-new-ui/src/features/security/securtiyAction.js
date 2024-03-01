@@ -42,7 +42,6 @@ export const loginUser = createAsyncThunk(
       );
       localStorage.setItem("jwtToken", data.authToken);
       const role = data.userRole;
-      localStorage.setItem("userRole", role);
       return {
         ...data,
         role,

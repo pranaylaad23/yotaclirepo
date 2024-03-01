@@ -5,13 +5,11 @@ import "../../../features/security/securitySlice";
 import Notif from "../Notification/notif";
 import { loginUser } from "../../../features/security/securtiyAction";
 const Header = (props) => {
-  const { user, role } = useSelector((state) => state.security);
   const { onSidebarToggle } = props;
   const jwtToken = localStorage.getItem("jwtToken");
-  let r2 = localStorage.getItem("userRole");
+
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");
-    localStorage.removeItem("userRole");
     window.location.href = "/login";
   };
 
@@ -123,7 +121,7 @@ const Header = (props) => {
               <span className="logo logo-light">
                 <span className="logo-lg logo-text-style font-size-24 padding-10 d-block">
                   {" "}
-                  YOTA <span className="font-size-role">{r2!=null?"("+r2+")":''}</span>{" "}
+                  YOTA APP{" "}
                 </span>
               </span>
             </div>
