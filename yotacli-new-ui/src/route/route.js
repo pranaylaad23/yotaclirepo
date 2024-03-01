@@ -18,7 +18,9 @@ import CreateUnitForm from "../components/unit-management/add-unit/CreateUnitFor
 import ListElement from "../components/question-management/test-list/ListElement.jsx";
 import { AssociatesList } from "../components/associate-management/list-associate/AssociatesList.jsx";
 import TestInstruction from "../components/question-management/test-instruction/TestInstruction.js";
-
+import { TestList } from "../components/take-test/take-test/TestList.jsx";
+import { StartTest } from "../components/take-test/take-test/StartTest.jsx";
+import { TestQuestions } from "../components/take-test/take-test/test-questions/TestQuestions.jsx";
 export default function AppRoutes() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -148,6 +150,23 @@ export default function AppRoutes() {
         element={
           <MainContent>
             <ListUnit />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/takeTest"
+        element={
+          <MainContent>
+            <TestList />
+          </MainContent>
+        }
+      />
+      <Route path="/start-test" element={<StartTest />} />
+      <Route
+        path="/take-quetions"
+        element={
+          <MainContent>
+            <TestQuestions />
           </MainContent>
         }
       />
