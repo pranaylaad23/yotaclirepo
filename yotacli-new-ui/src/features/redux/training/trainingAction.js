@@ -52,7 +52,7 @@ export const requestTraining = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error) {
-        return rejectWithValue(error.message);
+        return rejectWithValue(error.response.data);
       }
     }
   }

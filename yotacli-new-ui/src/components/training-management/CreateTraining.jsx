@@ -13,6 +13,8 @@ export const CreateTraining = () => {
   const training_description = useRef();
   const start_date = useRef();
   const end_date = useRef();
+  //const [startDate, setStartDate] = useState(null);
+  //const [endDate, setEndDate] = useState(null);
   const [selectMonth, setMonth] = useState("");
   const [selectYear, setYear] = useState("");
   const [selectUnit, setSelectUnit] = useState("");
@@ -28,6 +30,8 @@ export const CreateTraining = () => {
     (state) => state.trainigType.trainingTypeList
   );
 
+  //const error = useSelector((state)=> state.trainings.error);
+ 
   const handleUnitChange = (event) => {
     setSelectUnit(event.target.value);
   };
@@ -52,10 +56,12 @@ export const CreateTraining = () => {
   };
 
   const handlestartDateChange = (event) => {
+    //setStartDate(event.target.value);
     start_date.current = event.target.value;
   };
 
   const handleendDateChange = (event) => {
+    //setEndDate(event.target.value);
     end_date.current = event.target.value;
   };
 
@@ -118,9 +124,28 @@ export const CreateTraining = () => {
       endDate: end_date.current,
     };
 
+    console.log("Payload--",trainingRequest);
+    dispatch(requestTraining(JSON.stringify(trainingRequest)))
+    .unwrap()
+    .then((result) => {
+    console.log("Training Request Data" ,result);
     dispatch(requestTraining(JSON.stringify(trainingRequest)));
     console.log("Training Request Data" + JSON.stringify(trainingRequest));
     alert("Request Training Submit Successfully: ");
+    })
+    .catch((error) => {
+      const errorResponseString = JSON.stringify(error);
+      const errorMessageJson=JSON.parse(errorResponseString);
+      if(errorMessageJson.errorMessage) {
+        alert(errorMessageJson.errorMessage);
+      }
+      else {
+        if(errorMessageJson.trainingDescription) { 
+          alert(errorMessageJson.trainingDescription);
+        }
+      }
+    });
+    
   };
 
   return (
@@ -280,6 +305,7 @@ export const CreateTraining = () => {
                 name="startDate"
                 ref={start_date}
                 onChange={handlestartDateChange}
+                //value={startDate || new Date().toISOString().slice(0, 10)} // Set default value to current date
                 className="mb-2 form-control-sm form-control"
               />
             </div>
@@ -290,6 +316,7 @@ export const CreateTraining = () => {
                 name="endDate"
                 ref={end_date}
                 onChange={handleendDateChange}
+                //value={endDate || new Date().toISOString().slice(0, 10)} // Set default value to current date
                 className="mb-2 form-control-sm form-control"
               />
             </div>
