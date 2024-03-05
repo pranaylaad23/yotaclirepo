@@ -2,10 +2,8 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 export const addAssociate = createAsyncThunk(
   "associates/addAssociate",
-
   async (formData, { rejectWithValue }) => {
     const token = localStorage.getItem("jwtToken");
-
     try {
       const config = {
         headers: {
@@ -38,8 +36,32 @@ export const fetchAssociates = createAsyncThunk(
           Authorization: `${token}`,
         },
       };
-
       const response = await axios.get(`/yota-api/associates/`, config);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+//assigned test to user by paritosh
+export const fetchAssignedTests = createAsyncThunk(
+  "associates/fetchAssignedTests",
+  async (data, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      console.log(token);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      };
+      const response = await axios.get(`/yota-api/tests/assignedTests`, config);
       return response.data;
     } catch (error) {
       if (error.response) {

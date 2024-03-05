@@ -9,7 +9,7 @@ import { createTechnology } from "../../../features/redux/technology/technologyA
 export const TechnologyForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
+
   const showModalRef = useRef(true);
   const nameRef = useRef("");
   const descriptionRef = useRef("");
@@ -74,16 +74,19 @@ export const TechnologyForm = () => {
               </div>
             </div>
             <div className="d-flex p-2 justify-content-between">
-              <div className="Add-button"><Button type="submit">Add</Button></div>
-             
-              <div className="Tech-button"><CancelButton
-                type="reset"
-                className="cancel"
-                onClick={handleCancel}
-              >
-                Cancel
-              </CancelButton></div>
-             
+              <div className="Add-button">
+                <Button type="submit">Add</Button>
+              </div>
+
+              <div className="Tech-button">
+                <CancelButton
+                  type="reset"
+                  className="cancel"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </CancelButton>
+              </div>
             </div>
           </form>
         </Modal.Body>
@@ -91,4 +94,3 @@ export const TechnologyForm = () => {
     </div>
   );
 };
- 

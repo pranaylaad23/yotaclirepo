@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 import "./CreateUnitForm.css";
 import { useDispatch } from "react-redux";
 import { createUnit } from "../../../features/redux/unit/unitAction";
- 
+
 export const CreateUnitForm = () => {
   const showModalRef = useRef(true);
   const navigate = useNavigate();
   const nameRef = useRef("");
   const shortDescriptionRef = useRef("");
   const dispatch = useDispatch();
- 
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -25,7 +25,7 @@ export const CreateUnitForm = () => {
     alert("Unit created successfully");
     hideModal();
   };
- 
+
   const handleClose = () => {
     hideModal();
   };
@@ -80,7 +80,6 @@ export const CreateUnitForm = () => {
                 type="reset"
                 className="cancel"
                 onClick={handleClose}
-               
               >
                 Cancel
               </CancelButton>
@@ -91,5 +90,3 @@ export const CreateUnitForm = () => {
     </div>
   );
 };
-export default CreateUnitForm;
- 

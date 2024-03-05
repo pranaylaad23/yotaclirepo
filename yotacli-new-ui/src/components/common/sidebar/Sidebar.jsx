@@ -1,11 +1,11 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "../dashboard-layout/useWindowSize";
-import "./sidebar.style.css";
+import "./Sidebar.style.css";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 
-export default function Sidebar(props) {
+export const Sidebar = (props) => {
   const { open, onClose } = props;
   const { width } = useWindowSize();
   const [openedSubNav, setOpenedSubNav] = useState(null);
@@ -14,18 +14,18 @@ export default function Sidebar(props) {
   const [subActiveIndex, setSubActiveIndex] = useState([]);
   const [basedOnRoleRoutes, setBasedOnRoleRoutes] = useState([]);
   const { role } = useSelector((state) => state.security);
-  let r2 = localStorage.getItem("userRole");
+  let userRole = localStorage.getItem("userRole");
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     console.log(token);
-    const r1 = localStorage.getItem("userRole");
-    console.log("role of  =" + r1);
+    const role = localStorage.getItem("userRole");
+    console.log("role of  =" + role);
     if (token != null) {
       const decodedToken = jwtDecode(token);
       console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
     }
     const filteredRoutes = routes.filter((route) => {
-      if (!route.role) return true; // Show if no roles specified
+      if (!route.role) return true;
       return route.role.includes(role);
     });
 
@@ -38,7 +38,7 @@ export default function Sidebar(props) {
       path: "/dashboard",
       iconClass: "fa-solid fa-house-user",
       show: true,
-      r1: ["Requester", "Trainer", "Associate", "Technical Manager"],
+      role: ["Requester", "Trainer", "Associate", "Technical Manager"],
     },
 
     {
@@ -46,21 +46,21 @@ export default function Sidebar(props) {
       iconClass: "fa-solid fa-id-badge icon-color",
       show: true,
       showSubRoutes: true,
-      r1: ["Requester", "Trainer", "Technical Manager"],
+      role: ["Requester", "Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "Request Training",
           subPath: "/requestTraining",
           iconClass: "fa-solid fa-house-user",
-          show: r2 === "Technical Manager" || r2 === "Requester",
-          r1: ["Trainer", "Technical Manager", "Requester"],
+          show: userRole === "Technical Manager" || userRole === "Requester",
+          role: ["Trainer", "Technical Manager", "Requester"],
         },
         {
           name: "Training List",
           subPath: "/trainingList",
           iconClass: "fa-solid fa-house-user",
           show: true,
-          r1: ["Requester", "Trainer", "Technical Manager"],
+          role: ["Requester", "Trainer", "Technical Manager"],
         },
       ],
     },
@@ -68,9 +68,9 @@ export default function Sidebar(props) {
     {
       name: "Test Management",
       iconClass: "fas fa-pencil-square icon-color",
-      show: r2 !== "Requester",
+      show: userRole !== "Requester",
       showSubRoutes: true,
-      r1: ["Trainer", "Technical Manager"],
+      role: ["Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "CreateQuestion",
@@ -102,9 +102,9 @@ export default function Sidebar(props) {
     {
       name: "Associate Managment",
       iconClass: "fa-solid fa-people-roof icon-color",
-      show: r2 === "Technical Manager",
+      show: userRole === "Technical Manager",
       showSubRoutes: true,
-      r1: ["Technical Manager"],
+      role: ["Technical Manager"],
       subRoutes: [
         {
           name: "Add ",
@@ -129,18 +129,19 @@ export default function Sidebar(props) {
 
     {
       name: "Master Mangement",
-      iconClass: "fa-solid fa-house-user",
-      show: true,
+      iconClass: "fa-solid fa-list",
+      show: userRole !== "Associate",
       showSubRoutes: true,
-      r1: ["Requester", "Trainer", "Technical Manager"],
+      role: ["Requester", "Trainer", "Technical Manager"],
+
       subRoutes: [
         {
           name: "Technology ",
           iconClass: "fa-solid fa-laptop-code icon-color",
-          show: r2 !== "Requester",
-          ishowSubRoutes: true,
-          r1: ["Trainer", "Technical Manager"],
-          isubRoutes: [
+          show: userRole !== "Requester",
+          innershowSubRoutes: true,
+          role: ["Trainer", "Technical Manager"],
+          innersubRoutes: [
             {
               name: "Create ",
               path: "/tech-addTech",
@@ -160,9 +161,9 @@ export default function Sidebar(props) {
           name: "Unit ",
           iconClass: "fa-solid fa-laptop-code icon-color",
           show: true,
-          ishowSubRoutes: true,
-          r1: ["Trainer", "Technical Manager"],
-          isubRoutes: [
+          innershowSubRoutes: true,
+          role: ["Trainer", "Technical Manager"],
+          innersubRoutes: [
             {
               name: "Create ",
               subPath: "/Unit-createUnit",
@@ -181,9 +182,9 @@ export default function Sidebar(props) {
           name: "Client ",
           iconClass: "fas fa-sitemap icon-color",
           show: true,
-          ishowSubRoutes: true,
-          r1: ["Trainer", "Technical Manager"],
-          isubRoutes: [
+          innershowSubRoutes: true,
+          role: ["Trainer", "Technical Manager"],
+          innersubRoutes: [
             {
               name: "Create",
               subPath: "/client-management-createClient",
@@ -202,10 +203,10 @@ export default function Sidebar(props) {
     },
     {
       name: "Report",
-      iconClass: "fa-solid fa-house-user",
+      iconClass: "fa-solid fa-magnifying-glass",
       show: true,
       showSubRoutes: true,
-      r1: ["Requester", "Trainer", "Technical Manager"],
+      role: ["Requester", "Trainer", "Technical Manager"],
       subRoutes: [
         {
           name: "TestReport",
@@ -341,8 +342,8 @@ export default function Sidebar(props) {
                                           {subRoute.name}
                                         </span>
                                       </Link>
-                                      {subRoute.ishowSubRoutes &&
-                                        subRoute.isubRoutes.length > 0 && (
+                                      {subRoute.innershowSubRoutes &&
+                                        subRoute.innersubRoutes.length > 0 && (
                                           <i
                                             className={`fa-solid fa-angle-${
                                               openedISubNav === subindex + 1000
@@ -356,8 +357,8 @@ export default function Sidebar(props) {
                                         )}
                                     </div>
                                     {/* ---inner sub route start---- */}
-                                    {subRoute.ishowSubRoutes &&
-                                      subRoute.isubRoutes.length > 0 && (
+                                    {subRoute.innershowSubRoutes &&
+                                      subRoute.innersubRoutes.length > 0 && (
                                         <ul
                                           className={`list-style-none ${
                                             openedISubNav === subindex + 1000
@@ -365,7 +366,7 @@ export default function Sidebar(props) {
                                               : "d-none"
                                           }`}
                                         >
-                                          {subRoute.isubRoutes.map(
+                                          {subRoute.innersubRoutes.map(
                                             (isubRoute, isubIndex) =>
                                               isubRoute.show && (
                                                 <li
@@ -416,4 +417,4 @@ export default function Sidebar(props) {
       </div>
     </>
   );
-}
+};

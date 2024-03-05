@@ -1,25 +1,20 @@
 import React, { useState } from "react";
-import "./notif.css"; // Make sure to import your CSS file
-
-const Notification = () => {
+import "./Notification.css";
+export const Notification = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
-
   const toggleNotificationPanel = () => {
     setIsOpen(!isOpen);
   };
-
   const handleNotificationClick = () => {
-    // Simulate handling a notification click
     console.log("Notification clicked!");
-    setUnreadCount(0); // Clear unread count after handling
+    setUnreadCount(0);
   };
 
   return (
     <div className="notification-container">
       <button className="notification-button" onClick={toggleNotificationPanel}>
         <i className="fa-regular fa-bell"></i>
-        {/* Badge icon implementation */}
         {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
         <span
           className="icon-wrapper-bg bg-danger"
@@ -32,7 +27,6 @@ const Notification = () => {
           onClick={handleNotificationClick}
           style={{ padding: 20, height: 200, width: 250 }}
         >
-          {/* Render your notifications here */}
           <div className="notification" onClick={handleNotificationClick}>
             <button
               className="mark-read"
@@ -65,5 +59,3 @@ const Notification = () => {
     </div>
   );
 };
-
-export default Notification;

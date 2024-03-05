@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
- 
+
 export const getTrainings = createAsyncThunk(
   "trainings/getTrainings",
   async (trainingData, { rejectWithValue }) => {
@@ -8,18 +8,15 @@ export const getTrainings = createAsyncThunk(
       const token = localStorage.getItem("jwtToken");
       console.log(token);
       console.log("service getTrainings" + trainingData);
- 
+
       const config = {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,
         },
       };
- 
-      const response = await axios.get(
-        `/yota-api/trainings/`,
-        config
-      );
+
+      const response = await axios.get(`/yota-api/trainings/`, config);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -52,7 +49,7 @@ export const requestTraining = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error) {
-        return rejectWithValue(error.message);
+        return rejectWithValue(error.response.data);
       }
     }
   }

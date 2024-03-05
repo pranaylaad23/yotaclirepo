@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./Associate.module.css";
-const AssociateTableBody = ({ rows, columns, role }) => {
+export const AssociateTableBody = ({ rows, columns, role }) => {
   return (
     <tbody>
       {rows.map((row) => (
@@ -29,15 +29,14 @@ const AssociateTableBody = ({ rows, columns, role }) => {
                   </Link>
                 </div>
               ) : column.id === "firstName" ? (
-                row.firstName,
+                (row.firstName,
                 row.lastName,
                 row.emailId,
                 row.password,
                 row.createdAt,
                 row.updatedAt,
                 row.contactNo,
-                row.status
-
+                row.status)
               ) : (
                 row[column.id]
               )}
@@ -48,5 +47,3 @@ const AssociateTableBody = ({ rows, columns, role }) => {
     </tbody>
   );
 };
-
-export default AssociateTableBody;

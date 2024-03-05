@@ -8,85 +8,6 @@ import { useGetClientDetailsQuery } from "../../../app/services/securtiy/clientS
 import { useDispatch, useSelector } from "react-redux";
 import { fetchClients } from "../../../features/redux/client/clientAction";
 
-// const data = [
-//   {
-//     id: 1,
-//     name: "Jay",
-//     technology: "HTML",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 2,
-//     name: "Mitchel",
-//     technology: "JAVA",
-//     descrip: "Backend",
-//     action: "Active",
-//   },
-//   {
-//     id: 3,
-//     name: "Pat",
-//     technology: "HTML",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 4,
-//     name: "Rohit",
-//     technology: "SQL",
-//     descrip: "Database",
-//     action: "Active",
-//   },
-//   {
-//     id: 5,
-//     name: "Virat",
-//     technology: "HTML",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 6,
-//     name: "Sai",
-//     technology: "CSS",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 7,
-//     name: "Ashwin",
-//     technology: "HTML",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 8,
-//     name: "Head",
-//     technology: "CSS",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 9,
-//     name: "Kishan",
-//     technology: "HTML",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 10,
-//     name: "Ravi",
-//     technology: "HTML",
-//     descrip: "Frontend",
-//     action: "Active",
-//   },
-//   {
-//     id: 11,
-//     name: "Andrew",
-//     technology: "SPRING",
-//     descrip: "Backend",
-//     action: "Active",
-//   },
-// ];
 const columns = [
   { id: "id", label: "#" },
   { id: "name", label: "Name Of Client" },
@@ -103,8 +24,6 @@ const ListClient = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const dispatch = useDispatch();
   const clientList = useSelector((state) => state.client);
-  // const data = useGetClientDetailsQuery();
-  // console.log("response :", data);
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };

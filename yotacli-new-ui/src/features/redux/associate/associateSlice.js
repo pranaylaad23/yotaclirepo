@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAssociates } from "./associateAction";
+import { fetchAssociates, fetchAssignedTests } from "./associateAction";
 
 const initialState = {
   loading: false,
@@ -33,6 +33,21 @@ const associateSlice = createSlice({
       state.success = true;
     });
     builder.addCase(fetchAssociates.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    //fetchAssigned test to user by paritosh
+    builder.addCase(fetchAssignedTests.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(fetchAssignedTests.fulfilled, (state, action) => {
+      state.loading = false;
+      state.aasignedtests = action.payload;
+      state.success = true;
+    });
+    builder.addCase(fetchAssignedTests.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

@@ -1,11 +1,11 @@
 import React, { useCallback, useState, useEffect } from "react";
-import Header from "../header/header";
-import Sidebar from "../sidebar/Sidebar";
+import { Header } from "../header/Header";
+import { Sidebar } from "../sidebar/Sidebar";
 import "./mainContent.style.css";
 import { useWindowSize } from "./useWindowSize";
 import { LoginUser } from "../../user/LoginUser";
 
-export default function MainContent({ children }) {
+export const MainContent = ({ children }) => {
   const { width } = useWindowSize();
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 992);
   const token = localStorage.getItem("jwtToken");
@@ -44,4 +44,4 @@ export default function MainContent({ children }) {
   } else {
     return <LoginUser />;
   }
-}
+};

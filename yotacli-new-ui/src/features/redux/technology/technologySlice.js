@@ -11,11 +11,7 @@ const technologySlice = createSlice({
     loading: false,
     error: null,
   },
-  initialState: {
-    techList: [],
-    loading: false,
-    error: null,
-  },
+
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -56,8 +52,6 @@ const technologySlice = createSlice({
       state.error = action.payload.message;
     });
   },
-  
 });
 
 export default technologySlice.reducer;
-

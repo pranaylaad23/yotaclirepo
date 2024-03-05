@@ -36,7 +36,6 @@ a {
 
 .active-tab > a {
   color: bla !important;
- 
 }
 
 .active-tab:focus {
@@ -52,7 +51,6 @@ a {
 }
 .list-style-none {
   list-style: none !important;
-  
 }
 .list-style-none :focus {
   color: #3f6ad8;

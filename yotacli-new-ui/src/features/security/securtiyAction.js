@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { ToastContainer, toast } from "react-toastify";
+import { costomToast } from "../../components/common/toast/costomToast";
 export const registerUser = createAsyncThunk(
   "security/registeruser",
   async ({ username, password }, { rejectWithValue }) => {
@@ -50,8 +51,11 @@ export const loginUser = createAsyncThunk(
     } catch (error) {
       if (error.response) {
         if (error.response.status === 401) {
-          console.log(error.response.data.errorMessage);
-          alert(error.response.data.errorMessage);
+          costomToast({
+            message: `${error.response.data.errorMessage}`,
+            autoClose: 2000,
+            type: "error",
+          });
         }
         return rejectWithValue(error.response);
       }

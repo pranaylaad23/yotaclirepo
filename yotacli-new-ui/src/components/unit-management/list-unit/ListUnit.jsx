@@ -1,21 +1,17 @@
-import React, { useState ,useEffect } from "react";
-import {useSelector,useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./ListUnit.css";
 import { fetchUnits } from "../../../features/redux/unit/unitAction";
- 
 const ASC = "ASC";
 const DSC = "DSC";
- 
-const ListUnit = ({ order, setorder }) => {
+export const ListUnit = ({ order, setorder }) => {
   const data = useSelector((state) => state.unit.units);
-  const [ setdata] = useState([]);
+  const [setdata] = useState([]);
   const dispatch = useDispatch();
- 
- 
   useEffect(() => {
     dispatch(fetchUnits());
   }, [dispatch]);
- 
+
   const sorting = (col) => {
     const sorted = [...data].sort((a, b) =>
       order === "ASC" ? (a[col] > b[col] ? 1 : -1) : a[col] < b[col] ? 1 : -1
@@ -23,7 +19,7 @@ const ListUnit = ({ order, setorder }) => {
     setdata(sorted);
     setorder(order === "ASC" ? "DSC" : "ASC");
   };
- 
+
   return (
     <div>
       <div className="show-sort">
@@ -35,7 +31,6 @@ const ListUnit = ({ order, setorder }) => {
           <option value="2">10</option>
           <option value="3">15</option>
         </select>
- 
         <label className="Search-label">Search</label>
         <div className="input-group">
           <input
@@ -51,9 +46,7 @@ const ListUnit = ({ order, setorder }) => {
           </span>
         </div>
       </div>
- 
       <hr className="divider" />
- 
       <table
         id="myTable"
         className="table table-striped table-bordered table-sm"
@@ -74,33 +67,32 @@ const ListUnit = ({ order, setorder }) => {
             <th> Action</th>
           </tr>
         </thead>
- 
         <tbody>
-  {data.length > 0 ? (
-    data.map((d) => (
-      <tr className="table-rows" key={d.id}>
-        <td>{d.id}</td>
-        <td>{d.unitName}</td>
-        <td>{d.shortDescription}</td>
-        <td>
-          <i className="fa-solid fa-trash" id="icons">
-            _
-          </i>
-          <i className="fa-solid fa-pen-to-square" id="icons">
-            _
-          </i>
-          <i className="fa-solid fa-eye" id="icons"></i>
-        </td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="4">No data available</td>
-    </tr>
-  )}
-</tbody>
+          {data.length > 0 ? (
+            data.map((d) => (
+              <tr className="table-rows" key={d.id}>
+                <td>{d.id}</td>
+                <td>{d.unitName}</td>
+                <td>{d.shortDescription}</td>
+                <td>
+                  <i className="fa-solid fa-trash" id="icons">
+                    _
+                  </i>
+                  <i className="fa-solid fa-pen-to-square" id="icons">
+                    _
+                  </i>
+                  <i className="fa-solid fa-eye" id="icons"></i>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No data available</td>
+            </tr>
+          )}
+        </tbody>
       </table>
- 
+
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
           <li class="page-item disabled">
@@ -133,5 +125,3 @@ const ListUnit = ({ order, setorder }) => {
     </div>
   );
 };
- 
-export default ListUnit;

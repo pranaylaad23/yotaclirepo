@@ -21,5 +21,3 @@ export const CreateTechnology = () => {
     </div>
   );
 };
-export default CreateTechnology;
-

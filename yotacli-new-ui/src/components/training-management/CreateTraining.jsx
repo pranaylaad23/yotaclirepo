@@ -7,7 +7,7 @@ import { fetchTechnology } from "../../features/redux/technology/technologyActio
 import { fetchCompetency } from "../../features/redux/competency/competencyAction";
 import { fetchTrainingType } from "../../features/redux/training/training-type/trainingTypeAction";
 import { fetchUnits } from "../../features/redux/unit/unitAction";
-import CreateUnitForm from "../unit-management/add-unit/CreateUnitForm";
+import { CreateUnitForm } from "../unit-management/add-unit/CreateUnitForm";
 export const CreateTraining = () => {
   const dispatch = useDispatch();
   const training_description = useRef();
@@ -118,9 +118,26 @@ export const CreateTraining = () => {
       endDate: end_date.current,
     };
 
-    dispatch(requestTraining(JSON.stringify(trainingRequest)));
-    console.log("Training Request Data" + JSON.stringify(trainingRequest));
-    alert("Request Training Submit Successfully: ");
+    console.log("Payload--", trainingRequest);
+    dispatch(requestTraining(JSON.stringify(trainingRequest)))
+      .unwrap()
+      .then((result) => {
+        console.log("Training Request Data", result);
+        dispatch(requestTraining(JSON.stringify(trainingRequest)));
+        console.log("Training Request Data" + JSON.stringify(trainingRequest));
+        alert("Request Training Submit Successfully: ");
+      })
+      .catch((error) => {
+        const errorResponseString = JSON.stringify(error);
+        const errorMessageJson = JSON.parse(errorResponseString);
+        if (errorMessageJson.errorMessage) {
+          alert(errorMessageJson.errorMessage);
+        } else {
+          if (errorMessageJson.trainingDescription) {
+            alert(errorMessageJson.trainingDescription);
+          }
+        }
+      });
   };
 
   return (

@@ -51,5 +51,3 @@ export const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     </>
   );
 };
-
-export default Pagination;

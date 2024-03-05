@@ -16,7 +16,6 @@ export const ClientForm = () => {
   const descriptionRef = useRef("");
   const technologyRef = useRef("");
   const techList = useSelector((state) => state.technology.techList);
-
   useEffect(() => {
     dispatch(fetchTechnologies());
   }, [dispatch]);
@@ -24,7 +23,6 @@ export const ClientForm = () => {
   const handleTechnologyChange = (event) => {
     technologyRef.current = event.target.value;
   };
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -32,7 +30,7 @@ export const ClientForm = () => {
       shortDescription: descriptionRef.current.value,
       technology: Array.from(
         technologyRef.current,
-        (option) => option.value,
+        (option) => option.value
       ).join(","),
     };
     dispatch(createClient(formData));
@@ -40,7 +38,6 @@ export const ClientForm = () => {
     alert("client created successfully");
     hideModal();
   };
-
   const handleCancel = () => {
     hideModal();
   };

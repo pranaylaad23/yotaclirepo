@@ -7,12 +7,13 @@ import trainingsReducer from "../features/redux/training/trainingSlice";
 import clientReducer from "../features/redux/client/clientSlice";
 import unitSlice from "../features/redux/unit/unitSlice";
 import associateSlice from "../features/redux/associate/associateSlice";
-import questionSlice from "../features/redux/questions/questionSlice";
+// import questionSlice from "../features/redux/questions/questionSlice";
 import trainingReducer from "../features/redux/training/trainingSlice";
 import competencyReducer from "../features/redux/competency/competnencySlice";
 import trainingTypeReducer from "../features/redux/training/training-type/trainingTypeSlice";
 import testsReducer from "../features/redux/test/TestListSlice";
 import questionSlices from "../features/redux/questions/questionSlices";
+import associateAssignedTests from "../features/redux/associateAssignedTests/associateAssignedTestsSlice";
 import { clientApi } from "./services/securtiy/clientService";
 export const store = configureStore({
   reducer: {
@@ -24,12 +25,13 @@ export const store = configureStore({
     client: clientReducer,
     unit: unitSlice.reducer,
     associates: associateSlice,
-    questions: questionSlice.reducer,
+    // questions: questionSlice.reducer,
     questions: questionSlices.reducer,
     competency: competencyReducer,
     trainigType: trainingTypeReducer,
     training: trainingReducer,
     associate: associateSlice,
+    associateAssignedTests,
     [securityApi.reducerPath]: securityApi.reducer,
     [clientApi.reducerPath]: clientApi.reducer,
   },

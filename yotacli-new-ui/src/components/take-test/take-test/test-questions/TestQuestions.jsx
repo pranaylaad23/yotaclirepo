@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 export const TestQuestions = (props) => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -19,17 +18,14 @@ export const TestQuestions = (props) => {
       options: ["6", "7", "8", "9"],
       correctAnswer: "8",
     },
-    // Add more questions here
   ]);
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSelectedOption(null); // Reset selected option for next question
+    setSelectedOption(null);
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    setSelectedOption(null); // Reset selected option for previous question
+    setSelectedOption(null);
   };
 
   const handleOptionChange = (option) => {
@@ -38,11 +34,9 @@ export const TestQuestions = (props) => {
 
   return (
     <div>
-      {/* Render current question */}
       <div>
         <h5>Question {activeStep + 1}</h5>
         <p>{questions[activeStep].question}</p>
-        {/* Render options as radio buttons */}
         {questions[activeStep].options.map((option, index) => (
           <div key={index}>
             <input
@@ -57,8 +51,6 @@ export const TestQuestions = (props) => {
           </div>
         ))}
       </div>
-
-      {/* Stepper navigation */}
       <div>
         <button disabled={activeStep === 0} onClick={handleBack}>
           Back

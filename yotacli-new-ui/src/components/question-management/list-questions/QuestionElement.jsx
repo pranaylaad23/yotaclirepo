@@ -1,5 +1,5 @@
 import React from "react";
-const QuestionElement = (props) => {
+export const QuestionElement = (props) => {
   const databstarget = "#" + props.id;
   return (
     <div className="accordion-item">
@@ -26,7 +26,6 @@ const QuestionElement = (props) => {
         <div className="accordion-body">
           <div className="row">
             <div className="col-md-10">
-              {/* Display question details */}
               <div>
                 <p>
                   {" "}
@@ -116,4 +115,3 @@ const QuestionElement = (props) => {
     </div>
   );
 };
-export default QuestionElement;

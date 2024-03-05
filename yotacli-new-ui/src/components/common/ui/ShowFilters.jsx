@@ -8,7 +8,6 @@ export const ShowFilters = () => {
     setItemsPerPage(newItemsPerPage);
     setCurrentPage(1);
   };
-
   const renderPageNumbers = () => {
     const options = [5, 10, 15];
     return options.map((option) => (

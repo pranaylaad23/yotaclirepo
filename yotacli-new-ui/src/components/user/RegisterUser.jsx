@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { registerUser } from "../../features/security/securtiyAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Header from "../common/header/header";
+import { Header } from "../common/header/Header";
 import "./LoginUser.css";
-const RegisterUser = () => {
+export const RegisterUser = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -93,5 +93,3 @@ const RegisterUser = () => {
     </>
   );
 };
-
-export default RegisterUser;

@@ -21,20 +21,6 @@ export const TestList = (props) => {
     <div>
       <h2 className={classes.title}>Test List</h2>
       <ul>
-        {/*{testList.map(test => (
-                    <li key={test.id}>
-                        {test}
-                        <Link
-                            to={startTestPath}
-                            className="text-decoration-none color-grey menu-link"
-                        >
-                                      <span className="menu-text font-size-16 padding-10">
-                                        {test.testName}
-                                      </span>
-                        </Link>
-                    </li>
-
-                ))}*/}
         <li>
           <Link
             to={"/start-test"}

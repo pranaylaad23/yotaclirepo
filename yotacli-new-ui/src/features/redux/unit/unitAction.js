@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
- 
+
 export const createUnit = createAsyncThunk(
   "unit/CreateUnitForm",
   async (formData, { rejectWithValue }) => {
@@ -33,7 +33,7 @@ export const postUnits = createAsyncThunk(
           Authorization: `${token}`,
         },
       };
- 
+
       const response = await axios.post(`/yota-api/units/`, newUnit, config);
       return response.data;
     } catch (error) {
@@ -41,10 +41,10 @@ export const postUnits = createAsyncThunk(
     }
   }
 );
- 
+
 export const fetchUnits = createAsyncThunk(
   "units/fetchUnits",
- 
+
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("jwtToken");
@@ -61,4 +61,3 @@ export const fetchUnits = createAsyncThunk(
     }
   }
 );
- 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchQuestions } from "../../../features/redux/questions/questionAction";
-import QuestionElement from "./QuestionElement";
+import { QuestionElement } from "./QuestionElement";
 import "./ListQuestion.css";
 export const ListQuestions = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const ListQuestions = () => {
   const optionNames = ["option_A", "option_B", "option_C", "option_D"];
   const optionDisplayNames = ["Option A", "Option B", "Option C", "Option D"];
   return (
-    <React.Fragment>
+    <>
       <div className="row"></div>
       <hr />
       <div style={{ marginTop: "1rem" }}></div>
@@ -36,7 +36,7 @@ export const ListQuestions = () => {
         />
       ))}
       <nav aria-label="Page navigation example"></nav>
-    </React.Fragment>
+    </>
   );
 };
 export default ListQuestions;

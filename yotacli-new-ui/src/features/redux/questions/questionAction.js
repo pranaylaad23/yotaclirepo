@@ -40,7 +40,6 @@ export const fetchQuestions = createAsyncThunk(
         },
       };
       const response = await axios.get("/yota-api/questions/all", config);
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

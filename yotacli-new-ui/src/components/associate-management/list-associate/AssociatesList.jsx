@@ -1,12 +1,10 @@
-
-
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import "./Associate.module.css";
-import AssociateTableBody from "./AssociateTableBody";
+import { AssociateTableBody } from "./AssociateTableBody";
 import { fetchAssociates } from "../../../features/redux/associate/associateAction";
 
 export const AssociatesList = () => {

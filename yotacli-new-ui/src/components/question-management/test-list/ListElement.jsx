@@ -21,7 +21,7 @@ export const ListElement = () => {
   const rowsPerPageSelectRef = useRef(null);
 
   const dispatch = useDispatch();
-console.log(getTests);
+  console.log(getTests);
   const columns = [
     { id: "id", label: "#" },
     { id: "name", label: "Test Name" },
@@ -51,11 +51,7 @@ console.log(getTests);
   }, [tests, searchTerm]);
 
   function removeTime(start = new Date()) {
-    return new Date(
-      start.getFullYear(),
-      start.getMonth(),
-      start.getDate()
-    );
+    return new Date(start.getFullYear(), start.getMonth(), start.getDate());
   }
 
   const totalPages = useMemo(
@@ -91,7 +87,6 @@ console.log(getTests);
       <div className="testlistHeader">
         <h4>TESTS OVERVIEWS</h4>
       </div>
-
       <div className="table-container">
         <div className="filter-section">
           <div className="show-entries">
@@ -129,10 +124,7 @@ console.log(getTests);
           </div>
         </div>
       </div>
-
       <div className="horizontal-line"></div>
-
-      {/* Table */}
       <table className="mb-0 table table-bordered table-striped">
         <thead>
           <tr>
@@ -141,7 +133,6 @@ console.log(getTests);
             ))}
           </tr>
         </thead>
-
         <tbody>
           {paginatedData.map((row) => (
             <tr key={row.id}>
@@ -164,13 +155,11 @@ console.log(getTests);
                         <span className="action-divider">__ </span>
                         <FontAwesomeIcon icon={faCog} className="action-icon" />
                         <span className="action-divider"> __ </span>
-
                         <FontAwesomeIcon
                           icon={faShareAlt}
                           className="action-icon"
                         />
                         <span className="action-divider"> __ </span>
-
                         <FontAwesomeIcon
                           icon={faClone}
                           className="action-icon"
@@ -178,10 +167,7 @@ console.log(getTests);
                       </div>
                     </div>
                   ) : column.id === "" ? (
-                    `${row.name}`
-                    `${row.endDate}`
-                    `${row.startDate}`
-                    `${row.createdAt}`
+                    `${row.name}``${row.endDate}``${row.startDate}``${row.createdAt}`
                   ) : (
                     row[column.id]
                   )}
@@ -191,8 +177,6 @@ console.log(getTests);
           ))}
         </tbody>
       </table>
-
-      {/* Pagination */}
       <div className="pagination">
         <button
           className="page-button"
@@ -221,5 +205,3 @@ console.log(getTests);
     </>
   );
 };
-
-export default ListElement;

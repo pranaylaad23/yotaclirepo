@@ -4,7 +4,6 @@ import Button from "../../common/button/Button";
 export const UploadAssociate = () => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
-
     alert("associatefile upload successfully");
   };
   return (

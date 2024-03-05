@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { loginUser } from "../../features/security/securtiyAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Header from "../common/header/header";
+import { Header } from "../common/header/Header";
 import "./LoginUser.css";
-import costomToast from "../common/toast/costomToast";
-import { ToastContainer } from 'react-toastify';
+import { costomToast } from "../common/toast/costomToast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Dashboard } from "../dashboard/Dashboard";
 export const LoginUser = () => {
   const { loading, user, error, role } = useSelector((state) => state.security);
   const [username, setUsername] = useState("");
@@ -13,6 +15,7 @@ export const LoginUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log("role", role);
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
@@ -21,12 +24,13 @@ export const LoginUser = () => {
   }, []);
 
   useEffect(() => {
-    if (user) {      
+    if (user) {
       costomToast({
-        message:`Logged in successfully as a : ${role}`,
+        message: `Logged in successfully as a : ${role}`,
         autoClose: 2000,
-        onClose : () => navigate("/dashboard"),
+        onClose: () => navigate("/dashboard"),
       });
+      <Dashboard role={role} />;
     }
   }, [navigate, user, role]);
 
@@ -53,7 +57,6 @@ export const LoginUser = () => {
                 <label for="inputPassword" class="col-sm-1 col-form-label">
                   Email:
                 </label>
-
                 <div class="col-sm-4">
                   <input
                     type="username"
@@ -89,7 +92,6 @@ export const LoginUser = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

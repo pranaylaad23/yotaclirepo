@@ -23,7 +23,6 @@ export const createClient = createAsyncThunk(
     }
   }
 );
-
 export const fetchClients = createAsyncThunk(
   "client/getClients",
   async (formData, { rejectWithValue }) => {

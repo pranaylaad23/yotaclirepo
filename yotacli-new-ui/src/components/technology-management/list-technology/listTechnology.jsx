@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchTechnologies } from "../../../features/redux/technology/technologyAction";
 import { useSelector, useDispatch } from "react-redux";
-//import mocktechList from "./mocktechList.json";
 import "../../common/button/Button";
 import "./listTechnology.css";
 
-const ListTechnology = ({ order, setorder }) => {
+export const ListTechnology = ({ order, setorder }) => {
   const techList = useSelector((state) => state.technology.techList);
   const [settechList] = useState([]);
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const ListTechnology = ({ order, setorder }) => {
           <option value="2">10</option>
           <option value="3">15</option>
         </select>
-
         <label className="Search-label">Search</label>
         <div className="input-group">
           <input
@@ -53,9 +51,7 @@ const ListTechnology = ({ order, setorder }) => {
           </span>
         </div>
       </div>
-
       <hr className="divider" />
-
       <table
         id="myTable"
         className="table table-striped table-bordered table-sm"
@@ -79,7 +75,6 @@ const ListTechnology = ({ order, setorder }) => {
             <th> Action</th>
           </tr>
         </thead>
-
         <tbody>
           {techList.length > 0 ? (
             techList.map((d) => (
@@ -138,5 +133,3 @@ const ListTechnology = ({ order, setorder }) => {
     </div>
   );
 };
-
-export default ListTechnology;

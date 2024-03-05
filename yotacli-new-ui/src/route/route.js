@@ -1,40 +1,47 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { LoginUser } from "../components/user/LoginUser.jsx";
-import RegisterUser from "../components/user/RegisterUser.jsx";
-import MainContent from "../components/common/dashboard-layout/mainContent";
-import Dashboard from "../components/dashboard/dashboard.js";
+import { RegisterUser } from "../components/user/RegisterUser.jsx";
+import { MainContent } from "../components/common/dashboard-layout/mainContent";
+import { Dashboard } from "../components/dashboard/Dashboard.js";
 import { AddQuestion } from "../components/question-management/add-questions/AddQuestion.jsx";
 import { CreateTraining } from "../components/training-management/CreateTraining.jsx";
-import ListUnit from "../components/unit-management/list-unit/ListUnit.jsx";
-import ListTechnology from "../components/technology-management/list-technology/listTechnology.jsx";
+import { ListUnit } from "../components/unit-management/list-unit/ListUnit.jsx";
+import { ListTechnology } from "../components/technology-management/list-technology/listTechnology.jsx";
 import { TrainingList } from "../components/training-management/TrainingList.jsx";
 import { ClientForm } from "../components/client-management/add-client/ClientForm.jsx";
 import { TechnologyForm } from "../components/technology-management/add-technology/TechnologyForm.jsx";
 import { AddAssociate } from "../components/associate-management/add-associate/AddAssociate.jsx";
 import { ListQuestions } from "../components/question-management/list-questions/ListQuestions.jsx";
 import ListClient from "../components/client-management/list-client/ListClient.jsx";
-import CreateUnitForm from "../components/unit-management/add-unit/CreateUnitForm.jsx";
-import ListElement from "../components/question-management/test-list/ListElement.jsx";
+import { CreateUnitForm } from "../components/unit-management/add-unit/CreateUnitForm.jsx";
+import { ListElement } from "../components/question-management/test-list/ListElement.jsx";
 import { AssociatesList } from "../components/associate-management/list-associate/AssociatesList.jsx";
-import TestInstruction from "../components/question-management/test-instruction/TestInstruction.js";
+import { AssociateAssignedTestsList } from "../components/dashboard/list-associateAssignedTests/associateAssignedTestsList.jsx";
+import { TestInstruction } from "../components/question-management/test-instruction/TestInstruction.jsx";
 import { TestList } from "../components/take-test/take-test/TestList.jsx";
 import { StartTest } from "../components/take-test/take-test/StartTest.jsx";
 import { TestQuestions } from "../components/take-test/take-test/test-questions/TestQuestions.jsx";
-export default function AppRoutes() {
+export const AppRoutes = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
-
   return (
     <Routes>
       <Route path="/requester-registration" element={<RegisterUser />} />
       <Route path="/login" element={<LoginUser setLoggedIn={setLoggedIn} />} />
       <Route path="/" element={<LoginUser setLoggedIn={setLoggedIn} />} />
-
       <Route
         path="/dashboard"
         element={
           <MainContent>
             <Dashboard />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/dashboard/assigned-tests-list"
+        element={
+          <MainContent>
+            <AssociateAssignedTestsList />
           </MainContent>
         }
       />
@@ -172,4 +179,4 @@ export default function AppRoutes() {
       />
     </Routes>
   );
-}
+};

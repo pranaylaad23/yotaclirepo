@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { postTest } from "../../../features/redux/test/testAction";
 import { useDispatch } from "react-redux";
-import "./CreateQuestion.css"
+import "./CreateQuestion.css";
 
-const AddTest = ({ closeModal }) => {
+export const AddTest = ({ closeModal }) => {
   const nameRef = useRef("");
   const descriptionRef = useRef("");
   const StartDateRef = useRef("");
@@ -84,7 +84,12 @@ const AddTest = ({ closeModal }) => {
               />
             </div>
           </div>
-          <Button className="testAdd" type="submit" variant="primary" onClick={handleOnSubmitTest}>
+          <Button
+            className="testAdd"
+            type="submit"
+            variant="primary"
+            onClick={handleOnSubmitTest}
+          >
             Add
           </Button>
         </form>
@@ -92,5 +97,3 @@ const AddTest = ({ closeModal }) => {
     </Modal>
   );
 };
-
-export default AddTest;

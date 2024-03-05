@@ -38,31 +38,28 @@ export const postTest = createAsyncThunk(
   }
 );
 
-export const getTests = createAsyncThunk (
-  "tests/getTests" ,
-  async(testData , {rejectWithValue}) => {
-      try {
-          const token = localStorage.getItem("jwtToken");
+export const getTests = createAsyncThunk(
+  "tests/getTests",
+  async (testData, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
 
-          const config = {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `${token}`,
-              },
-            };
-            
-            const response = await axios.get(`/yota-api/tests/`,config,
-             
-          );
-   
-          return response.data;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      };
 
-  } catch (error) {
-    if (error.response) {
-      return rejectWithValue(error.response.data);
-    } else {
-      return rejectWithValue(error.message);
+      const response = await axios.get(`/yota-api/tests/`, config);
+
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
-}
 );
