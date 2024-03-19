@@ -6,7 +6,8 @@ const initialState = {
   loading: false,
   jwtToken: null,
   success: false,
-  role: null,
+  role: [],
+  username: [],
 };
 
 const securitySlice = createSlice({
@@ -37,6 +38,7 @@ const securitySlice = createSlice({
       state.user = action.payload;
       state.jwtToken = action.payload.jwtToken;
       state.role = action.payload.role;
+      // state.username = action.payload.username;
     });
     builder.addCase("security/loginuser/rejected", (state, action) => {
       state.loading = false;
