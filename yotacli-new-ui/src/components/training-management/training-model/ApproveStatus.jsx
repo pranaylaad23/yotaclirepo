@@ -50,9 +50,8 @@ export const ApproveStatus = () => {
     costomToast({
       message: "Training Approved Succesfully",
       autoClose: 2000,
+      onClose: () => window.location.reload("/trainingList"),
     });
-    // alert("Training Approved Succesfully");
-    // window.location.reload();
     hideModal();
   };
   const handleCancel = () => {

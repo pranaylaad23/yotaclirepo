@@ -16,13 +16,36 @@ const TrainingTableBody = ({ rows, columns, role }) => {
                   <div className="action-icon">
                     {role === "Technical Manager" ? (
                       <>
-                        <Link to={`/approveTraining/` + row.id}>
-                          <Button>Approve</Button>
-                        </Link>
-                        &nbsp;
-                        <Link to={`/rejectTraining/` + row.id}>
-                          <CancelButton>Reject</CancelButton>
-                        </Link>
+                        <div>
+                          {row.status === "APPROVED" ? (
+                            <div>
+                              <Link to={`/editTraining/` + row.id}>
+                                <i
+                                  className="fa-solid fa-pen-to-square"
+                                  id="eidt"
+                                >
+                                  _
+                                </i>
+                              </Link>
+
+                              <Link to={`/deleteTraining`}>
+                                <i className="fa-solid fa-trash" id="delete">
+                                  {" "}
+                                </i>
+                              </Link>
+                            </div>
+                          ) : (
+                            <div>
+                              <Link to={`/approveTraining/` + row.id}>
+                                <Button>Approve</Button>
+                              </Link>
+                              &nbsp;
+                              <Link to={`/rejectTraining/` + row.id}>
+                                <CancelButton>Reject</CancelButton>
+                              </Link>
+                            </div>
+                          )}
+                        </div>
                       </>
                     ) : role === "Requester" ? (
                       <div>
