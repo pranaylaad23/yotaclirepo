@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { LoginUser } from "../components/user/LoginUser.jsx";
 import { RegisterUser } from "../components/user/RegisterUser.jsx";
 import { MainContent } from "../components/common/dashboard-layout/mainContent";
-import { Dashboard } from "../components/dashboard/Dashboard.js";
+import { Dashboard } from "../components/dashboard/dashboard.js";
 import { AddQuestion } from "../components/question-management/add-questions/AddQuestion.jsx";
 import { CreateTraining } from "../components/training-management/CreateTraining.jsx";
 import { ListUnit } from "../components/unit-management/list-unit/ListUnit.jsx";
@@ -22,7 +22,11 @@ import { TestInstruction } from "../components/question-management/test-instruct
 import { TestList } from "../components/take-test/take-test/TestList.jsx";
 import { StartTest } from "../components/take-test/take-test/StartTest.jsx";
 import { TestQuestions } from "../components/take-test/take-test/test-questions/TestQuestions.jsx";
+
+import Nomination from "../components/training-management/Nomination.jsx";
+
 import { ApproveStatus } from "../components/training-management/training-model/ApproveStatus.jsx";
+
 export const AppRoutes = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   return (
@@ -84,6 +88,14 @@ export const AppRoutes = () => {
         element={
           <MainContent>
             <CreateTraining />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/requestNomination"
+        element={
+          <MainContent>
+            <Nomination />
           </MainContent>
         }
       />

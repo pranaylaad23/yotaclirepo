@@ -22,6 +22,7 @@ export const CreateTraining = () => {
   const [selectCompetency, setSelectCompetency] = useState("");
   const [selectTrainingType, setSelectTrainingType] = useState("");
   const [trainingName, setTrainingName] = useState("");
+  const [trainindDescription, setTrainingDescription] = useState("");
   const [showUnit, setShowUnit] = useState(false);
   const noOfParticipants = useRef();
   const trainingDescription = useRef();
@@ -71,10 +72,13 @@ export const CreateTraining = () => {
     setYear(event.target.value);
   };
   const handleDescriptionChange = (event) => {
-    trainingDescription.current = event.target.value;
+
+    setTrainingDescription(event.target.value);
+
   };
   const handleParticipantChange = (event) => {
     noOfParticipants.current = event.target.value;
+
   };
   const months = [
     "JAN",
@@ -120,10 +124,12 @@ export const CreateTraining = () => {
     event.preventDefault();
     const trainingRequest = {
       trainingName: trainingName,
+
       trainingDescription: trainingDescription.current,
       startDate: startDate.current,
       endDate: endDate.current,
       noOfParticipants: noOfParticipants.current,
+
     };
     costomToast({
       message: "Training request submitted successfully!",
@@ -137,9 +143,16 @@ export const CreateTraining = () => {
       .unwrap()
       .then((result) => {
         console.log("Training Request Data", result);
+        navigate("/requestNomination");
         dispatch(requestTraining(JSON.stringify(trainingRequest)));
         console.log("Training Request Data" + JSON.stringify(trainingRequest));
         // alert("Request Training Submit Successfully: ");
+
+        customToast({
+          message: "Request Training Submit Successfully: ",
+          autoClose: 2000,
+        });
+
       })
       .catch((error) => {
         const errorResponseString = JSON.stringify(error);
@@ -159,7 +172,7 @@ export const CreateTraining = () => {
       <form onSubmit={onSubmit}>
         <h5>Training Request Form</h5>
         <div className={classes.header}>
-          <Button>Add</Button>
+          <Button>Next</Button>
         </div>{" "}
         <hr />
         <div className="form-group">

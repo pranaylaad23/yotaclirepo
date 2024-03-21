@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "../dashboard-layout/useWindowSize";
-import "./Sidebar.style.css";
+import "./sidebar.style.css";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 

@@ -5,7 +5,7 @@ import "../../../features/security/securitySlice";
 import { Notification } from "../notification/Notification";
 import { loginUser } from "../../../features/security/securtiyAction";
 import { ToastContainer } from "react-toastify";
-import { costomToast } from "../toast/costomToast";
+import { customToast } from "../toast/customToast";
 
 export const Header = (props) => {
   const { user, role } = useSelector((state) => state.security);
@@ -19,7 +19,7 @@ export const Header = (props) => {
   };
 
   const handleLogout = () => {
-    costomToast({
+    customToast({
       message: "You are logged out!",
       autoClose: 1500,
       onClose: logoutRefresh,

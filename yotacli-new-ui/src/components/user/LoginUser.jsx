@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../common/header/Header";
 import "./LoginUser.css";
-import { costomToast } from "../common/toast/costomToast";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Dashboard } from "../dashboard/Dashboard";
+import { customToast } from "../common/toast/customToast";
+import { Dashboard } from "../dashboard/dashboard";
 export const LoginUser = () => {
   const { loading, user, error, role } = useSelector((state) => state.security);
   const [username, setUsername] = useState("");
@@ -25,7 +23,7 @@ export const LoginUser = () => {
 
   useEffect(() => {
     if (user) {
-      costomToast({
+      customToast({
         message: `Logged in successfully as a : ${role}`,
         autoClose: 2000,
         onClose: () => navigate("/dashboard"),

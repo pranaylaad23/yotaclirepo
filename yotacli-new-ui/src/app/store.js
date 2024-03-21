@@ -16,10 +16,12 @@ import questionSlices from "../features/redux/questions/questionSlices";
 import associateAssignedTests from "../features/redux/associateAssignedTests/associateAssignedTestsSlice";
 import { clientApi } from "./services/securtiy/clientService";
 
+
 import rejectTrainingReducer from "../features/redux/training/training-status/rejectTrainingSlice";
 
 import approveTrainingSlice from "../features/redux/training/training-status/approveTrainingSlice";
 import approveTrainingStatusSlice from "../features/redux/training/training-status/approveTrainingStatusSlice";
+
 
 export const store = configureStore({
   reducer: {
