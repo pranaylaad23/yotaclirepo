@@ -8,11 +8,13 @@ import { fetchCompetency } from "../../features/redux/competency/competencyActio
 import { fetchTrainingType } from "../../features/redux/training/training-type/trainingTypeAction";
 import { fetchUnits } from "../../features/redux/unit/unitAction";
 import { CreateUnitForm } from "../unit-management/add-unit/CreateUnitForm";
+import { useNavigate } from "react-router-dom";
+import { costomToast } from "../common/toast/costomToast";
 export const CreateTraining = () => {
   const dispatch = useDispatch();
-  const training_description = useRef();
-  const start_date = useRef();
-  const end_date = useRef();
+  const navigate = useNavigate();
+  const startDate = useRef();
+  const endDate = useRef();
   const [selectMonth, setMonth] = useState("");
   const [selectYear, setYear] = useState("");
   const [selectUnit, setSelectUnit] = useState("");
@@ -21,6 +23,8 @@ export const CreateTraining = () => {
   const [selectTrainingType, setSelectTrainingType] = useState("");
   const [trainingName, setTrainingName] = useState("");
   const [showUnit, setShowUnit] = useState(false);
+  const noOfParticipants = useRef();
+  const trainingDescription = useRef();
   const unitList = useSelector((state) => state.unit.units);
   const techList = useSelector((state) => state.technology.techList);
   const competency = useSelector((state) => state.competency.competencyList);
@@ -52,11 +56,11 @@ export const CreateTraining = () => {
   };
 
   const handlestartDateChange = (event) => {
-    start_date.current = event.target.value;
+    startDate.current = event.target.value;
   };
 
   const handleendDateChange = (event) => {
-    end_date.current = event.target.value;
+    endDate.current = event.target.value;
   };
 
   const handleMonthChange = (event) => {
@@ -67,21 +71,24 @@ export const CreateTraining = () => {
     setYear(event.target.value);
   };
   const handleDescriptionChange = (event) => {
-    training_description.current = event.target.value;
+    trainingDescription.current = event.target.value;
+  };
+  const handleParticipantChange = (event) => {
+    noOfParticipants.current = event.target.value;
   };
   const months = [
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
-    "APRIL",
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
     "MAY",
-    "JUNE",
-    "JULY",
-    "AUGUST",
-    "SEPTEMBER",
-    "OCTOBER",
-    "NOVEMBER",
-    "DECEMBER",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
   ];
   const years = Array.from(
     { length: 10 },
@@ -113,10 +120,17 @@ export const CreateTraining = () => {
     event.preventDefault();
     const trainingRequest = {
       trainingName: trainingName,
-      trainingDescription: training_description.current,
-      startDate: start_date.current,
-      endDate: end_date.current,
+      trainingDescription: trainingDescription.current,
+      startDate: startDate.current,
+      endDate: endDate.current,
+      noOfParticipants: noOfParticipants.current,
     };
+    costomToast({
+      message: "Training request submitted successfully!",
+      autoClose: 2000,
+      onClose: () => navigate("/trainingList"),
+    });
+    // window.location.reload();
 
     console.log("Payload--", trainingRequest);
     dispatch(requestTraining(JSON.stringify(trainingRequest)))
@@ -125,7 +139,7 @@ export const CreateTraining = () => {
         console.log("Training Request Data", result);
         dispatch(requestTraining(JSON.stringify(trainingRequest)));
         console.log("Training Request Data" + JSON.stringify(trainingRequest));
-        alert("Request Training Submit Successfully: ");
+        // alert("Request Training Submit Successfully: ");
       })
       .catch((error) => {
         const errorResponseString = JSON.stringify(error);
@@ -286,26 +300,28 @@ export const CreateTraining = () => {
                 value={trainingName}
                 onChange={handleTrainingNameChange}
                 className="mb-2 form-control-sm form-control"
+                disabled
               />
             </div>
           </div>
           <div className="row">
             <div className="col-6">
-              <label>StartDate:</label>
+              <label>Planned StartDate:</label>
               <input
                 type="date"
                 name="startDate"
-                ref={start_date}
+                id="startDate"
+                ref={startDate}
                 onChange={handlestartDateChange}
                 className="mb-2 form-control-sm form-control"
               />
             </div>
             <div className="col-6">
-              <label> End Date:</label>
+              <label> Planned End Date:</label>
               <input
                 type="date"
                 name="endDate"
-                ref={end_date}
+                ref={endDate}
                 onChange={handleendDateChange}
                 className="mb-2 form-control-sm form-control"
               />
@@ -313,9 +329,19 @@ export const CreateTraining = () => {
           </div>
           <div className="row">
             <div className="col-6">
-              <label>Description:</label>
+              <label>No.of Participant</label>
+              <input
+                ref={noOfParticipants}
+                onChange={handleParticipantChange}
+                name="trainindDescription"
+                className="mb-2 form-control-sm form-control"
+                id="exampleFormControlTextarea1"
+              ></input>
+            </div>
+            <div className="col-6">
+              <label>Purpose or Training</label>
               <textarea
-                ref={training_description}
+                ref={trainingDescription}
                 onChange={handleDescriptionChange}
                 name="trainindDescription"
                 className="mb-2 form-control-sm form-control"

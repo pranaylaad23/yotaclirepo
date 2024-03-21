@@ -6,9 +6,6 @@ export const getTrainings = createAsyncThunk(
   async (trainingData, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("jwtToken");
-      console.log(token);
-      console.log("service getTrainings" + trainingData);
-
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -39,13 +36,11 @@ export const requestTraining = createAsyncThunk(
           Authorization: `${token}`,
         },
       };
-
       const response = await axios.post(
         `/yota-api/trainings/`,
         trainingRequest,
         config
       );
-
       return response.data;
     } catch (error) {
       if (error) {
@@ -54,3 +49,28 @@ export const requestTraining = createAsyncThunk(
     }
   }
 );
+
+// export const requestTraining = createAsyncThunk(
+//   "trainingRequest/requestTraining",
+//   async (trainingRequest, { rejectWithValue }) => {
+//     try {
+//       const token = localStorage.getItem("jwtToken");
+//       console.log(token);
+//       const response = await axios.post(
+//         `/yota-api/trainings/`,
+//         trainingRequest,
+//         {
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `${token}`,
+//           },
+//         }
+//       );
+//       return response.data;
+//     } catch (error) {
+//       if (error) {
+//         return rejectWithValue(error.message);
+//       }
+//     }
+//   }
+// );
