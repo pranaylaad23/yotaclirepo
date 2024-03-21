@@ -7,7 +7,7 @@ import trainingsReducer from "../features/redux/training/trainingSlice";
 import clientReducer from "../features/redux/client/clientSlice";
 import unitSlice from "../features/redux/unit/unitSlice";
 import associateSlice from "../features/redux/associate/associateSlice";
-// import questionSlice from "../features/redux/questions/questionSlice";
+
 import trainingReducer from "../features/redux/training/trainingSlice";
 import competencyReducer from "../features/redux/competency/competnencySlice";
 import trainingTypeReducer from "../features/redux/training/training-type/trainingTypeSlice";
@@ -15,8 +15,12 @@ import testsReducer from "../features/redux/test/TestListSlice";
 import questionSlices from "../features/redux/questions/questionSlices";
 import associateAssignedTests from "../features/redux/associateAssignedTests/associateAssignedTestsSlice";
 import { clientApi } from "./services/securtiy/clientService";
+
+import rejectTrainingReducer from "../features/redux/training/training-status/rejectTrainingSlice";
+
 import approveTrainingSlice from "../features/redux/training/training-status/approveTrainingSlice";
 import approveTrainingStatusSlice from "../features/redux/training/training-status/approveTrainingStatusSlice";
+
 export const store = configureStore({
   reducer: {
     security: securityReducer,
@@ -27,7 +31,6 @@ export const store = configureStore({
     client: clientReducer,
     unit: unitSlice.reducer,
     associates: associateSlice,
-    // questions: questionSlice.reducer,
     questions: questionSlices.reducer,
     competency: competencyReducer,
     trainigType: trainingTypeReducer,
@@ -39,6 +42,7 @@ export const store = configureStore({
 
     [securityApi.reducerPath]: securityApi.reducer,
     [clientApi.reducerPath]: clientApi.reducer,
+    rejectTrainingStatus:rejectTrainingReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(securityApi.middleware, clientApi.middleware),

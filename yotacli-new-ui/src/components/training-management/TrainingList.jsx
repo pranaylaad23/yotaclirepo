@@ -13,8 +13,10 @@ export const TrainingList = (props) => {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
   let userRole = localStorage.getItem("userRole");
   console.log("resopse role: ", userRole);
+
   const columns = [
     { id: "id", label: "#" },
     { id: "trainingName", label: "Training Name" },
@@ -26,7 +28,7 @@ export const TrainingList = (props) => {
     { id: "status", label: "Status" },
     { id: "trainingStatus", label: "Training Status" },
     { id: "trainerName", label: "Trainer Name" },
-    { id: "action", label: "Action" },
+    { id: "action", label: "Action" },    
   ];
 
   const { trainings } = useSelector((state) => state.trainings);
