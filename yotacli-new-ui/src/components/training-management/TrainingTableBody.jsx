@@ -13,7 +13,6 @@ const TrainingTableBody = ({ rows, columns ,role}) => {
     const [rejectShow, setRejectShow] = useState(false);
     const [reasonDes, setReasonDes] = useState('');
     const [selectedRow, setSelectedRow] = useState({});
-    const [buttonDisable, setButtonDisable] = useState(false);
     const dispatch = useDispatch();
     const [actionType, setActionType] = useState('');
 
@@ -59,7 +58,7 @@ const TrainingTableBody = ({ rows, columns ,role}) => {
                 <div className="action-icon">
                   {role === "Technical Manager" ? (
                     <div>
-                       <button disabled={buttonDisable}  onClick={() => handleActionClickOnRejectButton('Reject', row)}>Reject</button> 
+                       <button disabled={row.status === 'REJECTED'} onClick={() => handleActionClickOnRejectButton('Reject', row)}>Reject</button>
                     </div>
                   ) : role === "Requester" ? (
                     <Link to={`/updateinfo`}>
