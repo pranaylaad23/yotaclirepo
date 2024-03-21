@@ -22,7 +22,11 @@ import { TestInstruction } from "../components/question-management/test-instruct
 import { TestList } from "../components/take-test/take-test/TestList.jsx";
 import { StartTest } from "../components/take-test/take-test/StartTest.jsx";
 import { TestQuestions } from "../components/take-test/take-test/test-questions/TestQuestions.jsx";
+
 import Nomination from "../components/training-management/Nomination.jsx";
+
+import { ApproveStatus } from "../components/training-management/training-model/ApproveStatus.jsx";
+
 export const AppRoutes = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   return (
@@ -178,11 +182,21 @@ export const AppRoutes = () => {
         }
       />
       <Route path="/start-test" element={<StartTest />} />
+      {/* <Route path="/approveTraining" element={<ApproveStatus />} /> */}
       <Route
         path="/take-quetions"
         element={
           <MainContent>
             <TestQuestions />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/approveTraining/:id"
+        element={
+          <MainContent>
+            <TrainingList />
+            <ApproveStatus />
           </MainContent>
         }
       />

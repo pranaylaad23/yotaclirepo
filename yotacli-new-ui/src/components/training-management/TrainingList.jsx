@@ -2,12 +2,10 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import "./Training.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import TrainingTableBody from "./TrainingTableBody";
 import { getTrainings } from "../../features/redux/training/trainingAction";
 
-export const TrainingList = () => {
+export const TrainingList = (props) => {
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.security);
   const searchInputRef = useRef(null);
@@ -16,25 +14,34 @@ export const TrainingList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  console.log("resopse role: ", role);
+  let userRole = localStorage.getItem("userRole");
+  console.log("resopse role: ", userRole);
+
   const columns = [
     { id: "id", label: "#" },
-    { id: "trainingName", label: "Name Of Training" },
+    { id: "trainingName", label: "Training Name" },
+    { id: "noOfParticipants", label: " Total Nominations" },
+    { id: "startDate", label: " Planned Start Date" },
+    { id: "endDate", label: "Planned End Date" },
     { id: "actualStartDate", label: "Actual Start Date" },
     { id: "actualEndDate", label: "Actual End Date" },
     { id: "status", label: "Status" },
-    { id: "action", label: "Action" },
+    { id: "trainingStatus", label: "Training Status" },
+    { id: "trainerName", label: "Trainer Name" },
+    { id: "action", label: "Action" },    
   ];
 
-  const { trainings, loading, error, success } = useSelector(
-    (state) => state.trainings
-  );
+  const { trainings } = useSelector((state) => state.trainings);
 
   useEffect(() => {
     dispatch(getTrainings());
   }, [dispatch]);
 
   const filteredData = useMemo(() => {
+    // const fiteredTraining = trainings.filter(
+    //   (item) => item.status === "APPROVED"
+    // );
+    // console.log(trainings);
     return trainings.filter((item) =>
       Object.values(item).some((value) =>
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -106,7 +113,6 @@ export const TrainingList = () => {
       </div>
 
       <div className="horizontal-line"></div>
-
       <table className="mb-0 table table-bordered table-striped">
         <thead>
           <tr>
@@ -116,7 +122,11 @@ export const TrainingList = () => {
           </tr>
         </thead>
 
-        <TrainingTableBody rows={paginatedData} columns={columns} role={role} />
+        <TrainingTableBody
+          rows={paginatedData}
+          columns={columns}
+          role={userRole}
+        />
       </table>
 
       <div className="pagination">
