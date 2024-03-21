@@ -18,30 +18,30 @@ const TrainingTableBody = ({ rows, columns, role }) => {
                       <>
                         <div>
                           {row.status === "APPROVED" ? (
+                            <div></div>
+                          ) : (
                             <div>
-                              <Link to={`/editTraining/` + row.id}>
+                              <Link to={`/approveTraining/` + row.id}>
                                 <i
                                   className="fa-solid fa-pen-to-square"
                                   id="eidt"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  type="button"
+                                  title="Approve Training"
                                 >
                                   _
                                 </i>
                               </Link>
-
-                              <Link to={`/deleteTraining`}>
-                                <i className="fa-solid fa-trash" id="delete">
-                                  {" "}
-                                </i>
-                              </Link>
-                            </div>
-                          ) : (
-                            <div>
-                              <Link to={`/approveTraining/` + row.id}>
-                                <Button>Approve</Button>
-                              </Link>
-                              &nbsp;
                               <Link to={`/rejectTraining/` + row.id}>
-                                <CancelButton>Reject</CancelButton>
+                                <i
+                                  className="fa-solid fa-square-xmark"
+                                  id="delete"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  type="button"
+                                  title="Reject Training"
+                                ></i>
                               </Link>
                             </div>
                           )}
