@@ -8,7 +8,8 @@ import {
   approveTraining,
   approveTrainingStatus,
 } from "../../../features/redux/training/training-status/approveTrainingAction";
-import { costomToast } from "../../common/toast/costomToast";
+import { customToast } from "../../common/toast/customToast";
+
 
 export const ApproveStatus = () => {
   const cancelref = useNavigate();
@@ -47,7 +48,7 @@ export const ApproveStatus = () => {
     console.log("Form Data:", formData);
     console.log(trainerList);
     console.log("Id Is" + id);
-    costomToast({
+    customToast({
       message: "Training Approved Succesfully",
       autoClose: 2000,
       onClose: () => window.location.reload("/trainingList"),

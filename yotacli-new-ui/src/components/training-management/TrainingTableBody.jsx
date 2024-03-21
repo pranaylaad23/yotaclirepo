@@ -1,6 +1,8 @@
-import React,{useSate} from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import "./Training.module.css";
+import Button from "../common/button/Button";
+import CancelButton from "../common/button/CancelButton";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from 'react-bootstrap/Modal';
@@ -46,86 +48,7 @@ const TrainingTableBody = ({ rows, columns ,role}) => {
        console.log(result);
       })
     }
-
-import Button from "../common/button/Button";
-import CancelButton from "../common/button/CancelButton";
-
-
   return (
-
-    <tbody>
-      { rows.map((row) => (
-        <tr key={row.id}>
-          {columns.map((column) => (
-            <td key={column.id}>
-              {column.id === "action" ? (
-                <div className="action-icon">
-                  {role === "Technical Manager" ? (
-                    <div>
-                       <button disabled={row.status === 'REJECTED'} onClick={() => handleActionClickOnRejectButton('Reject', row)}>Reject</button>
-                    </div>
-                  ) : role === "Requester" ? (
-                    <Link to={`/updateinfo`}>
-                      <i
-                        className="icon action-icon fa fa-edit"
-                        title="Update"
-                      ></i>
-                    </Link>
-                  ) : (
-                    <div>No Action Available</div>
-                  )}
-                </div>
-              ) : column.id === "trainingName" ? (
-                row.trainingName
-              ) : (column.id === "status" && row.status == 'REJECTED') ? (
-                <a href="#" onClick={() => showRejectTrainingMessage(row)}>{row.status}</a>
-              ) : (
-                row[column.id]
-              )}
-            </td>
-          ))}
-        </tr>
-      ))}
-
-      <Modal
-        show={rejectShow}
-        onHide={() => setRejectShow(false)}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-              Rejected Training Message
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-              {rejectMsg}
-        </Modal.Body>
-      </Modal>
- 
-
-      <Modal
-        show={show}
-        onHide={() => setShow(false)}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-            Please Enter Reject Reason Of Training
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div >
-          <textarea rows="4" cols="33" className="w-100" value={reasonDes} onChange={handleRejectReasonChange}/>
-          </div>
-          <div className="text-center">
-          <button onClick={handleSubmitRejectReason}>Submit</button>
-          </div>
-        </Modal.Body>
-      </Modal>
-    </tbody>
-
     <>
       <tbody>
         {rows.map((row) => (
@@ -162,7 +85,11 @@ import CancelButton from "../common/button/CancelButton";
                                   type="button"
                                   title="Reject Training"
                                 ></i>
+                    
                               </Link>
+                           <div>
+                            <button disabled={row.status === 'REJECTED'} onClick={() => handleActionClickOnRejectButton('Reject', row)}>Reject</button>
+                         </div>
                             </div>
                           )}
                         </div>
@@ -187,13 +114,53 @@ import CancelButton from "../common/button/CancelButton";
                   </div>
                 ) : column.id === "trainingName" ? (
                   row.trainingName
-                ) : (
+                ) 
+                : (column.id === "status" && row.status == 'REJECTED') ? (
+                  <a href="#" onClick={() => showRejectTrainingMessage(row)}>{row.status}</a>)
+                  : (
                   row[column.id]
                 )}
               </td>
             ))}
           </tr>
         ))}
+
+          <Modal
+        show={rejectShow}
+        onHide={() => setRejectShow(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+              Rejected Training Message
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+              {rejectMsg}
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title">
+            Please Enter Reject Reason Of Training
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div >
+          <textarea rows="4" cols="33" className="w-100" value={reasonDes} onChange={handleRejectReasonChange}/>
+          </div>
+          <div className="text-center">
+          <button onClick={handleSubmitRejectReason}>Submit</button>
+          </div>
+        </Modal.Body>
+      </Modal>
       </tbody>
     </>
   );

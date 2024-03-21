@@ -28,7 +28,7 @@ export const AssociateTableBody = ({ rows, columns, role }) => {
                     <i className="icon action-icon fa fa-eye" title="View"></i>
                   </Link>
                 </div>
-              ) : column.id === "firstName" ? (
+              ) : column.id === "lastName" ? (
                 (row.firstName,
                 row.lastName,
                 row.emailId,

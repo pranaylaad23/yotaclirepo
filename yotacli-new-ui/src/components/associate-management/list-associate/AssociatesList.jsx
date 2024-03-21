@@ -17,11 +17,13 @@ export const AssociatesList = () => {
 
   const columns = [
     { id: "id", label: "#" },
+    { id: "firstName", label: "First Name" },
     { id: "emailId", label: "Email Id" },
     { id: "status", label: "Status" },
     { id: "createdAt", label: "CreatedAt" },
     { id: "updatedAt", label: "UpdatedAt" },
     { id: "password", label: "Password" },
+    { id: "training_attended", label: "Training Attended" },
     { id: "action", label: "Action" },
   ];
 

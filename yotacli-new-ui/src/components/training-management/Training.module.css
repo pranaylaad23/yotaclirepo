@@ -1,11 +1,10 @@
-.table-container {
+  .table-container {
   display: contents;
   flex-direction: column;
   height: 100%;
   width: 100%;
   margin: 10px;
 }
- 
 .table {
   width: 100%;
   border-collapse: collapse;

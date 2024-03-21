@@ -9,7 +9,7 @@ import { fetchTrainingType } from "../../features/redux/training/training-type/t
 import { fetchUnits } from "../../features/redux/unit/unitAction";
 import { CreateUnitForm } from "../unit-management/add-unit/CreateUnitForm";
 import { useNavigate } from "react-router-dom";
-import { costomToast } from "../common/toast/costomToast";
+import { customToast } from "../common/toast/customToast";
 export const CreateTraining = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -131,10 +131,10 @@ export const CreateTraining = () => {
       noOfParticipants: noOfParticipants.current,
 
     };
-    costomToast({
+    customToast({
       message: "Training request submitted successfully!",
       autoClose: 2000,
-      onClose: () => navigate("/trainingList"),
+     // onClose: () => navigate("/trainingList"),
     });
     // window.location.reload();
 
