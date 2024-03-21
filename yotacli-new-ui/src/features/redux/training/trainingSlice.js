@@ -5,6 +5,8 @@ import {
   getTrainingById,
   updateTraining,
   deleteTraining,
+  uploadExcel,
+  addNominations,
 } from "./trainingAction";
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
+
 };
 
 const trainingSlice = createSlice({
@@ -44,6 +47,29 @@ const trainingSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
+    builder.addCase(uploadExcel.pending,(state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    builder.addCase(uploadExcel.fulfilled,(state) => {
+      state.loading = false;
+    })
+    builder.addCase(uploadExcel.rejected,(state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    builder.addCase(addNominations.pending,(state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    builder.addCase(addNominations.fulfilled,(state) => {
+      state.loading = false;
+    })
+    builder.addCase(addNominations.rejected,(state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    
   },
 });
 

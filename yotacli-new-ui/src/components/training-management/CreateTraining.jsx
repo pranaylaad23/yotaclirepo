@@ -8,8 +8,11 @@ import { fetchCompetency } from "../../features/redux/competency/competencyActio
 import { fetchTrainingType } from "../../features/redux/training/training-type/trainingTypeAction";
 import { fetchUnits } from "../../features/redux/unit/unitAction";
 import { CreateUnitForm } from "../unit-management/add-unit/CreateUnitForm";
+import { useNavigate } from "react-router-dom";
+import { costomToast, customToast } from "../common/toast/customToast";
 export const CreateTraining = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const training_description = useRef();
   const start_date = useRef();
   const end_date = useRef();
@@ -20,6 +23,7 @@ export const CreateTraining = () => {
   const [selectCompetency, setSelectCompetency] = useState("");
   const [selectTrainingType, setSelectTrainingType] = useState("");
   const [trainingName, setTrainingName] = useState("");
+  const [trainindDescription, setTrainingDescription] = useState("");
   const [showUnit, setShowUnit] = useState(false);
   const unitList = useSelector((state) => state.unit.units);
   const techList = useSelector((state) => state.technology.techList);
@@ -67,7 +71,7 @@ export const CreateTraining = () => {
     setYear(event.target.value);
   };
   const handleDescriptionChange = (event) => {
-    training_description.current = event.target.value;
+    setTrainingDescription(event.target.value);
   };
   const months = [
     "JANUARY",
@@ -113,7 +117,7 @@ export const CreateTraining = () => {
     event.preventDefault();
     const trainingRequest = {
       trainingName: trainingName,
-      trainingDescription: training_description.current,
+      trainingDescription: trainindDescription,
       startDate: start_date.current,
       endDate: end_date.current,
     };
@@ -123,9 +127,14 @@ export const CreateTraining = () => {
       .unwrap()
       .then((result) => {
         console.log("Training Request Data", result);
+        navigate("/requestNomination");
         dispatch(requestTraining(JSON.stringify(trainingRequest)));
         console.log("Training Request Data" + JSON.stringify(trainingRequest));
-        alert("Request Training Submit Successfully: ");
+        // alert("Request Training Submit Successfully: ");
+        customToast({
+          message: "Request Training Submit Successfully: ",
+          autoClose: 2000,
+        });
       })
       .catch((error) => {
         const errorResponseString = JSON.stringify(error);
@@ -145,7 +154,7 @@ export const CreateTraining = () => {
       <form onSubmit={onSubmit}>
         <h5>Training Request Form</h5>
         <div className={classes.header}>
-          <Button>Add</Button>
+          <Button>Next</Button>
         </div>{" "}
         <hr />
         <div className="form-group">
