@@ -15,6 +15,7 @@ import testsReducer from "../features/redux/test/TestListSlice";
 import questionSlices from "../features/redux/questions/questionSlices";
 import associateAssignedTests from "../features/redux/associateAssignedTests/associateAssignedTestsSlice";
 import { clientApi } from "./services/securtiy/clientService";
+import rejectTrainingReducer from "../features/redux/training/training-status/rejectTrainingSlice";
 export const store = configureStore({
   reducer: {
     security: securityReducer,
@@ -34,6 +35,7 @@ export const store = configureStore({
     associateAssignedTests,
     [securityApi.reducerPath]: securityApi.reducer,
     [clientApi.reducerPath]: clientApi.reducer,
+    rejectTrainingStatus:rejectTrainingReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(securityApi.middleware, clientApi.middleware),
