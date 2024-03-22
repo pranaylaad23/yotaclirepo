@@ -10,3 +10,10 @@
 .unit {
   padding-top: 0;
 }
+.addunitbutton {
+  border: none;
+  border-radius: 3px;
+  background-color: #fff;
+  float: right;
+  margin-right: -30px;
+}

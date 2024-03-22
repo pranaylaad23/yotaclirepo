@@ -26,6 +26,7 @@ import { TestQuestions } from "../components/take-test/take-test/test-questions/
 import Nomination from "../components/training-management/Nomination.jsx";
 
 import { ApproveStatus } from "../components/training-management/training-model/ApproveStatus.jsx";
+import { ChangeTrainingStatus } from "../components/training-management/training-model/ChangeTrainingStatus.jsx";
 
 export const AppRoutes = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -197,6 +198,15 @@ export const AppRoutes = () => {
           <MainContent>
             <TrainingList />
             <ApproveStatus />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/changeTrainingStatus/:id"
+        element={
+          <MainContent>
+            <TrainingList />
+            <ChangeTrainingStatus />
           </MainContent>
         }
       />

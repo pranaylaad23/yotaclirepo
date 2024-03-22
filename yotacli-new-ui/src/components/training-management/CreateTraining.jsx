@@ -22,7 +22,6 @@ export const CreateTraining = () => {
   const [selectCompetency, setSelectCompetency] = useState("");
   const [selectTrainingType, setSelectTrainingType] = useState("");
   const [trainingName, setTrainingName] = useState("");
-  const [trainindDescription, setTrainingDescription] = useState("");
   const [showUnit, setShowUnit] = useState(false);
   const noOfParticipants = useRef();
   const trainingDescription = useRef();
@@ -72,13 +71,10 @@ export const CreateTraining = () => {
     setYear(event.target.value);
   };
   const handleDescriptionChange = (event) => {
-
-    setTrainingDescription(event.target.value);
-
+    trainingDescription.current = event.target.value;
   };
   const handleParticipantChange = (event) => {
     noOfParticipants.current = event.target.value;
-
   };
   const months = [
     "JAN",
@@ -124,44 +120,40 @@ export const CreateTraining = () => {
     event.preventDefault();
     const trainingRequest = {
       trainingName: trainingName,
-
       trainingDescription: trainingDescription.current,
       startDate: startDate.current,
       endDate: endDate.current,
       noOfParticipants: noOfParticipants.current,
-
     };
-    customToast({
-      message: "Training request submitted successfully!",
-      autoClose: 2000,
-     // onClose: () => navigate("/trainingList"),
-    });
-    // window.location.reload();
 
     console.log("Payload--", trainingRequest);
     dispatch(requestTraining(JSON.stringify(trainingRequest)))
       .unwrap()
       .then((result) => {
         console.log("Training Request Data", result);
-        navigate("/requestNomination");
-        dispatch(requestTraining(JSON.stringify(trainingRequest)));
         console.log("Training Request Data" + JSON.stringify(trainingRequest));
-        // alert("Request Training Submit Successfully: ");
-
         customToast({
-          message: "Request Training Submit Successfully: ",
+          message: "Training request submitted successfully!",
           autoClose: 2000,
+          onClose: () => navigate("/requestNomination"),
         });
-
       })
       .catch((error) => {
         const errorResponseString = JSON.stringify(error);
         const errorMessageJson = JSON.parse(errorResponseString);
         if (errorMessageJson.errorMessage) {
-          alert(errorMessageJson.errorMessage);
+          customToast({
+            message: errorMessageJson.errorMessage,
+            autoClose: 2000,
+            type: "error",
+          });
         } else {
           if (errorMessageJson.trainingDescription) {
-            alert(errorMessageJson.trainingDescription);
+            customToast({
+              message: errorMessageJson.trainingDescription,
+              autoClose: 2000,
+              type: "error",
+            });
           }
         }
       });
@@ -172,7 +164,7 @@ export const CreateTraining = () => {
       <form onSubmit={onSubmit}>
         <h5>Training Request Form</h5>
         <div className={classes.header}>
-          <Button>Next</Button>
+          <Button>Add</Button>
         </div>{" "}
         <hr />
         <div className="form-group">
@@ -198,7 +190,7 @@ export const CreateTraining = () => {
               <div className={classes.addnewUnit}>
                 <button
                   type="button"
-                  className="addtestbutton"
+                  className={classes.addunitbutton}
                   onClick={handleButtonClick}
                 >
                   <i className="fas fa-plus"></i>

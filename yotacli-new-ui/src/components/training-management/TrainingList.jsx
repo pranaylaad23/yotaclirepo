@@ -28,7 +28,7 @@ export const TrainingList = (props) => {
     { id: "status", label: "Status" },
     { id: "trainingStatus", label: "Training Status" },
     { id: "trainerName", label: "Trainer Name" },
-    { id: "action", label: "Action" },    
+    { id: "action", label: "Action" },
   ];
 
   const { trainings } = useSelector((state) => state.trainings);
