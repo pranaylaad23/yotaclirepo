@@ -15,8 +15,9 @@ export const ChangeTrainingStatus = () => {
   const { id } = useParams();
 
   const trainingStatusList = [
-    { id: 1, name: "COMPLETED" },
-    { id: 2, name: "ON-HOLD" },
+    { id: 1, name: "ON-HOLD" },
+    { id: 2, name: "INPROGRESS" },
+    { id: 3, name: "COMPLETED" },
   ];
   const handleSelectTrainer = (event) => {
     trainingStatus.current = event.target.value;

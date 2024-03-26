@@ -51,30 +51,29 @@ export const requestTraining = createAsyncThunk(
   }
 );
 
-
 export const addNominations = createAsyncThunk(
   "training/nominations",
-  async (nominations, {rejectWithValue}) => {
-    try{
+  async (nominations, { rejectWithValue }) => {
+    try {
       const token = localStorage.getItem("jwtToken");
       const config = {
-        headers:{
+        headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,
         },
       };
       console.log(nominations);
-      const response = await axios.post(`yota-api/nominations/`, nominations, config);
-      customToast({
-        message:`${response.data}`,
-        autoClose:2000,
-      });
+      const response = await axios.post(
+        `yota-api/nominations/`,
+        nominations,
+        config
+      );
+
       return response.data;
-    }
-    catch(error){
+    } catch (error) {
       customToast({
-        message:`${error.response.data}`,
-        autoClose:2000,
+        message: `${error.response.data}`,
+        autoClose: 2000,
       });
       return rejectWithValue(error.response.data);
     }
@@ -83,30 +82,35 @@ export const addNominations = createAsyncThunk(
 
 export const uploadExcel = createAsyncThunk(
   "excel/uploadExcel",
-  async (file,{rejectWithValue}) => {
-    try{
+  async (file, { rejectWithValue }) => {
+    try {
       const token = localStorage.getItem("jwtToken");
       const formData = new FormData();
       formData.append("file", file);
 
       const config = {
-        headers:{
+        headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `${token}`,
         },
       };
 
-      const response = await axios.post(`yota-api/nominations/bulkNominations`, formData, config);
+      const response = await axios.post(
+        `yota-api/nominations/bulkNominations`,
+        formData,
+        config
+      );
       customToast({
-        message:`${response.data}`,
-        autoClose:2000,
+        message: `${response.data}`,
+        autoClose: 2000,
       });
       return response.data;
-    }
-    catch(error){
-      if(error.response){return rejectWithValue(error.response.data)}
-      else{return rejectWithValue(error.message)}
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
 );
-

@@ -7,7 +7,10 @@ import "react-quill/dist/quill.snow.css";
 import { AddTest } from "./addTest";
 import "./CreateQuestion.css";
 import sanitizeHtml from "sanitize-html";
-import { postQuestion } from "../../../features/redux/questions/questionAction";
+import {
+  postQuestion,
+  uploadQuestions,
+} from "../../../features/redux/questions/questionAction";
 
 export const CreateQuestion = () => {
   const dispatch = useDispatch();
@@ -20,6 +23,7 @@ export const CreateQuestion = () => {
   const optionDRef = useRef("");
   const correctAnswerRef = useRef("");
   const [showAddTest, setShowAddTest] = useState(false);
+  const [file, setFile] = useState(null);
 
   const techList = useSelector((state) => state.technology.techList);
   const testList = useSelector((state) => state.test.testList);
@@ -49,6 +53,8 @@ export const CreateQuestion = () => {
   };
 
   const handleCorrectAnswerChange = (event) => {
+    console.log(technologyRef.current);
+    console.log(testRef.current);
     correctAnswerRef.current = event.target.value;
   };
 
@@ -88,6 +94,24 @@ export const CreateQuestion = () => {
     dispatch(postQuestion(JSON.stringify(newQuestion)));
     event.preventDefault();
   };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    if (file) {
+      console.log("check1");
+      dispatch(
+        uploadQuestions({
+          file,
+          technologyId: technologyRef.current,
+          test: testRef.current,
+        })
+      );
+    }
+  };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -269,6 +293,21 @@ export const CreateQuestion = () => {
           <hr />
         </div>
       </form>
+
+      {/* bulk upload */}
+
+      <div className="UploadFile">
+        <h6>Bulk Upload</h6>
+        <input type="file" onChange={handleFileChange} />
+        <button
+          type="button"
+          className="uploadbutton btn btn-primary"
+          onClick={handleUpload}
+          style={{ marginLeft: "-50px" }}
+        >
+          Upload Questions
+        </button>
+      </div>
     </div>
   );
 };

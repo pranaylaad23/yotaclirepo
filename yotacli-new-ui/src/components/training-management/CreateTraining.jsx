@@ -164,7 +164,7 @@ export const CreateTraining = () => {
       <form onSubmit={onSubmit}>
         <h5>Training Request Form</h5>
         <div className={classes.header}>
-          <Button>Add</Button>
+          <Button>Next</Button>
         </div>{" "}
         <hr />
         <div className="form-group">
@@ -187,7 +187,7 @@ export const CreateTraining = () => {
                     </option>
                   ))}
               </select>
-              <div className={classes.addnewUnit}>
+              {/* <div className={classes.addnewUnit}>
                 <button
                   type="button"
                   className={classes.addunitbutton}
@@ -198,7 +198,7 @@ export const CreateTraining = () => {
                 {showUnit && (
                   <CreateUnitForm closeModal={() => setShowUnit(false)} />
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="col-6">
               <label>Competency:</label>

@@ -38,10 +38,7 @@ export const TrainingList = (props) => {
   }, [dispatch]);
 
   const filteredData = useMemo(() => {
-    // const fiteredTraining = trainings.filter(
-    //   (item) => item.status === "APPROVED"
-    // );
-    // console.log(trainings);
+    console.log(trainings);
     return trainings.filter((item) =>
       Object.values(item).some((value) =>
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())

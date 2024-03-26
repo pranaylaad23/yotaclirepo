@@ -6,6 +6,8 @@ import {
   uploadExcel,
 } from "../../features/redux/training/trainingAction";
 import Button from "../common/button/Button";
+import { useNavigate } from "react-router";
+import { customToast } from "../common/toast/customToast";
 
 const Nomination = () => {
   const [empName, setEmpName] = useState("");
@@ -14,7 +16,7 @@ const Nomination = () => {
   const [nominatedEmployees, setNominatedEmployees] = useState([]);
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleNominateEmployee = (event) => {
     event.preventDefault();
 
@@ -35,7 +37,11 @@ const Nomination = () => {
     event.preventDefault();
     console.log("Nominated Employees:", nominatedEmployees);
     dispatch(addNominations(nominatedEmployees));
-    // onNominate(nominatedEmployees);
+    customToast({
+      message: "Successfully added nominations",
+      autoClose: 2000,
+      onClose: () => navigate("/trainingList"),
+    });
   };
 
   const handleFileChange = (event) => {
@@ -61,80 +67,6 @@ const Nomination = () => {
         <hr />
         <br />
 
-        <div className="NominatedList">
-          <p>
-            <h6>Nominated Employees</h6>
-          </p>
-          <table style={{ borderCollapse: "collapse", width: "100%" }}>
-            <thead>
-              <tr>
-                <th
-                  style={{
-                    padding: "1rem",
-                    textAlign: "left",
-                    border: "1px solid #ddd",
-                    backgroundColor: "#f2f2f2",
-                  }}
-                >
-                  Name
-                </th>
-                <th
-                  style={{
-                    padding: "1rem",
-                    textAlign: "left",
-                    border: "1px solid #ddd",
-                    backgroundColor: "#f2f2f2",
-                  }}
-                >
-                  ID
-                </th>
-                <th
-                  style={{
-                    padding: "1rem",
-                    textAlign: "left",
-                    border: "1px solid #ddd",
-                    backgroundColor: "#f2f2f2",
-                  }}
-                >
-                  Email
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {nominatedEmployees.map((employee, index) => (
-                <tr key={index}>
-                  <td
-                    style={{
-                      padding: "1rem",
-                      textAlign: "left",
-                      border: "1px solid #ddd",
-                    }}
-                  >
-                    {employee.employeeName}
-                  </td>
-                  <td
-                    style={{
-                      padding: "1rem",
-                      textAlign: "left",
-                      border: "1px solid #ddd",
-                    }}
-                  >
-                    {employee.employeeId}
-                  </td>
-                  <td
-                    style={{
-                      padding: "1rem",
-                      textAlign: "left",
-                      border: "1px solid #ddd",
-                    }}
-                  >
-                    {employee.employeeEmail}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
         <hr />
         <div className="QuestionForm row g-3">
           <div className="employeeName col-md-6">
@@ -180,7 +112,81 @@ const Nomination = () => {
             </button>
             {/* <Button onClick={handleNominateEmployee}>Add Employee</Button> */}
           </div>
-
+          <hr />
+          <div className="NominatedList">
+            <p>
+              <h6>Nominated Employees</h6>
+            </p>
+            <table style={{ borderCollapse: "collapse", width: "100%" }}>
+              <thead>
+                <tr>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      border: "1px solid #ddd",
+                      backgroundColor: "#f2f2f2",
+                    }}
+                  >
+                    Name
+                  </th>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      border: "1px solid #ddd",
+                      backgroundColor: "#f2f2f2",
+                    }}
+                  >
+                    ID
+                  </th>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      border: "1px solid #ddd",
+                      backgroundColor: "#f2f2f2",
+                    }}
+                  >
+                    Email
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {nominatedEmployees.map((employee, index) => (
+                  <tr key={index}>
+                    <td
+                      style={{
+                        padding: "1rem",
+                        textAlign: "left",
+                        border: "1px solid #ddd",
+                      }}
+                    >
+                      {employee.employeeName}
+                    </td>
+                    <td
+                      style={{
+                        padding: "1rem",
+                        textAlign: "left",
+                        border: "1px solid #ddd",
+                      }}
+                    >
+                      {employee.employeeId}
+                    </td>
+                    <td
+                      style={{
+                        padding: "1rem",
+                        textAlign: "left",
+                        border: "1px solid #ddd",
+                      }}
+                    >
+                      {employee.employeeEmail}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <hr />
 
           <div className="UploadFile">
@@ -192,7 +198,7 @@ const Nomination = () => {
               onClick={handleUpload}
               style={{ marginLeft: "-50px" }}
             >
-              Upload Question
+              Upload Nomination
             </button>
           </div>
         </div>
