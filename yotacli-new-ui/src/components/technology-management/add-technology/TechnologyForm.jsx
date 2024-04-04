@@ -12,21 +12,22 @@ export const TechnologyForm = () => {
 
   const showModalRef = useRef(true);
   const nameRef = useRef("");
-  const descriptionRef = useRef("");
+  //const descriptionRef = useRef("");
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      name: nameRef.current.value,
-      shortDescription: descriptionRef.current.value,
+      name: nameRef.current.value
+      //shortDescription: descriptionRef.current.value,
     };
     dispatch(createTechnology(formData));
-    console.log("Form Data:", formData);
-    alert("Technology created successfully");
     hideModal();
   };
+
   const handleCancel = () => {
     hideModal();
   };
+
   const hideModal = () => {
     const modals = document.getElementsByClassName("modell");
     if (modals.length > 0) {
@@ -35,6 +36,7 @@ export const TechnologyForm = () => {
       navigate("/Dashboard");
     }
   };
+
   return (
     <div>
       <Modal className="modell" show={showModalRef.current} onHide={() => {}}>
@@ -46,20 +48,20 @@ export const TechnologyForm = () => {
         <Modal.Body>
           <form onSubmit={handleOnSubmit}>
             <div className="form-group row">
-              <label htmlFor="inputName" className="col-sm-2">
-                Name
+              <label htmlFor="inputName" className="col-sm-4">
+                Technology Name
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-8">
                 <input
                   ref={nameRef}
                   name="name"
-                  placeholder="Enter Name"
+                  placeholder="Enter technology name"
                   type="text"
                   className="mb-2 form-control-sm form-control"
                 />
               </div>
             </div>
-            <div className="form-group row">
+            {/* <div className="form-group row">
               <label htmlFor="inputDescription" className="col-sm-2">
                 Description
               </label>
@@ -72,7 +74,7 @@ export const TechnologyForm = () => {
                   className="mb-2 form-control-sm form-control"
                 ></textarea>
               </div>
-            </div>
+            </div> */}
             <div className="d-flex p-2 justify-content-between">
               <div className="Add-button">
                 <Button type="submit">Add</Button>

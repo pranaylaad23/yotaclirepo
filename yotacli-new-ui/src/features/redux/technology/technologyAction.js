@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { customToast } from "../../../components/common/toast/customToast";
 
 export const fetchTechnologies = createAsyncThunk(
   "technology/fetchTechnologies",
@@ -32,7 +33,18 @@ export const createTechnology = createAsyncThunk(
           Authorization: Token,
         },
       };
-      await axios.post("/yota-api/technologies/", formData, config);
+      const response = await axios.post(
+        "/yota-api/technologies/",
+        formData,
+        config
+      );
+      if (response.status === 200) {
+        customToast({
+          message: `${"Technology added successfully"}`,
+          autoClose: 2000,
+          type: "success",
+        });
+      }
     } catch (error) {
       if (error.response) {
         return rejectWithValue(error.response);
