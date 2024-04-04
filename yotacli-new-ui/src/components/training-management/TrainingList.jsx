@@ -20,14 +20,12 @@ export const TrainingList = (props) => {
   const columns = [
     { id: "id", label: "#" },
     { id: "trainingName", label: "Training Name" },
-    { id: "noOfParticipants", label: " Total Nominations" },
-    { id: "startDate", label: " Planned Start Date" },
-    { id: "endDate", label: "Planned End Date" },
-    { id: "actualStartDate", label: "Actual Start Date" },
-    { id: "actualEndDate", label: "Actual End Date" },
+    { id: "assignedTo", label: "Assigned To" },
+    { id: "startDate", label: "Start Date" },
+    { id: "endDate", label: "End Date" },
+    { id: "associates", label: "Associates" },
     { id: "status", label: "Status" },
-    { id: "trainingStatus", label: "Training Status" },
-    { id: "trainerName", label: "Trainer Name" },
+    { id: "changeStatus", label: "Change Status" },
     { id: "action", label: "Action" },
   ];
 
@@ -91,6 +89,7 @@ export const TrainingList = (props) => {
               <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
+              <option value="15">20</option>
             </select>
           </div>
         </div>
