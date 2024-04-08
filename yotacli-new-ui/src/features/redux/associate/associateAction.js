@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { customToast } from "../../../components/common/toast/customToast";
 export const addAssociate = createAsyncThunk(
   "associates/addAssociate",
   async (formData, { rejectWithValue }) => {
@@ -24,11 +25,11 @@ export const addAssociate = createAsyncThunk(
 
 export const fetchAssociates = createAsyncThunk(
   "associates/fetchAssociates",
-  async (trainingData, { rejectWithValue }) => {
+  async (trainingData,{ rejectWithValue }) => {
     try {
       const token = localStorage.getItem("jwtToken");
       console.log(token);
-      console.log("service getassociates" + trainingData);
+      console.log("service getassociates of ID" + trainingData);
 
       const config = {
         headers: {
@@ -36,7 +37,8 @@ export const fetchAssociates = createAsyncThunk(
           Authorization: `${token}`,
         },
       };
-      const response = await axios.get(`/yota-api/associates/`, config);
+      const response = await axios.get(`/yota-api/newAssociates/`, config);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -62,6 +64,70 @@ export const fetchAssignedTests = createAsyncThunk(
         },
       };
       const response = await axios.get(`/yota-api/tests/assignedTests`, config);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+//Upload excel file of list of associate by Vishal.Kanthariya
+export const uploadExcel = createAsyncThunk(
+  "excel/uploadExcel",
+  async ({id,file}, { rejectWithValue }) => {
+    try {
+      alert("id",id);
+      const token = localStorage.getItem("jwtToken");
+      const formData = new FormData();
+      formData.append("id",id)
+      formData.append("file", file);
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `${token}`,
+        },
+      };
+
+      const response = await axios.post(
+        `yota-api/newAssociates/bulkAddAssociates`,
+        formData,
+        config
+      );
+      customToast({
+        message: `${response.data}`,
+        autoClose: 2000,
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const fetchAssociatesOnCount = createAsyncThunk(
+  "associates/fetchAssociates",
+  async (id, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      console.log(token);
+      console.log("service getassociates of ID" + id);
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      };
+      const response = await axios.get(`/yota-api/newAssociates/${id}`, config);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response) {

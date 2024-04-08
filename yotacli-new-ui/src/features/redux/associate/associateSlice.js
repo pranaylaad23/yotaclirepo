@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAssociates, fetchAssignedTests } from "./associateAction";
+import { fetchAssociates, fetchAssignedTests,uploadExcel } from "./associateAction";
 
 const initialState = {
   loading: false,
@@ -51,6 +51,17 @@ const associateSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
+    builder.addCase(uploadExcel.pending,(state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    builder.addCase(uploadExcel.fulfilled,(state) => {
+      state.loading = false;
+    })
+    builder.addCase(uploadExcel.rejected,(state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
   },
 });
 export default associateSlice.reducer;

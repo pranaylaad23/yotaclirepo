@@ -6,6 +6,7 @@ import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import "./Associate.module.css";
 import { AssociateTableBody } from "./AssociateTableBody";
 import { fetchAssociates } from "../../../features/redux/associate/associateAction";
+import { useParams } from "react-router-dom";
 
 export const AssociatesList = () => {
   const dispatch = useDispatch();
@@ -14,16 +15,13 @@ export const AssociatesList = () => {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const { id } = useParams();
   const columns = [
     { id: "id", label: "#" },
-    { id: "firstName", label: "First Name" },
-    { id: "emailId", label: "Email Id" },
-    { id: "status", label: "Status" },
-    { id: "createdAt", label: "CreatedAt" },
-    { id: "updatedAt", label: "UpdatedAt" },
-    { id: "password", label: "Password" },
-    { id: "training_attended", label: "Training Attended" },
+    { id: "employeeId", label: "EmpID" },
+    { id: "employeeName", label: "Name" },
+    { id: "employeeEmailId", label: "EmailID" },
+    { id: "employeePassword", label: "Password" },
     { id: "action", label: "Action" },
   ];
 

@@ -1,51 +1,43 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
-import "./Training.module.css";
-import TrainingTableBody from "./TrainingTableBody";
-import { getTrainings } from "../../features/redux/training/trainingAction";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
+import "./Associate.module.css";
+import { AssociateTableBody } from "./AssociateTableBody";
+import { fetchAssociates, fetchAssociatesOnCount } from "../../../features/redux/associate/associateAction";
+import { useParams } from "react-router-dom";
 
-export const TrainingList = (props) => {
+export const AssociatesListToTraining = () => {
   const dispatch = useDispatch();
-  const { role } = useSelector((state) => state.security);
   const searchInputRef = useRef(null);
   const rowsPerPageSelectRef = useRef(null);
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  let userRole = localStorage.getItem("userRole");
-  console.log("resopse role: ", userRole);
-
+  const { id } = useParams();
   const columns = [
     { id: "id", label: "#" },
-    { id: "trainingName", label: "Training Name" },
-    { id: "noOfParticipants", label: " Total Nominations" },
-    { id: "startDate", label: " Planned Start Date" },
-    { id: "endDate", label: "Planned End Date" },
-    { id: "actualStartDate", label: "Actual Start Date" },
-    { id: "actualEndDate", label: "Actual End Date" },
-    { id: "associateCount", label: "Associates" },
-    { id: "status", label: "Status" },
-    { id: "trainingStatus", label: "Training Status" },
-    { id: "trainerName", label: "Trainer Name" },
+    { id: "employeeId", label: "EmpID" },
+    { id: "employeeName", label: "Name" },
+    { id: "employeeEmailId", label: "EmailID" },
+    { id: "employeePassword", label: "Password" },
     { id: "action", label: "Action" },
   ];
 
-  const { trainings } = useSelector((state) => state.trainings);
+  const { associate } = useSelector((state) => state.associate);
 
   useEffect(() => {
-    dispatch(getTrainings());
+    dispatch(fetchAssociatesOnCount(id));
   }, [dispatch]);
 
   const filteredData = useMemo(() => {
-    console.log(trainings);
-    return trainings.filter((item) =>
+    return associate.filter((item) =>
       Object.values(item).some((value) =>
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  }, [trainings, searchTerm]);
+  }, [associate, searchTerm]);
 
   const totalPages = useMemo(
     () => Math.ceil(filteredData.length / rowsPerPage),
@@ -111,6 +103,7 @@ export const TrainingList = (props) => {
       </div>
 
       <div className="horizontal-line"></div>
+
       <table className="mb-0 table table-bordered table-striped">
         <thead>
           <tr>
@@ -120,11 +113,7 @@ export const TrainingList = (props) => {
           </tr>
         </thead>
 
-        <TrainingTableBody
-          rows={paginatedData}
-          columns={columns}
-          role={userRole}
-        />
+        <AssociateTableBody rows={paginatedData} columns={columns} />
       </table>
 
       <div className="pagination">
