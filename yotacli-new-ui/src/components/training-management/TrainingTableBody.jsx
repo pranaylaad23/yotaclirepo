@@ -207,17 +207,28 @@ const TrainingTableBody = ({ rows, columns, role }) => {
                           </Link>
                         </div>
                       ) : role === "Trainer" ? (
+                        // <div>
+                        //   <Link to={`/changeTrainingStatus/` + row.id}>
+                        //     <i
+                        //       className="fa-solid fa-pen-to-square"
+                        //       id="eidt"
+                        //       data-toggle="tooltip"
+                        //       data-placement="bottom"
+                        //       type="button"
+                        //       title="Approve Training"
+                        //     ></i>
+                        //   </Link>
+                        // </div>
+
                         <div>
-                          <Link to={`/changeTrainingStatus/` + row.id}>
-                            <i
-                              className="fa-solid fa-pen-to-square"
-                              id="eidt"
-                              data-toggle="tooltip"
-                              data-placement="bottom"
-                              type="button"
-                              title="Approve Training"
-                            ></i>
-                          </Link>
+                          <i
+                            className="fa-solid fa-pen-to-square"
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="Reject Training"
+                            disabled={row.status === "REJECTED"}
+                            onClick={() => handleEditTrainingButton(row)}
+                          ></i>
                         </div>
                       ) : (
                         <div>No Action Available</div>

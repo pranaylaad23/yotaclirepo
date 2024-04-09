@@ -202,7 +202,7 @@ export const AppRoutes = () => {
           </MainContent>
         }
       />
-      <Route
+      {/* <Route
         path="/changeTrainingStatus/:id"
         element={
           <MainContent>
@@ -210,12 +210,12 @@ export const AppRoutes = () => {
             <ChangeTrainingStatus />
           </MainContent>
         }
-      />
+      /> */}
       <Route
         path="/addAssociate/:id"
         element={
           <MainContent>
-            <AssociatesListToTraining/> 
+            <AssociatesListToTraining />
           </MainContent>
         }
       />
