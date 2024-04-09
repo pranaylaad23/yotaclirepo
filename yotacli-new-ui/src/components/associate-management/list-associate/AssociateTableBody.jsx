@@ -3,8 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./Associate.module.css";
+import { useSelector } from "react-redux";
 export const AssociateTableBody = ({ rows, columns, role }) => {
+  const  trainings  = useSelector((state) => state.trainings);
   return (
+    <>
     <tbody>
       {rows.map((row) => (
         <tr key={row.id}>
@@ -45,5 +48,6 @@ export const AssociateTableBody = ({ rows, columns, role }) => {
         </tr>
       ))}
     </tbody>
+    </>
   );
 };
