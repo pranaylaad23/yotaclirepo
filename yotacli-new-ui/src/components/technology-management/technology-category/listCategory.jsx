@@ -21,6 +21,7 @@ export const ListCategory = ({ order, setorder }) => {
   const rowsPerPageSelectRef = useRef(null);
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isModal, setIsModal] = useState(false);
   const [selectedTech, setSelectedTech] = useState(null);
@@ -71,12 +72,17 @@ export const ListCategory = ({ order, setorder }) => {
   }, [createTechCategoryData]);
 
   const filteredData = useMemo(() => {
-    return techCategoryList.filter((item) =>
-      Object.values(item).some((value) =>
-        value?.toString()?.toLowerCase()?.includes(searchTerm?.toLowerCase())
-      )
-    );
-  }, [techCategoryList, searchTerm]);
+    let data = techCategoryList.filter((item) =>
+    Object.values(item).some((value) =>
+      value?.toString()?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+    )
+  );
+  if(selectedValue && selectedValue != "All"){
+    data = data.filter(record=>record.technologyMaster.name === selectedValue)
+  }
+  
+    return data 
+  }, [techCategoryList, searchTerm,selectedValue]);
 
   const totalPages = useMemo(
     () => Math.ceil(filteredData.length / rowsPerPage),
@@ -136,6 +142,11 @@ export const ListCategory = ({ order, setorder }) => {
       setorder("ASC");
     }
   };
+
+  const handleFilterTechChange = (event)=>{
+    let target = event.target.value
+    setSelectedValue(target);
+  }
 
   const renderForm = () => {
     return (
@@ -245,6 +256,24 @@ export const ListCategory = ({ order, setorder }) => {
           </span>
         </div>
         <Button onClick={handleAddCategory}>Add Category</Button>
+        <div className="col-sm-10 mt-4">
+          <select
+            id="data-per-page"
+            // ref={rowsPerPageSelectRef}
+            value={selectedTech}
+            onChange={handleFilterTechChange}
+            className="mb-2 form-control-sm form-control"
+
+          >
+            <option selected>All</option>
+
+            {techList && techList.length && techList.map((item, itemIndex)=> {
+              return (
+                <option key={itemIndex}>{item.name}</option>
+              )
+            })}
+          </select>
+        </div>
       </div>
       <hr className="divider" />
       <table
