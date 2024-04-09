@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import "./Training.module.css";
 import TrainingTableBody from "./TrainingTableBody";
-import { getTrainings } from "../../features/redux/training/trainingAction";
+import {
+  getTrainings,
+  getTrainingsByStatus,
+} from "../../features/redux/training/trainingAction";
 
 export const TrainingList = (props) => {
   const dispatch = useDispatch();
@@ -13,22 +16,18 @@ export const TrainingList = (props) => {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   let userRole = localStorage.getItem("userRole");
   console.log("resopse role: ", userRole);
 
   const columns = [
     { id: "id", label: "#" },
     { id: "trainingName", label: "Training Name" },
-    { id: "noOfParticipants", label: " Total Nominations" },
-    { id: "startDate", label: " Planned Start Date" },
-    { id: "endDate", label: "Planned End Date" },
-    { id: "actualStartDate", label: "Actual Start Date" },
-    { id: "actualEndDate", label: "Actual End Date" },
-    { id: "associateCount", label: "Associates" },
+    { id: "assignedTo", label: "Assigned To" },
+    { id: "startDate", label: "Start Date" },
+    { id: "endDate", label: "End Date" },
+    { id: "associates", label: "Associates" },
     { id: "status", label: "Status" },
-    { id: "trainingStatus", label: "Training Status" },
-    { id: "trainerName", label: "Trainer Name" },
+    { id: "changeRequestStatus", label: "Change Status" },
     { id: "action", label: "Action" },
   ];
 
@@ -38,11 +37,19 @@ export const TrainingList = (props) => {
     dispatch(getTrainings());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (searchTerm) {
+      dispatch(getTrainingsByStatus(searchTerm));
+    }
+  }, [searchTerm, dispatch]);
+
   const filteredData = useMemo(() => {
+    if (!trainings) return []; // Return an empty array if trainings is null or undefined
     console.log(trainings);
     return trainings.filter((item) =>
-      Object.values(item).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      Object.values(item).some(
+        (value) =>
+          value?.toString().toLowerCase().includes(searchTerm.toLowerCase()) // Use optional chaining (?.)
       )
     );
   }, [trainings, searchTerm]);
@@ -92,6 +99,7 @@ export const TrainingList = (props) => {
               <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
+              <option value="15">20</option>
             </select>
           </div>
         </div>

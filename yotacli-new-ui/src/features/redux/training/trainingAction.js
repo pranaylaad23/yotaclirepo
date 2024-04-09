@@ -114,3 +114,30 @@ export const uploadExcel = createAsyncThunk(
     }
   }
 );
+
+export const getTrainingsByStatus = createAsyncThunk(
+  "trainings/getTrainingsByStatus",
+  async (status, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      };
+
+      const response = await axios.get(
+        `/yota-api/trainings/status/${status}`,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
