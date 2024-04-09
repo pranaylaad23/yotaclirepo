@@ -142,13 +142,13 @@ export const Sidebar = (props) => {
           innershowSubRoutes: true,
           role: ["Trainer", "Technical Manager"],
           innersubRoutes: [
-            {
-              name: "Create ",
-              path: "/tech-addTech",
-              subPath: "/technology-createTechnology",
-              iconClass: "fa-solid fa-house-user",
-              show: true,
-            },
+            // {
+            //   name: "Create ",
+            //   path: "/tech-addTech",
+            //   subPath: "/technology-createTechnology",
+            //   iconClass: "fa-solid fa-house-user",
+            //   show: true,
+            // },
             {
               name: " List",
               subPath: "/technology-technologyList",
