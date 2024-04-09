@@ -44,6 +44,7 @@ export const createTechnology = createAsyncThunk(
           autoClose: 2000,
           type: "success",
         });
+        return response.data;
       }
     } catch (error) {
       if (error.response) {
@@ -82,13 +83,15 @@ export const fetchTechnologyById = createAsyncThunk(
     try {
       const token = localStorage.getItem("jwtToken");
       console.log(token);
-      const response = await axios.get(`/yota-api/technologies/${technologyId}`,
-       {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      });
+      const response = await axios.get(
+        `/yota-api/technologies/${technologyId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       if (error) {
@@ -134,7 +137,7 @@ export const deleteTechnology = createAsyncThunk(
 
 export const editTechnology = createAsyncThunk(
   "technology/editTechnology",
- 
+
   async (formData, { rejectWithValue }) => {
     const Token = localStorage.getItem("jwtToken");
     try {
@@ -144,7 +147,7 @@ export const editTechnology = createAsyncThunk(
           Authorization: Token,
         },
       };
-      
+
       const response = await axios.put(
         `/yota-api/technologies/${formData.technologyId}`,
         formData,
@@ -156,6 +159,7 @@ export const editTechnology = createAsyncThunk(
           autoClose: 2000,
           type: "success",
         });
+        return response.data;
       }
     } catch (error) {
       if (error.response) {
