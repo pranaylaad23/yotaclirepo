@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchTechnologies } from "./technologyAction";
+import { deleteTechnology, editTechnology, fetchTechnologies, fetchTechnologyById } from "./technologyAction";
 import { fetchTechnology } from "./technologyAction";
 import { createTechnology } from "./technologyAction";
 const technologySlice = createSlice({
@@ -9,7 +9,7 @@ const technologySlice = createSlice({
   initialState: {
     techList: [],
     loading: false,
-    error: null,
+    error: null
   },
 
   reducers: {},
@@ -51,6 +51,45 @@ const technologySlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     });
+    builder
+      .addCase(deleteTechnology.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTechnology.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technologyId = action.payload;
+      })
+      .addCase(deleteTechnology.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+
+      builder
+      .addCase(fetchTechnologyById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTechnologyById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technologyId = action.payload;
+      })
+      .addCase(fetchTechnologyById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+      builder.addCase(editTechnology.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      });
+      builder.addCase(editTechnology.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technology = action.payload;
+      });
+      builder.addCase(editTechnology.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 

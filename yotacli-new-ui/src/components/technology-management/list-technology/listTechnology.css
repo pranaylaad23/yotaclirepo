@@ -44,7 +44,7 @@ table.dataTable thead .sorting_desc_disabled:behtmlfore {
   text-align: center;
 }
 
-.divider {
+/* .divider {
   width: 100%;
   height: 40px;
   color: #333;
@@ -52,7 +52,7 @@ table.dataTable thead .sorting_desc_disabled:behtmlfore {
   background-color: #333;
   position: relative;
   top: -85px;
-}
+} */
 
 .table-rows:hover {
   background-color: rgba(231, 224, 224, 0.854);
