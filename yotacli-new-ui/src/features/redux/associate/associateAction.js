@@ -80,7 +80,6 @@ export const uploadExcel = createAsyncThunk(
   "excel/uploadExcel",
   async ({id,file}, { rejectWithValue }) => {
     try {
-      alert("id",id);
       const token = localStorage.getItem("jwtToken");
       const formData = new FormData();
       formData.append("id",id)

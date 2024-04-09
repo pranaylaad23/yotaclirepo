@@ -52,12 +52,6 @@ const TrainingTableBody = ({ rows, columns, role }) => {
       });
   };
   const showAssociateDetails=(id)=>{
-  // console.log("api call payload", id);
-  // dispatch(fetchAssociates(id))
-  //   .unwrap()
-  //   .then((result) => {
-  //     console.log(result);
-  //   });
   <Link to={`/addAssociate/` + id}>
     </Link>
   };

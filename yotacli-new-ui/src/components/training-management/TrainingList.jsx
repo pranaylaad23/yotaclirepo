@@ -25,7 +25,7 @@ export const TrainingList = (props) => {
     { id: "assignedTo", label: "Assigned To" },
     { id: "startDate", label: "Start Date" },
     { id: "endDate", label: "End Date" },
-    { id: "associates", label: "Associates" },
+    { id: "associateCount", label: "Associates" },
     { id: "status", label: "Status" },
     { id: "changeRequestStatus", label: "Change Status" },
     { id: "action", label: "Action" },
@@ -35,7 +35,7 @@ export const TrainingList = (props) => {
 
   useEffect(() => {
     dispatch(getTrainings());
-  }, [dispatch]);
+  }, [dispatch,trainings]);
 
   useEffect(() => {
     if (searchTerm) {
