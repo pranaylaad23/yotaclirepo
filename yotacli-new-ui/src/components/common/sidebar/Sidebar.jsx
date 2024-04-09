@@ -155,6 +155,13 @@ export const Sidebar = (props) => {
               iconClass: "fa-solid fa-house-user",
               show: true,
             },
+            {
+              name: "Category",
+              path: "/tech-category",
+              subPath: "/technology-category",
+              iconClass: "fa-solid fa-house-user",
+              show: true,
+            }
           ],
         },
         {

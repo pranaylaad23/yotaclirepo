@@ -22,6 +22,8 @@ import { TestInstruction } from "../components/question-management/test-instruct
 import { TestList } from "../components/take-test/take-test/TestList.jsx";
 import { StartTest } from "../components/take-test/take-test/StartTest.jsx";
 import { TestQuestions } from "../components/take-test/take-test/test-questions/TestQuestions.jsx";
+import { ListCategory } from "../components/technology-management/technology-category/listCategory.jsx";
+
 
 import Nomination from "../components/training-management/Nomination.jsx";
 
@@ -138,6 +140,15 @@ export const AppRoutes = () => {
         element={
           <MainContent>
             <ListTechnology />
+          </MainContent>
+        }
+      />
+
+      <Route
+        path="/technology-category"
+        element={
+          <MainContent>
+            <ListCategory />
           </MainContent>
         }
       />

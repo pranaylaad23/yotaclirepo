@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { fetchTechnologies } from "./technologyAction";
 import { fetchTechnology } from "./technologyAction";
-import { createTechnology } from "./technologyAction";
+import { createTechnology, fetchTechCategory, createTechCategory } from "./technologyAction";
 const technologySlice = createSlice({
   name: "technology",
   name: "technologies",
@@ -10,6 +10,10 @@ const technologySlice = createSlice({
     techList: [],
     loading: false,
     error: null,
+    techCategoryList: [],
+    techCategoryLoading: false,
+    techCategoryError: null,
+    createTechCategoryData: null
   },
 
   reducers: {},
@@ -50,6 +54,33 @@ const technologySlice = createSlice({
     builder.addCase(fetchTechnology.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
+    });
+    builder
+    .addCase(fetchTechCategory.pending, (state) => {
+      state.techCategoryLoading = true;
+      state.techCategoryError = null;
+    })
+    .addCase(fetchTechCategory.fulfilled, (state, action) => {
+      state.techCategoryLoading = false;
+      state.techCategoryList = action.payload;
+    })
+    .addCase(fetchTechCategory.rejected, (state, action) => {
+      state.techCategoryLoading = false;
+      state.techCategoryError = action.error.message;
+    });
+
+    builder
+    .addCase(createTechCategory.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(createTechCategory.fulfilled, (state, action) => {
+      state.loading = false;
+      state.createTechCategoryData = action.payload;
+    })
+    .addCase(createTechCategory.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });
