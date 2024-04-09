@@ -52,7 +52,7 @@ export const Sidebar = (props) => {
           name: "Request Training",
           subPath: "/requestTraining",
           iconClass: "fa-solid fa-house-user",
-          show: userRole === "Technical Manager" || userRole === "Requester",
+          show: userRole === "Technical Manager",
           role: ["Trainer", "Technical Manager", "Requester"],
         },
         {
