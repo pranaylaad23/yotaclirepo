@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import "./Training.module.css";
 import TrainingTableBody from "./TrainingTableBody";
-import { getTrainings } from "../../features/redux/training/trainingAction";
+import {
+  getTrainings,
+  getTrainingsByStatus,
+} from "../../features/redux/training/trainingAction";
 
 export const TrainingList = (props) => {
   const dispatch = useDispatch();
@@ -13,7 +16,6 @@ export const TrainingList = (props) => {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   let userRole = localStorage.getItem("userRole");
   console.log("resopse role: ", userRole);
 
@@ -25,7 +27,7 @@ export const TrainingList = (props) => {
     { id: "endDate", label: "End Date" },
     { id: "associates", label: "Associates" },
     { id: "status", label: "Status" },
-    { id: "changeStatus", label: "Change Status" },
+    { id: "changeRequestStatus", label: "Change Status" },
     { id: "action", label: "Action" },
   ];
 
@@ -35,11 +37,28 @@ export const TrainingList = (props) => {
     dispatch(getTrainings());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (searchTerm) {
+      dispatch(getTrainingsByStatus(searchTerm));
+    }
+  }, [searchTerm, dispatch]);
+
+  // const filteredData = useMemo(() => {
+  //   console.log(trainings);
+  //   return trainings.filter((item) =>
+  //     Object.values(item).some((value) =>
+  //       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+  //     )
+  //   );
+  // }, [trainings, searchTerm]);
+
   const filteredData = useMemo(() => {
+    if (!trainings) return []; // Return an empty array if trainings is null or undefined
     console.log(trainings);
     return trainings.filter((item) =>
-      Object.values(item).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      Object.values(item).some(
+        (value) =>
+          value?.toString().toLowerCase().includes(searchTerm.toLowerCase()) // Use optional chaining (?.)
       )
     );
   }, [trainings, searchTerm]);
