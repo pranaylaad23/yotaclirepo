@@ -15,21 +15,15 @@ export const AssociateTableBody = ({ rows, columns, role }) => {
             <td key={column.id}>
               {column.id === "action" ? (
                 <div className="action-icon">
-                  <Link to={`/updateinfo`}>
-                    <i
-                      className="icon action-icon fa fa-edit"
-                      title="Update"
-                    ></i>
-                  </Link>{" "}
-                  <Link to={`/deleteinfo`}>
-                    <i
-                      className="icon action-icon fa fa-trash-can"
-                      title="Delete"
-                    ></i>
-                  </Link>
-                  <Link to={`/viewinfo`}>
-                    <i className="icon action-icon fa fa-eye" title="View"></i>
-                  </Link>
+                
+                  <i className="fa-solid fa-trash" id="icons">
+                    _
+                  </i>
+                  <i className="fa-solid fa-pen-to-square" id="icons">
+                    _
+                  </i>
+                  <i className="fa-solid fa-eye" id="icons"></i>
+                
                 </div>
               ) : column.id === "lastName" ? (
                 (row.firstName,

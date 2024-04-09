@@ -61,14 +61,12 @@ const TrainingTableBody = ({ rows, columns, role }) => {
         console.log(result);
       });
   };
-  const showAssociateDetails = (id) => {
-    // console.log("api call payload", id);
-    // dispatch(fetchAssociates(id))
-    //   .unwrap()
-    //   .then((result) => {
-    //     console.log(result);
-    //   });
-    <Link to={`/addAssociate/` + id}></Link>;
+
+  const showAssociateDetails=(id)=>{
+  <Link to={`/addAssociate/` + id}>
+    </Link>
+
+  
   };
   const handleActionClickOnAddAssociate = (id) => {
     setUploadingId(id);
