@@ -228,41 +228,33 @@ export const ListCategory = ({ order, setorder }) => {
   return (
     <div>
       <div className="show-sort">
-        <label>Show Entries</label>
-        <br></br>
-        <select
-          id="data-per-page"
-          ref={rowsPerPageSelectRef}
-          value={rowsPerPage}
-          onChange={handleDataPerPageChange}
-        >
-          <option selected>0</option>
-          <option value="1">5</option>
-          <option value="2">10</option>
-          <option value="3">15</option>
-        </select>
-        <label className="Search-label">Search</label>
-        <div className="input-group">
-          <input
-            type="text"
-            placeholder=" ... "
-            value={searchTerm}
-            ref={searchInputRef}
-            onChange={handleSearch}
-            className="list-search-btn"
-          />
-          <span class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
-          </span>
+        <div className="d-flex justify-content-between align-items-center">
+        <div style={{width:"200px"}}>
+            <label>Show Entries</label>
+            <br></br>
+            <select
+              id="data-per-page"
+              ref={rowsPerPageSelectRef}
+              value={rowsPerPage}
+              className="w-100"
+              style={{height:"30px"}}
+              onChange={handleDataPerPageChange}
+            >
+              <option selected>0</option>
+              <option value="1">5</option>
+              <option value="2">10</option>
+              <option value="3">15</option>
+            </select>
         </div>
-        <Button onClick={handleAddCategory}>Add Category</Button>
-        <div className="col-sm-10 mt-4">
+        <div style={{width:"200px"}}>
+        <label className="">Filter</label>
           <select
             id="data-per-page"
             // ref={rowsPerPageSelectRef}
             value={selectedTech}
             onChange={handleFilterTechChange}
-            className="mb-2 form-control-sm form-control"
+            className="w-100"
+            style={{height:"30px"}}
 
           >
             <option selected>All</option>
@@ -273,6 +265,23 @@ export const ListCategory = ({ order, setorder }) => {
               )
             })}
           </select>
+        </div>
+        <div className="">
+          <label className="">Search</label>
+          <div>
+            <input
+              type="text"
+              placeholder=" ..."
+              value={searchTerm}
+              ref={searchInputRef}
+              onChange={handleSearch}
+              style={{height:"30px"}}
+            />
+          </div>
+        </div>
+        <div>
+          <Button onClick={handleAddCategory}>Add Category</Button>
+        </div>
         </div>
       </div>
       <hr className="divider" />
