@@ -24,7 +24,8 @@ export const ListTechnology = () => {
 
   useEffect(() => {
     dispatch(fetchTechnologies());
-  }, [techList]);
+    console.log("use effect 1");
+  }, [dispatch]);
 
   const filteredData = useMemo(() => {
     return techList.filter((item) =>
@@ -84,7 +85,7 @@ export const ListTechnology = () => {
   );
 
   const handleEditAdd = () => {
-    if (editAdd ==  "Add") {
+    if (editAdd == "Add") {
       return <h6>Add Technology</h6>;
     } else if (editAdd == "Edit") {
       return <h6>Edit Technology</h6>;
@@ -146,11 +147,15 @@ export const ListTechnology = () => {
           <Modal.Title>{handleEditAdd()}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {
-            editAdd == "Add" 
-            ? <TechnologyForm showModal={showModal} setShowModal={setShowModal} />
-            : <EditTechnology showModal={showModal} setShowModal={setShowModal} formDetail={formDetail} />
-          }  
+          {editAdd == "Add" ? (
+            <TechnologyForm showModal={showModal} setShowModal={setShowModal} />
+          ) : (
+            <EditTechnology
+              showModal={showModal}
+              setShowModal={setShowModal}
+              formDetail={formDetail}
+            />
+          )}
         </Modal.Body>
       </Modal>
 
