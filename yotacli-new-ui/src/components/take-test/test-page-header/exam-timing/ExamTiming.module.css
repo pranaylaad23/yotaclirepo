@@ -1,0 +1,40 @@
+.exam-timing {
+    text-align: center;
+}
+
+.exam-timing-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 12px;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+}
+
+.countdown-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 3px solid #bcbebe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*margin-right: 10px;*/
+    margin: 2px;
+}
+
+.countdown-label {
+    font-size: 12px;
+}
+
+.countdown-value {
+    font-size: 24px;
+    color: orangered;
+}

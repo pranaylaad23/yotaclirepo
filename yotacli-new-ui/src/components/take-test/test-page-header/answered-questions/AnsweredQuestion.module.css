@@ -1,0 +1,34 @@
+.answered-questions {
+    text-align: center;
+}
+
+.answered-questions-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.answered-questions-container {
+    display: flex;
+    justify-content: center;
+}
+
+.answered-questions-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2px;
+}
+
+.answered-questions-count {
+    font-size: 24px;
+    font-weight: bold;
+    color: #01a7da;
+}
+
+.filled {
+    border-width: 24px;
+}

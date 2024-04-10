@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.right-section {
+    display: flex;
+    align-items: flex-end;
+}
+
+.right-section p {
+    margin: 5px 0;
+}
+
+.right-section .spacer {
+    margin-right: 6rem;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 42px;
+    margin-right: 8px;
+    color: #f38506;
+}
+
+.application-name {
+    display: inline-block;
+    color: #f38506;
+}
+
+.label {
+    font-size: 12px;
+}
