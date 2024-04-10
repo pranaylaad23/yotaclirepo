@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { fetchTechCategory, fetchTechnologies, createTechCategory } from "../../../features/redux/technology/technologyAction";
+import {
+  fetchTechCategory,
+  fetchTechnologies,
+  createTechCategory,
+} from "../../../features/redux/technology/technologyAction";
 import { useSelector, useDispatch } from "react-redux";
 import "../../common/button/Button";
 import "./listCategory.css";
 import CancelButton from "../../common/button/CancelButton";
 import { Button, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
-import Breadcrumb from "../../common/breadcrumb/breadcrumb.jsx"
-
+import Breadcrumb from "../../common/breadcrumb/breadcrumb.jsx";
 
 export const ListCategory = ({ order, setorder }) => {
   const techCategoryList = useSelector(
@@ -15,7 +18,9 @@ export const ListCategory = ({ order, setorder }) => {
   );
   const techList = useSelector((state) => state.technology.techList);
 
-  const createTechCategoryData = useSelector((state) => state.technology.createTechCategoryData);
+  const createTechCategoryData = useSelector(
+    (state) => state.technology.createTechCategoryData
+  );
 
   const [settechCategoryList] = useState([]);
   const searchInputRef = useRef(null);
@@ -29,10 +34,7 @@ export const ListCategory = ({ order, setorder }) => {
 
   const dispatch = useDispatch();
 
-  const paths = [
-    { label: 'Technology', link: '/' },
-    { label: 'Category' },
-  ];
+  const paths = [{ label: "Technology", link: "/" }, { label: "Category" }];
 
   const showModalRef = useRef(true);
   const nameRef = useRef("");
@@ -41,19 +43,19 @@ export const ListCategory = ({ order, setorder }) => {
     e.preventDefault();
     let selectedId = techList.findIndex((item) => {
       return item.name === selectedTech;
-    })
+    });
     const formData = {
       name: nameRef.current.value,
       technologyMaster: {
-        id: techList[selectedId].id
-      }
+        id: techList[selectedId].id,
+      },
     };
     dispatch(createTechCategory(formData));
     console.log("Form Data:", formData);
-    toast("Category created successfully",{ 
-      type: 'success'
+    toast("Category created successfully", {
+      type: "success",
     });
-    setSelectedTech(null);
+    // setSelectedTech(null);
     nameRef.current.value = "";
   };
   const handleCancel = () => {
@@ -79,16 +81,18 @@ export const ListCategory = ({ order, setorder }) => {
 
   const filteredData = useMemo(() => {
     let data = techCategoryList.filter((item) =>
-    Object.values(item).some((value) =>
-      value?.toString()?.toLowerCase()?.includes(searchTerm?.toLowerCase())
-    )
-  );
-  if(selectedValue && selectedValue != "All"){
-    data = data.filter(record=>record.technologyMaster.name === selectedValue)
-  }
-  
-    return data 
-  }, [techCategoryList, searchTerm,selectedValue]);
+      Object.values(item).some((value) =>
+        value?.toString()?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+      )
+    );
+    if (selectedValue && selectedValue != "All") {
+      data = data.filter(
+        (record) => record.technologyMaster.name === selectedValue
+      );
+    }
+
+    return data;
+  }, [techCategoryList, searchTerm, selectedValue]);
 
   const totalPages = useMemo(
     () => Math.ceil(filteredData.length / rowsPerPage),
@@ -149,10 +153,10 @@ export const ListCategory = ({ order, setorder }) => {
     }
   };
 
-  const handleFilterTechChange = (event)=>{
-    let target = event.target.value
+  const handleFilterTechChange = (event) => {
+    let target = event.target.value;
     setSelectedValue(target);
-  }
+  };
 
   const renderForm = () => {
     return (
@@ -171,7 +175,10 @@ export const ListCategory = ({ order, setorder }) => {
         <Modal.Body>
           <form onSubmit={handleOnSubmit}>
             <div className="form-group row">
-              <label htmlFor="inputDescription" className="col-sm-2 d-flex align-items-center mt-0">
+              <label
+                htmlFor="inputDescription"
+                className="col-sm-2 d-flex align-items-center mt-0"
+              >
                 Technology
               </label>
               <div className="col-sm-10">
@@ -181,15 +188,16 @@ export const ListCategory = ({ order, setorder }) => {
                   value={selectedTech}
                   onChange={handleTechChange}
                   className="mb-2 form-control-sm form-control"
-
                 >
-                  <option selected disabled >Select Technology</option>
+                  <option selected disabled>
+                    Select Technology
+                  </option>
 
-                  {techList && techList.length && techList.map((item, itemIndex)=> {
-                    return (
-                      <option key={itemIndex}>{item.name}</option>
-                    )
-                  })}
+                  {techList &&
+                    techList.length &&
+                    techList.map((item, itemIndex) => {
+                      return <option key={itemIndex}>{item.name}</option>;
+                    })}
                 </select>
               </div>
             </div>
@@ -209,17 +217,19 @@ export const ListCategory = ({ order, setorder }) => {
             </div>
 
             <div className="d-flex justify-content-end mt-5">
-            <Button type="submit">Save & More</Button>
+              <Button style={{ borderRadius: "3px" }} type="submit">
+                Save & More
+              </Button>
 
-            <CancelButton
-              type="reset"
-              className="cancel"
-              onClick={() => {
-                setIsModal(false);
-              }}
-            >
-              Cancel
-            </CancelButton>
+              <CancelButton
+                type="reset"
+                className="cancel"
+                onClick={() => {
+                  setIsModal(false);
+                }}
+              >
+                Cancel
+              </CancelButton>
             </div>
           </form>
         </Modal.Body>
@@ -230,9 +240,9 @@ export const ListCategory = ({ order, setorder }) => {
   return (
     <div>
       <div className="show-sort">
-      <Breadcrumb paths={paths} />
+        <Breadcrumb paths={paths} />
         <div className="d-flex justify-content-between align-items-center">
-        <div style={{width:"200px"}}>
+          <div style={{ width: "200px" }}>
             <label>Show Entries</label>
             <br></br>
             <select
@@ -240,7 +250,7 @@ export const ListCategory = ({ order, setorder }) => {
               ref={rowsPerPageSelectRef}
               value={rowsPerPage}
               className="w-100"
-              style={{height:"30px"}}
+              style={{ height: "30px" }}
               onChange={handleDataPerPageChange}
             >
               <option selected>0</option>
@@ -248,43 +258,44 @@ export const ListCategory = ({ order, setorder }) => {
               <option value="2">10</option>
               <option value="3">15</option>
             </select>
-        </div>
-        <div style={{width:"200px"}}>
-        <label className="">Filter</label>
-          <select
-            id="data-per-page"
-            // ref={rowsPerPageSelectRef}
-            value={selectedTech}
-            onChange={handleFilterTechChange}
-            className="w-100"
-            style={{height:"30px"}}
-
-          >
-            <option selected>All</option>
-
-            {techList && techList.length && techList.map((item, itemIndex)=> {
-              return (
-                <option key={itemIndex}>{item.name}</option>
-              )
-            })}
-          </select>
-        </div>
-        <div className="">
-          <label className="">Search</label>
-          <div>
-            <input
-              type="text"
-              placeholder=" ..."
-              value={searchTerm}
-              ref={searchInputRef}
-              onChange={handleSearch}
-              style={{height:"30px"}}
-            />
           </div>
-        </div>
-        <div>
-          <Button onClick={handleAddCategory}>Add Category</Button>
-        </div>
+          <div style={{ width: "200px" }}>
+            <label className="">Filter</label>
+            <select
+              id="data-per-page"
+              // ref={rowsPerPageSelectRef}
+              value={selectedTech}
+              onChange={handleFilterTechChange}
+              className="w-100"
+              style={{ height: "30px" }}
+            >
+              <option selected>All</option>
+
+              {techList &&
+                techList.length &&
+                techList.map((item, itemIndex) => {
+                  return <option key={itemIndex}>{item.name}</option>;
+                })}
+            </select>
+          </div>
+          <div className="">
+            <label className="">Search</label>
+            <div>
+              <input
+                type="text"
+                placeholder=" ..."
+                value={searchTerm}
+                ref={searchInputRef}
+                onChange={handleSearch}
+                style={{ height: "30px" }}
+              />
+            </div>
+          </div>
+          <div>
+            <Button style={{ borderRadius: "3px" }} onClick={handleAddCategory}>
+              Add Category
+            </Button>
+          </div>
         </div>
       </div>
       <hr className="divider" />
