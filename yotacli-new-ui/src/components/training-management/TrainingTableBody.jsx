@@ -12,6 +12,8 @@ import {
 } from "../../features/redux/associate/associateAction";
 import { customToast } from "../common/toast/customToast";
 import { editTraining } from "../../features/redux/training/training-status/editTrainingAction";
+import { AssociateTableBody } from "../associate-management/list-associate/AssociateTableBody";
+import { AssociatesList } from "../associate-management/list-associate/AssociatesList";
 const TrainingTableBody = ({ rows, columns, role }) => {
   const [show, setShow] = useState(false);
   const [rejectMsg, setRejectMsg] = useState("");
@@ -112,6 +114,7 @@ const TrainingTableBody = ({ rows, columns, role }) => {
       autoClose: 2000,
     });
   };
+
   return (
     <>
       <tbody>
@@ -243,6 +246,7 @@ const TrainingTableBody = ({ rows, columns, role }) => {
                       <a href="#" onClick={() => showAssociateDetails(row.id)}>
                         {row.associateCount}
                       </a>
+
                     </Link>
                   ) : (
                     row[column.id]
@@ -252,7 +256,7 @@ const TrainingTableBody = ({ rows, columns, role }) => {
             </tr>
           );
         })}
-
+        
         <Modal
           show={rejectShow}
           onHide={() => setRejectShow(false)}
@@ -403,6 +407,7 @@ const TrainingTableBody = ({ rows, columns, role }) => {
             </button>
           </Modal.Body>
         </Modal>
+
       </tbody>
     </>
   );

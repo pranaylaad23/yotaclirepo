@@ -4,7 +4,7 @@ import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./Associate.module.css";
 import { useSelector } from "react-redux";
-export const AssociateTableBody = ({ rows, columns, role }) => {
+export const AssociateTableBody = ({ rows, columns}) => {
   const  trainings  = useSelector((state) => state.trainings);
   return (
     <>
