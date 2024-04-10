@@ -141,3 +141,39 @@ export const getTrainingsByStatus = createAsyncThunk(
     }
   }
 );
+
+export const uploadTrainingExcel = createAsyncThunk(
+  "excel/uploadExcel",
+  async (file, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `${token}`,
+        },
+      };
+
+      const response = await axios.post(
+        `yota-api/trainings/bulkUploadTrainings`,
+        formData,
+        config
+      );
+      customToast({
+        message: `${response.data}`,
+        autoClose: 2000,
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
