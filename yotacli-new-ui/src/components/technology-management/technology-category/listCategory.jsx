@@ -6,6 +6,7 @@ import "./listCategory.css";
 import CancelButton from "../../common/button/CancelButton";
 import { Button, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Breadcrumb from "../../common/breadcrumb/breadcrumb.jsx"
 
 
 export const ListCategory = ({ order, setorder }) => {
@@ -27,6 +28,11 @@ export const ListCategory = ({ order, setorder }) => {
   const [selectedTech, setSelectedTech] = useState(null);
 
   const dispatch = useDispatch();
+
+  const paths = [
+    { label: 'Technology', link: '/' },
+    { label: 'Category' },
+  ];
 
   const showModalRef = useRef(true);
   const nameRef = useRef("");
@@ -165,7 +171,7 @@ export const ListCategory = ({ order, setorder }) => {
         <Modal.Body>
           <form onSubmit={handleOnSubmit}>
             <div className="form-group row">
-              <label htmlFor="inputDescription" className="col-sm-2">
+              <label htmlFor="inputDescription" className="col-sm-2 d-flex align-items-center mt-0">
                 Technology
               </label>
               <div className="col-sm-10">
@@ -188,7 +194,7 @@ export const ListCategory = ({ order, setorder }) => {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="inputName" className="col-sm-2">
+              <label htmlFor="inputName" className="col-sm-2 mt-0">
                 Name
               </label>
               <div className="col-sm-10">
@@ -202,22 +208,18 @@ export const ListCategory = ({ order, setorder }) => {
               </div>
             </div>
 
-            <div className="d-flex p-2 justify-content-between">
-              <div className="Add-button">
-                <Button type="submit">Save & More</Button>
-              </div>
+            <div className="d-flex justify-content-end mt-5">
+            <Button type="submit">Save & More</Button>
 
-              <div className="Tech-button">
-                <CancelButton
-                  type="reset"
-                  className="cancel"
-                  onClick={() => {
-                    setIsModal(false);
-                  }}
-                >
-                  Cancel
-                </CancelButton>
-              </div>
+            <CancelButton
+              type="reset"
+              className="cancel"
+              onClick={() => {
+                setIsModal(false);
+              }}
+            >
+              Cancel
+            </CancelButton>
             </div>
           </form>
         </Modal.Body>
@@ -228,6 +230,7 @@ export const ListCategory = ({ order, setorder }) => {
   return (
     <div>
       <div className="show-sort">
+      <Breadcrumb paths={paths} />
         <div className="d-flex justify-content-between align-items-center">
         <div style={{width:"200px"}}>
             <label>Show Entries</label>
