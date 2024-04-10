@@ -10,11 +10,11 @@ import { customToast } from "../toast/customToast";
 export const Header = (props) => {
   const { user, role } = useSelector((state) => state.security);
   const { onSidebarToggle } = props;
-  const jwtToken = localStorage.getItem("jwtToken");
-  let r2 = localStorage.getItem("userRole");
+  // const jwtToken = localStorage.getItem("jwtToken");
+  // let r2 = localStorage.getItem("userRole");
   const logoutRefresh = () => {
-    localStorage.removeItem("jwtToken");
-    localStorage.removeItem("userRole");
+    // localStorage.removeItem("jwtToken");
+    // localStorage.removeItem("userRole");
     window.location.href = "/login";
   };
 
@@ -134,15 +134,15 @@ export const Header = (props) => {
                 <span className="logo-lg logo-text-style font-size-24 padding-10 d-block">
                   {" "}
                   YOTA{" "}
-                  <span className="font-size-role">
+                  {/* <span className="font-size-role">
                     {r2 != null ? "(" + r2 + ")" : ""}
-                  </span>{" "}
+                  </span>{" "} */}
                 </span>
               </span>
             </div>
           </div>
 
-          {jwtToken ? showOptionForLoginUser() : showOptionForGuestUser()}
+          {/* {jwtToken ? showOptionForLoginUser() : showOptionForGuestUser()} */}
         </div>
       </div>
       <ToastContainer />

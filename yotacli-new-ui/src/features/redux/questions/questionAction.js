@@ -6,13 +6,13 @@ export const postQuestion = createAsyncThunk(
   "questions/postQuestion",
   async (questionData, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      // const token = localStorage.getItem("jwtToken");
       console.log("service " + questionData);
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       };
 
       const response = await axios.post(
@@ -33,12 +33,12 @@ export const fetchQuestions = createAsyncThunk(
 
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      // const token = localStorage.getItem("jwtToken");
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       };
       const response = await axios.get("/yota-api/questions/all", config);
       return response.data;
@@ -53,7 +53,7 @@ export const uploadQuestions = createAsyncThunk(
   async ({ file, technologyId, test }, { rejectWithValue }) => {
     try {
       console.log("check2");
-      const token = localStorage.getItem("jwtToken");
+      // const token = localStorage.getItem("jwtToken");
       const formData = {
         file: file,
         technologyId: technologyId.toString(),
@@ -61,10 +61,10 @@ export const uploadQuestions = createAsyncThunk(
       };
       console.log(formData);
       const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        //   Authorization: `${token}`,
+        // },
       };
 
       const response = await axios.post(

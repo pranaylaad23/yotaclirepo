@@ -6,12 +6,12 @@ export const getTrainings = createAsyncThunk(
   "trainings/getTrainings",
   async (trainingData, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
+      // const token = localStorage.getItem("jwtToken");
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       };
 
       const response = await axios.get(`/yota-api/trainings/`, config);
@@ -29,13 +29,11 @@ export const requestTraining = createAsyncThunk(
   "training/requestTraining",
   async (trainingRequest, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
-      console.log(token);
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       };
       const response = await axios.post(
         `/yota-api/trainings/`,
@@ -55,12 +53,11 @@ export const addNominations = createAsyncThunk(
   "training/nominations",
   async (nominations, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       };
       console.log(nominations);
       const response = await axios.post(
@@ -84,15 +81,14 @@ export const uploadExcel = createAsyncThunk(
   "excel/uploadExcel",
   async (file, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
       const formData = new FormData();
       formData.append("file", file);
 
       const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        //   Authorization: `${token}`,
+        // },
       };
 
       const response = await axios.post(
@@ -119,12 +115,11 @@ export const getTrainingsByStatus = createAsyncThunk(
   "trainings/getTrainingsByStatus",
   async (status, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       };
 
       const response = await axios.get(

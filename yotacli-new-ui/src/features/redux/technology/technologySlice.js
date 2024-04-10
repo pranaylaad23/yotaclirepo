@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { deleteTechnology, editTechnology, fetchTechnologies, fetchTechnologyById } from "./technologyAction";
+import {
+  deleteTechnology,
+  editTechnology,
+  fetchTechnologies,
+  fetchTechnologyById,
+} from "./technologyAction";
 import { fetchTechnology } from "./technologyAction";
 import { createTechnology } from "./technologyAction";
 const technologySlice = createSlice({
@@ -9,7 +14,7 @@ const technologySlice = createSlice({
   initialState: {
     techList: [],
     loading: false,
-    error: null
+    error: null,
   },
 
   reducers: {},
@@ -65,7 +70,7 @@ const technologySlice = createSlice({
         state.error = action.error.message;
       });
 
-      builder
+    builder
       .addCase(fetchTechnologyById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -78,18 +83,18 @@ const technologySlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-      builder.addCase(editTechnology.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      });
-      builder.addCase(editTechnology.fulfilled, (state, action) => {
-        state.loading = false;
-        state.technology = action.payload;
-      });
-      builder.addCase(editTechnology.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+    builder.addCase(editTechnology.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(editTechnology.fulfilled, (state, action) => {
+      state.loading = false;
+      state.technology = action.payload;
+    });
+    builder.addCase(editTechnology.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   },
 });
 

@@ -17,8 +17,8 @@ export const CreateUnitForm = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      unitName: nameRef.current.value,
-      shortDescription: shortDescriptionRef.current.value,
+      unitName: nameRef.current,
+      shortDescription: shortDescriptionRef.current,
     };
     dispatch(createUnit(formData));
     console.log("Form Data:", formData);

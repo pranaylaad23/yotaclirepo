@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useWindowSize } from "../dashboard-layout/useWindowSize";
 import "./sidebar.style.css";
 import { useSelector } from "react-redux";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
 export const Sidebar = (props) => {
   const { open, onClose } = props;
@@ -14,16 +14,16 @@ export const Sidebar = (props) => {
   const [subActiveIndex, setSubActiveIndex] = useState([]);
   const [basedOnRoleRoutes, setBasedOnRoleRoutes] = useState([]);
   const { role } = useSelector((state) => state.security);
-  let userRole = localStorage.getItem("userRole");
+  // let userRole = localStorage.getItem("userRole");
   useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    console.log(token);
-    const role = localStorage.getItem("userRole");
-    console.log("role of  =" + role);
-    if (token != null) {
-      const decodedToken = jwtDecode(token);
-      console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
-    }
+    // const token = localStorage.getItem("jwtToken");
+    // console.log(token);
+    // const role = localStorage.getItem("userRole");
+    // console.log("role of  =" + role);
+    // if (token != null) {
+    //   const decodedToken = jwtDecode(token);
+    //   console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
+    // }
     const filteredRoutes = routes.filter((route) => {
       if (!route.role) return true;
       return route.role.includes(role);
@@ -52,7 +52,7 @@ export const Sidebar = (props) => {
           name: "Request Training",
           subPath: "/requestTraining",
           iconClass: "fa-solid fa-house-user",
-          show: userRole === "Technical Manager",
+          // show: userRole === "Technical Manager",
           role: ["Trainer", "Technical Manager", "Requester"],
         },
         {
@@ -68,7 +68,7 @@ export const Sidebar = (props) => {
     {
       name: "Test Management",
       iconClass: "fas fa-pencil-square icon-color",
-      show: userRole !== "Requester",
+      // show: userRole !== "Requester",
       showSubRoutes: true,
       role: ["Trainer", "Technical Manager"],
       subRoutes: [
@@ -102,7 +102,7 @@ export const Sidebar = (props) => {
     {
       name: "Associate Managment",
       iconClass: "fa-solid fa-people-roof icon-color",
-      show: userRole === "Technical Manager",
+      // show: userRole === "Technical Manager",
       showSubRoutes: true,
       role: ["Technical Manager"],
       subRoutes: [
@@ -130,7 +130,7 @@ export const Sidebar = (props) => {
     {
       name: "Master Mangement",
       iconClass: "fa-solid fa-list",
-      show: userRole !== "Associate",
+      // show: userRole !== "Associate",
       showSubRoutes: true,
       role: ["Requester", "Trainer", "Technical Manager"],
 
@@ -138,7 +138,7 @@ export const Sidebar = (props) => {
         {
           name: "Technology ",
           iconClass: "fa-solid fa-laptop-code icon-color",
-          show: userRole !== "Requester",
+          // show: userRole !== "Requester",
           innershowSubRoutes: true,
           role: ["Trainer", "Technical Manager"],
           innersubRoutes: [

@@ -16,8 +16,8 @@ export const TrainingList = (props) => {
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  let userRole = localStorage.getItem("userRole");
-  console.log("resopse role: ", userRole);
+  // let userRole = localStorage.getItem("userRole");
+  // console.log("resopse role: ", userRole);
 
   const columns = [
     { id: "id", label: "#" },
@@ -35,7 +35,7 @@ export const TrainingList = (props) => {
 
   useEffect(() => {
     dispatch(getTrainings());
-  }, [dispatch,trainings]);
+  }, [dispatch, trainings]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -131,7 +131,7 @@ export const TrainingList = (props) => {
         <TrainingTableBody
           rows={paginatedData}
           columns={columns}
-          role={userRole}
+          // role={userRole}
         />
       </table>
 

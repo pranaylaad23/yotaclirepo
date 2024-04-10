@@ -14,12 +14,12 @@ export const LoginUser = () => {
   const navigate = useNavigate();
 
   console.log("role", role);
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (token) {
-      window.location.href = "/dashboard";
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("jwtToken");
+  //   if (token) {
+  //     window.location.href = "/dashboard";
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (user) {

@@ -10,23 +10,23 @@ import { AssignedTestsCard } from "../assigned-test-user/assigned-test-user";
 export const Dashboard = () => {
   const navigate = useNavigate();
   const { role } = useSelector((state) => state.security);
-  let roles = localStorage.getItem("userRole");
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    console.log(token);
-    const role = localStorage.getItem("userRole");
-    console.log("role of  =" + role);
-    if (token != null) {
-      const decodedToken = jwtDecode(token);
-      console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
-    }
-  }, [role]);
+  // let roles = localStorage.getItem("userRole");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("jwtToken");
+  //   console.log(token);
+  //   const role = localStorage.getItem("userRole");
+  //   console.log("role of  =" + role);
+  //   if (token != null) {
+  //     const decodedToken = jwtDecode(token);
+  //     console.log(`decoded token: ${JSON.stringify(decodedToken)}`);
+  //   }
+  // }, [role]);
 
   console.log("role", role);
   return (
     <div>
       <div className="font-size-16">
-        <h5> Welcome To {roles} Dashboard</h5>
+        {/* <h5> Welcome To {roles} Dashboard</h5> */}
         <p
           onClick={() => {
             navigate("/dashboard/assigned-tests-list");

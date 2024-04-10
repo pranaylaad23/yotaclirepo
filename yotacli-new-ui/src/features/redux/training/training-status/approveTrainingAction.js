@@ -4,13 +4,13 @@ export const approveTraining = createAsyncThunk(
   "approveTraining/approveTraining",
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
-      console.log(token);
+      // const token = localStorage.getItem("jwtToken");
+      // console.log(token);
       const response = await axios.get(`/yota-api/users/trainer`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `${token}`,
+        // },
       });
       return response.data;
     } catch (error) {
@@ -25,16 +25,14 @@ export const approveTrainingStatus = createAsyncThunk(
   "approveTraining/approveTraining",
   async (trainingRequest, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
-      console.log(token);
       const response = await axios.put(
         `/yota-api/trainings/updateActualStartAndEndDate`,
         trainingRequest,
         {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
+          // headers: {
+          //   "Content-Type": "application/json",
+          //   Authorization: `${token}`,
+          // },
         }
       );
       return response.data;
@@ -50,16 +48,14 @@ export const getTrainingStatus = createAsyncThunk(
   "approveTraining/approveTraining",
   async (trainingRequest, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("jwtToken");
-      console.log(token);
       const response = await axios.put(
         `/yota-api/trainings/updateTrainingStatus`,
         trainingRequest,
         {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
+          // headers: {
+          //   "Content-Type": "application/json",
+          //   Authorization: `${token}`,
+          // },
         }
       );
       return response.data;

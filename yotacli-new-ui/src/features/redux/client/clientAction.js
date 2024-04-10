@@ -4,14 +4,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const createClient = createAsyncThunk(
   "client/createClient",
   async (formData, { rejectWithValue }) => {
-    const Token = localStorage.getItem("jwtToken");
+    // const Token = localStorage.getItem("jwtToken");
 
     try {
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: Token,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: Token,
+        // },
       };
       await axios.post("/yota-api/clients/", formData, config);
     } catch (error) {
@@ -26,14 +26,14 @@ export const createClient = createAsyncThunk(
 export const fetchClients = createAsyncThunk(
   "client/getClients",
   async (formData, { rejectWithValue }) => {
-    const Token = localStorage.getItem("jwtToken");
+    // const Token = localStorage.getItem("jwtToken");
 
     try {
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: Token,
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: Token,
+        // },
       };
       await axios.get("/yota-api/clients/", formData, config);
     } catch (error) {

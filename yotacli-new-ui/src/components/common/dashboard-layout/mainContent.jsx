@@ -8,7 +8,7 @@ import { LoginUser } from "../../user/LoginUser";
 export const MainContent = ({ children }) => {
   const { width } = useWindowSize();
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 992);
-  const token = localStorage.getItem("jwtToken");
+  // const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     if (width < 992) setSidebarOpen(false);
@@ -23,25 +23,25 @@ export const MainContent = ({ children }) => {
     setSidebarOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (token === null) {
-      window.location.href = "/login";
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token === null) {
+  //     window.location.href = "/login";
+  //   }
+  // }, [token]);
 
-  if (token) {
-    return (
-      <div className="layout-wrapper">
-        <Header onSidebarToggle={handleSidebarToggle} />{" "}
-        <Sidebar open={sidebarOpen} onClose={handleSidebarClose} />
-        <div className={`main-content ${sidebarOpen ? "" : "margin-left-0"}`}>
-          <div className="page-content">
-            <div className="container-fluid ">{children}</div>
-          </div>
+  // if (token) {
+  return (
+    <div className="layout-wrapper">
+      <Header onSidebarToggle={handleSidebarToggle} />{" "}
+      <Sidebar open={sidebarOpen} onClose={handleSidebarClose} />
+      <div className={`main-content ${sidebarOpen ? "" : "margin-left-0"}`}>
+        <div className="page-content">
+          <div className="container-fluid ">{children}</div>
         </div>
       </div>
-    );
-  } else {
-    return <LoginUser />;
-  }
+    </div>
+  );
+  // } else {
+  //   return <LoginUser />;
+  // }
 };
