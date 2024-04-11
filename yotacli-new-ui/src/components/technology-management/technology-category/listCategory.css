@@ -1,0 +1,59 @@
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:behtmlfore,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:behtmlfore,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:behtmlfore,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:behtmlfore,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:behtmlfore {
+  bottom: 0.5em;
+}
+
+.Search-label {
+  position: relative;
+  top: 5%;
+  margin-left: 60%;
+}
+
+.show-sort {
+  padding: 40px;
+  position: relative;
+  top: -40px;
+}
+
+.sort-option {
+  width: 90px;
+}
+
+.input-group {
+  position: relative;
+  top: -40px;
+  margin-left: 70%;
+  width: 250px;
+}
+
+#myTable {
+  position: relative;
+  top: -70px;
+  text-align: left;
+}
+
+.table-columns {
+  text-align: center;
+}
+
+.divider {
+  width: 100%;
+  height: 40px;
+  color: #333;
+  border: 1.5px solid black;
+  background-color: #333;
+  position: relative;
+  top: -85px;
+}
+
+.table-rows:hover {
+  background-color: rgba(231, 224, 224, 0.854);
+}

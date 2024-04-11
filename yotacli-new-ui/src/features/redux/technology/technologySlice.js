@@ -7,13 +7,17 @@ import {
   fetchTechnologyById,
 } from "./technologyAction";
 import { fetchTechnology } from "./technologyAction";
-import { createTechnology } from "./technologyAction";
+import { createTechnology, fetchTechCategory, createTechCategory } from "./technologyAction";
 const technologySlice = createSlice({
   name: "technology",
   initialState: {
     techList: [],
     loading: false,
     error: null,
+    techCategoryList: [],
+    techCategoryLoading: false,
+    techCategoryError: null,
+    createTechCategoryData: null
   },
 
   reducers: {},
@@ -56,6 +60,27 @@ const technologySlice = createSlice({
       state.error = action.payload.message;
     });
     builder
+    .addCase(fetchTechCategory.pending, (state) => {
+      state.techCategoryLoading = true;
+      state.techCategoryError = null;
+    })
+    .addCase(fetchTechCategory.fulfilled, (state, action) => {
+      state.techCategoryLoading = false;
+      state.techCategoryList = action.payload;
+    })
+    .addCase(fetchTechCategory.rejected, (state, action) => {
+      state.techCategoryLoading = false;
+      state.techCategoryError = action.error.message;
+    });
+    .addCase(createTechCategory.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(createTechCategory.fulfilled, (state, action) => {
+      state.loading = false;
+      state.createTechCategoryData = action.payload;
+    })
+    .addCase(createTechCategory.rejected, (state, action) => {
       .addCase(deleteTechnology.pending, (state) => {
         state.loading = true;
         state.error = null;
