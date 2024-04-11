@@ -1,18 +1,27 @@
 import { useDispatch } from "react-redux";
-import { deleteTechnology, fetchTechnologyById } from "../../../features/redux/technology/technologyAction";
+import {
+  deleteTechnology,
+  fetchTechnologyById,
+} from "../../../features/redux/technology/technologyAction";
 
-export const TechnologyTableBody = ({ techList, sorting, setShowModal, setEditAdd, setFormDetail}) => {
+export const TechnologyTableBody = ({
+  techList,
+  sorting,
+  setShowModal,
+  setEditAdd,
+  setFormDetail,
+}) => {
   const dispatch = useDispatch();
 
   const handleDeleteTechnology = (technologyId) => {
     dispatch(deleteTechnology(technologyId));
   };
 
-  const handleEdit = async (technologyId) =>{
+  const handleEdit = async (technologyId) => {
     const response = await dispatch(fetchTechnologyById(technologyId));
     const data = await response.payload;
     setFormDetail(data);
-  } 
+  };
 
   return (
     <div>
@@ -35,9 +44,9 @@ export const TechnologyTableBody = ({ techList, sorting, setShowModal, setEditAd
             </tr>
           </thead>
           <tbody>
-            {techList.map((d,index) => (
+            {techList.map((d, index) => (
               <tr className="table-rows" key={d.id}>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>{d.name}</td>
                 <td>
                   <i
@@ -50,8 +59,12 @@ export const TechnologyTableBody = ({ techList, sorting, setShowModal, setEditAd
                   <i
                     className="fa-solid fa-pen-to-square text-primary"
                     id="icons"
-                    onClick={() => {setEditAdd("Edit"); setShowModal(true); handleEdit(d.id)}}
-                  />     
+                    onClick={() => {
+                      setEditAdd("Edit");
+                      setShowModal(true);
+                      handleEdit(d.id);
+                    }}
+                  />
                 </td>
               </tr>
             ))}

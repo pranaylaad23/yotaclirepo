@@ -6,16 +6,21 @@ import TrainingTableBody from "./TrainingTableBody";
 import {
   getTrainings,
   getTrainingsByStatus,
+  uploadExcel,
+  uploadTrainingExcel,
 } from "../../features/redux/training/trainingAction";
+import { Button, Modal } from "react-bootstrap";
 
 export const TrainingList = (props) => {
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.security);
   const searchInputRef = useRef(null);
+  const [uploadShow, setuploadShow] = useState(false);
   const rowsPerPageSelectRef = useRef(null);
   const [page, setPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [file, setFile] = useState("");
   // let userRole = localStorage.getItem("userRole");
   // console.log("resopse role: ", userRole);
 
@@ -81,7 +86,19 @@ export const TrainingList = (props) => {
     page * rowsPerPage,
     Math.min((page + 1) * rowsPerPage, filteredData.length)
   );
+  const handleUpload=()=>{
 
+    setuploadShow(true);
+  }
+  const handleActionOnUpload=()=>{
+    if (file) {
+      dispatch(uploadTrainingExcel(file));
+    }
+    setuploadShow(false);
+  }
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
   return (
     <div className="table-container">
       <div className="filter-section">
@@ -102,8 +119,13 @@ export const TrainingList = (props) => {
               <option value="15">20</option>
             </select>
           </div>
+
         </div>
+        <div className="upload">
+              <button class="btn btn-secondary" onClick={() => handleUpload()}>Upload</button>
+            </div>
         <div className="list-search">
+
           <label className="filter-label" htmlFor="data-per-page">
             Search
           </label>
@@ -160,6 +182,25 @@ export const TrainingList = (props) => {
           Next
         </button>
       </div>
+      <Modal
+          className="modell"
+          show={uploadShow}
+          onHide={() => setuploadShow(false)}
+        >
+          <Modal.Header>
+            <Modal.Title>
+              <h5>Upload File of Trainings</h5>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <input type="file" onChange={handleFileChange}></input>
+            <div className="d-flex p-2 justify-content-between">
+              <div className="create-button">
+                <Button onClick={() => handleActionOnUpload()}>Upload</Button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
     </div>
   );
 };

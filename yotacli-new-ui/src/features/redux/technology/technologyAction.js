@@ -44,6 +44,7 @@ export const createTechnology = createAsyncThunk(
           autoClose: 2000,
           type: "success",
         });
+        return response.data;
       }
     } catch (error) {
       if (error.response) {
@@ -54,6 +55,32 @@ export const createTechnology = createAsyncThunk(
     }
   }
 );
+
+
+export const createTechCategory = createAsyncThunk(
+  "technology/createTechCategory",
+
+  async (formData, { rejectWithValue }) => {
+    const Token = localStorage.getItem("jwtToken");
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Token,
+        },
+      };
+      await axios.post("/yota-api/categories/create", formData, config);
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 
 export const fetchTechnology = createAsyncThunk(
   "technology/fetchTechnology",
@@ -76,6 +103,27 @@ export const fetchTechnology = createAsyncThunk(
   }
 );
 
+
+export const fetchTechCategory = createAsyncThunk(
+  "technology/fetchTechCategory",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      console.log(token);
+      const response = await axios.get(`/yota-api/categories/getAll`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      if (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const fetchTechnologyById = createAsyncThunk(
   "technology/fetchTechnologyById",
   async (technologyId, { rejectWithValue }) => {
@@ -158,6 +206,7 @@ export const editTechnology = createAsyncThunk(
           autoClose: 2000,
           type: "success",
         });
+        return response.data;
       }
     } catch (error) {
       if (error.response) {

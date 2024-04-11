@@ -8,7 +8,7 @@ import { AssociateTableBody } from "./AssociateTableBody";
 import { fetchAssociates } from "../../../features/redux/associate/associateAction";
 import { useParams } from "react-router-dom";
 
-export const AssociatesList = () => {
+export const AssociatesList = ( trainingName,totalAssociates ) => {
   const dispatch = useDispatch();
   const searchInputRef = useRef(null);
   const rowsPerPageSelectRef = useRef(null);
@@ -113,7 +113,7 @@ export const AssociatesList = () => {
           </tr>
         </thead>
 
-        <AssociateTableBody rows={paginatedData} columns={columns} />
+        <AssociateTableBody rows={paginatedData} columns={columns} trainingName={trainingName} totalAssociates={totalAssociates}/>
       </table>
 
       <div className="pagination">

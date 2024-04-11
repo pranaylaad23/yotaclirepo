@@ -111,38 +111,47 @@ export const AppRoutes = () => {
                 }
             />
 
-            <Route
-                path="/associate-addAssociate"
-                element={
-                    <MainContent>
-                        <AddAssociate/>
-                    </MainContent>
-                }
-            />
-            <Route
-                path="/associate-associateList"
-                element={
-                    <MainContent>
-                        <AssociatesList/>
-                    </MainContent>
-                }
-            />
-            <Route
-                path="/technology-createTechnology"
-                element={
-                    <MainContent>
-                        <TechnologyForm/>
-                    </MainContent>
-                }
-            />
-            <Route
-                path="/technology-technologyList"
-                element={
-                    <MainContent>
-                        <ListTechnology/>
-                    </MainContent>
-                }
-            />
+      <Route
+        path="/associate-addAssociate"
+        element={
+          <MainContent>
+            <AddAssociate />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/associate-associateList"
+        element={
+          <MainContent>
+            <AssociatesList />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/technology-createTechnology"
+        element={
+          <MainContent>
+            <TechnologyForm />
+          </MainContent>
+        }
+      />
+      <Route
+        path="/technology-technologyList"
+        element={
+          <MainContent>
+            <ListTechnology />
+          </MainContent>
+        }
+      />
+
+      <Route
+        path="/technology-category"
+        element={
+          <MainContent>
+            <ListCategory />
+          </MainContent>
+        }
+      />
 
             <Route
                 path="/client-management-createClient"
