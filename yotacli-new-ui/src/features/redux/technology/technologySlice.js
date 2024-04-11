@@ -1,11 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchTechnologies } from "./technologyAction";
+import {
+  deleteTechnology,
+  editTechnology,
+  fetchTechnologies,
+  fetchTechnologyById,
+} from "./technologyAction";
 import { fetchTechnology } from "./technologyAction";
 import { createTechnology, fetchTechCategory, createTechCategory } from "./technologyAction";
 const technologySlice = createSlice({
   name: "technology",
-  name: "technologies",
   initialState: {
     techList: [],
     loading: false,
@@ -37,7 +41,7 @@ const technologySlice = createSlice({
     });
     builder.addCase(createTechnology.fulfilled, (state, action) => {
       state.loading = false;
-      state.technology = action.payload;
+      state.techList.push(action.payload);
     });
     builder.addCase(createTechnology.rejected, (state, action) => {
       state.loading = false;
@@ -68,8 +72,6 @@ const technologySlice = createSlice({
       state.techCategoryLoading = false;
       state.techCategoryError = action.error.message;
     });
-
-    builder
     .addCase(createTechCategory.pending, (state) => {
       state.loading = true;
       state.error = null;
@@ -79,6 +81,49 @@ const technologySlice = createSlice({
       state.createTechCategoryData = action.payload;
     })
     .addCase(createTechCategory.rejected, (state, action) => {
+      .addCase(deleteTechnology.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTechnology.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technologyId = action.payload;
+        let index = state.techList.findIndex(
+          (ques) => ques.id === action.meta.arg
+        );
+        state.techList.splice(index, 1);
+      })
+      .addCase(deleteTechnology.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(fetchTechnologyById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTechnologyById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technologyId = action.payload;
+      })
+      .addCase(fetchTechnologyById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+    builder.addCase(editTechnology.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(editTechnology.fulfilled, (state, action) => {
+      state.loading = false;
+      let index = state.techList.findIndex(
+        (tech) => tech.id === action.meta.arg.technologyId
+      );
+      state.techList.splice(index, 1);
+      state.techList.push(action.payload);
+    });
+    builder.addCase(editTechnology.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

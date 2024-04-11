@@ -29,6 +29,7 @@ import Nomination from "../components/training-management/Nomination.jsx";
 
 import { ApproveStatus } from "../components/training-management/training-model/ApproveStatus.jsx";
 import { ChangeTrainingStatus } from "../components/training-management/training-model/ChangeTrainingStatus.jsx";
+import { AssociatesListToTraining } from "../components/associate-management/list-associate/AssociateListToTraining.jsx";
 
 export const AppRoutes = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -212,12 +213,20 @@ export const AppRoutes = () => {
           </MainContent>
         }
       />
-      <Route
+      {/* <Route
         path="/changeTrainingStatus/:id"
         element={
           <MainContent>
             <TrainingList />
             <ChangeTrainingStatus />
+          </MainContent>
+        }
+      /> */}
+      <Route
+        path="/addAssociate/:id"
+        element={
+          <MainContent>
+            <AssociatesListToTraining />
           </MainContent>
         }
       />

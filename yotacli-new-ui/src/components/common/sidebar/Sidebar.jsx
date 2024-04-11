@@ -52,7 +52,7 @@ export const Sidebar = (props) => {
           name: "Request Training",
           subPath: "/requestTraining",
           iconClass: "fa-solid fa-house-user",
-          show: userRole === "Technical Manager" || userRole === "Requester",
+          show: userRole === "Technical Manager",
           role: ["Trainer", "Technical Manager", "Requester"],
         },
         {
@@ -142,13 +142,13 @@ export const Sidebar = (props) => {
           innershowSubRoutes: true,
           role: ["Trainer", "Technical Manager"],
           innersubRoutes: [
-            {
-              name: "Create ",
-              path: "/tech-addTech",
-              subPath: "/technology-createTechnology",
-              iconClass: "fa-solid fa-house-user",
-              show: true,
-            },
+            // {
+            //   name: "Create ",
+            //   path: "/tech-addTech",
+            //   subPath: "/technology-createTechnology",
+            //   iconClass: "fa-solid fa-house-user",
+            //   show: true,
+            // },
             {
               name: " List",
               subPath: "/technology-technologyList",
