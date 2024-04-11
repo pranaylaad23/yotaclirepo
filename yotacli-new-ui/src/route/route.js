@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import {LoginUser} from "../components/user/LoginUser.jsx";
 import {RegisterUser} from "../components/user/RegisterUser.jsx";
@@ -29,9 +29,46 @@ import Nomination from "../components/training-management/Nomination.jsx";
 
 import {ApproveStatus} from "../components/training-management/training-model/ApproveStatus.jsx";
 import {AssociatesListToTraining} from "../components/associate-management/list-associate/AssociateListToTraining";
+import {ListCategory} from "../components/technology-management/technology-category/listCategory";
+import {useDispatch} from "react-redux";
+import {syncUserAuthData} from "../features/security/securtiyAction";
+import {DEFAULT_REQUEST_HEADER_CONTENT_TYPE, TOKEN_KEY} from "../constants/helperConstants";
+import {getDecryption} from "../security/crypto/EncryptionDecryption";
+import {isTokenExpired} from "../security/jwt/JwtService";
+import axios from "axios";
 
 export const AppRoutes = () => {
     const [isLoggedIn, setLoggedIn] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(syncUserAuthData());
+    }, [dispatch]);
+
+    useEffect(() => {
+        const requestInterceptor = axios.interceptors.request.use(
+            (config) => {
+                const token = localStorage.getItem(TOKEN_KEY);
+                if (token) {
+                    const decryptedToken = getDecryption(token);
+                    if (decryptedToken && !isTokenExpired(token)) {
+                        config.headers['Authorization'] = `Bearer ${decryptedToken}`;
+                    }
+                }
+                config.headers["Content-Type"] = config.headers["Content-Type"] ? config.headers["Content-Type"] : DEFAULT_REQUEST_HEADER_CONTENT_TYPE;
+                return config;
+            },
+            (error) => {
+                return Promise.reject(error);
+            }
+        )
+
+        return () => {
+            axios.interceptors.request.eject(requestInterceptor);
+        };
+    }, []);
+
     return (
         <Routes>
             <Route path="/requester-registration" element={<RegisterUser/>}/>
@@ -111,47 +148,47 @@ export const AppRoutes = () => {
                 }
             />
 
-      <Route
-        path="/associate-addAssociate"
-        element={
-          <MainContent>
-            <AddAssociate />
-          </MainContent>
-        }
-      />
-      <Route
-        path="/associate-associateList"
-        element={
-          <MainContent>
-            <AssociatesList />
-          </MainContent>
-        }
-      />
-      <Route
-        path="/technology-createTechnology"
-        element={
-          <MainContent>
-            <TechnologyForm />
-          </MainContent>
-        }
-      />
-      <Route
-        path="/technology-technologyList"
-        element={
-          <MainContent>
-            <ListTechnology />
-          </MainContent>
-        }
-      />
+            <Route
+                path="/associate-addAssociate"
+                element={
+                    <MainContent>
+                        <AddAssociate/>
+                    </MainContent>
+                }
+            />
+            <Route
+                path="/associate-associateList"
+                element={
+                    <MainContent>
+                        <AssociatesList/>
+                    </MainContent>
+                }
+            />
+            <Route
+                path="/technology-createTechnology"
+                element={
+                    <MainContent>
+                        <TechnologyForm/>
+                    </MainContent>
+                }
+            />
+            <Route
+                path="/technology-technologyList"
+                element={
+                    <MainContent>
+                        <ListTechnology/>
+                    </MainContent>
+                }
+            />
 
-      <Route
-        path="/technology-category"
-        element={
-          <MainContent>
-            <ListCategory />
-          </MainContent>
-        }
-      />
+            <Route
+                path="/technology-category"
+                element={
+                    <MainContent>
+                        <ListCategory/>
+                    </MainContent>
+                }
+            />
 
             <Route
                 path="/client-management-createClient"

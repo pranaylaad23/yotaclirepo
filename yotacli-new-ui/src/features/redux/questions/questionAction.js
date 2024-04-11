@@ -1,93 +1,92 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import { customToast } from "../../../components/common/toast/customToast";
+import {customToast} from "../../../components/common/toast/customToast";
 
 export const postQuestion = createAsyncThunk(
-  "questions/postQuestion",
-  async (questionData, { rejectWithValue }) => {
-    try {
-      // const token = localStorage.getItem("jwtToken");
-      console.log("service " + questionData);
-      const config = {
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   Authorization: `${token}`,
-        // },
-      };
+    "questions/postQuestion",
+    async (questionData, {rejectWithValue}) => {
+        try {
+            // const token = localStorage.getItem("jwtToken");
+            console.log("service " + questionData);
+            const config = {
+                // headers: {
+                //   "Content-Type": "application/json",
+                //   Authorization: `${token}`,
+                // },
+            };
 
-      const response = await axios.post(
-        "/yota-api/questions/",
-        questionData,
-        config
-      );
+            const response = await axios.post(
+                "/yota-api/questions/",
+                questionData,
+                config
+            );
 
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
-  }
 );
 
 export const fetchQuestions = createAsyncThunk(
-  "questions/fetchQuestions",
+    "questions/fetchQuestions",
 
-  async (_, { rejectWithValue }) => {
-    try {
-      // const token = localStorage.getItem("jwtToken");
-      const config = {
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   Authorization: `${token}`,
-        // },
-      };
-      const response = await axios.get("/yota-api/questions/all", config);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    async (_, {rejectWithValue}) => {
+        try {
+            // const token = localStorage.getItem("jwtToken");
+            const config = {
+                // headers: {
+                //   "Content-Type": "application/json",
+                //   Authorization: `${token}`,
+                // },
+            };
+            const response = await axios.get("/yota-api/questions/all", config);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
-  }
 );
 
 export const uploadQuestions = createAsyncThunk(
-  "excel/uploadQuestionExcel",
-  async ({ file, technologyId, test }, { rejectWithValue }) => {
-    try {
-      console.log("check2");
-      // const token = localStorage.getItem("jwtToken");
-      const formData = {
-        file: file,
-        technologyId: technologyId.toString(),
-        test: test.toString(),
-      };
-      console.log(formData);
-      const config = {
-        // headers: {
-        //   "Content-Type": "multipart/form-data",
-        //   Authorization: `${token}`,
-        // },
-      };
+    "excel/uploadQuestionExcel",
+    async ({file, technologyId, test}, {rejectWithValue}) => {
+        try {
+            console.log("check2");
+            const formData = {
+                file: file,
+                technologyId: technologyId.toString(),
+                test: test.toString(),
+            };
 
-      const response = await axios.post(
-        `yota-api/questions/upload-questions`,
-        formData,
-        config
-      );
-      customToast({
-        message: `${response.data}`,
-        autoClose: 2000,
-      });
-      return response.data;
-    } catch (error) {
-      if (error.response) {
-        customToast({
-          message: `${error.response.data}`,
-          autoClose: 2000,
-          type: "error",
-        });
-        return rejectWithValue(error.response.data);
-      } else {
-        return rejectWithValue(error.message);
-      }
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            };
+            console.log(formData);
+
+            const response = await axios.post(
+                `yota-api/questions/upload-questions`,
+                formData,
+                config
+            );
+            customToast({
+                message: `${response.data}`,
+                autoClose: 2000,
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response) {
+                customToast({
+                    message: `${error.response.data}`,
+                    autoClose: 2000,
+                    type: "error",
+                });
+                return rejectWithValue(error.response.data);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
     }
-  }
 );

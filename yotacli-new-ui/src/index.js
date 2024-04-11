@@ -1,19 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./App.css";
-import { App } from "./App";
+import {App} from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import "./common-styles/commonStyles";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import {Provider} from "react-redux";
+import {store} from "./app/store";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
+    <Provider store={store}>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+        {/*for prod only*/}
+        {/*<BrowserRouter basename={"/yotacli/"}>
+            <App/>
+        </BrowserRouter>*/}
+    </Provider>
 );
 
 // If you want to start measuring perhtmlFormance in your app, pass a function
