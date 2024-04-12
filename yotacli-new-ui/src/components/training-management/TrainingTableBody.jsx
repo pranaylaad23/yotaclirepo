@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import classes from "./Training.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-bootstrap/Modal";
 import {useDispatch} from "react-redux";
@@ -127,31 +126,26 @@ const TrainingTableBody = ({rows, columns, role}) => {
                                         {role === "Technical Manager" ? (
                                             <>
                                                 <div>
-                                                    {row.status === "APPROVED" ||
+                                                    {/*{row.status === "APPROVED" ||
                                                     row.status === "REJECTED" ? (
                                                         <div>
                                                             <p className={classes.actionicons}>
                                                                 No Action{" "}
                                                             </p>
                                                         </div>
-                                                    ) : (
-                                                        <>
-                                                            {/*<Link to={`/approveTraining/` + row.id}>
+                                                    ) : (*/}
+                                                    <>
+                                                        {/*<Link to={`/approveTraining/` + row.id}>
                                                                 <i
                                                                     id="eidt"
                                                                     data-toggle="tooltip"
                                                                     data-placement="bottom"
-                                                                    type="button"
                                                                     title="Approve Training"
-                                                                    className={
-                                                                        "classes .btn btn-success statustraining"
-                                                                    }
-                                                                >
-                                                                     Approve
-                                                                </i>
+                                                                    className={"fas fa-check"}
+                                                                />
                                                             </Link>
-
-                                                            <div>
+                                                            &nbsp;&nbsp;&nbsp;*/}
+                                                        {/*<div>
                                                                 <i
                                                                     data-toggle="tooltip"
                                                                     data-placement="bottom"
@@ -170,17 +164,16 @@ const TrainingTableBody = ({rows, columns, role}) => {
                                                                      Reject
                                                                 </i>
                                                             </div>*/}
-                                                            <i
-                                                                className="fas fa-plus"
-                                                                data-toggle="tooltip"
-                                                                data-placement="bottom"
-                                                                title="Add Associates To Training"
-                                                                onClick={() =>
-                                                                    handleActionClickOnAddAssociate(row.id)
-                                                                }
-                                                            />
-                                                        </>
-                                                    )}
+                                                        <i
+                                                            className="fas fa-plus"
+                                                            data-toggle="tooltip"
+                                                            data-placement="bottom"
+                                                            title="Add Associates To Training"
+                                                            onClick={() =>
+                                                                handleActionClickOnAddAssociate(row.id)
+                                                            }
+                                                        />
+                                                    </>
                                                 </div>
                                             </>
                                         ) : role === "Requester" ? (
