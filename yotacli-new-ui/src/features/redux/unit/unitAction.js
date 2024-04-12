@@ -1,61 +1,42 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import {AXIOS_BASE_URL} from "../../../constants/helperConstants";
 
 export const createUnit = createAsyncThunk(
-  "unit/CreateUnitForm",
-  async (formData, { rejectWithValue }) => {
-    // const token = localStorage.getItem("jwtToken");
-    try {
-      const config = {
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   Authorization: `${token}`,
-        // },
-      };
-      await axios.post(`/yota-api/units/`, formData, config);
-    } catch (error) {
-      if (error.response) {
-        return rejectWithValue(error.response);
-      } else {
-        return rejectWithValue(error.message);
-      }
+    "unit/CreateUnitForm",
+    async (formData, {rejectWithValue}) => {
+        try {
+            await axios.post(AXIOS_BASE_URL + `/units/`, formData);
+        } catch (error) {
+            if (error.response) {
+                return rejectWithValue(error.response);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
     }
-  }
 );
 export const postUnits = createAsyncThunk(
-  "units/postunits",
-  async ({ newUnit }, { rejectWithValue }) => {
-    try {
-      const config = {
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   Authorization: `${token}`,
-        // },
-      };
-
-      const response = await axios.post(`/yota-api/units/`, newUnit, config);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    "units/postunits",
+    async ({newUnit}, {rejectWithValue}) => {
+        try {
+            const response = await axios.post(AXIOS_BASE_URL + "/units/", newUnit);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
-  }
 );
 
 export const fetchUnits = createAsyncThunk(
-  "units/fetchUnits",
+    "units/fetchUnits",
 
-  async (_, { rejectWithValue }) => {
-    try {
-      const config = {
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   Authorization: `${token}`,
-        // },
-      };
-      const response = await axios.get(`/yota-api/units/`, config);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    async (_, {rejectWithValue}) => {
+        try {
+            const response = await axios.get(AXIOS_BASE_URL + "/units/");
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
-  }
 );

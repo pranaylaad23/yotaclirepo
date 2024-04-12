@@ -12,19 +12,11 @@ import {
 
 export const registerUser = createAsyncThunk(
     "security/registeruser",
-    async ({username, password}, {rejectWithValue}) => {
+    async (registerData, {rejectWithValue}) => {
         try {
-            debugger;
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
             await axios.post(
-                `/yota-api/users/register`,
-                {username, password},
-                config
-            );
+                AXIOS_BASE_URL + `/users/register`,
+                registerData);
         } catch (error) {
             if (error.response) {
                 return rejectWithValue(error.response);
@@ -38,7 +30,6 @@ export const loginUser = createAsyncThunk(
     "security/loginuser",
     async (loginData, {rejectWithValue}) => {
         try {
-            // debugger;
             console.log("Trying logging in...");
 
             const response = await axios.post(

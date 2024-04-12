@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import {LoginUser} from "../components/user/LoginUser.jsx";
 import {RegisterUser} from "../components/user/RegisterUser.jsx";
 import {MainContent} from "../components/common/dashboard-layout/mainContent";
@@ -41,6 +41,7 @@ export const AppRoutes = () => {
     const [isLoggedIn, setLoggedIn] = useState(false);
 
     const dispatch = useDispatch();
+    const location = useLocation();
 
     useEffect(() => {
         dispatch(syncUserAuthData());
@@ -54,6 +55,8 @@ export const AppRoutes = () => {
                     const decryptedToken = getDecryption(token);
                     if (decryptedToken && !isTokenExpired(token)) {
                         config.headers['Authorization'] = `Bearer ${decryptedToken}`;
+                        config.headers["Content-Type"] = config.headers["Content-Type"] ? config.headers["Content-Type"] : DEFAULT_REQUEST_HEADER_CONTENT_TYPE;
+                        return config;
                     }
                 }
                 config.headers["Content-Type"] = config.headers["Content-Type"] ? config.headers["Content-Type"] : DEFAULT_REQUEST_HEADER_CONTENT_TYPE;

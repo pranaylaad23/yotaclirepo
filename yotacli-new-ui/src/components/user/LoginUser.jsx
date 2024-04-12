@@ -9,7 +9,7 @@ import {Dashboard} from "../dashboard/dashboard";
 import {isTokenExpired} from "../../security/jwt/JwtService";
 
 export const LoginUser = () => {
-    const userData = useSelector((state) => state.security.userData);
+    const {userData} = useSelector((state) => state.security);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
@@ -30,24 +30,12 @@ export const LoginUser = () => {
         }
     }, [userData, navigate]);
 
-    /*useEffect(() => {
-        if (token) {
-            customToast({
-                message: `Logged in successfully as a : ${role}`,
-                autoClose: 2000,
-                onClose: () => navigate("/dashboard"),
-            });
-            <Dashboard role={role}/>;
-        }
-    }, [navigate, user, role]);*/
-
     const onSubmit = (event) => {
         event.preventDefault();
         const loginRequest = {
             email: username,
             password: password
         };
-        console.log(loginRequest)
         dispatch(loginUser(JSON.stringify(loginRequest)));
     };
 

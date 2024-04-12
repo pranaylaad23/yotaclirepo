@@ -1,5 +1,6 @@
 import axios from "axios";
 import {createAsyncThunk} from "@reduxjs/toolkit";
+import {AXIOS_BASE_URL} from "../../../constants/helperConstants";
 
 export const fetchAssociateAssignedTests = createAsyncThunk(
     "associateAssignedTests/fetchAssociateAssignedTests",
@@ -7,7 +8,7 @@ export const fetchAssociateAssignedTests = createAsyncThunk(
         try {
             console.log("service getassociates" + trainingData);
             const response = await axios.get(
-                `/yota-api/tests/1/assignedTests`);
+                AXIOS_BASE_URL + `/tests/1/assignedTests`);
             return response.data;
         } catch (error) {
             if (error.response) {

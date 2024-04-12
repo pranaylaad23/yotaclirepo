@@ -1,20 +1,13 @@
 import axios from "axios";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {customToast} from "../../../components/common/toast/customToast";
+import {AXIOS_BASE_URL} from "../../../constants/helperConstants";
 
 export const getTrainings = createAsyncThunk(
     "trainings/getTrainings",
     async (trainingData, {rejectWithValue}) => {
         try {
-            // const token = localStorage.getItem("jwtToken");
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
-
-            const response = await axios.get(`/yota-api/trainings/`, config);
+            const response = await axios.get(AXIOS_BASE_URL + `/trainings/`);
             return response.data;
         } catch (error) {
             if (error.response) {
@@ -29,17 +22,9 @@ export const requestTraining = createAsyncThunk(
     "training/requestTraining",
     async (trainingRequest, {rejectWithValue}) => {
         try {
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
             const response = await axios.post(
-                `/yota-api/trainings/`,
-                trainingRequest,
-                config
-            );
+                AXIOS_BASE_URL + `/trainings/`,
+                trainingRequest);
             return response.data;
         } catch (error) {
             if (error) {
@@ -53,18 +38,10 @@ export const addNominations = createAsyncThunk(
     "training/nominations",
     async (nominations, {rejectWithValue}) => {
         try {
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
             console.log(nominations);
             const response = await axios.post(
-                `yota-api/nominations/`,
-                nominations,
-                config
-            );
+                AXIOS_BASE_URL + `/nominations/`,
+                nominations);
 
             return response.data;
         } catch (error) {
@@ -85,14 +62,13 @@ export const uploadExcel = createAsyncThunk(
             formData.append("file", file);
 
             const config = {
-                // headers: {
-                //   "Content-Type": "multipart/form-data",
-                //   Authorization: `${token}`,
-                // },
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
             };
 
             const response = await axios.post(
-                `yota-api/nominations/bulkNominations`,
+                AXIOS_BASE_URL + `/nominations/bulkNominations`,
                 formData,
                 config
             );
@@ -115,17 +91,8 @@ export const getTrainingsByStatus = createAsyncThunk(
     "trainings/getTrainingsByStatus",
     async (status, {rejectWithValue}) => {
         try {
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
-
             const response = await axios.get(
-                `/yota-api/trainings/status/${status}`,
-                config
-            );
+                AXIOS_BASE_URL + `/trainings/status/${status}`);
             return response.data;
         } catch (error) {
             if (error.response) {
@@ -151,7 +118,7 @@ export const uploadTrainingExcel = createAsyncThunk(
             };
 
             const response = await axios.post(
-                `yota-api/trainings/bulkUploadTrainings`,
+                AXIOS_BASE_URL + `/trainings/bulkUploadTrainings`,
                 formData,
                 config
             );

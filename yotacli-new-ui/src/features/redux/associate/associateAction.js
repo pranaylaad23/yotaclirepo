@@ -2,6 +2,7 @@ import axios from "axios";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {customToast} from "../../../components/common/toast/customToast";
 import {AXIOS_BASE_URL} from "../../../constants/helperConstants";
+import {getTrainings} from "../training/trainingAction";
 
 export const addAssociate = createAsyncThunk(
     "associates/addAssociate",
@@ -54,21 +55,19 @@ export const fetchAssignedTests = createAsyncThunk(
 //Upload excel file of list of associate by Vishal.Kanthariya
 export const uploadExcel = createAsyncThunk(
     "excel/uploadExcel",
-    async ({id, file}, {rejectWithValue}) => {
+    async ({id, file}, {rejectWithValue, dispatch}) => {
         try {
-            // const token = localStorage.getItem("jwtToken");
             const formData = new FormData();
             formData.append("id", id);
             formData.append("file", file);
             const config = {
-                // headers: {
-                //   "Content-Type": "multipart/form-data",
-                //   Authorization: `${token}`,
-                // },
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             };
 
             const response = await axios.post(
-                `yota-api/newAssociates/bulkAddAssociates`,
+                AXIOS_BASE_URL + `/newAssociates/bulkAddAssociates`,
                 formData,
                 config
             );
@@ -76,6 +75,7 @@ export const uploadExcel = createAsyncThunk(
                 message: `${response.data}`,
                 autoClose: 2000,
             });
+            dispatch(getTrainings());
             return response.data;
         } catch (error) {
             if (error.response) {
@@ -91,18 +91,8 @@ export const fetchAssociatesOnCount = createAsyncThunk(
     "associates/fetchAssociates",
     async (id, {rejectWithValue}) => {
         try {
-            // const token = localStorage.getItem("jwtToken");
-            // console.log(token);
             console.log("service getassociates of ID" + id);
-
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
-            const response = await axios.get(`/yota-api/newAssociates/${id}`, config);
-            console.log(response.data);
+            const response = await axios.get(AXIOS_BASE_URL + `/newAssociates/${id}`);
             return response.data;
         } catch (error) {
             if (error.response) {

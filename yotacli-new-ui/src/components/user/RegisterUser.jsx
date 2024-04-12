@@ -3,10 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {Header} from "../common/header/Header";
 import "./LoginUser.css";
+import {registerUser} from "../../features/security/securtiyAction";
 
 export const RegisterUser = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [fullName, setFullName] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {user, success} = useSelector((state) => state.security);
@@ -14,12 +16,13 @@ export const RegisterUser = () => {
     const onSubmit = (event) => {
         event.preventDefault();
         const userToRegister = {
-            username,
-            password,
+            name: fullName,
+            emailId: username,
+            password: password
         };
 
-        // dispatch(registerUser(userToRegister));
-        alert(`You have been Registered successfully as a Requester!
+        dispatch(registerUser(userToRegister));
+        alert(`You have been Registered successfully!
     Login With your UserName and Password`);
         navigate("/login");
     };
@@ -52,6 +55,26 @@ export const RegisterUser = () => {
                                                     placeholder="Enter Email"
                                                     value={username}
                                                     onChange={(event) => setUsername(event.target.value)}
+                                                    style={{width: "300px", marginLeft: "70px"}}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="mb-3 row" style={{marginleft: "30px"}}>
+                                            <label
+                                                for="inputPassword"
+                                                class="email col-sm-1 col-form-label"
+                                            >
+                                                Name:
+                                            </label>
+
+                                            <div class="col-sm-4">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="floatingInput"
+                                                    placeholder="Enter Full Name"
+                                                    value={fullName}
+                                                    onChange={(event) => setFullName(event.target.value)}
                                                     style={{width: "300px", marginLeft: "70px"}}
                                                 />
                                             </div>

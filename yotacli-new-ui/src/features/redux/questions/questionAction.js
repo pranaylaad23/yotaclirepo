@@ -1,25 +1,16 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {customToast} from "../../../components/common/toast/customToast";
+import {AXIOS_BASE_URL} from "../../../constants/helperConstants";
 
 export const postQuestion = createAsyncThunk(
     "questions/postQuestion",
     async (questionData, {rejectWithValue}) => {
         try {
-            // const token = localStorage.getItem("jwtToken");
             console.log("service " + questionData);
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
-
             const response = await axios.post(
-                "/yota-api/questions/",
-                questionData,
-                config
-            );
+                AXIOS_BASE_URL + "/questions/",
+                questionData);
 
             return response.data;
         } catch (error) {
@@ -33,14 +24,7 @@ export const fetchQuestions = createAsyncThunk(
 
     async (_, {rejectWithValue}) => {
         try {
-            // const token = localStorage.getItem("jwtToken");
-            const config = {
-                // headers: {
-                //   "Content-Type": "application/json",
-                //   Authorization: `${token}`,
-                // },
-            };
-            const response = await axios.get("/yota-api/questions/all", config);
+            const response = await axios.get(AXIOS_BASE_URL + "/questions/all");
             return response.data;
         } catch (error) {
             return rejectWithValue(error.message);
@@ -67,10 +51,9 @@ export const uploadQuestions = createAsyncThunk(
             console.log(formData);
 
             const response = await axios.post(
-                `yota-api/questions/upload-questions`,
+                AXIOS_BASE_URL + `/questions/upload-questions`,
                 formData,
-                config
-            );
+                config);
             customToast({
                 message: `${response.data}`,
                 autoClose: 2000,

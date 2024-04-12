@@ -13,3 +13,9 @@ export const AXIOS_BASE_URL = "http://localhost:8080/yota-api";
 export const TOKEN_KEY = 'auth_token';
 
 export const DEFAULT_REQUEST_HEADER_CONTENT_TYPE = "application/json";
+
+export const PUBLIC_URLS = [
+    '',
+    '/login',
+    '/requester-registration'
+]

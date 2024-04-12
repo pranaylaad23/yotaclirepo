@@ -33,7 +33,7 @@ export const TrainingList = (props) => {
     useEffect(() => {
         if (userData.token)
             dispatch(getTrainings());
-    }, [userData]);
+    }, [userData, dispatch]);
 
     useEffect(() => {
         if (searchTerm) {
@@ -146,7 +146,7 @@ export const TrainingList = (props) => {
                 <TrainingTableBody
                     rows={paginatedData}
                     columns={columns}
-                    // role={userRole}
+                    role={userData.userRole}
                 />
             </table>
 

@@ -115,9 +115,9 @@ const TrainingTableBody = ({rows, columns, role}) => {
         <>
             <tbody>
             {rows.map((row) => {
-                if (role === "Trainer" && row.status !== "APPROVED") {
+                /*if (role === "Trainer" && row.status !== "APPROVED") {
                     return null;
-                }
+                }*/
                 return (
                     <tr key={row.id}>
                         {columns.map((column) => (
@@ -135,8 +135,8 @@ const TrainingTableBody = ({rows, columns, role}) => {
                                                             </p>
                                                         </div>
                                                     ) : (
-                                                        <div>
-                                                            <Link to={`/approveTraining/` + row.id}>
+                                                        <>
+                                                            {/*<Link to={`/approveTraining/` + row.id}>
                                                                 <i
                                                                     id="eidt"
                                                                     data-toggle="tooltip"
@@ -147,7 +147,7 @@ const TrainingTableBody = ({rows, columns, role}) => {
                                                                         "classes .btn btn-success statustraining"
                                                                     }
                                                                 >
-                                                                    {/* Approve */}
+                                                                     Approve
                                                                 </i>
                                                             </Link>
 
@@ -167,25 +167,19 @@ const TrainingTableBody = ({rows, columns, role}) => {
                                                                         )
                                                                     }
                                                                 >
-                                                                    {/* Reject */}
+                                                                     Reject
                                                                 </i>
-                                                            </div>
-                                                            <div>
-                                                                <button
-                                                                    data-toggle="tooltip"
-                                                                    data-placement="bottom"
-                                                                    title="Add Associates To Training"
-                                                                    className={
-                                                                        "classes.btn btn-danger statustraining"
-                                                                    }
-                                                                    onClick={() =>
-                                                                        handleActionClickOnAddAssociate(row.id)
-                                                                    }
-                                                                >
-                                                                    AddAssociate
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                                            </div>*/}
+                                                            <i
+                                                                className="fas fa-plus"
+                                                                data-toggle="tooltip"
+                                                                data-placement="bottom"
+                                                                title="Add Associates To Training"
+                                                                onClick={() =>
+                                                                    handleActionClickOnAddAssociate(row.id)
+                                                                }
+                                                            />
+                                                        </>
                                                     )}
                                                 </div>
                                             </>
@@ -210,10 +204,10 @@ const TrainingTableBody = ({rows, columns, role}) => {
                                                         className="fa-solid fa-pen-to-square"
                                                         data-toggle="tooltip"
                                                         data-placement="bottom"
-                                                        title="Reject Training"
-                                                        disabled={row.status === "REJECTED"}
+                                                        title="Edit Training"
                                                         onClick={() => handleEditTrainingButton(row)}
                                                     ></i>
+                                                    &nbsp;&nbsp;&nbsp;
                                                     <i
                                                         className="fas fa-plus"
                                                         data-toggle="tooltip"
