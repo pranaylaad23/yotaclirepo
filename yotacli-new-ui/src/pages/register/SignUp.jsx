@@ -19,7 +19,7 @@ export const SignUp = () => {
     useEffect(() => {
         if (message) {
             alert(message);
-            navigate("/");
+            window.location.assign("/yotacli");
         }
     }, [message, navigate]);
 

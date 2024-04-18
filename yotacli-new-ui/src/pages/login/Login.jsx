@@ -1,10 +1,10 @@
 import {useEffect, useRef, useState} from "react";
-import "./login.css";
 import styles from "./Login.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {isTokenExpired} from "../../security/jwt/JwtService";
 import {useDispatch, useSelector} from "react-redux";
-import {login, syncUserAuthData} from "../../features/login/loginAction";
+import {login} from "../../features/login/loginAction";
+import {clearMessage} from "../../features/login/loginSlice";
 
 const initialForm = {
     email: null,
@@ -21,10 +21,6 @@ export const Login = () => {
     const userData = useSelector((state) => state.auth.userData);
 
     useEffect(() => {
-        dispatch(syncUserAuthData());
-    }, []);
-
-    useEffect(() => {
         const token = userData.token;
         if (token && !isTokenExpired(token))
             navigate("/home");
@@ -33,6 +29,10 @@ export const Login = () => {
             if (userData.message)
                 alert(userData.message)
             navigate("/");
+        }
+        return () => {
+            if (userData.status === "FAILED")
+                dispatch(clearMessage());
         }
     }, [navigate, userData]);
 
@@ -50,23 +50,6 @@ export const Login = () => {
     useEffect(() => {
         if (loginData.email && loginData.password) {
             console.log("Trying logging in...");
-
-            /*axios.post(
-                AXIOS_BASE_URL + "/login",
-                JSON.stringify(loginData))
-                .then((response) => {
-                    console.log(response.data);
-                    const token = response.data.token;
-                    const encryptedToken = getEncryption(token);
-                    localStorage.setItem(TOKEN_KEY, encryptedToken);
-                    setLoginData(initialForm);
-
-                    navigate("/home");
-                })
-                .catch((error) => {
-                    console.log(error);
-                })*/
-
             dispatch(login(JSON.stringify(loginData)));
         }
     }, [loginData, navigate, dispatch]);
