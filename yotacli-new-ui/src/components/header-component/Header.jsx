@@ -29,7 +29,7 @@ export const Header = () => {
         <Fragment>
             <header className={styles["App-header"]}>
                 <div className={styles["app-name"]}>
-                    <p>
+                    <p onClick={() => navigate("/")}>
                         YOTA
                         <span className={styles["font-size-role"]}>
                             {role ? " ( " + role + " ) " : ""}

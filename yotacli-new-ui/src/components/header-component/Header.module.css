@@ -17,6 +17,7 @@
     align-content: center;
     font-weight: bold;
     font-size: 24px;
+    cursor: pointer;
 }
 
 .header-options {

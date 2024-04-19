@@ -1,5 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchAllAssociates, fetchAllPendingAssociates} from "./associateAction";
+import {
+    approvePendingAssociate,
+    declinePendingAssociate,
+    fetchAllAssociates,
+    fetchAllPendingAssociates
+} from "./associateAction";
 
 const initialState = {
     associates: [],
@@ -50,6 +55,46 @@ const associateSlice = createSlice({
                 state.success = false;
                 state.error = action.payload;
                 state.associates = [];
+            })
+        ;
+        //approve pending associate
+        builder
+            .addCase(approvePendingAssociate.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(approvePendingAssociate.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
+                let index = state.associates.findIndex(associate => associate.emailAdd === action.meta.arg);
+                state.associates.splice(index, 1);
+            })
+            .addCase(approvePendingAssociate.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+            })
+        ;
+        //decline pending associate
+        builder
+            .addCase(declinePendingAssociate.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(declinePendingAssociate.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
+                let index = state.associates.findIndex(associate => associate.emailAdd === action.meta.arg);
+                state.associates.splice(index, 1);
+            })
+            .addCase(declinePendingAssociate.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
             })
         ;
     }

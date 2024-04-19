@@ -35,3 +35,48 @@ export const fetchAllPendingAssociates = createAsyncThunk(
         }
     }
 );
+
+export const approvePendingAssociate = createAsyncThunk(
+    "associates/approvePendingAssociate",
+    async (email, {rejectWithValue}) => {
+        try {
+            console.log("Approving pending associate...");
+
+            const config = {
+                params: {
+                    email: email,
+                },
+            }
+            const response = await axios.put(
+                AXIOS_BASE_URL + "/users/approve/associate",
+                null,
+                config);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const declinePendingAssociate = createAsyncThunk(
+    "associates/declinePendingAssociate",
+    async (email, {rejectWithValue}) => {
+        try {
+            console.log("Declining pending associate...");
+
+            const param = {
+                params: {
+                    email: email,
+                }
+            }
+            const response = await axios.put(
+                AXIOS_BASE_URL + "/users/decline/associate",
+                null,
+                param
+            );
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);

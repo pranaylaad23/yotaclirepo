@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {Login} from "../pages/login/Login";
 import {SignUp} from "../pages/register/SignUp";
 import {useEffect} from "react";
@@ -6,12 +6,37 @@ import axios from "axios";
 import {isTokenExpired} from "../security/jwt/JwtService";
 import {Home} from "../pages/home/Home";
 import {getDecryption} from "../security/crypto/EncryptionDecryption";
-import {DEFAULT_REQUEST_HEADER_CONTENT_TYPE, TOKEN_KEY} from "../constants/helperConstants";
+import {DEFAULT_REQUEST_HEADER_CONTENT_TYPE, PUBLIC_URLS, TOKEN_KEY} from "../constants/helperConstants";
 import {AllAssociates} from "../pages/associates/AllAssociates";
 import {AllTrainers} from "../pages/trainers/AllTrainers";
 import {PendingUsers} from "../pages/pending-users/PendingUsers";
+import {logout, syncUserAuthData} from "../features/login/loginAction";
+import {useDispatch} from "react-redux";
 
 export const AppRoutes = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        dispatch(syncUserAuthData());
+    }, [navigate, dispatch]);
+
+    useEffect(() => {
+        const token = localStorage.getItem(TOKEN_KEY);
+        if (token) {
+            if (isTokenExpired(token)) {
+                console.log("Token Expired");
+                dispatch(logout());
+                navigate("/");
+            }
+        } else {
+            console.log("Token not found");
+            if (!PUBLIC_URLS.includes(location.pathname))
+                navigate("/")
+        }
+    }, [dispatch, navigate]);
 
     useEffect(() => {
         const requestInterceptor = axios.interceptors.request.use(
@@ -32,7 +57,6 @@ export const AppRoutes = () => {
                 return Promise.reject(error);
             }
         )
-
         return () => {
             axios.interceptors.request.eject(requestInterceptor);
         };
