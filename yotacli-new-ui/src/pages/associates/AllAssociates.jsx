@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllAssociatesByStatus } from "../../features/associates/associateAction";
 import { TableHeader } from "../../components/table-component/TableHeader";
-import Card from 'react-bootstrap/Card';
+import Card from "../../components/Card/Card";
 import Button from 'react-bootstrap/Button';
 import styles from "../../pages/associates/AllAssociates.module.css"
 import { TableBody } from "../../components/table-component/TableBody";
@@ -42,20 +42,23 @@ export const AllAssociates = () => {
             <Card className={styles["users-list"]}>
                 {
                     associates.length == 0
-                        ?
-                        <div className={styles["custom-text-left"]}>
-                            <b>No associates found with the approved status..</b>
-                        </div>
+                        ? (
+                            <div className={styles["custom-text-left"]}>
+                                <b>No associates found with the approved status..</b>
+                            </div>
+                        )
                         :
-                        <>
-                            <Button variant="primary" size="sm" style={{ marginLeft: "83%" }}>
-                                Assign Selected
-                            </Button>
-                            <table className="table table-bordered table-striped table-hover mt-1">
-                                <TableHeader theadData={theadData} />
-                                <TableBody tbodyData={tbodyData} tbodyDataKey={tbodyDataKey} />
-                            </table>
-                        </>
+                        (
+                            <>
+                                <Button variant="primary" size="sm" style={{ marginLeft: "83%" }}>
+                                    Assign Selected
+                                </Button>
+                                <table className="table table-bordered table-striped table-hover mt-1">
+                                    <TableHeader theadData={theadData} />
+                                    <TableBody tbodyData={tbodyData} tbodyDataKey={tbodyDataKey} />
+                                </table>
+                            </>
+                        )
                 }
             </Card>
         </>
