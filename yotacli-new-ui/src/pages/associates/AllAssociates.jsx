@@ -41,15 +41,9 @@ export const AllAssociates = () => {
             <h5>Approved Associates List</h5>
             <Card className={styles["users-list"]}>
                 {
-                    associates.length == 0
+                    associates.length > 0
                         ? (
-                            <div className={styles["custom-text-left"]}>
-                                <b>No associates found with the approved status..</b>
-                            </div>
-                        )
-                        :
-                        (
-                            <>
+                            <div>
                                 <Button variant="primary" size="sm" style={{ marginLeft: "83%" }}>
                                     Assign Selected
                                 </Button>
@@ -57,7 +51,13 @@ export const AllAssociates = () => {
                                     <TableHeader theadData={theadData} />
                                     <TableBody tbodyData={tbodyData} tbodyDataKey={tbodyDataKey} />
                                 </table>
-                            </>
+                            </div>
+                        )
+                        :
+                        (
+                            <div className={styles["custom-text-left"]}>
+                                <b>No associates found with the approved status..</b>
+                            </div>
                         )
                 }
             </Card>
