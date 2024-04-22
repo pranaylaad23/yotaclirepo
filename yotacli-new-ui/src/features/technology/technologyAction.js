@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import {  toast } from 'react-toastify';
 import {AXIOS_BASE_URL} from "../../constants/helperConstants";
 
 export const createTechnology = createAsyncThunk(
