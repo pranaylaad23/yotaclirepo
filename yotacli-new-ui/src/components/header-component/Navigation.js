@@ -24,6 +24,12 @@ const Navigation = ({
                             <Link to={"/all-trainers"}>Trainers</Link>
                         </li>
                     )}
+                    {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
+                            <Link to={"/add-technology"}>Technology</Link>
+                        </li>
+                    )}
                 {isLoggedIn &&
                     role !== USER_ROLES.ASSOCIATE && (
                         <li>
