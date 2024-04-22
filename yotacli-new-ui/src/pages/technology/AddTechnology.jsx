@@ -1,27 +1,33 @@
 import React, { useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import './AddTechnology.css'; // Import the CSS file
-import {useDispatch} from "react-redux";
+import './AddTechnology.css';
+import { useDispatch } from "react-redux";
 import { createTechnology } from '../../features/technology/technologyAction';
+
+// Import the TechnologyList component
+import TechnologyList from './TechnologyList'; // Assuming the file path is correct
+
 function AddTechnology() {
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const nameRef = useRef("");
 
   const handleSubmit = (event) => {
+    console.log("Form Submitted");
     event.preventDefault();
-    const technologyName = nameRef.current.value; // Corrected assignment syntax
+    const technologyName = nameRef.current.value;
     dispatch(createTechnology(technologyName));
     console.log("Technology Name:", technologyName);
     nameRef.current.value = "";
     setShowForm(false);
-};
+  };
 
   const handleCancel = () => {
     setShowForm(false);
   };
 
   return (
+    <>
     <div className="add-tech-container">
       {!showForm && (
         <Button onClick={() => setShowForm(true)}>Add Technology</Button>
@@ -45,6 +51,8 @@ function AddTechnology() {
         </form>
       )}
     </div>
+    <TechnologyList/>
+    </>
   );
 }
 
