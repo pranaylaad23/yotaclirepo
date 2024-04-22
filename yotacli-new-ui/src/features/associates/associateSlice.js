@@ -3,6 +3,7 @@ import {
     approvePendingAssociate,
     declinePendingAssociate,
     fetchAllAssociates,
+    fetchAllAssociatesByStatus,
     fetchAllPendingAssociates
 } from "./associateAction";
 
@@ -96,6 +97,25 @@ const associateSlice = createSlice({
                 state.success = false;
                 state.error = action.payload;
             })
+            //fetching all approved associates
+        builder
+        .addCase(fetchAllAssociatesByStatus.pending, (state) => {
+            state.loading = true;
+            state.success = false;
+            state.error = null;
+            state.associates = [];
+        })
+        .addCase(fetchAllAssociatesByStatus.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = true;
+            state.associates = action.payload;
+        })
+        .addCase(fetchAllAssociatesByStatus.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+            state.associates = [];
+        })
         ;
     }
 });
