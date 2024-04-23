@@ -12,9 +12,9 @@ import {AllTrainers} from "../pages/trainers/AllTrainers";
 import {PendingUsers} from "../pages/pending-users/PendingUsers";
 import {logout, syncUserAuthData} from "../features/login/loginAction";
 import {useDispatch} from "react-redux";
+import AddTechnology from "../pages/technology/AddTechnology";
 
 export const AppRoutes = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -71,7 +71,7 @@ export const AppRoutes = () => {
             <Route path={"/all-associates"} element={<AllAssociates/>}/>
             <Route path={"/all-trainers"} element={<AllTrainers/>}/>
             <Route path={"/all-pending-users"} element={<PendingUsers/>}/>
-
+            <Route path={"/add-technology"} element={<AddTechnology/>}/>
             {/*this should always be kept at last place, keep all the application urls above this one*/}
             <Route path={"/*"} element={<Navigate to={"/"}/>}/>
         </Routes>
