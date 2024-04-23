@@ -16,6 +16,7 @@ const technologySlice = createSlice({
         builder.addCase(createTechnology.pending, (state) => {
             state.loading = true;
             state.success = false;
+            state.error = null;
         });
         builder.addCase(createTechnology.fulfilled, (state, action) => {
             state.loading = false;
@@ -27,7 +28,6 @@ const technologySlice = createSlice({
             state.loading = false;
             state.success = false;
             state.error = action.payload;
-            state.technologies = [];
         });
         builder.addCase(fetchAllTechnology.pending, (state) => {
             state.loading = true;
