@@ -80,3 +80,25 @@ export const declinePendingAssociate = createAsyncThunk(
         }
     }
 );
+
+export const fetchAllAssociatesByStatus = createAsyncThunk(
+    "associates/fetchAllAssociatesByStatus",
+    async (_, {rejectWithValue}) => {
+
+        try {
+            console.log("Trying fetching associates...");
+
+            const response = await axios.get(
+                AXIOS_BASE_URL + "/users/get/all-associates-status",{
+                    params: {
+                        status: "APPROVED"
+                    }
+                }
+            );
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);

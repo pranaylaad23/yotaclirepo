@@ -20,12 +20,12 @@ export const createTechnology = createAsyncThunk(
     }
 );
 export const fetchAllTechnology = createAsyncThunk(
-    "technology/createTechnology",
+    "technology/fetchAllTechnology",
     async(_, {rejectWithValue}) => {
 
         try {
             const response = await axios.get(
-                AXIOS_BASE_URL + "/technology"
+                AXIOS_BASE_URL + "/technology/"
             );
             console.log("Data",response.data)
             return response.data;
