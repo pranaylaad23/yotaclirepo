@@ -4,18 +4,18 @@ import {AXIOS_BASE_URL} from "../../constants/helperConstants";
 
 export const createTechnology = createAsyncThunk(
     "technology/createTechnology",
-    async(technologyName, {rejectWithValue}) => {
+    async (technologyPayload, {rejectWithValue}) => {
 
         try {
-            console.log("Create Technology...",technologyName);
+            console.log("Create Technology...", technologyPayload);
 
             const response = await axios.post(
-                AXIOS_BASE_URL + "/technology/addTechnology/" + encodeURIComponent(technologyName)
+                AXIOS_BASE_URL + "/technology/addTechnology", technologyPayload
             );
             console.log("Data",response.data)
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.data);
         }
     }
 );
