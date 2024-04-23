@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { createTechnology } from "./technologyAction";
+import { createTechnology, fetchAllTechnology } from "./technologyAction";
 
 const initialState = {
     technologies: [],
@@ -28,7 +28,22 @@ const technologySlice = createSlice({
             state.success = false;
             state.error = action.payload;
             state.technologies = [];
-        })
+        });
+        builder.addCase(fetchAllTechnology.pending, (state) => {
+            state.loading = true;
+            state.success = false;
+          });
+          builder.addCase(fetchAllTechnology.fulfilled, (state,action) => {
+            state.loading = false;
+            state.success = true;
+            state.error = null;
+            state.technologies = action.payload;
+          });
+          builder.addCase(fetchAllTechnology.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+          });
     }
 })
 
