@@ -39,6 +39,7 @@ export const PendingUsers = () => {
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Emp Id</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Status</th>
@@ -49,6 +50,7 @@ export const PendingUsers = () => {
                                 {associates.map((associate, index) => (
                                     <tr key={index}>
                                         <th scope="row">{index + 1}</th>
+                                        <td>{associate.empId}</td>
                                         <td>{associate.fullName}</td>
                                         <td>{associate.emailAdd}</td>
                                         <td>{associate.accountStatus}</td>
