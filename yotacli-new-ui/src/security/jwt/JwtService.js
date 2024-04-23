@@ -58,7 +58,7 @@ export function isTokenExpired(token) {
         return false;
 }
 
-export function getEcnryptionKeyFromToken(token) {
+export function getEncryptionKeyFromToken(token) {
     const decodedToken = decodeToken(token);
     if (decodedToken) {
         return decodedToken.encryption_key;

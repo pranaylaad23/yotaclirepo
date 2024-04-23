@@ -2,10 +2,12 @@ import styles from '../login/Login.module.css';
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {register} from "../../features/login/loginAction";
 import {isTokenExpired} from "../../security/jwt/JwtService";
+import {register} from "../../features/login/loginAction";
 
 export const SignUp = () => {
+
+    const empIdInputRef = useRef('');
     const emailInputRef = useRef('');
     const fullNameInputRef = useRef('');
     const passwordInputRef = useRef('');
@@ -35,6 +37,7 @@ export const SignUp = () => {
         event.preventDefault();
 
         const formData = {
+            empId: empIdInputRef.current.value,
             fullName: fullNameInputRef.current.value,
             emailAdd: emailInputRef.current.value,
             password: passwordInputRef.current.value,
@@ -53,6 +56,15 @@ export const SignUp = () => {
                         Already registered?{" "}
                         <Link to={"/"}
                               style={{textDecoration: "none"}}>Sign In</Link>
+                    </div>
+                    <div className="form-group mt-3">
+                        <label className={styles["form-label"]}>Employee Id</label>
+                        <input
+                            ref={empIdInputRef}
+                            type="tel"
+                            className="form-control mt-1"
+                            placeholder="e.g 1015432"
+                        />
                     </div>
                     <div className="form-group mt-3">
                         <label className={styles["form-label"]}>Full Name</label>
