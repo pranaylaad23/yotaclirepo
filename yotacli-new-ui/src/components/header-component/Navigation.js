@@ -47,6 +47,12 @@ const Navigation = ({
                             <Link to={"/all-pending-users"}>Pending Users</Link>
                         </li>
                     )}
+		 {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
+                            <Link to={"/all-registered-associates"}>Training registered Associates</Link>
+                        </li>
+                    )}
 
                     {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (

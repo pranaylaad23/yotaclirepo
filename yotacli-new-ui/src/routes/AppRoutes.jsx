@@ -9,19 +9,16 @@ import { Login } from "../pages/login/Login";
 import { SignUp } from "../pages/register/SignUp";
 import { useEffect } from "react";
 import axios from "axios";
-import { isTokenExpired } from "../security/jwt/JwtService";
-import { Home } from "../pages/home/Home";
-import { getDecryption } from "../security/crypto/EncryptionDecryption";
-import {
-  DEFAULT_REQUEST_HEADER_CONTENT_TYPE,
-  PUBLIC_URLS,
-  TOKEN_KEY,
-} from "../constants/helperConstants";
-import { AllAssociates } from "../pages/associates/AllAssociates";
-import { AllTrainers } from "../pages/trainers/AllTrainers";
-import { PendingUsers } from "../pages/pending-users/PendingUsers";
-import { logout, syncUserAuthData } from "../features/login/loginAction";
-import { useDispatch } from "react-redux";
+import {isTokenExpired} from "../security/jwt/JwtService";
+import {Home} from "../pages/home/Home";
+import {getDecryption} from "../security/crypto/EncryptionDecryption";
+import {DEFAULT_REQUEST_HEADER_CONTENT_TYPE, PUBLIC_URLS, TOKEN_KEY} from "../constants/helperConstants";
+import {AllAssociates} from "../pages/associates/AllAssociates";
+import {AllTrainers} from "../pages/trainers/AllTrainers";
+import {PendingUsers} from "../pages/pending-users/PendingUsers";
+import {logout, syncUserAuthData} from "../features/login/loginAction";
+import {RegisteredAssociates} from "../pages/registered-associates/RegisteredAssociates";
+import {useDispatch} from "react-redux";
 import AddTechnology from "../pages/technology/AddTechnology";
 import TechnologyList from "../pages/technology/TechnologyList";
 
@@ -91,6 +88,7 @@ export const AppRoutes = () => {
             <Route path={"/all-pending-users"} element={<PendingUsers/>}/>
             <Route path={"/technology-list"} element={<TechnologyList/>}/>
             <Route path={"/add-test"} element={<AddTest/>}/>
+		    <Route path={"/all-registered-associates"} element={<RegisteredAssociates/>}/>
             {/*this should always be kept at last place, keep all the application urls above this one*/}
             <Route path={"/*"} element={<Navigate to={"/"}/>}/>
         </Routes>
