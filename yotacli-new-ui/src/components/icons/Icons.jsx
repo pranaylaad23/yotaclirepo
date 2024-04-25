@@ -1,5 +1,5 @@
 import {BsPatchCheckFill} from "react-icons/bs";
-import {AiOutlineStop} from "react-icons/ai";
+import {AiOutlineEdit, AiOutlineStop} from "react-icons/ai";
 
 export const ApproveIcon = ({
                                 onApprove,
@@ -27,4 +27,18 @@ export const DeclineIcon = ({
         cursor={"pointer"}
         title={title ? title : "Decline"}
         onClick={onDecline}/>
+};
+
+export const EditIcon = ({
+    onEdit,
+    title = null,
+    color = null,
+    size = null
+}) => {
+return <AiOutlineEdit
+color={color ? color : "#fd1212"}
+size={size > 10 ? size : "24"}
+cursor={"pointer"}
+title={title ? title : "Edit"}
+onClick={onEdit}/>
 };

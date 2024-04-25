@@ -10,7 +10,7 @@ import axios from "axios";
 import {AXIOS_BASE_URL, TOKEN_KEY} from "../../constants/helperConstants";
 import {getDecryption, getEncryption} from "../../security/crypto/EncryptionDecryption";
 import {
-    getEcnryptionKeyFromToken,
+    getEncryptionKeyFromToken,
     getFullNameFromToken,
     getRoleFromToken,
     getUserNameFromToken,
@@ -42,7 +42,7 @@ export const login = createAsyncThunk(
                     userRole: getRoleFromToken(encryptedToken),
                     email: getUserNameFromToken(encryptedToken),
                     fullName: getFullNameFromToken(encryptedToken),
-                    encryptionKey: getEcnryptionKeyFromToken(token)
+                    encryptionKey: getEncryptionKeyFromToken(token)
                 };
             } else {
                 return {
@@ -74,7 +74,7 @@ export const syncUserAuthData = createAsyncThunk(
                     userRole: getRoleFromToken(encryptedToken),
                     email: getUserNameFromToken(encryptedToken),
                     fullName: getFullNameFromToken(encryptedToken),
-                    encryptionKey: getEcnryptionKeyFromToken(token)
+                    encryptionKey: getEncryptionKeyFromToken(token)
                 };
             } else {
                 throw new Error("Unable to sync Data, Please re-login");

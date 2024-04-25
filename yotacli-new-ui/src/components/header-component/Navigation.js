@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from "react";
 import classes from './Navigation.module.css';
 import { Link } from "react-router-dom";
 import { USER_ROLES } from "../../constants/helperConstants";
@@ -56,6 +55,7 @@ const Navigation = ({
             </ul>
         </nav>
     );
+
 };
 
 export default Navigation;

@@ -89,7 +89,7 @@ export const fetchAllAssociatesByStatus = createAsyncThunk(
             console.log("Trying fetching associates...");
 
             const response = await axios.get(
-                AXIOS_BASE_URL + "/users/get/all-associates-status",{
+                AXIOS_BASE_URL + "/users/all-associates-status",{
                     params: {
                         status: "APPROVED"
                     }
