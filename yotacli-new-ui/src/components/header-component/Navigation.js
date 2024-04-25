@@ -47,6 +47,13 @@ const Navigation = ({
                             <Link to={"/all-pending-users"}>Pending Users</Link>
                         </li>
                     )}
+
+                    {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
+                            <Link to={"/add-test"}>Add Test</Link>
+                        </li>
+                    )}
                 {isLoggedIn && (
                     <li>
                         <button onClick={onLogout}>Logout</button>

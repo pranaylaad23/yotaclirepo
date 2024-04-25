@@ -90,10 +90,11 @@ export const AppRoutes = () => {
             <Route path={"/all-trainers"} element={<AllTrainers/>}/>
             <Route path={"/all-pending-users"} element={<PendingUsers/>}/>
             <Route path={"/technology-list"} element={<TechnologyList/>}/>
+            <Route path={"/add-test"} element={<AddTest/>}/>
             {/*this should always be kept at last place, keep all the application urls above this one*/}
             <Route path={"/*"} element={<Navigate to={"/"}/>}/>
         </Routes>
-    )
+    
 
   );
 };

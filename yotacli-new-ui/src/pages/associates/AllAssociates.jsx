@@ -13,14 +13,14 @@ import Row from 'react-bootstrap/Row';
 
 
 export const AllAssociates = () => {
-  const { associates } = useSelector((state) => state.associates);
-  const { token } = useSelector((state) => state.auth.userData);
-  const dispatch = useDispatch();
+  // const { associates } = useSelector((state) => state.associates);
+  // const { token } = useSelector((state) => state.auth.userData);
+  // const dispatch = useDispatch();
   // table
-  const theadData = ["Select", "Emp ID", "Name", "Email"];
-  const tbodyDataKey = ["Select", "userId", "fullName", "emailAdd"];
+  // const theadData = ["Select", "Emp ID", "Name", "Email"];
+  // const tbodyDataKey = ["Select", "userId", "fullName", "emailAdd"];
   // serach box
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
 
 
     const {associates} = useSelector((state) => state.associates);
@@ -52,19 +52,19 @@ export const AllAssociates = () => {
   }
 
 
-  const tbodyData = associates
-    .filter((associateDetails) =>
-      Object.values(associateDetails).some(
-        (values) =>
-          typeof values === "string" &&
-          values.toLowerCase().includes(searchValue.toLowerCase())
-      )
-    )
-    .map((item) => {
-      const newItem = { ...item };
-      newItem[tbodyDataKey[0]] = getCheckBox();
-      return newItem;
-    });
+  // const tbodyData = associates
+  //   .filter((associateDetails) =>
+  //     Object.values(associateDetails).some(
+  //       (values) =>
+  //         typeof values === "string" &&
+  //         values.toLowerCase().includes(searchValue.toLowerCase())
+  //     )
+  //   )
+  //   .map((item) => {
+  //     const newItem = { ...item };
+  //     newItem[tbodyDataKey[0]] = getCheckBox();
+  //     return newItem;
+  //   });
 
 
     function getCheckBox() {
