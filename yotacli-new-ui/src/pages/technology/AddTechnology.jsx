@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import './AddTechnology.css';
@@ -87,6 +88,7 @@ function AddTechnology() {
       </Modal>
     </>
   );
+
 }
 
 export default AddTechnology;

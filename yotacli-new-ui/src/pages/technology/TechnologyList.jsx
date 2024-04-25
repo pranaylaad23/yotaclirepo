@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import styles from './AddTechnology.css';
+
 import {  EditIcon } from '../../components/icons/Icons';
 import { fetchAllTechnology } from '../../features/technology/technologyAction';
 import Card from '../../components/Card/Card';
@@ -54,6 +55,7 @@ function TechnologyList() {
       </Card>
     </div>
   );
+
 }
 
 export default TechnologyList;
