@@ -6,16 +6,16 @@ import { fetchAllTechnology } from '../../features/technology/technologyAction';
 import Card from '../../components/Card/Card';
 import AddTechnology from './AddTechnology';
 
+
 function TechnologyList() {
-    const dispatch = useDispatch();
-  const {userData} = useSelector(state => state.auth);
-  const { technologies } = useSelector(state => state.technologies);
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.auth);
+  const { technologies } = useSelector((state) => state.technologies);
   console.log("technology List", technologies);
 
   useEffect(() => {
-    if (userData.token)
-       dispatch(fetchAllTechnology());
-}, [userData, dispatch]);
+    if (userData.token) dispatch(fetchAllTechnology());
+  }, [userData, dispatch]);
   return (
     <div>
       <Card className="users-list">
@@ -23,7 +23,9 @@ function TechnologyList() {
           <h4>Technology List</h4>{" "}
           <AddTechnology/>
         </div>
+
         <div className="users-list1">
+
           <table className="table table-bordered table-striped table-hover">
             <thead>
               <tr>
@@ -41,7 +43,6 @@ function TechnologyList() {
                   <td>{technology.questionCountUnderTechnology}</td>
                   <td>
                     <div className={styles["action-buttons"]}>
-                      
                       <EditIcon />
                     </div>
                   </td>

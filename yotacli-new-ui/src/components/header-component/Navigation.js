@@ -1,14 +1,13 @@
-import React from 'react';
-
+import React from "react";
 import classes from './Navigation.module.css';
-import {Link} from "react-router-dom";
-import {USER_ROLES} from "../../constants/helperConstants";
+import { Link } from "react-router-dom";
+import { USER_ROLES } from "../../constants/helperConstants";
 
 const Navigation = ({
-                        isLoggedIn,
-                        onLogout,
-                        role
-                    }) => {
+    isLoggedIn,
+    onLogout,
+    role
+}) => {
 
     return (
         <nav className={classes.nav}>
@@ -21,10 +20,16 @@ const Navigation = ({
                 {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
+                            <Link to={"/add-training"}>Trainings</Link>
+                        </li>
+                    )}
+                {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
                             <Link to={"/all-trainers"}>Trainers</Link>
                         </li>
                     )}
-                    {isLoggedIn &&
+                {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
                             <Link to={"/technology-list"}>Technology</Link>
@@ -50,6 +55,7 @@ const Navigation = ({
             </ul>
         </nav>
     );
+
 };
 
 export default Navigation;
