@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './AddTechnology.css';
 import {  EditIcon } from '../../components/icons/Icons';
 import { fetchAllTechnology } from '../../features/technology/technologyAction';
+import Card from '../../components/Card/Card';
+import AddTechnology from './AddTechnology';
 
 function TechnologyList() {
     const dispatch = useDispatch();
@@ -16,11 +18,12 @@ function TechnologyList() {
 }, [userData, dispatch]);
   return (
     <div>
-      <div class="card text-center mt-2">
-        <div class="card-header">
+      <Card className="users-list">
+        <div className="card-header">
           <h4>Technology List</h4>{" "}
+          <AddTechnology/>
         </div>
-        <div class="card-body">
+        <div className="users-list1">
           <table className="table table-bordered table-striped table-hover">
             <thead>
               <tr>
@@ -35,7 +38,7 @@ function TechnologyList() {
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>{technology.technology}</td>
-                  <td>{technology.countQuestion}</td>
+                  <td>{technology.questionCountUnderTechnology}</td>
                   <td>
                     <div className={styles["action-buttons"]}>
                       
@@ -47,7 +50,7 @@ function TechnologyList() {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card>
     </div>
   );
 }

@@ -1,70 +1,92 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Button} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import './AddTechnology.css';
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 // Import the TechnologyList component
 import TechnologyList from './TechnologyList';
-import {createTechnology} from "../../features/technology/technologyAction"; // Assuming the file path is correct
+import { createTechnology } from '../../features/technology/technologyAction'; // Assuming the file path is correct
 
 function AddTechnology() {
-    const dispatch = useDispatch();
-    const [showForm, setShowForm] = useState(false);
-    const nameRef = useRef("");
-    const {error} = useSelector((state) => state.technologies);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [technologyName, setTechnologyName] = useState('');
+  const {error}= useSelector((state) => state.technologies);
+  
 
-    useEffect(() => {
-        if (error)
-            alert(error)
-    }, [error]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const trimmedTechnologyName = technologyName.trim();
+	if((trimmedTechnologyName.length >0)&& (error===null)){
+	dispatch(createTechnology({ technology: trimmedTechnologyName }));
+      setTechnologyName('');
+      setOpen(false);}
+   else if(trimmedTechnologyName.length === 0){
+   setTechnologyName('');
+        setOpen(false);
+        alert('Name is empty. Please provide a technology name.');
+   }else if(error){
+	 alert(error);
+      setTechnologyName('');
+      setOpen(false);
+   }
+  };
 
-    const handleSubmit = (event) => {
-        console.log("Form Submitted");
-        event.preventDefault();
-        let technologyPayload = {
-            technology: nameRef.current.value
-        }
-        if (technologyPayload.technology.length > 0)
-            dispatch(createTechnology(JSON.stringify(technologyPayload)));
-        else
-            alert("Name is empty, Please provide technology name...")
-        console.log("Technology Name:", technologyPayload);
-        nameRef.current.value = "";
-        setShowForm(false);
-    };
-
-    const handleCancel = () => {
-        setShowForm(false);
-    };
-
-    return (
-        <>
-            <div className="add-tech-container">
-                {!showForm && (
-                    <Button onClick={() => setShowForm(true)}>Add Technology</Button>
-                )}
-                {showForm && (
-                    <form className="add-tech-form" onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="inputName">Technology Name</label>
-                            <input
-                                ref={nameRef}
-                                name="name"
-                                placeholder="Enter technology name"
-                                type="text"
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="add-tech-buttons">
-                            <Button type="submit" className="add">Add</Button>
-                            <Button type="button" className="cancel" onClick={handleCancel}>Cancel</Button>
-                        </div>
-                    </form>
-                )}
+  const openModal = () => {
+    setOpen(true);
+  };
+  const handleChange = (event) => {
+    setTechnologyName(event.target.value);
+  };
+  return (
+    <>
+      <Button variant="primary" size="sm" style={{ marginLeft: "83%" }} onClick={openModal}>
+                            Add Technology
+                        </Button>
+      <Modal
+        show={open}
+        onHide={() => setOpen(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title">
+            Add Technology
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <div className="form-group row mb-1 ">
+              <label
+                for="inputDescription"
+                className="createclientdescription col-sm-4 col-form-label mt-0"
+              >
+                Technology Name
+              </label>
+              <div className="col-sm-8">
+                <input
+                  type="text"
+                  value={technologyName}
+                  placeholder='Enter Technology'
+                  className="mb-2 form-control-sm form-control mt-1"
+                  onChange={handleChange} 
+                ></input>
+              </div>
             </div>
-            <TechnologyList/>
-        </>
-    );
+          </div>
+
+          <button
+            className="submitt-button btn btn-primary"
+            type="submit"
+           onClick={handleSubmit}
+            style={{ borderRadius: "revert-layer", marginLeft: "390px" }}
+          >
+            Submit
+          </button>
+        </Modal.Body>
+      </Modal>
+    </>
+  );
 }
 
 export default AddTechnology;

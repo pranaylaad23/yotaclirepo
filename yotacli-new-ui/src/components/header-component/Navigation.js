@@ -27,7 +27,7 @@ const Navigation = ({
                     {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
-                            <Link to={"/add-technology"}>Technology</Link>
+                            <Link to={"/technology-list"}>Technology</Link>
                         </li>
                     )}
                 {isLoggedIn &&
