@@ -3,6 +3,7 @@ import loginSlice from "../features/login/loginSlice";
 import associateSlice from "../features/associates/associateSlice";
 import trainerSlice from "../features/trainers/trainerSlice";
 import technologySlice from "../features/technology/technologySlice";
+import trainingSlice from "../features/training/trainingSlice"
 
 
 export const store = configureStore({
@@ -11,6 +12,6 @@ export const store = configureStore({
         associates: associateSlice,
         trainers: trainerSlice,
         technologies:technologySlice,
-        
+        trainings: trainingSlice,
     }
 });

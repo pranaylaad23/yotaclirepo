@@ -53,6 +53,7 @@ export const AllAssociates = () => {
       return newItem;
     });
 
+
   return (
     <>
       <h5>Approved Associates List</h5>

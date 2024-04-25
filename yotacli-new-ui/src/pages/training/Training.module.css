@@ -1,0 +1,27 @@
+.custom-text-left {
+    text-align: left;
+}
+
+.training-list {
+    max-width: 60%;
+    min-width: 40%;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.inner-card {
+    width: 110%;
+    margin-left: -5%;
+    margin-top: -5%;
+}
+
+.submit-buttons{
+margin: 8%;
+margin-top: 9%;
+}
+
+
+ 

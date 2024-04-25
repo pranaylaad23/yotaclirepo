@@ -23,8 +23,9 @@ import { PendingUsers } from "../pages/pending-users/PendingUsers";
 import { logout, syncUserAuthData } from "../features/login/loginAction";
 import { useDispatch } from "react-redux";
 import AddTechnology from "../pages/technology/AddTechnology";
-import AddTest from "../pages/test/AddTest";
 
+import Training from "../pages/training/Training";
+import AddTest from "../pages/test/AddTest";
 export const AppRoutes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -76,20 +77,22 @@ export const AppRoutes = () => {
     };
   }, []);
 
-  return (
-    <Routes>
-      <Route path={"/"} element={<Login />} />
-      <Route path={"/login"} element={<Login />} />
-      <Route path={"/register"} element={<SignUp />} />
-      <Route path={"/home"} element={<Home />} />
-      <Route path={"/all-associates"} element={<AllAssociates />} />
-      <Route path={"/all-trainers"} element={<AllTrainers />} />
-      <Route path={"/all-pending-users"} element={<PendingUsers />} />
-      <Route path={"/add-technology"} element={<AddTechnology />} />
-      <Route path={"/add-test"} element={<AddTest />} />
+ 
+    return (
+        <Routes>
+            <Route path={"/"} element={<Login/>}/>
+            <Route path={"/login"} element={<Login/>}/>
+            <Route path={"/register"} element={<SignUp/>}/>
+            <Route path={"/home"} element={<Home/>}/>
+            <Route path={"/add-training"} element={<Training/>}/>
+            <Route path={"/all-associates"} element={<AllAssociates/>}/>
+            <Route path={"/all-trainers"} element={<AllTrainers/>}/>
+            <Route path={"/all-pending-users"} element={<PendingUsers/>}/>
+            <Route path={"/add-technology"} element={<AddTechnology/>}/>
+            {/*this should always be kept at last place, keep all the application urls above this one*/}
+            <Route path={"/*"} element={<Navigate to={"/"}/>}/>
+        </Routes>
+    )
 
-      {/*this should always be kept at last place, keep all the application urls above this one*/}
-      <Route path={"/*"} element={<Navigate to={"/"} />} />
-    </Routes>
   );
 };
