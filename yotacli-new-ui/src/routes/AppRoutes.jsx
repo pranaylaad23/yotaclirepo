@@ -13,6 +13,8 @@ import {PendingUsers} from "../pages/pending-users/PendingUsers";
 import {logout, syncUserAuthData} from "../features/login/loginAction";
 import {useDispatch} from "react-redux";
 import AddTechnology from "../pages/technology/AddTechnology";
+import Training from "../pages/training/Training";
+
 
 export const AppRoutes = () => {
     const dispatch = useDispatch();
@@ -68,6 +70,7 @@ export const AppRoutes = () => {
             <Route path={"/login"} element={<Login/>}/>
             <Route path={"/register"} element={<SignUp/>}/>
             <Route path={"/home"} element={<Home/>}/>
+            <Route path={"/add-training"} element={<Training/>}/>
             <Route path={"/all-associates"} element={<AllAssociates/>}/>
             <Route path={"/all-trainers"} element={<AllTrainers/>}/>
             <Route path={"/all-pending-users"} element={<PendingUsers/>}/>

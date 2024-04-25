@@ -47,6 +47,7 @@ export const AllAssociates = () => {
                                 <Button variant="primary" size="sm" style={{ marginLeft: "83%" }}>
                                     Assign Selected
                                 </Button>
+                                {console.log(associates)}
                                 <table className="table table-bordered table-striped table-hover mt-1">
                                     <TableHeader theadData={theadData} />
                                     <TableBody tbodyData={tbodyData} tbodyDataKey={tbodyDataKey} />
