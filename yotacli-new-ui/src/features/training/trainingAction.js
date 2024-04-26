@@ -33,3 +33,18 @@ export const listTrainings = createAsyncThunk(
         }
     }
 );
+
+export const assignTraining = createAsyncThunk(
+    "training/assignTraining",
+    async (assignTrainingPayload, { rejectWithValue }) => {
+        try {
+            console.log("Trying fetching associates...");
+            const response = await axios.post(
+                AXIOS_BASE_URL + "/assign/assign-training", assignTrainingPayload
+            );
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
