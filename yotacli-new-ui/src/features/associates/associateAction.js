@@ -102,3 +102,20 @@ export const fetchAllAssociatesByStatus = createAsyncThunk(
         }
     }
 );
+
+export const fetchRegisteredAssociates = createAsyncThunk(
+    "associates/fetchRegisteredAssociates",
+    async (_, {rejectWithValue}) => {
+        try {
+            console.log("Fetched Registered Associates...");
+
+            const response = await axios.get(
+                AXIOS_BASE_URL + "/users/get/all-registered/associates?trainingId=1"
+            );
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);

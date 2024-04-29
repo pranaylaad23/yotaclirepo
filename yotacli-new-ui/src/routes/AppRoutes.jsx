@@ -11,7 +11,9 @@ import {AllAssociates} from "../pages/associates/AllAssociates";
 import {AllTrainers} from "../pages/trainers/AllTrainers";
 import {PendingUsers} from "../pages/pending-users/PendingUsers";
 import {logout, syncUserAuthData} from "../features/login/loginAction";
+import {RegisteredAssociates} from "../pages/registered-associates/RegisteredAssociates";
 import {useDispatch} from "react-redux";
+import AddTechnology from "../pages/technology/AddTechnology";
 import TechnologyList from "../pages/technology/TechnologyList";
 
 import Training from "../pages/training/Training";
@@ -83,6 +85,7 @@ export const AppRoutes = () => {
             <Route path={"/technology-list"} element={<TechnologyList/>}/>
             <Route path={"/add-test"} element={<AddTest/>}/>
             <Route path={"/add-question"} element={<AddQuestion/>}/>
+		        <Route path={"/all-registered-associates"} element={<RegisteredAssociates/>}/>
             {/*this should always be kept at last place, keep all the application urls above this one*/}
             <Route path={"/*"} element={<Navigate to={"/"}/>}/>
         </Routes>
