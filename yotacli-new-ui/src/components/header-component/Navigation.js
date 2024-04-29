@@ -1,13 +1,13 @@
 import React from "react";
 import classes from './Navigation.module.css';
-import { Link } from "react-router-dom";
-import { USER_ROLES } from "../../constants/helperConstants";
+import {Link} from "react-router-dom";
+import {USER_ROLES} from "../../constants/helperConstants";
 
 const Navigation = ({
-    isLoggedIn,
-    onLogout,
-    role
-}) => {
+                        isLoggedIn,
+                        onLogout,
+                        role
+                    }) => {
 
     return (
         <nav className={classes.nav}>
@@ -48,10 +48,16 @@ const Navigation = ({
                         </li>
                     )}
 
-                    {isLoggedIn &&
+                {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
                             <Link to={"/add-test"}>Add Test</Link>
+                        </li>
+                    )}
+                {isLoggedIn &&
+                    role !== USER_ROLES.ASSOCIATE && (
+                        <li>
+                            <Link to={"/add-question"}>Add Questions</Link>
                         </li>
                     )}
                 {isLoggedIn && (
