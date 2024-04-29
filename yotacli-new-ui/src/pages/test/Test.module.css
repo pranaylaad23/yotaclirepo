@@ -51,3 +51,11 @@
   color: rgb(34, 34, 34);
   margin-right: 473px;
 }
+.form-title-q {
+  margin-bottom: 32px;
+  margin-top: -18px;
+}
+.search-test {
+  flex: 0 0 auto;
+  width: 50%;
+}

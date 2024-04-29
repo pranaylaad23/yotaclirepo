@@ -24,9 +24,11 @@ import { logout, syncUserAuthData } from "../features/login/loginAction";
 import { useDispatch } from "react-redux";
 import AddTechnology from "../pages/technology/AddTechnology";
 import TechnologyList from "../pages/technology/TechnologyList";
-
-import Training from "../pages/training/Training";
 import AddTest from "../pages/test/AddTest";
+import AddFormLibrary from "../pages/test/AddFromLibrary";
+import QuestionFromLibrary from "../pages/test/QuestionFromLibrary";
+import Training from "../pages/training/Training";
+
 export const AppRoutes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,6 +63,7 @@ export const AppRoutes = () => {
             config.headers["Content-Type"] = config.headers["Content-Type"]
               ? config.headers["Content-Type"]
               : DEFAULT_REQUEST_HEADER_CONTENT_TYPE;
+            console.log(config);
             return config;
           }
         }
@@ -78,23 +81,44 @@ export const AppRoutes = () => {
     };
   }, []);
 
- 
-    return (
-        <Routes>
-            <Route path={"/"} element={<Login/>}/>
-            <Route path={"/login"} element={<Login/>}/>
-            <Route path={"/register"} element={<SignUp/>}/>
-            <Route path={"/home"} element={<Home/>}/>
-            <Route path={"/add-training"} element={<Training/>}/>
-            <Route path={"/all-associates"} element={<AllAssociates/>}/>
-            <Route path={"/all-trainers"} element={<AllTrainers/>}/>
-            <Route path={"/all-pending-users"} element={<PendingUsers/>}/>
-            <Route path={"/technology-list"} element={<TechnologyList/>}/>
-            <Route path={"/add-test"} element={<AddTest/>}/>
-            {/*this should always be kept at last place, keep all the application urls above this one*/}
-            <Route path={"/*"} element={<Navigate to={"/"}/>}/>
-        </Routes>
-    
+  return (
+    <Routes>
+      <Route path={"/"} element={<Login />} />
+      <Route path={"/login"} element={<Login />} />
+      <Route path={"/register"} element={<SignUp />} />
+      <Route path={"/home"} element={<Home />} />
+      <Route path={"/add-training"} element={<Training />} />
+      <Route path={"/all-associates"} element={<AllAssociates />} />
+      <Route path={"/all-trainers"} element={<AllTrainers />} />
+      <Route path={"/all-pending-users"} element={<PendingUsers />} />
+      <Route path={"/technology-list"} element={<TechnologyList />} />
+      <Route path={"/add-test"} element={<AddTest />} />
+      <Route path={"/add-test"} element={<AddTest />} />
+      <Route path={"/add-test1"} element={<AddFormLibrary />} />
+      <Route path={"/add-test2"} element={<QuestionFromLibrary />} />
+      <Route path={"/add-technology"} element={<AddTechnology />} />
+      {/*this should always be kept at last place, keep all the application urls above this one*/}
+      <Route path={"/*"} element={<Navigate to={"/"} />} />
+    </Routes>
 
+    // return (
+    //   <Routes>
+    //     <Route path={"/"} element={<Login />} />
+    //     <Route path={"/login"} element={<Login />} />
+    //     <Route path={"/register"} element={<SignUp />} />
+    //     <Route path={"/home"} element={<Home />} />
+    //     <Route path={"/all-associates"} element={<AllAssociates />} />
+    //     <Route path={"/all-trainers"} element={<AllTrainers />} />
+    //     <Route path={"/all-pending-users"} element={<PendingUsers />} />
+    //     <Route path={"/add-technology"} element={<AddTechnology />} />
+    //     <Route path={"/add-test"} element={<AddTest />} />
+    //     <Route path={"/add-test1"} element={<AddFormLibrary />} />
+    //     <Route path={"/add-test2"} element={<QuestionFromLibrary />} />
+    //     {/* AddQuestionFromLibrary */}
+    //     {/*this should always be kept at last place, keep all the application urls above this one*/}
+    //     <Route path={"/*"} element={<Navigate to={"/"} />} />
+    //   </Routes>
+
+    // );
   );
 };
