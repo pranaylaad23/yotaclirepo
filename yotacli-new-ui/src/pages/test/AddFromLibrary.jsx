@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllTechnology } from "../../features/technology/technologyAction";
 import styles from "../test/Test.module.css";
-import QuestionFromLibrary from "./QuestionFromLibrary";
+import { QuestionFromLibrary } from "./QuestionFromLibrary";
 
 const AddFormLibrary = () => {
   const [selectedTechnology, setSelectedTechnology] = useState("");

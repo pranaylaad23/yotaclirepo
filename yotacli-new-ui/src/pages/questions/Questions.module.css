@@ -1,0 +1,62 @@
+.card-container {
+    max-width: 80%;
+    min-width: 40%;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.form-container {
+    max-width: 80%;
+    min-width: 40%;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.form-group {
+    justify-content: space-between;
+    display: inline-flex;
+    align-items: center;
+    max-width: 80%;
+    width: 90%;
+    min-width: 40%;
+    padding-bottom: 1rem;
+}
+
+.form-group-question {
+    justify-content: space-between;
+    display: inline-flex;
+    align-items: center;
+    max-width: 80%;
+    width: 90%;
+    min-width: 40%;
+    padding-bottom: 1rem;
+}
+
+.required-span {
+    color: red;
+}
+
+.select-icon-group {
+    justify-content: space-evenly;
+    display: inline-flex;
+    align-items: center;
+    max-width: 30%;
+    width: 50%;
+    min-width: 40%;
+}
+
+.question-text-editor {
+    height: 100px;
+}

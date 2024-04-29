@@ -1,6 +1,13 @@
 import {BsPatchCheckFill} from "react-icons/bs";
 import {AiOutlineEdit, AiOutlineStop} from "react-icons/ai";
 
+import { IoPersonAdd } from "react-icons/io5";
+import { TbFileReport } from "react-icons/tb";
+
+import {IoMdAddCircle} from "react-icons/io";
+import {PiUploadSimpleBold} from "react-icons/pi";
+
+
 export const ApproveIcon = ({
                                 onApprove,
                                 title = null,
@@ -30,15 +37,73 @@ export const DeclineIcon = ({
 };
 
 export const EditIcon = ({
-    onEdit,
+                             onEdit,
+                             title = null,
+                             color = null,
+                             size = null
+                         }) => {
+    return <AiOutlineEdit
+        color={color ? color : "#fd1212"}
+        size={size > 10 ? size : "24"}
+        cursor={"pointer"}
+        title={title ? title : "Edit"}
+        onClick={onEdit}/>
+};
+
+export const AddIcon = ({
+                            onAdd,
+                            title = null,
+                            color = null,
+                            size = null
+                        }) => {
+    return <IoMdAddCircle
+        color={color ? color : "#0d74da"}
+        size={size > 10 ? size : "24"}
+        cursor={"pointer"}
+        title={title ? title : "Add New"}
+        onClick={onAdd}/>
+};
+
+
+export const AssignTrainingIcon = ({
+    assignTraining,
     title = null,
     color = null,
     size = null
 }) => {
-return <AiOutlineEdit
-color={color ? color : "#fd1212"}
-size={size > 10 ? size : "24"}
+return <IoPersonAdd
+color={color ? color : "#21a321"}
+size={size > 10 ? size : "18"}
 cursor={"pointer"}
 title={title ? title : "Edit"}
-onClick={onEdit}/>
+onClick={assignTraining}/>
 };
+
+export const ReportIcon = ({
+    report,
+    title = null,
+    color = null,
+    size = null
+}) => {
+return <TbFileReport
+color={color ? color : "#fd1212"}
+size={size > 10 ? size : "18"}
+cursor={"pointer"}
+title={title ? title : "Edit"}
+onClick={report}/>
+};
+
+export const UploadIcon = ({
+                               onUpload,
+                               title = null,
+                               color = null,
+                               size = null
+                           }) => {
+    return <PiUploadSimpleBold
+        color={color ? color : "#0d74da"}
+        size={size > 10 ? size : "24"}
+        cursor={"pointer"}
+        title={title ? title : "Upload"}
+        onClick={onUpload}/>
+}
+
