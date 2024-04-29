@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTraining, assignTraining, listTrainings } from './trainingAction';
+import { addTraining, assignTraining, listTrainings, registeredList } from './trainingAction';
 
 const initialState = {
   trainings: [],
@@ -53,11 +53,25 @@ const trainingSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.trainings = action.payload;
-        const emailAddresses = action.payload.yotaUser.map(user => user.emailAdd);
-        const message = `Associated added in training:\n${emailAddresses.join('\n')}`;
-        alert(message);
       })
       .addCase(assignTraining.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload;
+      })
+      //registered list
+      builder
+      .addCase(registeredList.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(registeredList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.trainings = action.payload;
+      })
+      .addCase(registeredList.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.error = action.payload;

@@ -36,11 +36,35 @@ export const listTrainings = createAsyncThunk(
 
 export const assignTraining = createAsyncThunk(
     "training/assignTraining",
-    async (assignTrainingPayload, { rejectWithValue }) => {
+    async ({ emailIds, trainingId }, { rejectWithValue }) => {
         try {
             console.log("Trying fetching associates...");
             const response = await axios.post(
-                AXIOS_BASE_URL + "/assign/assign-training", assignTrainingPayload
+                `${AXIOS_BASE_URL}/training/assign`,
+                JSON.stringify(emailIds),
+                {
+                    params: {
+                        trainingId: trainingId 
+                    }
+                }
+            );
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const registeredList = createAsyncThunk(
+    "training/registeredList",
+    async (trainingId, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(
+                AXIOS_BASE_URL + "/training/assigned-associated", {
+                params: {
+                    trainingId: trainingId
+                }
+            }
             );
             return response.data;
         } catch (error) {

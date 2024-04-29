@@ -12,17 +12,7 @@ import Row from 'react-bootstrap/Row';
 import { useNavigate } from "react-router-dom";
 import { assignTraining } from "../../features/training/trainingAction";
 
-
 export const AllAssociates = () => {
-    // const { associates } = useSelector((state) => state.associates);
-    // const { token } = useSelector((state) => state.auth.userData);
-    // const dispatch = useDispatch();
-    // table
-    // const theadData = ["Select", "Emp ID", "Name", "Email"];
-    // const tbodyDataKey = ["Select", "userId", "fullName", "emailAdd"];
-    // serach box
-    // const [searchValue, setSearchValue] = useState("");
-
 
     const { associates } = useSelector((state) => state.associates);
     const { token } = useSelector((state) => state.auth.userData);
@@ -57,26 +47,11 @@ export const AllAssociates = () => {
         )
     }
 
-
-    // const tbodyData = associates
-    //   .filter((associateDetails) =>
-    //     Object.values(associateDetails).some(
-    //       (values) =>
-    //         typeof values === "string" &&
-    //         values.toLowerCase().includes(searchValue.toLowerCase())
-    //     )
-    //   )
-    //   .map((item) => {
-    //     const newItem = { ...item };
-    //     newItem[tbodyDataKey[0]] = getCheckBox();
-    //     return newItem;
-    //   });
-
-
+    let checkboxCount = 0;
     const countSelectedCheckbox = (event) => {
         const isChecked = event.target.checked;
         const selectedEmail = event.target.value;
-        
+
         if (isChecked) {
             // If email.current is not yet an array, initialize it as an empty array
             if (!Array.isArray(email.current)) {
@@ -84,27 +59,36 @@ export const AllAssociates = () => {
             }
             // Push the selected email to the array
             email.current.push(selectedEmail);
+            checkboxCount++;
         } else {
             // If the checkbox is unchecked, remove the email from the array
             email.current = email.current.filter(email => email !== selectedEmail);
+            checkboxCount--;
         }
     }
 
     const addAssignTraining = () => {
-        const emailAddArray = email.current;
-        const yotaUser = emailAddArray.map(emailAdd => ({ emailAdd }));
+        const nominatedValue = localStorage.getItem("nominated");
+        const trainingId = localStorage.getItem("trainingId");
+        const registeredCount = localStorage.getItem("registeredCount");
 
-        const id = localStorage.getItem("trainingId");
-        const trainings = { id };
-
-        const assignTrainingPayload = { yotaUser, trainings };
-        dispatch(assignTraining(assignTrainingPayload))
-        .then(() => {
-            navigate('/add-training');
-          })
-          .catch((error) => {
-           alert(error);
-          });
+        if (checkboxCount === 0) {
+            alert("No associated item has been selected for training. Please make a selection and try again.")
+        } else if (nominatedValue < checkboxCount) {
+            alert("The nominated associated limit has been reached: " + nominatedValue + "\nPlease try again.");
+        } else if (nominatedValue > registeredCount) {
+            const emailAddArray = email.current;
+            const emailIds = emailAddArray.map(email => (email));
+            dispatch(assignTraining({ emailIds, trainingId }))
+                .then(() => {
+                    navigate('/add-training');
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        } else {
+            alert("Cannot assign training. Registered limit has been reached.");
+        }
     }
 
 
@@ -137,8 +121,8 @@ export const AllAssociates = () => {
                                         <Search setSearchValue={setSearchValue} />
                                     </Col>
                                     <Col>
-                                        <Button variant="primary" size="sm" className={styles["assign-button"]} 
-                                                                            onClick={addAssignTraining}>
+                                        <Button variant="primary" size="sm" className={styles["assign-button"]}
+                                            onClick={addAssignTraining}>
                                             Assign Selected
                                         </Button>
                                     </Col>

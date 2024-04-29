@@ -8,8 +8,8 @@
     width: 80%;
     align-items: center;
     justify-content: center;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 1rem auto;
+    padding: 1rem;
 }
 
 .inner-card {
@@ -23,5 +23,10 @@ margin: 8%;
 margin-top: 9%;
 }
 
+.view {
+    font-size: smaller; 
+    margin-left: 5px; 
+    cursor: pointer;
+}
 
  
