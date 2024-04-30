@@ -3,7 +3,7 @@ import Card from '../../components/Card/Card';
 import styles from "../../pages/training/Training.module.css";
 import Button from 'react-bootstrap/esm/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTraining, listTrainings } from '../../features/training/trainingAction';
+import { addTraining, assignedAssociateList, listTrainings } from '../../features/training/trainingAction';
 import { fetchAllTrainers } from '../../features/trainers/trainerAction';
 import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -62,6 +62,14 @@ const Training = () => {
             endDate: endDate.current,
             totalNominations: nominated.current
         };
+        if (!trainingObject.startDate || !trainingObject.assignTo || !trainingObject.startDate || !trainingObject.endDate || !trainingObject.totalNominations) {
+            alert("All fields are required");
+            return; // Prevent further execution
+        }
+        if (trainingObject.startDate >= trainingObject.endDate) {
+            alert("End date must be after start date");
+            return; // Prevent further execution
+        }
         dispatch(addTraining(trainingObject));
         setOpen(false);
         window.location.reload();
@@ -72,6 +80,16 @@ const Training = () => {
         localStorage.setItem("nominated", data.totalNominations);
         localStorage.setItem("registeredCount", data.registeredInTraining)
         navigate(`/all-associates`);
+    }
+
+    const navigateToAssignedAssociateList = (trainingId) => {
+        dispatch(assignedAssociateList(trainingId))
+            .then(() => {
+                navigate('/assigned-associate');
+            })
+            .catch((error) => {
+                alert(error);
+            });
     }
 
     return (
@@ -147,7 +165,7 @@ const Training = () => {
                                     <td>{training.assignTo}</td>
                                     <td>{training.totalNominations}</td>
                                     <td>{training.registeredInTraining}
-                                        <a className={styles["view"]}>view associate</a>
+                                        <a className={styles["view"]} onClick={() => navigateToAssignedAssociateList(training.id)}>view associate</a>
                                     </td>
                                     <td>
                                         <div className={styles["action-buttons"]}>

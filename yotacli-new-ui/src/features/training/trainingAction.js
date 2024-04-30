@@ -55,8 +55,8 @@ export const assignTraining = createAsyncThunk(
     }
 );
 
-export const registeredList = createAsyncThunk(
-    "training/registeredList",
+export const assignedAssociateList = createAsyncThunk(
+    "training/assignedAssociateList",
     async (trainingId, { rejectWithValue }) => {
         try {
             const response = await axios.get(
@@ -71,4 +71,4 @@ export const registeredList = createAsyncThunk(
             return rejectWithValue(error.message);
         }
     }
-);
+);	

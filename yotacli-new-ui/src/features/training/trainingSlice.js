@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTraining, assignTraining, listTrainings, registeredList } from './trainingAction';
+import { addTraining, assignTraining, assignedAssociateList, listTrainings } from './trainingAction';
 
 const initialState = {
   trainings: [],
@@ -59,23 +59,23 @@ const trainingSlice = createSlice({
         state.success = false;
         state.error = action.payload;
       })
-      //registered list
-      builder
-      .addCase(registeredList.pending, (state) => {
-        state.loading = true;
-        state.success = false;
-        state.error = null;
-      })
-      .addCase(registeredList.fulfilled, (state, action) => {
-        state.loading = false;
-        state.success = true;
-        state.trainings = action.payload;
-      })
-      .addCase(registeredList.rejected, (state, action) => {
-        state.loading = false;
-        state.success = false;
-        state.error = action.payload;
-      })
+      //Assigned associate in training list
+    builder
+    .addCase(assignedAssociateList.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+      state.error = null;
+    })
+    .addCase(assignedAssociateList.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.trainings = action.payload;
+    })
+    .addCase(assignedAssociateList.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+    })
       ;
   }
 });
