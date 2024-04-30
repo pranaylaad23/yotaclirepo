@@ -11,6 +11,7 @@ function App() {
             <main className={"page-content"}>
                 <AppRoutes/>
             </main>
+            {/*<Footer/>*/}
         </div>
     );
 }

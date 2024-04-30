@@ -55,3 +55,14 @@
 .add-tech-buttons button.cancel:hover {
   opacity: 0.8;
 }
+
+.users-list {
+  max-width: 60%;
+  min-width: 40%;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+

@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from "react";
 import classes from './Navigation.module.css';
 import {Link} from "react-router-dom";
 import {USER_ROLES} from "../../constants/helperConstants";
@@ -21,25 +20,44 @@ const Navigation = ({
                 {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
+                            <Link to={"/add-training"}>Trainings</Link>
+                        </li>
+                    )}
+                {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
                             <Link to={"/all-trainers"}>Trainers</Link>
                         </li>
                     )}
-                    {isLoggedIn &&
+                {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
-                            <Link to={"/add-technology"}>Technology</Link>
+                            <Link to={"/technology-list"}>Technology</Link>
+                        </li>
+                    )}
+                {/* {isLoggedIn &&
+                    role !== USER_ROLES.ASSOCIATE && (
+                        <li>
+                            <Link to={"/all-associates"}>Associates</Link>
+                        </li>
+                    )} */}
+                {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
+                            <Link to={"/all-pending-users"}>Pending Users</Link>
+                        </li>
+                    )}
+
+                {isLoggedIn &&
+                    role === USER_ROLES.TECHNICAL_MANAGER && (
+                        <li>
+                            <Link to={"/add-test"}>Add Test</Link>
                         </li>
                     )}
                 {isLoggedIn &&
                     role !== USER_ROLES.ASSOCIATE && (
                         <li>
-                            <Link to={"/all-associates"}>Associates</Link>
-                        </li>
-                    )}
-                {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/all-pending-users"}>Pending Users</Link>
+                            <Link to={"/add-question"}>Add Questions</Link>
                         </li>
                     )}
                 {isLoggedIn && (
@@ -50,6 +68,7 @@ const Navigation = ({
             </ul>
         </nav>
     );
+
 };
 
 export default Navigation;

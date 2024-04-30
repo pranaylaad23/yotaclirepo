@@ -112,7 +112,7 @@ export const register = createAsyncThunk(
 
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.data);
         }
     }
 );
