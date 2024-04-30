@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import styles from './AddTechnology.css';
-
-import {  EditIcon } from '../../components/icons/Icons';
-import { fetchAllTechnology } from '../../features/technology/technologyAction';
-import Card from '../../components/Card/Card';
-import AddTechnology from './AddTechnology';
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./AddTechnology.css";
+import { EditIcon } from "../../components/icons/Icons";
+import { fetchAllTechnology } from "../../features/technology/technologyAction";
+import Card from "../../components/Card/Card";
+import AddTechnology from "./AddTechnology";
 
 function TechnologyList() {
   const dispatch = useDispatch();
@@ -17,16 +15,15 @@ function TechnologyList() {
   useEffect(() => {
     if (userData.token) dispatch(fetchAllTechnology());
   }, [userData, dispatch]);
+
   return (
     <div>
       <Card className="users-list">
         <div className="card-header">
-          <h4>Technology List</h4>{" "}
-          <AddTechnology/>
+          <h4>Technology List</h4> <AddTechnology />
         </div>
 
         <div className="users-list1">
-
           <table className="table table-bordered table-striped table-hover">
             <thead>
               <tr>
@@ -55,7 +52,6 @@ function TechnologyList() {
       </Card>
     </div>
   );
-
 }
 
 export default TechnologyList;
