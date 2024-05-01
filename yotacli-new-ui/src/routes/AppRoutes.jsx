@@ -20,7 +20,7 @@ import Training from "../pages/training/Training";
 import AddTest from "../pages/test/AddTest";
 import { AddQuestion } from "../pages/questions/add-question/AddQuestion";
 import { AssignedAssociateList } from "../pages/assign-associates/AssignedAssociateList";
-
+import CategoryList from "../pages/category/CategoryList";
 export const AppRoutes = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -88,6 +88,9 @@ export const AppRoutes = () => {
             <Route path={"/add-question"} element={<AddQuestion />} />
             <Route path={"/all-registered-associates"} element={<RegisteredAssociates />} />
             <Route path={"/assigned-associate"} element={<AssignedAssociateList />} />
+             <Route path={"/category-list"} element={<CategoryList/>}/>
+            <Route path={"/add-test"} element={<AddTest/>}/>
+            <Route path={"/addCategory/:id"} element={<CategoryList/>}/>
             {/*this should always be kept at last place, keep all the application urls above this one*/}
             <Route path={"/*"} element={<Navigate to={"/"} />} />
         </Routes>

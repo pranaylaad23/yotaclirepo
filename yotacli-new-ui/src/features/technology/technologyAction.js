@@ -15,6 +15,7 @@ export const createTechnology = createAsyncThunk(
             console.log("Data",response.data)
             return response.data;
         } catch (error) {
+            alert(error.response.data);
             return rejectWithValue(error.response.data);
         }
     }

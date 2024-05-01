@@ -1,45 +1,56 @@
-
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import './AddTechnology.css';
+import './AddCategory.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-// Import the TechnologyList component
-import TechnologyList from './TechnologyList';
-import { createTechnology } from '../../features/technology/technologyAction'; // Assuming the file path is correct
+// Import the actions
+import { fetchAllTechnology } from '../../features/technology/technologyAction';
+import { createCategory } from '../../features/category/categoryAction';
 
-function AddTechnology() {
+function AddCategory(props) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [technologyName, setTechnologyName] = useState('');
-  const {error}= useSelector((state) => state.technologies);
+  const [categoryName, setCategoryName] = useState('');
+  const [selectedTechnology, setSelectedTechnology] = useState('');
+  const { technologies, error: technologyError } = useSelector((state) => state.technologies);
   
+  const techId=props.technologyId;
+  useEffect(() => {
+    dispatch(fetchAllTechnology());
+  }, [dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const trimmedTechnologyName = technologyName.trim();
-	if((trimmedTechnologyName.length >0)){
-	dispatch(createTechnology({ technology: trimmedTechnologyName }));
-      setTechnologyName('');
-      setOpen(false);}
-   else if(trimmedTechnologyName.length === 0){
-   setTechnologyName('');
+    const trimmedCategoryName = categoryName.trim();
+    if (trimmedCategoryName.length > 0) {
+      if (techId) {
+        const formData = {
+          name: trimmedCategoryName
+        };
+        dispatch(createCategory({ formData: formData, techId: techId }));
+        setCategoryName('');
         setOpen(false);
-        alert('Name is empty. Please provide a technology name.');
-   }
+      } else {
+        alert('Please select a technology.');
+      }
+    } else {
+      alert('Name is empty. Please provide a category name.');
+    }
   };
 
   const openModal = () => {
     setOpen(true);
   };
+
   const handleChange = (event) => {
-    setTechnologyName(event.target.value);
+    setCategoryName(event.target.value);
   };
+
   return (
     <>
-      <Button className='mb-2' variant="primary" size="sm"  style={{ marginLeft: "83%" }} onClick={openModal}>
-                            Add Technolgy
-                        </Button>
+      <Button className='mb-2' variant="primary" size="sm" style={{ marginLeft: "83%" }} onClick={openModal}>
+        Add Category
+      </Button>
       <Modal
         show={open}
         onHide={() => setOpen(false)}
@@ -48,34 +59,35 @@ function AddTechnology() {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            Add Technology
+            Add Category
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <div className="form-group row mb-1 ">
               <label
-                for="inputDescription"
+                htmlFor="inputDescription"
                 className="createclientdescription col-sm-4 col-form-label mt-0"
               >
-                Technology Name
+                Category Name
               </label>
               <div className="col-sm-8">
                 <input
                   type="text"
-                  value={technologyName}
-                  placeholder='Enter Technology'
+                  value={categoryName}
+                  placeholder='Enter Category'
                   className="mb-2 form-control-sm form-control mt-1"
                   onChange={handleChange} 
-                ></input>
+                />
               </div>
             </div>
+            
           </div>
 
           <button
             className="submitt-button btn btn-primary"
             type="submit"
-           onClick={handleSubmit}
+            onClick={handleSubmit}
             style={{ borderRadius: "revert-layer", marginLeft: "390px" }}
           >
             Submit
@@ -84,7 +96,6 @@ function AddTechnology() {
       </Modal>
     </>
   );
-
 }
 
-export default AddTechnology;
+export default AddCategory;

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./AddTechnology.css";
-import { EditIcon } from "../../components/icons/Icons";
-import { fetchAllTechnology } from "../../features/technology/technologyAction";
-import Card from "../../components/Card/Card";
-import AddTechnology from "./AddTechnology";
+
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import styles from './AddTechnology.css';
+
+import {  EditIcon } from '../../components/icons/Icons';
+import { fetchAllTechnology } from '../../features/technology/technologyAction';
+import Card from '../../components/Card/Card';
+import AddTechnology from './AddTechnology';
+import { Link } from 'react-router-dom';
 
 function TechnologyList() {
   const dispatch = useDispatch();
@@ -13,7 +16,8 @@ function TechnologyList() {
   console.log("technology List", technologies);
 
   useEffect(() => {
-    if (userData.token) dispatch(fetchAllTechnology());
+    if (userData.token) 
+    dispatch(fetchAllTechnology());
   }, [userData, dispatch]);
 
   return (
@@ -37,7 +41,10 @@ function TechnologyList() {
               {technologies.map((technology, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{technology.technology}</td>
+                  <td> 
+                  <Link to={`/addCategory/` + technology.id}>{technology.technology}</Link>
+                  
+                    </td>
                   <td>{technology.questionCountUnderTechnology}</td>
                   <td>
                     <div className={styles["action-buttons"]}>

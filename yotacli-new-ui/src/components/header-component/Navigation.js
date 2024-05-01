@@ -35,12 +35,12 @@ const Navigation = ({
                             <Link to={"/technology-list"}>Technology</Link>
                         </li>
                     )}
-                {/* {isLoggedIn &&
+                {isLoggedIn &&
                     role !== USER_ROLES.ASSOCIATE && (
                         <li>
                             <Link to={"/all-associates"}>Associates</Link>
                         </li>
-                    )} */}
+                    )} 
                 {isLoggedIn &&
                     role === USER_ROLES.TECHNICAL_MANAGER && (
                         <li>
