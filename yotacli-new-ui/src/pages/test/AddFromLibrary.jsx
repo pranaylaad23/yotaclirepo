@@ -3,13 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllTechnology } from "../../features/technology/technologyAction";
 import styles from "../test/Test.module.css";
 import { QuestionFromLibrary } from "./QuestionFromLibrary";
+import { Link } from "react-router-dom";
+import "../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min";
 
 const AddFormLibrary = () => {
   const [selectedTechnology, setSelectedTechnology] = useState("");
+  // const [selectedEasyLevel, setSelectedEasyLevel] = useState("");
+  // const [selectedMediumLevel, setSelectedMeduimLevel] = useState("");
+  // const [selectedHard, setSelectedHard] = useState("");
   const dispatch = useDispatch();
   const { technologies } = useSelector((state) => state.technologies);
   const { token } = useSelector((state) => state.auth.userData);
   const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     if (token) {
       dispatch(fetchAllTechnology());
@@ -22,14 +28,21 @@ const AddFormLibrary = () => {
   console.log(technologies);
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
-        <div className={styles["form-content"]}>
+      <form className={styles.form1}>
+        <div className={styles["form-form1"]}>
           <div>
-            <h6>Add From Library-Step4</h6>
-            <p>Total Questions to be added: {/* Display total questions */}</p>
-            <p>Easy:0 {/* Display total questions */}</p>
-            <p>Medium:0 {/* Display total questions */}</p>
-            <p>Hard:0 {/* Display total questions */}</p>
+            <h5>Add From Library-Step4</h5>
+            <div className={styles["question-count"]}>
+              <p>
+                Total Questions to be added: 0{/* Display total questions */}
+              </p>
+              <div className={styles["level-count"]}>
+                {" "}
+                <h6>Easy:0 </h6>
+                <h6>Medium:0 </h6>
+                <h6>Hard:0 </h6>
+              </div>
+            </div>
             <div className="row g-3">
               <div className="col-md-6 ">
                 <select
@@ -45,7 +58,7 @@ const AddFormLibrary = () => {
                   ))}
                 </select>
               </div>
-              <div className="col-md-6 ">
+              <div className={` col-md-6 `} style={{ paddingLeft: "41%" }}>
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -53,14 +66,15 @@ const AddFormLibrary = () => {
                 >
                   Show
                 </button>
-                {showForm && <QuestionFromLibrary />}
               </div>
             </div>
-          </div>
+            {showForm && (
+              <QuestionFromLibrary selectedTechnology={selectedTechnology} />
+            )}
+          </div>{" "}
         </div>
       </form>
     </div>
   );
 };
-
 export default AddFormLibrary;
