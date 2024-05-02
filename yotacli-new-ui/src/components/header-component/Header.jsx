@@ -1,9 +1,8 @@
 import {Fragment, useEffect, useState} from "react";
-import styles from './Header.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import Navigation from "./Navigation";
 import {logout} from "../../features/login/loginAction";
 import {useNavigate} from "react-router-dom";
+import Navigation from "./Navigation";
 
 export const Header = () => {
 
@@ -27,17 +26,10 @@ export const Header = () => {
 
     return (
         <Fragment>
-            <header className={styles["App-header"]}>
-                <div className={styles["app-name"]}>
-                    <p onClick={() => navigate("/")}>
-                        YOTA
-                        <span className={styles["font-size-role"]}>
-                            {role ? " ( " + role + " ) " : ""}
-                        </span>
-                    </p>
-                </div>
-                <Navigation isLoggedIn={isLoggedIn} onLogout={logoutHandler} role={role}/>
-            </header>
+            <Navigation isLoggedIn={isLoggedIn}
+                        onLogout={logoutHandler}
+                        role={role}/>
+            {/*<Bs1CircleFill size={24} alphabetic={4} vAlphabetic={4}/>*/}
         </Fragment>
     )
 };
