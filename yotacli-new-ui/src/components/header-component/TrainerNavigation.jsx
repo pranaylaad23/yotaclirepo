@@ -17,8 +17,8 @@ const TrainerNavigation = ({
             <div className="container-fluid">
                 <Link to={"/"} className="navbar-brand align-items-center">
                     <b>YOTA
-                        <span style={{fontSize: "0.8rem"}}>
-                        {" " + role}
+                        <span style={{fontSize: "12px"}}>
+                        {" (" + role + ")"}
                         </span>
                     </b>
                 </Link>
@@ -36,61 +36,28 @@ const TrainerNavigation = ({
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-0 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
+                            <Link className="nav-link active" aria-current="page" to="/home">
                                 Dashboard
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="/add-training">
                                 Training
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="/add-test">
                                 Test
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="/add-question">
                                 Question Bank
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                Users
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Pending Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider"/>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle"
-                                href="#"
                                 id="navbarDropdown"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -119,33 +86,9 @@ const TrainerNavigation = ({
                                 </li>
                             </ul>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                Master
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Technology
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Category
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                     <div className="d-flex">
-                        <button className="btn btn-outline-primary"
+                        <button className="btn btn-primary"
                                 onClick={onLogout}>
                             Logout
                         </button>

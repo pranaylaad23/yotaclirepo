@@ -29,7 +29,6 @@ export const Header = () => {
             <Navigation isLoggedIn={isLoggedIn}
                         onLogout={logoutHandler}
                         role={role}/>
-            {/*<Bs1CircleFill size={24} alphabetic={4} vAlphabetic={4}/>*/}
         </Fragment>
     )
 };

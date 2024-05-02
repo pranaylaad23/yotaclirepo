@@ -17,7 +17,7 @@ function AssociateNavigation({
             <div className="container-fluid">
                 <Link to={"/"} className="navbar-brand align-items-center">
                     <b>YOTA
-                        <span style={{fontSize: "0.8rem"}}>
+                        <span style={{fontSize: "12px"}}>
                         {" (" + role + ")"}
                         </span>
                     </b>
@@ -36,61 +36,23 @@ function AssociateNavigation({
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-0 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
+                            <Link className="nav-link active" aria-current="page" to="/home">
                                 Dashboard
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Training
-                            </a>
+                            <Link className="nav-link" to="/">
+                                My Training
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Test
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Question Bank
-                            </a>
+                            <Link className="nav-link" to="/">
+                                My Tests
+                            </Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                Users
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Pending Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider"/>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle"
-                                href="#"
                                 id="navbarDropdown"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -122,30 +84,29 @@ function AssociateNavigation({
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
-                                href="#"
                                 id="navbarDropdown"
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                Master
+                                Profile
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a className="dropdown-item" href="#">
-                                        Technology
-                                    </a>
+                                    <Link className="dropdown-item" to="/">
+                                        My Profile
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
-                                        Category
-                                    </a>
+                                    <Link className="dropdown-item" to="/category-list">
+                                        Change Password
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                     <div className="d-flex">
-                        <button className="btn btn-outline-primary"
+                        <button className="btn btn-primary"
                                 onClick={onLogout}>
                             Logout
                         </button>

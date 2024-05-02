@@ -16,7 +16,7 @@ const TechnicalManagerNavigation = ({
             <div className="container-fluid">
                 <Link to={"/"} className="navbar-brand align-items-center">
                     <b>YOTA
-                        <span style={{fontSize: "0.8rem"}}>
+                        <span style={{fontSize: "12px"}}>
                         {" (" + role + ")"}
                         </span>
                     </b>
@@ -35,29 +35,28 @@ const TechnicalManagerNavigation = ({
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-0 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
+                            <Link className="nav-link active" aria-current="page" to="/home">
                                 Dashboard
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="/add-training">
                                 Training
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="/add-test">
                                 Test
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link className="nav-link" to="/add-question">
                                 Question Bank
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
-                                href="#"
                                 id="navbarDropdown"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -67,29 +66,20 @@ const TechnicalManagerNavigation = ({
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="/all-pending-users">
                                         Pending Users
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="/all-associates">
                                         Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider"/>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
-                                href="#"
                                 id="navbarDropdown"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -121,7 +111,6 @@ const TechnicalManagerNavigation = ({
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
-                                href="#"
                                 id="navbarDropdown"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -131,14 +120,14 @@ const TechnicalManagerNavigation = ({
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="/technology-list">
                                         Technology
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="/category-list">
                                         Category
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
