@@ -4,7 +4,8 @@ import {
     declinePendingAssociate,
     fetchAllAssociates,
     fetchAllAssociatesByStatus,
-    fetchAllPendingAssociates
+    fetchAllPendingAssociates,
+    fetchRegisteredAssociates
 } from "./associateAction";
 
 const initialState = {
@@ -116,6 +117,27 @@ const associateSlice = createSlice({
             state.error = action.payload;
             state.associates = [];
         })
+        ;
+//fetching all training registered associates
+        builder.addCase(fetchRegisteredAssociates.pending, (state) => {
+            state.loading = true;
+            state.associates = [];
+            state.success = false;
+            state.error = null;
+        });
+        builder.addCase(fetchRegisteredAssociates.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = true;
+            state.error = null;
+            console.log("???",action.payload);
+            state.associates = action.payload;
+        });
+        builder.addCase(fetchRegisteredAssociates.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+            state.associates = [];
+        });
         ;
     }
 });
