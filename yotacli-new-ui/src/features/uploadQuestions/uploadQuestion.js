@@ -30,3 +30,38 @@ export const uploadQuestion = createAsyncThunk(
         }
     }
 );
+
+export const downloadQuestionTemplate = createAsyncThunk(
+    "/questions/downloadQuestionTemplate",
+    async ({}, { rejectWithValue, dispatch }) => {
+        try {
+            
+            const response = await axios.get(
+                AXIOS_BASE_URL + `/questions/download-excel`);
+                console.log('response ::: ', response);
+                if (response) {
+                    const file = new Blob(
+                        [response.data], 
+                        { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }
+                    );
+        
+                    // Create a link element, hide it, direct it towards the blob, and then 'click' it programmatically
+                    const fileURL = URL.createObjectURL(file);
+                    const fileLink = document.createElement('a');
+                    fileLink.href = fileURL;
+                    fileLink.setAttribute('download', 'questionTemplate.xlsx'); // whatever file name you want
+                    document.body.appendChild(fileLink);
+                    
+                    fileLink.click();
+        
+                    // Clean up and remove the link
+                    document.body.removeChild(fileLink)
+                }
+            return response.data;
+        } catch (error) {
+            if (error) {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+);

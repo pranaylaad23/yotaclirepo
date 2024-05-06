@@ -7,12 +7,13 @@ import { useEffect, useState } from "react";
 import { fetchAllTechnology } from "../../../features/technology/technologyAction";
 import { Container, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { uploadQuestion } from "../../../features/uploadQuestions/uploadQuestion";
+import { uploadQuestion, downloadQuestionTemplate } from "../../../features/uploadQuestions/uploadQuestion";
 
 export const AddQuestion = () => {
   const dispatch = useDispatch();
   const { technologies } = useSelector((state) => state.technologies);
   const { token } = useSelector((state) => state.auth.userData);
+  const downloadedTemplateContentDetails= useSelector((state) => state.uploadQuestion);
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -124,6 +125,10 @@ export const AddQuestion = () => {
     setCategoryList(data.categories);
   }
 
+  const handleDownloadTemplate = () => {
+    dispatch(downloadQuestionTemplate({}));
+  };
+
   return (
     <div>
       <Card className={styles["card-container"]}>
@@ -135,6 +140,19 @@ export const AddQuestion = () => {
             justifyContent: "end",
           }}
         >
+
+          <div
+            onClick={handleDownloadTemplate}
+            style={
+              {
+                paddingRight: '20px',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                fontSize: '12px'
+              }
+            }>
+            Download Template
+          </div>
           <Button
             color={"primary"}
             onClick={handleModalUploadTrainingButton}
