@@ -1,7 +1,9 @@
 import React from "react";
-import classes from './Navigation.module.css';
-import {Link} from "react-router-dom";
 import {USER_ROLES} from "../../constants/helperConstants";
+import TechnicalManagerNavigation from "./TechnicalManagerNavigation";
+import TrainerNavigation from "./TrainerNavigation";
+import AssociateNavigation from "./AssociateNavigation";
+import {Link} from "react-router-dom";
 
 const Navigation = ({
                         isLoggedIn,
@@ -9,90 +11,42 @@ const Navigation = ({
                         role
                     }) => {
 
-    return (
-        <nav className={classes.nav}>
-            <ul>
-                {isLoggedIn && (
-                    <li>
-                        <Link to={"/home"}>Home</Link>
-                    </li>
-                )}
-                {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/add-training"}>Trainings</Link>
-                        </li>
-                    )}
-                {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/all-trainers"}>Trainers</Link>
-                        </li>
-                    )}
-                {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/technology-list"}>Technology</Link>
-                        </li>
-                    )}
-                {isLoggedIn &&
-                    role !== USER_ROLES.ASSOCIATE && (
-                        <li>
-                            <Link to={"/all-associates"}>Associates</Link>
-                        </li>
-                    )} 
-                {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/all-pending-users"}>Pending Users</Link>
-                        </li>
-                    )}
-		 {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/all-registered-associates"}>Training registered Associates</Link>
-                        </li>
-                    )}
+    if (isLoggedIn && role === USER_ROLES.TECHNICAL_MANAGER)
+        return <TechnicalManagerNavigation
+            onLogout={onLogout}
+            role={role}/>
 
-                {isLoggedIn &&
-                    role === USER_ROLES.TECHNICAL_MANAGER && (
-                        <li>
-                            <Link to={"/add-test"}>Add Test</Link>
-                        </li>
-                    )}
-                {isLoggedIn &&
-                    role !== USER_ROLES.ASSOCIATE && (
-                        <li>
-                            <Link to={"/add-question"}>Add Questions</Link>
-                        </li>
-                    )}
-                    {isLoggedIn &&
-                    role === USER_ROLES.ASSOCIATE && (
-                        <li>
-                            <Link to={"/myTrainings"}>My Trainings</Link>
-                        </li>
-                    )}
-                     {isLoggedIn &&
-                    role === USER_ROLES.ASSOCIATE && (
-                        <li>
-                            <Link to={"/myTests"}>My Test</Link>
-                        </li>
-                    )}
-                     {isLoggedIn &&
-                    role === USER_ROLES.ASSOCIATE && (
-                        <li>
-                            <Link to={"/reports"}>Reports</Link>
-                        </li>
-                    )}
-                {isLoggedIn && (
-                    <li>
-                        <button onClick={onLogout}>Logout</button>
-                    </li>
-                )}
-            </ul>
-        </nav>
-    );
+    else if (isLoggedIn && role === USER_ROLES.TRAINER)
+        return <TrainerNavigation
+            onLogout={onLogout}
+            role={role}/>
 
+    else if (isLoggedIn && role === USER_ROLES.ASSOCIATE)
+        return <AssociateNavigation
+            onLogout={onLogout}
+            role={role}/>
+
+    else
+        return (
+            <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+                <div className="container-fluid">
+                    <Link to={"/"} className="navbar-brand align-items-center">
+                        <b>YOTA</b>
+                    </Link>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        )
 };
 
 export default Navigation;
