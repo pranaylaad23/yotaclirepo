@@ -37,7 +37,7 @@ export const downloadQuestionTemplate = createAsyncThunk(
         try {
             
             const response = await axios.get(
-                AXIOS_BASE_URL + `/questions/download-excel`);
+                AXIOS_BASE_URL + `/questions/download-excel`, { responseType: 'arraybuffer'});
                 console.log('response ::: ', response);
                 if (response) {
                     const file = new Blob(
