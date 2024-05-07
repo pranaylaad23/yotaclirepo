@@ -1,10 +1,13 @@
-import { uploadQuestion } from "./uploadQuestion";
+import { uploadQuestion, downloadQuestionTemplate } from "./uploadQuestion";
 
 const initialState = {
     uploadQuestion: [],
     loading: false,
     error: null,
     success: false,
+    downloadedTemplateContent: null,
+    downloadTemplateAPILoading: false,
+    downloadTemplateAPIError: null
 }
 
 const uploadQuestionSlice = createSlice({
@@ -27,6 +30,22 @@ const uploadQuestionSlice = createSlice({
             state.loading = false;
             state.success = false;
             state.error = action.payload;
+        });
+        builder.addCase(downloadQuestionTemplate.pending, (state) => {
+            state.downloadTemplateAPILoading = true;
+            state.downloadedTemplateContent = undefined;
+            state.downloadTemplateAPIError = null;
+        });
+        builder.addCase(downloadQuestionTemplate.fulfilled, (state, action) => {
+            state.downloadTemplateAPILoading = false;
+            // state.success = true;
+            state.downloadTemplateAPIError = null;
+            state.downloadedTemplateContent = action.payload;
+        });
+        builder.addCase(downloadQuestionTemplate.rejected, (state, action) => {
+            state.downloadTemplateAPILoading = false;
+            // state.success = false;
+            state.downloadTemplateAPIError = action.payload;
         });
     }
 })
