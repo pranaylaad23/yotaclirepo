@@ -51,3 +51,72 @@
   color: rgb(34, 34, 34);
   margin-right: 473px;
 }
+.form-title-q {
+  margin-bottom: 32px;
+  margin-top: -18px;
+}
+.search-test {
+  flex: 0 0 auto;
+  width: 50%;
+}
+.question-list {
+  min-width: 40%;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+}
+.question-count {
+  margin-right: 661px;
+  width: 80%;
+  text-align: left;
+}
+.level-count {
+  margin-right: 634px;
+}
+.form1 {
+  width: 934px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.showbutton {
+  margin-left: 1px;
+}
+.assign-button {
+  margin-left: 82px;
+}
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+.page-button {
+  border: 0.75px solid rgb(182, 182, 182);
+  padding: 10px 12px;
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+}
+.page-button:hover {
+  background-color: #f0f0f0;
+}
+
+.page-button:disabled {
+  cursor: not-allowed;
+}
+
+.page-button.active {
+  background-color: rgba(169, 10, 119, 0.15);
+}
+.custom-select {
+  width: 150px;
+  margin-left: 0px;
+}

@@ -119,3 +119,21 @@ export const fetchRegisteredAssociates = createAsyncThunk(
         }
     }
 );
+
+export const fetchAllAssociatesTrainingsByEmailId = createAsyncThunk(
+    "associates/fetchAllAssociatesTrainingsByEmailId",
+    async (_, {rejectWithValue}) => {
+
+        try {
+            console.log("Trying fetching associates Trainings...");
+
+            const response = await axios.get(
+                AXIOS_BASE_URL + "/training/assigned?email=soni.rahul@yash.com"
+            );
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);

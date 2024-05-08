@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTest } from "./testAction";
+import { createTest, fetchCategory } from "./testAction";
 
 const initialState = {
-  tets: [],
+  tests: [],
   loading: false,
   error: null,
   success: false,
 };
 
 const testSlice = createSlice({
-  name: "tets",
+  name: "tests",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -21,13 +21,13 @@ const testSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.tets.push(action.payload);
+      state.tests.push(action.payload);
     });
     builder.addCase(createTest.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;
-      state.tets = [];
+      state.tests = [];
     });
   },
 });
