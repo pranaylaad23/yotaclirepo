@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "../test/Test.module.css";
 import { createTest } from "../../features/tests/testAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import AddFormLibrary from "./AddFromLibrary";
+import { Link } from "react-router-dom";
 
 const AddTest = () => {
   const [formData, setFormData] = useState({
@@ -11,10 +13,11 @@ const AddTest = () => {
     endDate: "",
     endTime: "",
   });
+  const [showForm, setShowForm] = useState(false);
 
   const [step, setStep] = useState(1); // Initialize step state
   const dispatch = useDispatch();
-
+  const token = useSelector((state) => state.auth.useData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -26,8 +29,11 @@ const AddTest = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    console.log(token);
     if (step === 1) {
-      setStep(2); // Move to the next step
+      setStep(2); // Move to step 2
+    } else if (step === 2) {
+      setStep(3); // Move to step 3
     } else {
       // Handle final form submission here
       console.log("Final form submitted!");
@@ -135,8 +141,43 @@ const AddTest = () => {
 
               <div className={styles["test-btn"]}>
                 <button type="submit" className="btn btn-primary">
-                  Submit
+                  Next
                 </button>
+              </div>
+            </div>
+          )}
+          {step === 3 && (
+            <div className={styles["form-content"]}>
+              <div>
+                <h5 className={styles["form-title-q"]}>Add Question-Step3</h5>
+              </div>
+              <div className=" row g-3">
+                <div className="col-md-6">
+                  <Link to="/add-test1">
+                    <button type="button" className="btn btn-primary">
+                      Add from Library
+                    </button>
+                  </Link>
+                </div>
+                {/* <div className="col-md-6">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => setShowForm(true)}
+                  >
+                    Add from Library
+                  </button>
+                  {showForm && <AddFormLibrary />}
+                </div> */}
+                <div className="col-md-6">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => <AddFormLibrary />}
+                  >
+                    Upload
+                  </button>
+                </div>
               </div>
             </div>
           )}
