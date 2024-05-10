@@ -46,7 +46,7 @@ function AssociateNavigation({
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/MyTrainings">
+                            <Link className="nav-link" to="/MyTest">
                                 My Tests
                             </Link>
                         </li>

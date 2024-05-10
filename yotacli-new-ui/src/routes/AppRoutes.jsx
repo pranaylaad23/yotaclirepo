@@ -21,6 +21,7 @@ import {AddQuestion} from "../pages/questions/add-question/AddQuestion";
 import {AssignedAssociateList} from "../pages/assign-associates/AssignedAssociateList";
 import CategoryList from "../pages/category/CategoryList";
 import MyTrainings from "../pages/associates/MyTrainings";
+import MyTest from "../pages/associates/MyTest";
 
 export const AppRoutes = () => {
     const dispatch = useDispatch();
@@ -120,7 +121,7 @@ export const AppRoutes = () => {
             {userRole === USER_ROLES.ASSOCIATE && (
                 <>
                       <Route path={"/myTrainings"} element={<MyTrainings/>}/>
-                      <Route path={"/myTests"} element={"/"}/>
+                      <Route path={"/myTest"} element={<MyTest/>}/>
                       <Route path={"/reports"} element={"/"}/>
                 </>
             )}
