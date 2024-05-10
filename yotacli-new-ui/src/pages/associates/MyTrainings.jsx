@@ -7,10 +7,12 @@ import { TableBody } from "../../components/table-component/TableBody";
 import styles from "../../pages/associates/AllAssociates.module.css";
 
 export const MyTrainings = () => {
-  const options = { day: '2-digit', month: 'long', year: 'numeric' };
+  // const options = { day: '2-digit', month: 'long', year: 'numeric' };
   const { associates } = useSelector((state) => state.associates);
-  const { token } = useSelector((state) => state.auth.userData);
+  const { token,email } = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
+
+  
 
   // table
   const theadData = ["S.No", "Training Name", "Start Date", "End Date", "Status"];
@@ -19,9 +21,9 @@ export const MyTrainings = () => {
   const [searchValue] = useState("");
   
   useEffect(() => {
-    if (token) dispatch(fetchAllAssociatesTrainingsByEmailId());
-  }, [dispatch, token]);
-  console.log(associates)
+    if (token) dispatch(fetchAllAssociatesTrainingsByEmailId(email));
+  }, [dispatch, token,email]);
+
   const tbodyData = associates
     .filter((associateDetails) =>
       Object.values(associateDetails).some((values) => {
@@ -36,6 +38,7 @@ export const MyTrainings = () => {
       })
     );
    
+    console.log("tbodyData",tbodyData)
   return ( 
   <div>
       <div className="card-header">
