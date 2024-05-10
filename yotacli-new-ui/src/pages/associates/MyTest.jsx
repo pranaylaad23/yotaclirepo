@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import styles from "../../pages/associates/AllAssociates.module.css";
 import Card from "../../components/Card/Card";
 import { TableHeader } from "../../components/table-component/TableHeader";
@@ -16,6 +16,8 @@ const MyTest = () => {
       dispatch(fetchAllAssociatesTestByEmailId(email));
     }
   }, [dispatch, token, email]);
+
+  const currentDateTime = new Date();
 
   return (
     <>
@@ -48,8 +50,17 @@ const MyTest = () => {
                           <button type="button" className="btn btn-info">
                             Check Result
                           </button>
-                        ) : (
+                        ) : currentDateTime >= new Date(data.startDate) &&
+                          currentDateTime <= new Date(data.endDate) ? (
                           <button type="button" className="btn btn-success">
+                            Start test
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className="btn btn-success"
+                            disabled={true}
+                          >
                             Start test
                           </button>
                         )}
