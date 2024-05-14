@@ -20,6 +20,7 @@ import AddTest from "../pages/test/AddTest";
 import {AddQuestion} from "../pages/questions/add-question/AddQuestion";
 import {AssignedAssociateList} from "../pages/assign-associates/AssignedAssociateList";
 import CategoryList from "../pages/category/CategoryList";
+import TestPaper from "../pages/associates/student/TestPaper";
 import MyTrainings from "../pages/associates/MyTrainings";
 import MyTest from "../pages/associates/MyTest";
 
@@ -105,6 +106,7 @@ export const AppRoutes = () => {
                     <Route path={"/add-test"} element={<AddTest/>}/>
                     <Route path={"/add-question"} element={<AddQuestion/>}/>
                     <Route path={"/assigned-associate"} element={<AssignedAssociateList/>}/>
+                    
                 </>
             )}
 
@@ -120,6 +122,7 @@ export const AppRoutes = () => {
             {/*For Associates*/}
             {userRole === USER_ROLES.ASSOCIATE && (
                 <>
+                    <Route path={"/my-test"} element={<TestPaper />} />
                       <Route path={"/myTrainings"} element={<MyTrainings/>}/>
                       <Route path={"/myTest"} element={<MyTest/>}/>
                       <Route path={"/reports"} element={"/"}/>
