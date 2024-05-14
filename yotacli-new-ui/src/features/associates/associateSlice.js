@@ -6,7 +6,9 @@ import {
     fetchAllAssociatesByStatus,
     fetchAllPendingAssociates,
     fetchRegisteredAssociates,
-    fetchTestByTestId
+    fetchTestByTestId,
+    fetchAllAssociatesTrainingsByEmailId,
+    fetchAllAssociatesTestByEmailId
 } from "./associateAction";
 
 const initialState = {
@@ -154,6 +156,30 @@ const associateSlice = createSlice({
             state.associates = action.payload;
         });
         builder.addCase(fetchRegisteredAssociates.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+            state.associates = [];
+        });
+        builder.addCase(fetchAllAssociatesTrainingsByEmailId.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = true;
+            //state.error = action.payload;
+            state.associates = action.payload;
+        });
+        builder.addCase(fetchAllAssociatesTrainingsByEmailId.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+            state.associates = [];
+        });
+        builder.addCase(fetchAllAssociatesTestByEmailId.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = true;
+            //state.error = action.payload;
+            state.associates = action.payload;
+        });
+        builder.addCase(fetchAllAssociatesTestByEmailId.rejected, (state, action) => {
             state.loading = false;
             state.success = false;
             state.error = action.payload;
