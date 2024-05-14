@@ -149,5 +149,3 @@ export const fetchAllAssociatesTestByEmailId = createAsyncThunk(
     }
   }
 );
-
-//http://localhost:8080/yota-api/associate/assignedTest?email=vaibhav.shete@yash.com
