@@ -119,3 +119,26 @@ export const fetchRegisteredAssociates = createAsyncThunk(
         }
     }
 );
+
+
+export const fetchTestByTestId = createAsyncThunk(
+    "associates/fetchTestByTestId",
+    async (_, {rejectWithValue}) => {
+
+        try {
+            console.log("Trying fetching associates test...");
+
+            const response = await axios.get(
+                AXIOS_BASE_URL + "/tests/testPaper",{
+                    params: {
+                        id: 1
+                    }
+                }
+            );
+            console.log('response.data..............',response.data)
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);

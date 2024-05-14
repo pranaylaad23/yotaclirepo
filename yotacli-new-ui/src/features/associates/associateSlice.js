@@ -5,7 +5,8 @@ import {
     fetchAllAssociates,
     fetchAllAssociatesByStatus,
     fetchAllPendingAssociates,
-    fetchRegisteredAssociates
+    fetchRegisteredAssociates,
+    fetchTestByTestId
 } from "./associateAction";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
     loading: false,
     error: null,
     success: false,
+    test:{}
 }
 
 const associateSlice = createSlice({
@@ -116,8 +118,27 @@ const associateSlice = createSlice({
             state.success = false;
             state.error = action.payload;
             state.associates = [];
-        })
-        ;
+        });
+        //fetching test
+        builder.addCase(fetchTestByTestId.pending, (state) => {
+            state.loading = true;
+            state.success = false;
+            state.error = null;
+            state.test = null;
+        });
+        builder .addCase(fetchTestByTestId.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = true;
+            state.test = action.payload;
+        });
+        builder.addCase(fetchTestByTestId.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+            state.test = null;
+        });
+       
+        
 //fetching all training registered associates
         builder.addCase(fetchRegisteredAssociates.pending, (state) => {
             state.loading = true;
