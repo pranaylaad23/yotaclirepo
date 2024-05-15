@@ -15,6 +15,7 @@ const trainingSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addTraining.pending, (state) => {
       state.loading = true;
+      state.success = false;
       state.error = null;
     });
     builder.addCase(addTraining.fulfilled, (state, action) => {
@@ -24,6 +25,7 @@ const trainingSlice = createSlice({
     });
     builder.addCase(addTraining.rejected, (state, action) => {
       state.loading = false;
+      state.success = false;
       state.error = action.payload;
     });
     builder

@@ -16,13 +16,15 @@ import {useDispatch, useSelector} from "react-redux";
 import TechnologyList from "../pages/technology/TechnologyList";
 
 import Training from "../pages/training/Training";
-import AddTest from "../pages/test/AddTest";
 import {AddQuestion} from "../pages/questions/add-question/AddQuestion";
 import {AssignedAssociateList} from "../pages/assign-associates/AssignedAssociateList";
 import CategoryList from "../pages/category/CategoryList";
 import TestPaper from "../pages/associates/student/TestPaper";
 import MyTrainings from "../pages/associates/MyTrainings";
 import MyTest from "../pages/associates/MyTest";
+import { TPR } from "../pages/training-performance-report/TPR";
+import { AddTest } from "../pages/test/AddTest";
+import { AssociatesList } from "../pages/associates/AssociatesList";
 
 export const AppRoutes = () => {
     const dispatch = useDispatch();
@@ -102,11 +104,12 @@ export const AppRoutes = () => {
                     <Route path={"/addCategory/:id"} element={<CategoryList/>}/>
                     <Route path={"/add-training"} element={<Training/>}/>
                     <Route path={"/all-associates"} element={<AllAssociates/>}/>
+                    <Route path={"/associates"} element={<AssociatesList/>}/>
                     <Route path={"/all-trainers"} element={<AllTrainers/>}/>
                     <Route path={"/add-test"} element={<AddTest/>}/>
                     <Route path={"/add-question"} element={<AddQuestion/>}/>
                     <Route path={"/assigned-associate"} element={<AssignedAssociateList/>}/>
-                    
+                    <Route path={"/training-performance-report"} element={<TPR />}/>
                 </>
             )}
 
