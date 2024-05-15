@@ -125,7 +125,7 @@ export const fetchAllAssociatesTrainingsByEmailId = createAsyncThunk(
   async (email, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        AXIOS_BASE_URL + `/training/assigned?email=${email}`
+        AXIOS_BASE_URL + `/associate/assigned?email=${email}`
       );
 
       return response.data;
