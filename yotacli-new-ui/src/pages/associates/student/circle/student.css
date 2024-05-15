@@ -1,0 +1,23 @@
+.outer-circle{
+    width: 35px;
+    height: 50px;
+    float: left;
+  }
+  
+  .circle {
+    /* circle styles */
+    width: 25px;
+    height: 25px;
+    border: 1px solid #222;
+    border-radius: 50%;
+    
+    /* become a flex container */
+    /* its children will be flex items */
+    display: flex;
+    /* place items in column */
+    flex-direction: column;
+    /* center flex items horizontally */
+    align-items: center;
+    /* center all content vertically */
+    justify-content: center;
+  }
