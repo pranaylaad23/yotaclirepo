@@ -7,11 +7,18 @@
  */
   import React from 'react';
   import {Link} from "react-router-dom";
+  import {useSelector } from "react-redux";
   
   function AssociateNavigation({
                                    onLogout,
                                    role
                                }) {
+
+const { associates } = useSelector((state) => state.associates);
+
+  const inCompletedCount=associates.filter((count)=>{
+     return count.action=="incompleted"   
+  })
       return (
           <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
               <div className="container-fluid">
@@ -47,7 +54,8 @@
                           </li>
                           <li className="nav-item">
                               <Link className="nav-link" to="/MyTest">
-                                  My Tests
+                                  My Tests 
+                                  &nbsp;<span className="badge bg-info">{inCompletedCount.length}</span>
                               </Link>
                           </li>
                           <li className="nav-item dropdown">
