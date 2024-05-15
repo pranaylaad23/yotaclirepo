@@ -9,7 +9,7 @@ import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { TableHeader } from '../../components/table-component/TableHeader';
 import { AssignTrainingIcon, ReportIcon } from '../../components/icons/Icons';
-
+import { USER_ROLES } from '../../constants/helperConstants';
 const Training = () => {
     const trainings = useSelector((state) => state.trainings);
     const trainers = useSelector((state) => state.trainers);
@@ -25,12 +25,14 @@ const Training = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const [userRole, setUserRole] = useState(null);
     useEffect(() => {
         if (userData.token) {
             dispatch(listTrainings());
             dispatch(fetchAllTrainers());
         }
+        if (userData.userRole)
+            setUserRole(userData.userRole?.substring(5).replace('_', ' '));
     }, [dispatch, userData]);
 
 
@@ -110,10 +112,12 @@ const Training = () => {
                             <Card className={styles["training-list"]}>
                                 <div>
 
-
-                                    <Button variant="primary" size="sm" style={{ marginLeft: "89%" }} onClick={openModal}>
-                                        Add Training
-                                    </Button>
+                                    {userRole != USER_ROLES.TECHNICAL_MANAGER &&
+                                        (
+                                            <Button variant="primary" size="sm" style={{ marginLeft: "89%" }} onClick={openModal}>
+                                                Add Training
+                                            </Button>
+                                        )}
 
                                     <Modal
                                         show={open}
