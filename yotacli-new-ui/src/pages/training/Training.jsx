@@ -9,7 +9,7 @@ import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { TableHeader } from '../../components/table-component/TableHeader';
 import { AssignTrainingIcon, ReportIcon } from '../../components/icons/Icons';
-import {USER_ROLES} from '../../constants/helperConstants';
+
 const Training = () => {
     const trainings = useSelector((state) => state.trainings);
     const trainers = useSelector((state) => state.trainers);
@@ -24,25 +24,16 @@ const Training = () => {
     const nominated = useRef("");
 
     const navigate = useNavigate();
-<<<<<<< Updated upstream
     const dispatch = useDispatch();
 
-=======
-    const [userRole, setUserRole] = useState(null);
->>>>>>> Stashed changes
     useEffect(() => {
         if (userData.token) {
             dispatch(listTrainings());
             dispatch(fetchAllTrainers());
         }
-        if (userData.userRole)
-            setUserRole(userData.userRole?.substring(5).replace('_', ' '));
     }, [dispatch, userData]);
 
-    useEffect(() => {
-        if (userData.userRole)
-            setUserRole(userData.userRole?.substring(5).replace('_', ' '));
-    }, [userData]);
+
     const theadData = ["Sr No", "Name", "Start Date", "End Date", "Assign To", "Nominated", "Registered in Training", "Action"];
     const options = { day: '2-digit', month: 'long', year: 'numeric' };
 
@@ -111,7 +102,6 @@ const Training = () => {
     return (
         <div>
 
-<<<<<<< Updated upstream
             {
                 trainings.trainings.length != 0
                     ? (
@@ -119,17 +109,6 @@ const Training = () => {
                             <h6>Training List</h6>
                             <Card className={styles["training-list"]}>
                                 <div>
-=======
-            <h5>Training List</h5>
-            <Card className={styles["training-list"]}>
-                <div>
-                    {userRole != USER_ROLES.TECHNICAL_MANAGER &&
-                        (
-                            <Button variant="primary" size="sm" style={{ marginLeft: "89%" }} onClick={openModal}>
-                                Add Training
-                            </Button>
-                        )}
->>>>>>> Stashed changes
 
 
                                     <Button variant="primary" size="sm" style={{ marginLeft: "89%" }} onClick={openModal}>
@@ -222,38 +201,6 @@ const Training = () => {
 
             }
 
-<<<<<<< Updated upstream
-=======
-                    < table className="table table-bordered table-striped table-hover mt-1">
-                        <TableHeader theadData={theadData} />
-                        <tbody>
-                            {Array.isArray(trainings.trainings) && trainings.trainings.map((training, index) => (
-                                <tr key={index}>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{training.trainingName}</td>
-                                    <td>{new Date(training.startDate).toLocaleDateString('en-US', options)}</td>
-                                    <td>{new Date(training.endDate).toLocaleDateString('en-US', options)}</td>
-                                    <td>{training.assignTo}</td>
-                                    <td>{training.totalNominations}</td>
-                                    <td>{training.registeredInTraining}
-                                        <a className={styles["view"]} onClick={() => navigateToAssignedAssociateList(training.id)}>view associate</a>
-                                    </td>
-                                    <td>
-                                        <div className={styles["action-buttons"]}>
-                                            {userRole != USER_ROLES.TECHNICAL_MANAGER &&( <AssignTrainingIcon assignTraining={() => navigateToAllAssociates(training)} />)
-
-                                            }
-                                           &nbsp;&nbsp;
-                                            <ReportIcon />
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </Card >
->>>>>>> Stashed changes
         </div >
     )
 }
