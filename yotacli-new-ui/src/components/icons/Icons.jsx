@@ -75,7 +75,7 @@ return <IoPersonAdd
 color={color ? color : "#21a321"}
 size={size > 10 ? size : "18"}
 cursor={"pointer"}
-title={title ? title : "Edit"}
+title={title ? title : "Associate"}
 onClick={assignTraining}/>
 };
 
@@ -89,7 +89,7 @@ return <TbFileReport
 color={color ? color : "#fd1212"}
 size={size > 10 ? size : "18"}
 cursor={"pointer"}
-title={title ? title : "Edit"}
+title={title ? title : "TPR"}
 onClick={report}/>
 };
 

@@ -117,9 +117,10 @@ export const AllAssociates = () => {
 
   return (
     <>
-      <h5>Approved Associates List</h5>
-      <Card className={styles["users-list"]}>
         {associates.length > 0 ? (
+          <>
+          <h6>Approved Associates List</h6>
+          <Card className={styles["users-list"]}>
           <div>
             <Row>
               <Col xs={8}>
@@ -142,12 +143,13 @@ export const AllAssociates = () => {
               <TableBody tbodyData={tbodyData} tbodyDataKey={tbodyDataKey} />
             </table>
           </div>
+          </Card>
+          </>
         ) : (
-          <div className={styles["custom-text-left"]}>
+          <div className={styles["custom-text-center"]}>
             <b>No associates found with the approved status..</b>
           </div>
         )}
-      </Card>
     </>
   );
 };

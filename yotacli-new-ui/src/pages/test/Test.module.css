@@ -3,8 +3,22 @@
   justify-content: center;
   align-items: center;
   width: auto;
-  height: 85vh;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 50%;
+  /* height: 70vh; */
 }
+
+.testContainer {
+  max-width: 50%;
+  min-width: 50%;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
 
 .form {
   width: 650px;
@@ -33,13 +47,16 @@
   font-size: 14px;
   font-weight: 600;
   color: rgb(34, 34, 34);
-  margin-right: 373px;
+  /* margin-right: 373px; */
+  float: left;
 }
 .test-btn {
-  margin-left: 454px;
+  /* margin-left: 454px;
   gap: 0.5rem !important;
   margin-top: 1rem !important;
-  display: grid !important;
+  display: grid !important; */
+  float: right;
+  margin-top: 2%;
 }
 .form-content-setting {
   padding-left: 12%;
@@ -49,7 +66,8 @@
   font-size: 14px;
   font-weight: 600;
   color: rgb(34, 34, 34);
-  margin-right: 473px;
+  /* margin-right: 475px; */
+  float: left;
 }
 .form-title-q {
   margin-bottom: 32px;
@@ -120,3 +138,4 @@
   width: 150px;
   margin-left: 0px;
 }
+
