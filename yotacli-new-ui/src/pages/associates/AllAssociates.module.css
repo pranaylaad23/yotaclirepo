@@ -1,5 +1,5 @@
-.custom-text-left {
-    text-align: left;
+.custom-text-center {
+    text-align: center;
 }
 
 .users-list {
@@ -13,7 +13,7 @@
 }
   
 .assign-button{
-    margin-left: 40%;
+    float: right;
 }
 
 .custom-text-left {

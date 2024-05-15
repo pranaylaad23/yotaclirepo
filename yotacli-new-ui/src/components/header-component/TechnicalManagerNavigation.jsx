@@ -71,7 +71,7 @@ const TechnicalManagerNavigation = ({
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link className="dropdown-item" to="/all-associates">
+                                    <Link className="dropdown-item" to="/associates">
                                         Users
                                     </Link>
                                 </li>
@@ -124,11 +124,11 @@ const TechnicalManagerNavigation = ({
                                         Technology
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link className="dropdown-item" to="/category-list">
                                         Category
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </li>
                     </ul>

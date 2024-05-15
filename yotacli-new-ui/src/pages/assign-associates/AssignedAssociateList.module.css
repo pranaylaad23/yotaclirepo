@@ -12,3 +12,7 @@
     justify-content: space-around;
     display: flex;
 }
+
+.header {
+    float: left;
+}
