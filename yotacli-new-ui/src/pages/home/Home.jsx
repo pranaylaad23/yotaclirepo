@@ -1,6 +1,6 @@
-import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../features/login/loginAction";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../features/login/loginAction";
 
 export const Home = () => {
 
@@ -20,8 +20,28 @@ export const Home = () => {
             {userData && (
                 <div>
                     <h3>Welcome, {userData.fullName}</h3>
-                    <br/>
+                    <br />
                     <h4>This is the home page for {role}</h4>
+                </div>
+            )}
+            {userData && role === USER_ROLES.ASSOCIATE && (
+                <div>
+                    <h3>Welcome, {userData.fullName}</h3>
+                    <br />
+                    <div>
+
+                        <StartTest />
+                    </div>
+                    <div>
+                        <Card>
+                            <h4>My Trainings</h4>
+                        </Card>
+                    </div>
+                    <div>
+                        <Card>
+                            <h4>My Tests</h4>
+                        </Card>
+                    </div>l̥
                 </div>
             )}
         </div>
