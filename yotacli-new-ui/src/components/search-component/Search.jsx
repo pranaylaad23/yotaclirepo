@@ -21,6 +21,7 @@ export const Search = ({ setSearchValue }) => {
             placeholder="Search..."
             ref={searchInput}
             onChange={handleChange}
+            style={{height:"1px"}}
           />
         </Col>
       </Row>
