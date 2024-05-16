@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../../pages/associates/AllAssociates.module.css";
 import Card from "../../components/Card/Card";
 import { TableHeader } from "../../components/table-component/TableHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllAssociatesTestByEmailId } from "../../features/associates/associateAction";
+import { Link } from "react-router-dom";
 
 const MyTest = () => {
   const { associates } = useSelector((state) => state.associates);
   const { token, email } = useSelector((state) => state.auth.userData);
   const theadData = ["S.No", "Test Name", "Start Date", "End Date", "Action"];
   const dispatch = useDispatch();
-  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -20,7 +20,6 @@ const MyTest = () => {
 
   const currentDateTime = new Date();
 
- 
   return (
     <>
       <div className="card-header">
@@ -33,6 +32,14 @@ const MyTest = () => {
             placeholder="Search..."
             style={{ marginRight: "600px" }}
           />
+          <button
+            className="btn btn-warning"
+            style={{ marginLeft: "600px" }}
+          >
+            <Link className="nav-link" to="/MyTest">
+              Refresh
+            </Link>
+          </button>
         </div>
         {associates.length > 0 ? (
           <div>
