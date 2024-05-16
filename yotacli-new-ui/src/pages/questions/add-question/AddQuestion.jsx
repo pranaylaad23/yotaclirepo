@@ -7,13 +7,19 @@ import { useEffect, useState } from "react";
 import { fetchAllTechnology } from "../../../features/technology/technologyAction";
 import { Container, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { uploadQuestion, downloadQuestionTemplate } from "../../../features/uploadQuestions/uploadQuestion";
+import {
+  uploadQuestion,
+  downloadQuestionTemplate,
+  uploadQuestionByForm,
+} from "../../../features/uploadQuestions/uploadQuestion";
 
 export const AddQuestion = () => {
   const dispatch = useDispatch();
   const { technologies } = useSelector((state) => state.technologies);
   const { token } = useSelector((state) => state.auth.userData);
-  const downloadedTemplateContentDetails= useSelector((state) => state.uploadQuestion);
+  const downloadedTemplateContentDetails = useSelector(
+    (state) => state.uploadQuestion
+  );
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -22,13 +28,13 @@ export const AddQuestion = () => {
   const [technology, setTechnology] = useState("");
   const [categoryList, setCategoryList] = useState([]);
   const [category, setCategory] = useState("");
-
-  const correct_options_list = {
-    option_a: "option_a",
-    option_b: "option_b",
-    option_c: "option_c",
-    option_d: "option_d",
-  };
+  const [currentOption, setCurrentOption] = useState(null);
+  const [questionLevel, setQuestionLevel] = useState(null);
+  const [questionTitle, setQuestionTitle] = useState(null);
+  const [option_A, setOption_A] = useState(null);
+  const [option_B, setOption_B] = useState(null);
+  const [option_C, setOption_C] = useState(null);
+  const [option_D, setOption_D] = useState(null);
 
   const [newQuestion, setNewQuestion] = useState({
     questionTitle: "",
@@ -40,6 +46,44 @@ export const AddQuestion = () => {
     questionLevel: "",
   });
 
+  console.log("categories", selectedTechnology);
+  console.log("technologies", selectedCategory);
+
+  const correct_options_list = [
+    {
+      id: 1,
+      current_Option: "A",
+    },
+    {
+      id: 2,
+      current_Option: "B",
+    },
+    {
+      id: 3,
+      current_Option: "C",
+    },
+    {
+      id: 4,
+      current_Option: "D",
+    },
+  ];
+
+  const question_level_list = [
+    {
+      id: 1,
+      question_level: "EASY",
+    },
+    {
+      id: 2,
+      question_level: "MEDIUM",
+    },
+
+    {
+      id: 3,
+      question_level: "HARD",
+    },
+  ];
+
   function technologyChangeHandler(event) {
     console.log(event.target.value);
     setSelectedTechnology(event.target.value);
@@ -49,6 +93,16 @@ export const AddQuestion = () => {
   function categoryChangeHandler(event) {
     console.log(event.target.value);
     setSelectedCategory(event.target.value);
+  }
+
+  function currentOptionHanderChangeHandler(event) {
+    console.log(event.target.value);
+    setCurrentOption(event.target.value);
+  }
+
+  function questionLevelHanderChangeHandler(event) {
+    console.log(event.target.value);
+    setQuestionLevel(event.target.value);
   }
 
   function addTechnologyEventHandler(event) {
@@ -81,6 +135,26 @@ export const AddQuestion = () => {
 
   function addNewQuestionHandler(event) {
     event.preventDefault();
+    let data = {
+      correctAnswer: currentOption,
+      option_A: option_A,
+      option_B: option_B,
+      option_C: option_C,
+      option_D: option_D,
+      questionLevel: questionLevel,
+      questionTitle: questionTitle,
+    };
+    dispatch(uploadQuestionByForm({ data,techId: selectedTechnology, catId: selectedCategory }));
+
+     setCurrentOption("")
+     setSelectedTechnology("")
+     setSelectedCategory("")
+     setOption_A("")
+     setOption_B("")
+     setOption_C("")
+     setOption_D("")
+     setQuestionLevel("")
+     setQuestionTitle("")
   }
 
   const handleFileChange = (event) => {
@@ -140,17 +214,15 @@ export const AddQuestion = () => {
             justifyContent: "end",
           }}
         >
-
           <div
             onClick={handleDownloadTemplate}
-            style={
-              {
-                paddingRight: '20px',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-                fontSize: '12px'
-              }
-            }>
+            style={{
+              paddingRight: "20px",
+              textDecoration: "underline",
+              cursor: "pointer",
+              fontSize: "12px",
+            }}
+          >
             Download Template
           </div>
           <Button
@@ -220,7 +292,11 @@ export const AddQuestion = () => {
               </label>
             </div>
             <div className={styles["form-group-question"]}>
-              <textarea rows={8} cols={80} />
+              <textarea
+                rows={8}
+                cols={80}
+                onChange={(event) => setQuestionTitle(event.target.value)}
+              />
             </div>
             <div className={styles["form-group"]}>
               <label htmlFor="question-title">
@@ -229,12 +305,32 @@ export const AddQuestion = () => {
               </label>
             </div>
             <div className={styles["form-group"]}>
-              <textarea rows={4} cols={20} placeholder={"Option A"} />
-              <textarea rows={4} cols={20} placeholder={"Option B"} />
+              <textarea
+                rows={4}
+                cols={20}
+                placeholder={"Option A"}
+                onChange={(event) => setOption_A(event.target.value)}
+              />
+              <textarea
+                rows={4}
+                cols={20}
+                placeholder={"Option B"}
+                onChange={(event) => setOption_B(event.target.value)}
+              />
             </div>
             <div className={styles["form-group"]}>
-              <textarea rows={4} cols={20} placeholder={"Option C"} />
-              <textarea rows={4} cols={20} placeholder={"Option D"} />
+              <textarea
+                rows={4}
+                cols={20}
+                placeholder={"Option C"}
+                onChange={(event) => setOption_C(event.target.value)}
+              />
+              <textarea
+                rows={4}
+                cols={20}
+                placeholder={"Option D"}
+                onChange={(event) => setOption_D(event.target.value)}
+              />
             </div>
             <div className={styles["form-group"]}>
               <label htmlFor="question-title">
@@ -243,11 +339,32 @@ export const AddQuestion = () => {
               </label>
               <div className={styles["select-icon-group"]}>
                 <SelectComponent
-                  name="correct_option_select"
+                  name="currentOption"
                   width={"select-dropdown"}
-                  id="c_opt"
+                  id="currentoption"
                   options={correct_options_list}
-                  optionChangeHandler={categoryChangeHandler}
+                  dataFieldName={"current_Option"}
+                  keyFieldName={"id"}
+                  valueFieldName={"current_Option"}
+                  optionChangeHandler={currentOptionHanderChangeHandler}
+                />
+              </div>
+            </div>
+            <div className={styles["form-group"]}>
+              <label htmlFor="question-title">
+                Question Level
+                <span className={styles["required-span"]}> *</span>
+              </label>
+              <div className={styles["select-icon-group"]}>
+                <SelectComponent
+                  name="questionLevel"
+                  width={"select-dropdown"}
+                  dataFieldName={"question_level"}
+                  keyFieldName={"id"}
+                  valueFieldName={"question_level"}
+                  id="queslevel"
+                  options={question_level_list}
+                  optionChangeHandler={questionLevelHanderChangeHandler}
                 />
               </div>
             </div>
