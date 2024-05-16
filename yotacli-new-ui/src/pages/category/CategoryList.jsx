@@ -47,7 +47,7 @@ function CategoryList() {
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{category.name}</td>
-                <td>{category.questions.length !=0 ? category.questions.length:0}</td>
+                <td>{category.questionCountUnderCategory}</td>
                 <td>
                   <div className={styles["action-buttons"]}>
 
