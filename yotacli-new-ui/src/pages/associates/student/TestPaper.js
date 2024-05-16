@@ -22,13 +22,27 @@ const TestPaper = () => {
     return (
         <div className="container ">
             <div className="row">
+                <div className="col-12 col-md-8 p-2">
+                    <div className="p-2 g-col-6 text-start">
+                        <StudentCard header={test?.testName} text1=
+                            {<TextPaperType Qtype={test?.testType} totalQ={test?.totalQuestions} totalMarks={test?.totalMarks}
+                                totalTime={test?.totalTime + " min"} />} />
+                    </div>
+                </div>
+                <div className="col-12 col-md-4">
+                    <div className="p-2 g-col-6 text-start">
+                    <div className="p-2 g-col-6 text-start" ><Timer paperTime={test?.totalTime} /></div>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
                 <div className="col-12 col-md-8">
                     <div className="grid gap-0 row-gap-1">
-                        <div className="p-2 g-col-6 text-start">
+                        {/* <div className="p-2 g-col-6 text-start">
                             <StudentCard header={test?.testName} text1=
                                 {<TextPaperType Qtype={test?.testType} totalQ={test?.totalQuestions} totalMarks={test?.totalMarks}
                                     totalTime={test?.totalTime + " min"} />} />
-                        </div>
+                        </div> */}
                         <div className="col">
                             <div className="p-2 g-col-6 text-start"><Question /></div>
                         </div>
@@ -46,11 +60,11 @@ const TestPaper = () => {
                     </div>
                 </div>
 
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-4" >
                     <div className="grid gap-0 row-gap-1">
-                        <div className="p-2 g-col-6 text-start" ><Timer paperTime={test?.totalTime} /></div>
+                        {/* <div className="p-2 g-col-6 text-start" ><Timer paperTime={test?.totalTime} /></div> */}
                         <div className="p-2 g-col-6 text-start"><StudentCard header="Questions" text1={<ItereateCircle />} /></div>
-                        <div className="p-2 g-col-6 text-start"><StudentCard text1="Orange color Question indicate that you verified Question but not answered"
+                        <div className="p-2 g-col-6 text-start p-2"><StudentCard text1="Orange color Question indicate that you verified Question but not answered"
                             text2="Green color Question indicate that you have submitted those Question" /></div>
                     </div>
                 </div>

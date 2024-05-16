@@ -33,7 +33,7 @@ export const Home = () => {
                     <h3>Welcome, {userData.fullName}</h3>
                     <br/>
                     <div>
-                        <MyTestButton/>
+                       
                         <StartTest/>
                     </div>
                 </div>
