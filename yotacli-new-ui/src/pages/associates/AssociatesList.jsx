@@ -17,37 +17,44 @@ export const AssociatesList = () => {
         if (token) dispatch(fetchAllAssociatesByStatus());
     }, [dispatch, token]);
 
+    const showData = () => {
+        return (
+            <>
+                <Card className={styles["users-list"]}>
+                    <div>
+                        <table className="table table-bordered table-striped table-hover mt-2">
+                            <TableHeader theadData={theadData} />
+                            <tbody>
+                                {
+                                    associates.map((response, key) => (
+                                        <tr>
+                                            <th scope="row">{key + 1}</th>
+                                            <td>{response.empId}</td>
+                                            <td>{response.fullName}</td>
+                                            <td>{response.emailAdd}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </Card>
+            </>
+        )
+    }
+
+    const showErrorMessage = () => {
+        return (
+            <div className={styles["custom-text-center"]}>
+                <b>No associates found with the approved status..</b>
+            </div>
+        )
+    }
 
     return (
         <div>
-            {associates.length > 0 ? (
-                <>
-                    <h6>Approved Associates List</h6>
-                    <Card className={styles["users-list"]}>
-                        <div>
-                            <table className="table table-bordered table-striped table-hover mt-2">
-                                <TableHeader theadData={theadData} />
-                                <tbody>
-                                    {
-                                        associates.map((response, key) => (
-                                            <tr>
-                                                <th scope="row">{key + 1}</th>
-                                                <td>{response.empId}</td>
-                                                <td>{response.fullName}</td>
-                                                <td>{response.emailAdd}</td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </Card>
-                </>
-            ) : (
-                <div className={styles["custom-text-center"]}>
-                    <b>No associates found with the approved status..</b>
-                </div>
-            )}
+            <h6>Approved Associates List</h6>
+            {associates.length > 0 ? showData() : showErrorMessage()}
         </div>
     )
 }

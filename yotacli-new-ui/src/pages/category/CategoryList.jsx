@@ -30,51 +30,57 @@ function CategoryList() {
     }
   }, [userData]);
 
+  const showData = () => {
+    return (
+      <div className="users-list1">
+        <table className="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">QuestionCount</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((category, index) => (
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{category.name}</td>
+                <td>{category.questionCountUnderCategory}</td>
+                <td>
+                  <div className={styles["action-buttons"]}>
+
+                    <EditIcon />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  const showErrorMessage = () => {
+    return (
+      <div className={styles["custom-text-center"]}>
+        <b>No categories found, Please try to add category...</b>
+      </div>
+    )
+  }
+
   return (
     <div>
-      {
-        categories.length != 0 ? (
-          <>
-            <h6>Category List</h6>
-            <Card className="users-list">
-              <div className="card-header">
-                <AddCategory technologyId={id} />
-              </div>{" "}
-              <div className="users-list1">
-                <table className="table table-bordered table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Category Name</th>
-                      <th scope="col">QuestionCount</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {categories.map((category, index) => (
-                      <tr key={index}>
-                        <th scope="row">{index + 1}</th>
-                        <td>{category.name}</td>
-                        <td>{category.questionCountUnderCategory}</td>
-                        <td>
-                          <div className={styles["action-buttons"]}>
-
-                            <EditIcon />
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-          </>
-        ) : (
-          <div className={styles["custom-text-center"]}>
-            <b>No categories found please try to add..</b>
-          </div>
-        )
-      }
+      <h6>Category List</h6>
+      <Card className="users-list">
+        <div className="card-header">
+          <AddCategory technologyId={id} />
+        </div>{" "}
+        {
+          categories.length != 0 ? showData() : showErrorMessage()
+        }
+      </Card>
     </div>
   );
 }
