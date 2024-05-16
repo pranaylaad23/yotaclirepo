@@ -295,6 +295,8 @@ export const AddQuestion = () => {
               <textarea
                 rows={8}
                 cols={80}
+                name="questionTitle"
+                value={questionTitle}
                 onChange={(event) => setQuestionTitle(event.target.value)}
               />
             </div>
@@ -308,12 +310,16 @@ export const AddQuestion = () => {
               <textarea
                 rows={4}
                 cols={20}
+                name="option_A"
+                value={option_A}
                 placeholder={"Option A"}
                 onChange={(event) => setOption_A(event.target.value)}
               />
               <textarea
                 rows={4}
                 cols={20}
+                name="option_B"
+                value={option_B}
                 placeholder={"Option B"}
                 onChange={(event) => setOption_B(event.target.value)}
               />
@@ -322,12 +328,16 @@ export const AddQuestion = () => {
               <textarea
                 rows={4}
                 cols={20}
+                name="option_C"
+                value={option_C}
                 placeholder={"Option C"}
                 onChange={(event) => setOption_C(event.target.value)}
               />
               <textarea
                 rows={4}
                 cols={20}
+                name="option_D"
+                value={option_D}
                 placeholder={"Option D"}
                 onChange={(event) => setOption_D(event.target.value)}
               />
@@ -347,6 +357,7 @@ export const AddQuestion = () => {
                   keyFieldName={"id"}
                   valueFieldName={"current_Option"}
                   optionChangeHandler={currentOptionHanderChangeHandler}
+                  selectedValue={currentOption}
                 />
               </div>
             </div>
@@ -365,6 +376,7 @@ export const AddQuestion = () => {
                   id="queslevel"
                   options={question_level_list}
                   optionChangeHandler={questionLevelHanderChangeHandler}
+                  selectedValue={questionLevel}
                 />
               </div>
             </div>
