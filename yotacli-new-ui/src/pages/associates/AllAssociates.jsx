@@ -78,8 +78,8 @@ export const AllAssociates = () => {
     } else if (nominatedValue < checkboxCount) {
       alert(
         "The nominated associated limit has been reached: " +
-        nominatedValue +
-        "\nPlease try again."
+          nominatedValue +
+          "\nPlease try again."
       );
     } else if (nominatedValue > registeredCount) {
       const emailAddArray = email.current;
@@ -143,21 +143,21 @@ export const AllAssociates = () => {
           </div>
         </Card>
       </>
-    )
-  }
+    );
+  };
 
   const showErrorMessage = () => {
     return (
       <div className={styles["custom-text-center"]}>
         <b>No associates found with the approved status..</b>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <>
       <h6>Approved Associates List</h6>
-      {associates.length < 0 ? showData() : showErrorMessage()}
+      {associates.length > 0 ? showData() : showErrorMessage()}
     </>
   );
 };

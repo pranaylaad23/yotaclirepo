@@ -48,7 +48,8 @@ function CategoryList() {
                 <th scope="row">{index + 1}</th>
                 <td>{category.name}</td>
                 <td>
-                  {category.questions.length != 0
+                  {Array.isArray(category.questions) &&
+                  category.questions.length
                     ? category.questions.length
                     : 0}
                 </td>
