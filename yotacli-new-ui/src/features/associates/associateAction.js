@@ -118,29 +118,29 @@ export const fetchRegisteredAssociates = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-  );
-export const fetchTestByTestId = createAsyncThunk(
-    "associates/fetchTestByTestId",
-    async (_, {rejectWithValue}) => {
-
-        try {
-            console.log("Trying fetching associates test...");
-
-            const response = await axios.get(
-                AXIOS_BASE_URL + "/tests/testPaper",{
-                    params: {
-                        id: 1
-                    }
-                }
-            );
-            console.log('response.data..............',response.data)
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
 );
-  
+export const fetchTestByTestId = createAsyncThunk(
+  "associates/fetchTestByTestId",
+  async (_, { rejectWithValue }) => {
+
+    try {
+      console.log("Trying fetching associates test...");
+
+      const response = await axios.get(
+        AXIOS_BASE_URL + "/tests/testPaper", {
+        params: {
+          id: 1
+        }
+      }
+      );
+      console.log('response.data..............', response.data)
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 
 export const fetchAllAssociatesTrainingsByEmailId = createAsyncThunk(
   "associates/fetchAllAssociatesTrainingsByEmailId",
@@ -160,11 +160,49 @@ export const fetchAllAssociatesTrainingsByEmailId = createAsyncThunk(
 export const fetchAllAssociatesTestByEmailId = createAsyncThunk(
   "associates/fetchAllAssociatesTestByEmailId",
   async (email, { rejectWithValue }) => {
-    console.log("email",email)
+    console.log("email", email)
     try {
       const response = await axios.get(
         AXIOS_BASE_URL + `/associate/assignedTest?email=${email}`
       );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const profileDetail = createAsyncThunk(
+  "associates/profileDetail",
+  async (email, { rejectWithValue }) => {
+    console.log("email", email)
+    try {
+      const response = await axios.get(
+        AXIOS_BASE_URL + `/associate/profile-details`,
+        {
+          params: {
+            email: email
+          }
+        }
+      );
+      console.log("Profile details = " + response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changePasswordDetails = createAsyncThunk(
+  "associates/changePasswordDetails",
+  async (changePasswordDetails, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        AXIOS_BASE_URL + `/changePassword`,
+        changePasswordDetails
+      );
+      console.log("Profile details = " + response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

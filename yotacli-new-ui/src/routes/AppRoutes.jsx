@@ -1,23 +1,23 @@
-import {Navigate, Route, Routes, useLocation, useNavigate,} from "react-router-dom";
-import {Login} from "../pages/login/Login";
-import {SignUp} from "../pages/register/SignUp";
-import {useEffect, useState} from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate, } from "react-router-dom";
+import { Login } from "../pages/login/Login";
+import { SignUp } from "../pages/register/SignUp";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {isTokenExpired} from "../security/jwt/JwtService";
-import {Home} from "../pages/home/Home";
-import {getDecryption} from "../security/crypto/EncryptionDecryption";
-import {DEFAULT_REQUEST_HEADER_CONTENT_TYPE, PUBLIC_URLS, TOKEN_KEY, USER_ROLES,} from "../constants/helperConstants";
-import {AllAssociates} from "../pages/associates/AllAssociates";
-import {AllTrainers} from "../pages/trainers/AllTrainers";
-import {PendingUsers} from "../pages/pending-users/PendingUsers";
-import {logout, syncUserAuthData} from "../features/login/loginAction";
-import {RegisteredAssociates} from "../pages/registered-associates/RegisteredAssociates";
-import {useDispatch, useSelector} from "react-redux";
+import { isTokenExpired } from "../security/jwt/JwtService";
+import { Home } from "../pages/home/Home";
+import { getDecryption } from "../security/crypto/EncryptionDecryption";
+import { DEFAULT_REQUEST_HEADER_CONTENT_TYPE, PUBLIC_URLS, TOKEN_KEY, USER_ROLES, } from "../constants/helperConstants";
+import { AllAssociates } from "../pages/associates/AllAssociates";
+import { AllTrainers } from "../pages/trainers/AllTrainers";
+import { PendingUsers } from "../pages/pending-users/PendingUsers";
+import { logout, syncUserAuthData } from "../features/login/loginAction";
+import { RegisteredAssociates } from "../pages/registered-associates/RegisteredAssociates";
+import { useDispatch, useSelector } from "react-redux";
 import TechnologyList from "../pages/technology/TechnologyList";
 
 import Training from "../pages/training/Training";
-import {AddQuestion} from "../pages/questions/add-question/AddQuestion";
-import {AssignedAssociateList} from "../pages/assign-associates/AssignedAssociateList";
+import { AddQuestion } from "../pages/questions/add-question/AddQuestion";
+import { AssignedAssociateList } from "../pages/assign-associates/AssignedAssociateList";
 import CategoryList from "../pages/category/CategoryList";
 import TestPaper from "../pages/associates/student/TestPaper";
 import MyTrainings from "../pages/associates/MyTrainings";
@@ -25,12 +25,13 @@ import MyTest from "../pages/associates/MyTest";
 import { TPR } from "../pages/training-performance-report/TPR";
 import { AddTest } from "../pages/test/AddTest";
 import { AssociatesList } from "../pages/associates/AssociatesList";
+import { ProfileDetails } from "../pages/profile-details/ProfileDetails";
 
 export const AppRoutes = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    const {userData} = useSelector((state) => state.auth);
+    const { userData } = useSelector((state) => state.auth);
     const [userRole, setUserRole] = useState(null);
 
     useEffect(() => {
@@ -87,38 +88,38 @@ export const AppRoutes = () => {
     return (
         <Routes>
             {/*Public Routes*/}
-            <Route path={"/"} element={<Login/>}/>
-            <Route path={"/login"} element={<Login/>}/>
-            <Route path={"/register"} element={<SignUp/>}/>
-            <Route path={"/home"} element={<Home/>}/>
+            <Route path={"/"} element={<Login />} />
+            <Route path={"/login"} element={<Login />} />
+            <Route path={"/register"} element={<SignUp />} />
+            <Route path={"/home"} element={<Home />} />
 
             {/*---------Adding private routes---------*/}
 
             {/*For Technical Manager*/}
             {userRole === USER_ROLES.TECHNICAL_MANAGER && (
                 <>
-                    <Route path={"/all-pending-users"} element={<PendingUsers/>}/>
-                    <Route path={"/technology-list"} element={<TechnologyList/>}/>
-                    <Route path={"/all-registered-associates"} element={<RegisteredAssociates/>}/>
-                    <Route path={"/category-list"} element={<CategoryList/>}/>
-                    <Route path={"/addCategory/:id"} element={<CategoryList/>}/>
-                    <Route path={"/add-training"} element={<Training/>}/>
-                    <Route path={"/all-associates"} element={<AllAssociates/>}/>
-                    <Route path={"/associates"} element={<AssociatesList/>}/>
-                    <Route path={"/all-trainers"} element={<AllTrainers/>}/>
-                    <Route path={"/add-test"} element={<AddTest/>}/>
-                    <Route path={"/add-question"} element={<AddQuestion/>}/>
-                    <Route path={"/assigned-associate"} element={<AssignedAssociateList/>}/>
-                    <Route path={"/training-performance-report"} element={<TPR />}/>
+                    <Route path={"/all-pending-users"} element={<PendingUsers />} />
+                    <Route path={"/technology-list"} element={<TechnologyList />} />
+                    <Route path={"/all-registered-associates"} element={<RegisteredAssociates />} />
+                    <Route path={"/category-list"} element={<CategoryList />} />
+                    <Route path={"/addCategory/:id"} element={<CategoryList />} />
+                    <Route path={"/add-training"} element={<Training />} />
+                    <Route path={"/all-associates"} element={<AllAssociates />} />
+                    <Route path={"/associates"} element={<AssociatesList />} />
+                    <Route path={"/all-trainers"} element={<AllTrainers />} />
+                    <Route path={"/add-test"} element={<AddTest />} />
+                    <Route path={"/add-question"} element={<AddQuestion />} />
+                    <Route path={"/assigned-associate"} element={<AssignedAssociateList />} />
+                    <Route path={"/training-performance-report"} element={<TPR />} />
                 </>
             )}
 
             {/*For Trainers*/}
             {userRole === USER_ROLES.TRAINER && (
                 <>
-                    <Route path={"/add-training"} element={<Training/>}/>
-                    <Route path={"/add-question"} element={<AddQuestion/>}/>
-                    <Route path={"/add-test"} element={<AddTest/>}/>
+                    <Route path={"/add-training"} element={<Training />} />
+                    <Route path={"/add-question"} element={<AddQuestion />} />
+                    <Route path={"/add-test"} element={<AddTest />} />
                 </>
             )}
 
@@ -126,15 +127,16 @@ export const AppRoutes = () => {
             {userRole === USER_ROLES.ASSOCIATE && (
                 <>
                     <Route path={"/my-test"} element={<TestPaper />} />
-                      <Route path={"/myTrainings"} element={<MyTrainings/>}/>
-                      <Route path={"/myTest"} element={<MyTest/>}/>
-                      <Route path={"/reports"} element={"/"}/>
+                    <Route path={"/myTrainings"} element={<MyTrainings />} />
+                    <Route path={"/myTest"} element={<MyTest />} />
+                    <Route path={"/profile-details"} element={<ProfileDetails />} />
+                    <Route path={"/reports"} element={"/"} />
                 </>
             )}
 
             {/*this should always be kept at last place, keep all the application urls above this one*/}
             {/*Default Route*/}
-            <Route path={"/*"} element={<Navigate to={"/"}/>}/>
+            <Route path={"/*"} element={<Navigate to={"/"} />} />
         </Routes>
 
 
