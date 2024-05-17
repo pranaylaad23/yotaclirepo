@@ -13,7 +13,7 @@ import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { TableHeader } from "../../components/table-component/TableHeader";
 import { AssignTrainingIcon, ReportIcon } from "../../components/icons/Icons";
-import { USER_ROLES } from '../../constants/helperConstants';
+import { USER_ROLES } from "../../constants/helperConstants";
 const Training = () => {
   const trainings = useSelector((state) => state.trainings);
   const trainers = useSelector((state) => state.trainers);
@@ -35,7 +35,7 @@ const Training = () => {
       dispatch(listTrainings());
       dispatch(fetchAllTrainers());
       if (userData.userRole)
-        setUserRole(userData.userRole?.substring(5).replace('_', ' '));
+        setUserRole(userData.userRole?.substring(5).replace("_", " "));
     }
   }, [dispatch, userData]);
 
@@ -156,14 +156,17 @@ const Training = () => {
                     </a>
                   </td>
                   <td>
-                          <div className={styles["action-buttons"]}>
-                              {userRole != USER_ROLES.TRAINER && (<AssignTrainingIcon
-                                  assignTraining={() => navigateToAllAssociates(training)}
-                              />
-                              )}
-                              &nbsp;&nbsp;
-                              <ReportIcon report={() => navigateToTrainingReport()} />
-                          </div>
+                    <div className={styles["action-buttons"]}>
+                      {userRole !== USER_ROLES.TRAINER && (
+                        <AssignTrainingIcon
+                          assignTraining={() =>
+                            navigateToAllAssociates(training)
+                          }
+                        />
+                      )}
+                      &nbsp;&nbsp;
+                      <ReportIcon report={() => navigateToTrainingReport()} />
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -291,7 +294,7 @@ const Training = () => {
   return (
     <div>
       <h6>Training List</h6>
-      {userRole != USER_ROLES.TRAINER &&(<ShowAddTrainigButton />)}
+      {userRole !== USER_ROLES.TRAINER && <ShowAddTrainigButton />}
       {trainings.trainings.length !== 0 ? <ShowTraining /> : <NoTraining />}
     </div>
   );
