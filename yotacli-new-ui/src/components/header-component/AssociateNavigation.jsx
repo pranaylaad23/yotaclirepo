@@ -12,9 +12,10 @@ import { useSelector } from "react-redux";
 function AssociateNavigation({ onLogout, role }) {
   const { associates } = useSelector((state) => state.associates);
 
-  const inCompletedCount = associates.filter((count) => {
-    return count.action === "incompleted";
-  });
+  // const inCompletedCount = associates.filter((count) => {
+  //   return count.action === "incompleted";
+  // });
+
   return (
     <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
       <div className="container-fluid">
@@ -43,14 +44,14 @@ function AssociateNavigation({ onLogout, role }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/MyTrainings">
-                My Training
+              <Link className="nav-link" to="/myTrainings">
+                Training
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/MyTest">
-                My Tests &nbsp;
-                <span className="badge bg-info">{inCompletedCount.length}</span>
+              <Link className="nav-link" to="/myTest">
+                Tests &nbsp;
+                {/* <span className="badge bg-info">{inCompletedCount.length}</span> */}
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -84,7 +85,7 @@ function AssociateNavigation({ onLogout, role }) {
                 </li>
               </ul>
             </li>
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown"
@@ -96,7 +97,7 @@ function AssociateNavigation({ onLogout, role }) {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <Link className="dropdown-item" to="/">
+                  <Link className="dropdown-item" to="/profile-details">
                     My Profile
                   </Link>
                 </li>
@@ -106,7 +107,13 @@ function AssociateNavigation({ onLogout, role }) {
                   </Link>
                 </li>
               </ul>
+            </li> */}
+            <li className="nav-item">
+              <Link className="nav-link" to="/profile-details">
+                Profile
+              </Link>
             </li>
+
           </ul>
           <div className="d-flex">
             <button className="btn btn-primary" onClick={onLogout}>
