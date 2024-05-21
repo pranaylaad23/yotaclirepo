@@ -14,9 +14,10 @@ import {logout, syncUserAuthData} from "../features/login/loginAction";
 import {RegisteredAssociates} from "../pages/registered-associates/RegisteredAssociates";
 import {useDispatch, useSelector} from "react-redux";
 import TechnologyList from "../pages/technology/TechnologyList";
-
+import ShowQuestion from "../pages/technology/ShowQuestion";
 import Training from "../pages/training/Training";
 import {AddQuestion} from "../pages/questions/add-question/AddQuestion";
+import {UpdateQuestion} from "../pages/questions/update-question/UpdateQuestion";
 import {AssignedAssociateList} from "../pages/assign-associates/AssignedAssociateList";
 import CategoryList from "../pages/category/CategoryList";
 import TestPaper from "../pages/associates/student/TestPaper";
@@ -110,6 +111,8 @@ export const AppRoutes = () => {
                     <Route path={"/add-question"} element={<AddQuestion/>}/>
                     <Route path={"/assigned-associate"} element={<AssignedAssociateList/>}/>
                     <Route path={"/training-performance-report"} element={<TPR />}/>
+                    <Route path={"/show-question/:id"} element={<ShowQuestion/>}/>
+                    <Route path={"/UpdateQuestion"} element={<UpdateQuestion/>}/>
                 </>
             )}
 

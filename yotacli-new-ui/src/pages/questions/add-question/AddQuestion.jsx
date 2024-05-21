@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { fetchAllTechnology } from "../../../features/technology/technologyAction";
 import { Container, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   uploadQuestion,
   downloadQuestionTemplate,
@@ -35,7 +37,7 @@ export const AddQuestion = () => {
   const [option_B, setOption_B] = useState(null);
   const [option_C, setOption_C] = useState(null);
   const [option_D, setOption_D] = useState(null);
-
+  const navigate = useNavigate();
   const [newQuestion, setNewQuestion] = useState({
     questionTitle: "",
     correctAnswer: "",
@@ -45,9 +47,6 @@ export const AddQuestion = () => {
     option_D: "",
     questionLevel: "",
   });
-
-  console.log("categories", selectedTechnology);
-  console.log("technologies", selectedCategory);
 
   const correct_options_list = [
     {
@@ -144,17 +143,25 @@ export const AddQuestion = () => {
       questionLevel: questionLevel,
       questionTitle: questionTitle,
     };
-    dispatch(uploadQuestionByForm({ data,techId: selectedTechnology, catId: selectedCategory }));
+    dispatch(
+      uploadQuestionByForm({
+        data,
+        techId: selectedTechnology,
+        catId: selectedCategory,
+      })
+    );
 
-     setCurrentOption("")
-     setSelectedTechnology("")
-     setSelectedCategory("")
-     setOption_A("")
-     setOption_B("")
-     setOption_C("")
-     setOption_D("")
-     setQuestionLevel("")
-     setQuestionTitle("")
+    setCurrentOption();
+    setSelectedTechnology();
+    setSelectedCategory();
+    setOption_A("");
+    setOption_B("");
+    setOption_C("");
+    setOption_D("");
+    setQuestionLevel();
+    setQuestionTitle("");
+
+    navigate("/add-question")
   }
 
   const handleFileChange = (event) => {
@@ -189,13 +196,12 @@ export const AddQuestion = () => {
     setCategory("");
     setTechnology("");
     setFile(null);
-    console.log("QuestionBank", data);
+
     setOpen(false);
   };
 
   function getCategoriesByTechnology(id) {
     const data = technologies.find((item) => item.id == id);
-    console.log("data", data);
     setCategoryList(data.categories);
   }
 
@@ -253,6 +259,7 @@ export const AddQuestion = () => {
                   keyFieldName={"id"}
                   valueFieldName={"id"}
                   selectedValue={selectedTechnology}
+                  defaultValue={""}
                 />
                 <AddIcon
                   size={30}
@@ -277,6 +284,7 @@ export const AddQuestion = () => {
                   keyFieldName={"id"}
                   valueFieldName={"id"}
                   selectedValue={selectedCategory}
+                  defaultValue={""}
                 />
                 <AddIcon
                   size={30}
@@ -358,6 +366,7 @@ export const AddQuestion = () => {
                   valueFieldName={"current_Option"}
                   optionChangeHandler={currentOptionHanderChangeHandler}
                   selectedValue={currentOption}
+                  defaultValue={""}
                 />
               </div>
             </div>
@@ -377,12 +386,15 @@ export const AddQuestion = () => {
                   options={question_level_list}
                   optionChangeHandler={questionLevelHanderChangeHandler}
                   selectedValue={questionLevel}
+                  defaultValue={""}
                 />
               </div>
             </div>
             <Container className={"text-center"}>
               <Button color={"primary"} type={"submit"}>
+                {/* <Link className="nav-link" to="/add-question"> */}
                 Add
+                {/* </Link> */}
               </Button>
               <Button color={"danger"} className={"ms-2"}>
                 Cancel
