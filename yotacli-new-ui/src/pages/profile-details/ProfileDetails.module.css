@@ -1,0 +1,32 @@
+.profile {
+    max-width: 75%;
+    min-width: 30%;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+img {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.profile-left {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    float: left;
+}
+
+.buttonContainer {
+    width: 40%;
+}

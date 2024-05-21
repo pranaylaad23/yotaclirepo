@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {
     approvePendingAssociate,
     declinePendingAssociate,
@@ -8,7 +8,8 @@ import {
     fetchRegisteredAssociates,
     fetchTestByTestId,
     fetchAllAssociatesTrainingsByEmailId,
-    fetchAllAssociatesTestByEmailId
+    profileDetail,
+    changePasswordDetails
 } from "./associateAction";
 
 const initialState = {
@@ -16,7 +17,7 @@ const initialState = {
     loading: false,
     error: null,
     success: false,
-    test:{}
+    test: {}
 }
 
 const associateSlice = createSlice({
@@ -62,7 +63,7 @@ const associateSlice = createSlice({
                 state.error = action.payload;
                 state.associates = [];
             })
-        ;
+            ;
         //approve pending associate
         builder
             .addCase(approvePendingAssociate.pending, (state) => {
@@ -82,7 +83,7 @@ const associateSlice = createSlice({
                 state.success = false;
                 state.error = action.payload;
             })
-        ;
+            ;
         //decline pending associate
         builder
             .addCase(declinePendingAssociate.pending, (state) => {
@@ -102,25 +103,25 @@ const associateSlice = createSlice({
                 state.success = false;
                 state.error = action.payload;
             })
-            //fetching all approved associates
+        //fetching all approved associates
         builder
-        .addCase(fetchAllAssociatesByStatus.pending, (state) => {
-            state.loading = true;
-            state.success = false;
-            state.error = null;
-            state.associates = [];
-        })
-        .addCase(fetchAllAssociatesByStatus.fulfilled, (state, action) => {
-            state.loading = false;
-            state.success = true;
-            state.associates = action.payload;
-        })
-        .addCase(fetchAllAssociatesByStatus.rejected, (state, action) => {
-            state.loading = false;
-            state.success = false;
-            state.error = action.payload;
-            state.associates = [];
-        });
+            .addCase(fetchAllAssociatesByStatus.pending, (state) => {
+                state.loading = true;
+                state.success = false;
+                state.error = null;
+                state.associates = [];
+            })
+            .addCase(fetchAllAssociatesByStatus.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.associates = action.payload;
+            })
+            .addCase(fetchAllAssociatesByStatus.rejected, (state, action) => {
+                state.loading = false;
+                state.success = false;
+                state.error = action.payload;
+                state.associates = [];
+            });
         //fetching test
         builder.addCase(fetchTestByTestId.pending, (state) => {
             state.loading = true;
@@ -128,7 +129,7 @@ const associateSlice = createSlice({
             state.error = null;
             state.test = null;
         });
-        builder .addCase(fetchTestByTestId.fulfilled, (state, action) => {
+        builder.addCase(fetchTestByTestId.fulfilled, (state, action) => {
             state.loading = false;
             state.success = true;
             state.test = action.payload;
@@ -139,9 +140,9 @@ const associateSlice = createSlice({
             state.error = action.payload;
             state.test = null;
         });
-       
-        
-//fetching all training registered associates
+
+
+        //fetching all training registered associates
         builder.addCase(fetchRegisteredAssociates.pending, (state) => {
             state.loading = true;
             state.associates = [];
@@ -152,7 +153,7 @@ const associateSlice = createSlice({
             state.loading = false;
             state.success = true;
             state.error = null;
-            console.log("???",action.payload);
+            console.log("???", action.payload);
             state.associates = action.payload;
         });
         builder.addCase(fetchRegisteredAssociates.rejected, (state, action) => {
@@ -161,10 +162,18 @@ const associateSlice = createSlice({
             state.error = action.payload;
             state.associates = [];
         });
+
+        builder.addCase(fetchAllAssociatesTrainingsByEmailId.pending, (state) => {
+            state.loading = true;
+            state.associates = [];
+            state.success = false;
+            state.error = null;
+        });
         builder.addCase(fetchAllAssociatesTrainingsByEmailId.fulfilled, (state, action) => {
             state.loading = false;
             state.success = true;
-            //state.error = action.payload;
+            state.error = null;
+            console.log("???", action.payload);
             state.associates = action.payload;
         });
         builder.addCase(fetchAllAssociatesTrainingsByEmailId.rejected, (state, action) => {
@@ -173,13 +182,40 @@ const associateSlice = createSlice({
             state.error = action.payload;
             state.associates = [];
         });
-        builder.addCase(fetchAllAssociatesTestByEmailId.fulfilled, (state, action) => {
+
+        //profiles details
+        builder.addCase(profileDetail.pending, (state) => {
+            state.loading = true;
+            state.associates = [];
+            state.success = false;
+            state.error = null;
+        });
+        builder.addCase(profileDetail.fulfilled, (state, action) => {
             state.loading = false;
             state.success = true;
-            //state.error = action.payload;
+            state.error = null;
             state.associates = action.payload;
         });
-        builder.addCase(fetchAllAssociatesTestByEmailId.rejected, (state, action) => {
+        builder.addCase(profileDetail.rejected, (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+            state.associates = [];
+        });
+        //change password
+        builder.addCase(changePasswordDetails.pending, (state) => {
+            state.loading = true;
+            state.associates = [];
+            state.success = false;
+            state.error = null;
+        });
+        builder.addCase(changePasswordDetails.fulfilled, (state, action) => {
+            state.loading = false;
+            state.success = true;
+            state.error = null;
+            state.associates = action.payload;
+        });
+        builder.addCase(changePasswordDetails.rejected, (state, action) => {
             state.loading = false;
             state.success = false;
             state.error = action.payload;
