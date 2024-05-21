@@ -1,6 +1,6 @@
 import Card from "../../../components/Card/Card";
 import styles from "../Questions.module.css";
-import { AddIcon, UploadIcon } from "../../../components/icons/Icons";
+import { AddIcon } from "../../../components/icons/Icons";
 import { SelectComponent } from "../../../components/select-component/SelectComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -10,17 +10,15 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import {
   uploadQuestion,
-  downloadQuestionTemplate,
   uploadQuestionByForm,
 } from "../../../features/uploadQuestions/uploadQuestion";
+import { useParams } from "react-router-dom";
 
 export const UpdateQuestion = () => {
   const dispatch = useDispatch();
   const { technologies } = useSelector((state) => state.technologies);
   const { token } = useSelector((state) => state.auth.userData);
-  const downloadedTemplateContentDetails = useSelector(
-    (state) => state.uploadQuestion
-  );
+
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -37,6 +35,7 @@ export const UpdateQuestion = () => {
   const [option_C, setOption_C] = useState(null);
   const [option_D, setOption_D] = useState(null);
   const navigate = useNavigate();
+  const { id } = useParams("id");
   const [newQuestion, setNewQuestion] = useState({
     questionTitle: "",
     correctAnswer: "",

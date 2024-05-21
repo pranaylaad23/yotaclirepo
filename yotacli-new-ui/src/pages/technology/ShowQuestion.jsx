@@ -45,7 +45,7 @@ const ShowQuestion = () => {
     dispatch(questionByCategory({ catId: selectedCategory, techId: id }));
   };
 
-  console.log("categoris questo",)
+
   return (
     <>
       {technologyes.map((tech) => {
@@ -106,10 +106,18 @@ const ShowQuestion = () => {
                       <td>{data.questionTitle}</td>
                       <td>{data.questionLevel}</td>
                       <td>{CategoriesName}</td>
-                      <td>{data.updated_At}</td>
+                      {data.updated_At != null ? (
+                        <td>{data.updated_At}</td>
+                      ) : (
+                        <td>Not Modified</td>
+                      )}
+
                       <td>
                         <p className="editDelete">
-                          <Link className="nav-link" to="/UpdateQuestion">
+                          <Link
+                            className="nav-link"
+                            to={`/UpdateQuestion/` + data.id}
+                          >
                             <EditIcon />
                           </Link>
                           <Link className="nav-link" to="/UpdateQuestion">
@@ -127,10 +135,17 @@ const ShowQuestion = () => {
                       <td>{data.questionTitle}</td>
                       <td>{data.questionLevel}</td>
                       <td>{data.category.name}</td>
-                      <td>{data.updated_At}</td>
+                      {data.updated_At != null ? (
+                        <td>{data.updated_At}</td>
+                      ) : (
+                        <td>Not Modified</td>
+                      )}
                       <td>
                         <p className="editDelete">
-                          <Link className="nav-link" to="/UpdateQuestion">
+                          <Link
+                            className="nav-link"
+                            to={`/UpdateQuestion/` + data.id}
+                          >
                             <EditIcon />
                           </Link>
                           <Link className="nav-link" to="/UpdateQuestion">
