@@ -1,5 +1,5 @@
 import {BsPatchCheckFill} from "react-icons/bs";
-import {AiOutlineEdit, AiOutlineStop} from "react-icons/ai";
+import {AiOutlineEdit, AiOutlineStop,AiOutlineDelete} from "react-icons/ai";
 
 import { IoPersonAdd } from "react-icons/io5";
 import { TbFileReport } from "react-icons/tb";
@@ -48,6 +48,20 @@ export const EditIcon = ({
         cursor={"pointer"}
         title={title ? title : "Edit"}
         onClick={onEdit}/>
+};
+
+export const DeleteIcon = ({
+    onEdit,
+    title = null,
+    color = null,
+    size = null
+}) => {
+return <AiOutlineDelete
+color={color ? color : "#fd1212"}
+size={size > 10 ? size : "24"}
+cursor={"pointer"}
+title={title ? title : "Edit"}
+onClick={onEdit}/>
 };
 
 export const AddIcon = ({
