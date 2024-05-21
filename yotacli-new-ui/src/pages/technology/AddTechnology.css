@@ -83,3 +83,8 @@
   color: blue;
   text-decoration: underline;
 }
+
+.editDelete{
+  display: flex;
+  justify-content: center;
+}
