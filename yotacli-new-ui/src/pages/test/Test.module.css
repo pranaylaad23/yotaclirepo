@@ -5,7 +5,7 @@
   width: auto;
   margin: 1rem auto;
   padding: 1rem;
-  width: 50%;
+  width: 54%;
   /* height: 70vh; */
 }
 
@@ -139,3 +139,12 @@
   margin-left: 0px;
 }
 
+.containerFormLibrary {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin: 1rem auto;
+  padding: 1rem; */
+  /* width: 150%; */
+}

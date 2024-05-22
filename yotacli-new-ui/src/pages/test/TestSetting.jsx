@@ -1,17 +1,63 @@
 import styles from "../test/Test.module.css";
 import Button from "react-bootstrap/esm/Button";
 import Card from "../../components/Card/Card";
+import { useRef } from "react";
+import { addTest } from "../../features/tests/testAction";
+import { useDispatch } from "react-redux";
 
 export const TestSetting = ({ nextScreen }) => {
 
-    const handleSubmit = (e) =>{
-        e.preventDefault(); 
-        nextScreen("screen3")
+    const endDate = useRef("");
+    const startDate = useRef("");
+    const dispatch = useDispatch();
+
+    const validateForm = (settingFormData) => {
+
+        if (Object.values(settingFormData).every(value => value.trim() === '')) {
+            alert("All fields are required and cannot be empty");
+            return false;
+        }
+
+        if (settingFormData.endDate.trim() === '') {
+            alert("End date cannot be empty");
+            return false;
+        }
+
+        if (settingFormData.startTime.trim() === '') {
+            alert("Start date cannot be empty");
+            return false;
+        }
+        return true;
     }
 
-    return (
-        <div>
-            <Card className={styles["container"]}>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const basicInfoFormData = localStorage.getItem("basicInfo");
+
+        const eDate = endDate.current.value;
+        const sTime = startDate.current.value;
+
+        const settingFormData = {
+            endDate: eDate,
+            startTime: sTime
+        }
+
+        if (validateForm(settingFormData)) {
+            const allData = { ...JSON.parse(basicInfoFormData), ...settingFormData }
+            dispatch(addTest(allData))
+                .then(() => {
+                    alert("Test details added successfully..!!\nPlease add question in test");
+                    nextScreen("screen3")
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        }
+    }
+
+    const FormTestSetting = () => {
+        return (
+            <div>
                 <form onSubmit={handleSubmit}>
                     <h6 className={styles["form-title"]}>Test Setting</h6>
 
@@ -22,6 +68,7 @@ export const TestSetting = ({ nextScreen }) => {
                             name="endDate"
                             className="form-control mt-1"
                             placeholder="Add title"
+                            ref={endDate}
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -31,6 +78,7 @@ export const TestSetting = ({ nextScreen }) => {
                             name="endTime"
                             className="form-control mt-1"
                             placeholder="Add title"
+                            ref={startDate}
                         />
                     </div>
 
@@ -43,6 +91,14 @@ export const TestSetting = ({ nextScreen }) => {
                         </Button>
                     </div>
                 </form>
+            </div>
+        )
+    }
+
+    return (
+        <div>
+            <Card className={styles["container"]}>
+                <FormTestSetting />
             </Card>
         </div >
     )

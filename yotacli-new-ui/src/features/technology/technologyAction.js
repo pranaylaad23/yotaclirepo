@@ -28,7 +28,6 @@ export const fetchAllTechnology = createAsyncThunk(
             const response = await axios.get(
                 AXIOS_BASE_URL + "/technology/"
             );
-            console.log("Data",response.data)
             return response.data;
         } catch (error) {
             return rejectWithValue(error.message);
