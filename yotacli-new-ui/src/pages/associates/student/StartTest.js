@@ -1,8 +1,6 @@
 import React, { useState} from 'react';
 import Card from '../../../components/Card/Card';
 import styles from '../../../pages/associates/AllAssociates.module.css';
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import { TableBody } from '../../../components/table-component/TableBody';
 import { TableHeader } from "../../../components/table-component/TableHeader";
 import MyTestButton from '../MyTestButton';

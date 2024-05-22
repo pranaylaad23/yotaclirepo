@@ -5,17 +5,13 @@ function ItereateCircle() {
         , false, true,true, false, true, false, true, false, true]; // Example attempted states
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col">
+        // <div className="container">
                     <div>
                         {attempted.map((isAttempted, index) => (
                             <Circle key={index} index={index} isAttempted={isAttempted} />
                         ))}
                     </div>
-                </div>
-            </div>
-        </div>
+                // </div>
 
     );
 }
