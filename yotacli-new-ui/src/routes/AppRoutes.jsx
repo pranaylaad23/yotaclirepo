@@ -130,6 +130,7 @@ export const AppRoutes = () => {
           />
           <Route path={"/training-performance-report"} element={<TPR />} />
           <Route path={"/show-question/:id"} element={<ShowQuestion />} />
+          <Route path={"/show-question"} element={<ShowQuestion />} />
           <Route path={"/UpdateQuestion/:id"} element={<UpdateQuestion />} />
         </>
       )}

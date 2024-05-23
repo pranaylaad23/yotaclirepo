@@ -30,3 +30,20 @@ export const questionByCategory = createAsyncThunk(
     }
   }
 );
+
+export const deleteQuestion= createAsyncThunk(
+  "/questions/deleteQuestion",
+  async ({quesId },{ rejectWithValue}) => {
+    try {
+      const response = await axios.delete(
+        AXIOS_BASE_URL + `/questions/${quesId}`,
+      );
+      console.log("questionupdate Response",response.data)
+      return response.data;
+    } catch (error) {
+      if (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

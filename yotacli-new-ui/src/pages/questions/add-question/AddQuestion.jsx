@@ -9,6 +9,9 @@ import { Container, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   uploadQuestion,
   downloadQuestionTemplate,
@@ -161,7 +164,10 @@ export const AddQuestion = () => {
     setQuestionLevel();
     setQuestionTitle("");
 
-    navigate("/add-question")
+    toast("Question Addeed Successfully!");
+    setTimeout(() => {
+      navigate("/technology-list");
+    }, 2000);
   }
 
   const handleFileChange = (event) => {
@@ -494,6 +500,7 @@ export const AddQuestion = () => {
           </button>
         </Modal.Body>
       </Modal>
+      <ToastContainer />
     </div>
   );
 };
