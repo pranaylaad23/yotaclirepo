@@ -39,8 +39,6 @@ const ShowQuestion = () => {
     return tech.id == id;
   });
 
-  console.log("selectcat", selectedCategory);
-
   const catName = categories.filter((data) => {
     return data.id == selectedCategory ? data.name : null;
   });
@@ -60,8 +58,6 @@ const ShowQuestion = () => {
       navigate("/technology-list");
     }, 2000);
   }
-
-  console.log("categories", categories);
 
   return (
     <>
