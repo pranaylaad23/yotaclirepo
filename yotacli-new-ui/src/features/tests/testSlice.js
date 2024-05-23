@@ -3,6 +3,7 @@ import { addTest, countQuestion, questionUnderTechnologyId } from "./testAction"
 
 const initialState = {
   tests: [],
+  question: [],
   loading: false,
   error: null,
   success: false,
@@ -46,7 +47,6 @@ const testSlice = createSlice({
       state.easyCount = action.payload.easyCount;
       state.mediumCount = action.payload.mediumCount;
       state.hardCount = action.payload.hardCount;
-      console.log(action.payload.questionCount);
     });
     builder.addCase(countQuestion.rejected, (state, action) => {
       state.loading = false;
@@ -64,14 +64,13 @@ const testSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.tests = action.payload;
-      console.log(action.payload)
+      state.question = action.payload;
     });
     builder.addCase(questionUnderTechnologyId.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;
-      state.tests = [];
+      state.question = [];
     });
   },
 });

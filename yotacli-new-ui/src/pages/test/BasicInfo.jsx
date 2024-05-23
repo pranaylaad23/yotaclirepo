@@ -21,7 +21,7 @@ export const BasicInfo = ({ nextScreen }) => {
             errors.push('Title ')
         }
         if (formData.type.trim() === '') {
-            errors.push('Title ')
+            errors.push('Type ')
         }
         if (formData.description.trim() === '') {
             errors.push('Description ')

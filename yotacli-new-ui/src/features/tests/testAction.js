@@ -19,9 +19,15 @@ export const addTest = createAsyncThunk(
 
 export const countQuestion = createAsyncThunk(
   "test/countQuestion",
-  async (_, { rejectWithValue }) => {
+  async (technologyId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(AXIOS_BASE_URL + "/questions/count-details");
+      const response = await axios.get(AXIOS_BASE_URL + "/questions/count-details",
+        {
+          params: {
+            techId: technologyId
+          }
+        }
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -36,7 +42,7 @@ export const questionUnderTechnologyId = createAsyncThunk(
       const response = await axios.get(
         AXIOS_BASE_URL + `/questions/get/list/tech`, {
         params: {
-          techId : technologyId
+          techId: technologyId
         }
       }
       );

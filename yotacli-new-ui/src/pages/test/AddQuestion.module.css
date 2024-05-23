@@ -34,3 +34,9 @@
   padding: 4%;
   margin-top: 3%;
 }
+
+.custom-text-center {
+  text-align: center;
+  margin-top: 2%;
+  padding: 3%;
+}

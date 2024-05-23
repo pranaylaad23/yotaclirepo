@@ -12,17 +12,25 @@ export const AddQuestion = () => {
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth.userData);
     const { technologies } = useSelector((state) => state.technologies);
-    const questionCount = useSelector((state) => state.questionCount);
-    const { questionList } = useSelector((state) => state.tests);
+    const questionCount = useSelector((state) => state.tests.questionCount);
+    const easyCount = useSelector((state) => state.tests.easyCount);
+    const mediumCount = useSelector((state) => state.tests.mediumCount);
+    const hardCount = useSelector((state) => state.tests.hardCount);
+    const question = useSelector((state) => state.tests.question);
     const [screenContain, setScreenContain] = useState('Add');
-    const technologyId = useRef(null);
+    const technologyId = useRef();
 
     useEffect(() => {
         if (token) {
             dispatch(fetchAllTechnology());
-            dispatch(countQuestion());
         }
     }, [token]);
+
+    const questionByTechnology = () => {
+        const techId = technologyId.current.value;
+        dispatch(questionUnderTechnologyId(techId))
+        dispatch(countQuestion(techId));
+    }
 
     const LoadScreenContain = () => {
         switch (screenContain) {
@@ -77,17 +85,17 @@ export const AddQuestion = () => {
                         <hr></hr>
                         <div class="col-6">
                             <b>
-                                Total Questions to be added - 0
+                                Total Questions to be added - {questionCount > 0 ? questionCount : 0}
                             </b>
                         </div>
                         <div class="col-2">
-                            <b>Easy - 5</b>
+                            <b>Easy - {easyCount > 0 ? easyCount : 0}</b>
                         </div>
                         <div class="col-2">
-                            <b>Medium - 10</b>
+                            <b>Medium - {mediumCount > 0 ? mediumCount : 0}</b>
                         </div>
                         <div class="col-2">
-                            <b>Hard - 10</b>
+                            <b>Hard - {hardCount > 0 ? hardCount : 0}</b>
                         </div>
                     </div>
                 </div>
@@ -124,84 +132,67 @@ export const AddQuestion = () => {
                 {/* end technlogy search */}
 
                 {/* search box code */}
-                <div className={styles["searchBoxContainer"]}>
-                    <Card>
-                        <div class="container text-center mt-2" style={{ padding: "10px" }}>
-                            <div class="row">
-                                <div class="col-4">
-                                    <input class="form-control form-control-sm" type="text" placeholder="Search..." aria-label=".form-control-sm example" style={{ float: "left" }} />
+                {
+                    question.length !== 0 ? (
+                        <div className={styles["searchBoxContainer"]}>
+                            <Card>
+                                <div class="container text-center mt-2" style={{ padding: "10px" }}>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <input class="form-control form-control-sm" type="text" placeholder="Search..." aria-label=".form-control-sm example" style={{ float: "left" }} />
+                                        </div>
+                                        <div class="col">
+                                            <Button
+                                                variant="primary"
+                                                size="sm"
+                                                style={{ float: "right" }}>
+                                                Add Selected Ques.
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <Button
-                                        variant="primary"
-                                        size="sm"
-                                        style={{ float: "right" }}>
-                                        Add Selected Ques.
-                                    </Button>
+
+                                <div style={{ padding: "1%", marginTop: "-6px" }}>
+                                    <table className="table table-bordered table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Level</th>
+                                                <th scope="col">Question</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                question.map((response, index) => (
+                                                    <tr>
+                                                        <td>
+                                                            <div className="form-check" style={{ display: "inline-block" }}>
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    id="flexCheckDefault"
+                                                                />
+                                                            </div>
+                                                        </td>
+                                                        <td>{response.category.name}</td>
+                                                        <td>{response.questionLevel}</td>
+                                                        <td>{response.questionTitle}</td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </Card>
+                        </div>
+                    )
+                        : (
+                            <div className={styles["custom-text-center"]}>
+                                <b>The question has not been presented yet, you will get it based on the search results.</b>
                             </div>
-                        </div>
-
-                        <div style={{ padding: "1%", marginTop: "-6px" }}>
-                            <table className="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Level</th>
-                                        <th scope="col">Question</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div className="form-check" style={{ display: "inline-block" }}>
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    id="flexCheckDefault"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td>Oops</td>
-                                        <td>Easy</td>
-                                        <td>What is java?</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div className="form-check" style={{ display: "inline-block" }}>
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    id="flexCheckDefault"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td>Oops</td>
-                                        <td>Easy</td>
-                                        <td>What is java?</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <div className="form-check" style={{ display: "inline-block" }}>
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    id="flexCheckDefault"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td>Oops</td>
-                                        <td>Easy</td>
-                                        <td>What is java?</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </Card>
-                </div>
+                        )
+                }
                 {/* end search box code */}
             </div>
         )
@@ -226,12 +217,6 @@ export const AddQuestion = () => {
         )
     }
 
-    const questionByTechnology = () => {
-        const techId = technologyId.current.value;
-        dispatch(questionUnderTechnologyId(techId))
-    }
-
-    console.log(questionList);
 
     return (
         <div>

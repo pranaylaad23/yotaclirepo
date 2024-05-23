@@ -9,15 +9,14 @@ export const AddTest = () => {
 
     const renderScreen = () => {
         switch (nextScreen) {
-            // case 'screen1':
-            //     return <BasicInfo nextScreen={setNextScreen} />;
-            // case 'screen2':
-            //     return <TestSetting nextScreen={setNextScreen} />;
-            // case 'screen3':
-            //     return <AddQuestion />
+            case 'screen1':
+                return <BasicInfo nextScreen={setNextScreen} />;
+            case 'screen2':
+                return <TestSetting nextScreen={setNextScreen} />;
+            case 'screen3':
+                return <AddQuestion />
             default:
-                //return <BasicInfo nextScreen={setNextScreen} />;
-            return <AddQuestion />;
+                return <BasicInfo nextScreen={setNextScreen} />;
         }
     }
 
