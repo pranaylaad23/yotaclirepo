@@ -3,14 +3,18 @@ import { SelectComponent } from "../../components/select-component/SelectCompone
 import styles from "./ShowQuestion.module.css";
 import Button from "react-bootstrap/Button";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategoriesUnderTechnologyById } from "../../features/category/categoryAction";
 import {
   allQuestion,
   questionByCategory,
+  deleteQuestion,
 } from "../../features/Question/questionAction";
 import { Link } from "react-router-dom";
 import { EditIcon, DeleteIcon } from "../../components/icons/Icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ShowQuestion = () => {
   const { userData } = useSelector((state) => state.auth);
@@ -19,8 +23,10 @@ const ShowQuestion = () => {
   const { categoryquestions } = useSelector((state) => state.categoryquestions);
   const { technologies } = useSelector((state) => state.technologies);
   const [selectedCategory, setSelectedCategory] = useState();
+
   const { id } = useParams("id");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userData.token) {
@@ -45,12 +51,19 @@ const ShowQuestion = () => {
     dispatch(questionByCategory({ catId: selectedCategory, techId: id }));
   };
 
+  function handleDelete(data) {
+    dispatch(deleteQuestion({ quesId: data }));
+    toast("Question Delete Successfully!");
+    setTimeout(() => {
+      navigate("/technology-list");
+    }, 2000);
+  }
 
   return (
     <>
       {technologyes.map((tech) => {
         return (
-          <h4 className="text-start">
+          <h4 className="text-start" key={tech.id}>
             Question From {tech.technology} Technology
           </h4>
         );
@@ -69,7 +82,7 @@ const ShowQuestion = () => {
           </label>
         )}
         <div className={styles["select-icon-group"]}>
-          <SelectComponent
+          {/* <SelectComponent
             name="technology_select"
             width={"select-dropdown"}
             id="tech"
@@ -81,7 +94,18 @@ const ShowQuestion = () => {
             keyFieldName={"id"}
             valueFieldName={"id"}
             selectedValue={selectedCategory}
-          />
+          /> */}
+
+          <select onChange={(event) => setSelectedCategory(event.target.value)}>
+            <option>All</option>
+            {categories.map((option, index) => {
+              return (
+                <option key={index} value={option.id}>
+                  {option.name}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <Button onClick={handleQuestionByCategory}>APPLY</Button>
       </div>
@@ -111,7 +135,6 @@ const ShowQuestion = () => {
                       ) : (
                         <td>Not Modified</td>
                       )}
-
                       <td>
                         <p className="editDelete">
                           <Link
@@ -120,9 +143,15 @@ const ShowQuestion = () => {
                           >
                             <EditIcon />
                           </Link>
-                          <Link className="nav-link" to="/UpdateQuestion">
+                          <button
+                            style={{ border: "none" }}
+                            onClick={
+                              () => handleDelete(data.id)
+                              // dispatch(deleteQuestion({ quesId: data.id }))
+                            }
+                          >
                             <DeleteIcon />
-                          </Link>
+                          </button>
                         </p>
                       </td>
                     </tr>
@@ -148,9 +177,15 @@ const ShowQuestion = () => {
                           >
                             <EditIcon />
                           </Link>
-                          <Link className="nav-link" to="/UpdateQuestion">
+                          <button
+                            style={{ border: "none" }}
+                            onClick={
+                              () => handleDelete(data.id)
+                              // dispatch(deleteQuestion({ quesId: data.id }))
+                            }
+                          >
                             <DeleteIcon />
-                          </Link>
+                          </button>
                         </p>
                       </td>
                     </tr>
@@ -159,6 +194,7 @@ const ShowQuestion = () => {
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </>
   );
 };

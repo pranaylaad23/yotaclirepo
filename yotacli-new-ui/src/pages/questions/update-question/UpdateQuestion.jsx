@@ -1,50 +1,34 @@
 import Card from "../../../components/Card/Card";
 import styles from "../Questions.module.css";
-import { AddIcon } from "../../../components/icons/Icons";
 import { SelectComponent } from "../../../components/select-component/SelectComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchAllTechnology } from "../../../features/technology/technologyAction";
-import { Container, Modal } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import {
-  uploadQuestion,
-  uploadQuestionByForm,
-} from "../../../features/uploadQuestions/uploadQuestion";
+import { updateQuestion } from "../../../features/uploadQuestions/uploadQuestion";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const UpdateQuestion = () => {
   const dispatch = useDispatch();
-  const { technologies } = useSelector((state) => state.technologies);
   const { token } = useSelector((state) => state.auth.userData);
+  const { questions } = useSelector((state) => state.questions);
 
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [categories, setCategories] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [file, setFile] = useState(null);
-  const [technology, setTechnology] = useState("");
-  const [categoryList, setCategoryList] = useState([]);
-  const [category, setCategory] = useState("");
-  const [currentOption, setCurrentOption] = useState(null);
-  const [questionLevel, setQuestionLevel] = useState(null);
-  const [questionTitle, setQuestionTitle] = useState(null);
-  const [option_A, setOption_A] = useState(null);
-  const [option_B, setOption_B] = useState(null);
-  const [option_C, setOption_C] = useState(null);
-  const [option_D, setOption_D] = useState(null);
+  const [currentOption, setCurrentOption] = useState();
+  const [questionLevel, setQuestionLevel] = useState();
+  const [questionTitle, setQuestionTitle] = useState();
+  const [option_A, setOption_A] = useState();
+  const [option_B, setOption_B] = useState();
+  const [option_C, setOption_C] = useState();
+  const [option_D, setOption_D] = useState();
+
   const navigate = useNavigate();
   const { id } = useParams("id");
-  const [newQuestion, setNewQuestion] = useState({
-    questionTitle: "",
-    correctAnswer: "",
-    option_A: "",
-    option_B: "",
-    option_C: "",
-    option_D: "",
-    questionLevel: "",
-  });
 
   const correct_options_list = [
     {
@@ -74,42 +58,36 @@ export const UpdateQuestion = () => {
       id: 2,
       question_level: "MEDIUM",
     },
-
     {
       id: 3,
       question_level: "HARD",
     },
   ];
 
-  function technologyChangeHandler(event) {
-    console.log(event.target.value);
-    setSelectedTechnology(event.target.value);
-    setSelectedCategory("");
-  }
+  const questionData = questions.filter((quesData) => {
+    return quesData.id == id ? quesData : null;
+  });
 
-  function categoryChangeHandler(event) {
-    console.log(event.target.value);
-    setSelectedCategory(event.target.value);
-  }
+  useEffect(() => {
+    if (token) {
+      questionData.map((data) => {
+        setOption_A(data.option_A);
+        setOption_B(data.option_B);
+        setOption_C(data.option_C);
+        setOption_D(data.option_D);
+        setQuestionTitle(data.questionTitle);
+        setQuestionLevel(data.questionLevel);
+        setCurrentOption(data.correctAnswer);
+      });
+    }
+  }, []);
 
   function currentOptionHanderChangeHandler(event) {
-    console.log(event.target.value);
     setCurrentOption(event.target.value);
   }
 
   function questionLevelHanderChangeHandler(event) {
-    console.log(event.target.value);
     setQuestionLevel(event.target.value);
-  }
-
-  function addTechnologyEventHandler(event) {
-    event.preventDefault();
-    console.log("add button clicked...");
-  }
-
-  function addCategoryEventHandler(event) {
-    event.preventDefault();
-    console.log(event.target.value);
   }
 
   useEffect(() => {
@@ -117,18 +95,6 @@ export const UpdateQuestion = () => {
       dispatch(fetchAllTechnology());
     }
   }, [token, dispatch]);
-
-  useEffect(() => {
-    if (selectedTechnology) {
-      const catArr = technologies
-        .filter((technology) => technology.id === Number(selectedTechnology))
-        .map((tech) => tech.categories)
-        .flatMap((cat) => cat);
-
-      setCategories(catArr.length > 0 ? catArr : null);
-      setSelectedCategory(null);
-    }
-  }, [selectedTechnology]);
 
   function addNewQuestionHandler(event) {
     event.preventDefault();
@@ -142,10 +108,9 @@ export const UpdateQuestion = () => {
       questionTitle: questionTitle,
     };
     dispatch(
-      uploadQuestionByForm({
+      updateQuestion({
         data,
-        techId: selectedTechnology,
-        catId: selectedCategory,
+        quesId: id,
       })
     );
 
@@ -159,51 +124,19 @@ export const UpdateQuestion = () => {
     setQuestionLevel();
     setQuestionTitle("");
 
-    navigate("/add-question");
+    toast("Question Updated Successfully!");
+    setTimeout(() => {
+      navigate("/technology-list");
+    }, 2000);
   }
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
-
-  const handleTechnologyChange = (event) => {
-    console.log(event.target.value);
-    setTechnology(event.target.value);
-    getCategoriesByTechnology(event.target.value);
-  };
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  const handleSubmitUploadTrainingButton = () => {
-    let data = {
-      file: file,
-      techId: technology,
-      catId: category,
-    };
-    if (file) {
-      dispatch(
-        uploadQuestion({ file: file, techId: technology, catId: category })
-      );
-    }
-
-    setCategory("");
-    setTechnology("");
-    setFile(null);
-
-    setOpen(false);
-  };
-
-  function getCategoriesByTechnology(id) {
-    const data = technologies.find((item) => item.id == id);
-    setCategoryList(data.categories);
-  }
   return (
     <div>
       <Card className={styles["card-container"]}>
         <p className={styles["page-title"]}>Update Question</p>
         <Card className={styles["form-container"]}>
           <form onSubmit={addNewQuestionHandler}>
+            {/* for the future use
             <div className={styles["form-group"]}>
               <label htmlFor="technology">
                 Technology
@@ -253,7 +186,7 @@ export const UpdateQuestion = () => {
                   onAdd={addCategoryEventHandler}
                 />
               </div>
-            </div>
+            </div> */}
             <div className={styles["form-group-question"]}>
               <label htmlFor="question-title">
                 Question
@@ -317,8 +250,8 @@ export const UpdateQuestion = () => {
                 <span className={styles["required-span"]}> *</span>
               </label>
               <div className={styles["select-icon-group"]}>
-                <SelectComponent
-                  name="currentOption"
+                {/* <SelectComponent
+                  name="current_Option"
                   width={"select-dropdown"}
                   id="currentoption"
                   options={correct_options_list}
@@ -327,8 +260,22 @@ export const UpdateQuestion = () => {
                   valueFieldName={"current_Option"}
                   optionChangeHandler={currentOptionHanderChangeHandler}
                   selectedValue={currentOption}
-                  defaultValue={""}
-                />
+                /> */}
+                <select
+                  onChange={currentOptionHanderChangeHandler}
+                  value={currentOption}
+                >
+                  <option value="" disabled={true}>
+                    select
+                  </option>
+                  {correct_options_list.map((option, index) => {
+                    return (
+                      <option key={index} value={option.current_Option}>
+                        {option.current_Option}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
             <div className={styles["form-group"]}>
@@ -337,8 +284,8 @@ export const UpdateQuestion = () => {
                 <span className={styles["required-span"]}> *</span>
               </label>
               <div className={styles["select-icon-group"]}>
-                <SelectComponent
-                  name="questionLevel"
+                {/* <SelectComponent
+                  name="question_Level"
                   width={"select-dropdown"}
                   dataFieldName={"question_level"}
                   keyFieldName={"id"}
@@ -347,8 +294,22 @@ export const UpdateQuestion = () => {
                   options={question_level_list}
                   optionChangeHandler={questionLevelHanderChangeHandler}
                   selectedValue={questionLevel}
-                  defaultValue={""}
-                />
+                /> */}
+                <select
+                  onChange={questionLevelHanderChangeHandler}
+                  value={questionLevel}
+                >
+                  <option value="" disabled={true}>
+                    select
+                  </option>
+                  {question_level_list.map((option, index) => {
+                    return (
+                      <option key={index} value={option.question_level}>
+                        {option.question_level}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
             <Container className={"text-center"}>
@@ -362,97 +323,7 @@ export const UpdateQuestion = () => {
           </form>
         </Card>
       </Card>
-      <Modal
-        show={open}
-        onHide={() => setOpen(false)}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-            Question Bank
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="mr-4">
-          <div>
-            <div className="form-group row mb-1">
-              <label
-                for="inputDescription"
-                className="createclientdescription col-sm-4 col-form-label mt-0"
-              >
-                Technology
-              </label>
-              <div className="col-sm-8">
-                <div className="technologyDrop">
-                  <select
-                    className="form-select form-select-sm w-90 mt-1"
-                    aria-label=".form-select-sm example"
-                    onChange={handleTechnologyChange}
-                  >
-                    <option value="" disabled selected>
-                      Select Technology
-                    </option>
-                    {technologies &&
-                      technologies.map((technologies, index) => (
-                        <option key={index} value={technologies.id}>
-                          {technologies.technology}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="form-group row mb-1">
-              <label
-                for="inputDescription"
-                className="createclientdescription col-sm-4 col-form-label mt-0"
-              >
-                Categories
-              </label>
-              <div className="col-sm-8">
-                <div className="technologyDrop">
-                  <select
-                    className="form-select form-select-sm w-90 mt-1"
-                    aria-label=".form-select-sm example"
-                    onChange={handleCategoryChange}
-                  >
-                    <option value="" disabled selected>
-                      Select Category
-                    </option>
-                    {categoryList &&
-                      categoryList.map((tech, index) => (
-                        <option key={index} value={tech.id}>
-                          {tech.name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="form-group row ">
-              <label
-                for="inputDescription"
-                className="createclientdescription col-sm-4 col-form-label mt-0"
-              >
-                Upload File
-              </label>
-              <div className="col-sm-8 mt-1">
-                <input type="file" onChange={handleFileChange} />
-              </div>
-            </div>
-          </div>
-
-          <button
-            className="submitt-button btn btn-primary"
-            type="submit"
-            onClick={handleSubmitUploadTrainingButton}
-            style={{ borderRadius: "revert-layer", marginLeft: "390px" }}
-            disabled={!file}
-          >
-            Submit
-          </button>
-        </Modal.Body>
-      </Modal>
+      <ToastContainer />
     </div>
   );
 };

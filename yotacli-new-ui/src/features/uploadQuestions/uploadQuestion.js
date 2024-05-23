@@ -81,3 +81,22 @@ export const uploadQuestionByForm = createAsyncThunk(
     }
   }
 );
+
+//UPDATE QUESTION ACTION http://localhost:8080/yota-api/questions/1
+export const updateQuestion= createAsyncThunk(
+  "/questions/updateQuestion",
+  async ({ data,quesId },{ rejectWithValue}) => {
+    try {
+      const response = await axios.put(
+        AXIOS_BASE_URL + `/questions/${quesId}`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      if (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
