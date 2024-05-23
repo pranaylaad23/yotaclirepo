@@ -39,6 +39,8 @@ const ShowQuestion = () => {
     return tech.id == id;
   });
 
+  console.log("selectcat", selectedCategory);
+
   const catName = categories.filter((data) => {
     return data.id == selectedCategory ? data.name : null;
   });
@@ -58,6 +60,8 @@ const ShowQuestion = () => {
       navigate("/technology-list");
     }, 2000);
   }
+
+  console.log("categories", categories);
 
   return (
     <>
@@ -82,7 +86,7 @@ const ShowQuestion = () => {
           </label>
         )}
         <div className={styles["select-icon-group"]}>
-          <SelectComponent
+          {/* <SelectComponent
             name="technology_select"
             width={"select-dropdown"}
             id="tech"
@@ -94,7 +98,18 @@ const ShowQuestion = () => {
             keyFieldName={"id"}
             valueFieldName={"id"}
             selectedValue={selectedCategory}
-          />
+          /> */}
+
+          <select onChange={(event) => setSelectedCategory(event.target.value)}>
+            <option>All</option>
+            {categories.map((option, index) => {
+              return (
+                <option key={index} value={option.id}>
+                  {option.name}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <Button onClick={handleQuestionByCategory}>APPLY</Button>
       </div>

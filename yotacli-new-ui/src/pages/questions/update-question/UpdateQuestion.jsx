@@ -128,7 +128,6 @@ export const UpdateQuestion = () => {
     setTimeout(() => {
       navigate("/technology-list");
     }, 2000);
-   
   }
 
   return (
@@ -251,7 +250,7 @@ export const UpdateQuestion = () => {
                 <span className={styles["required-span"]}> *</span>
               </label>
               <div className={styles["select-icon-group"]}>
-                <SelectComponent
+                {/* <SelectComponent
                   name="current_Option"
                   width={"select-dropdown"}
                   id="currentoption"
@@ -261,7 +260,22 @@ export const UpdateQuestion = () => {
                   valueFieldName={"current_Option"}
                   optionChangeHandler={currentOptionHanderChangeHandler}
                   selectedValue={currentOption}
-                />
+                /> */}
+                <select
+                  onChange={currentOptionHanderChangeHandler}
+                  value={currentOption}
+                >
+                  <option value="" disabled={true}>
+                    select
+                  </option>
+                  {correct_options_list.map((option, index) => {
+                    return (
+                      <option key={index} value={option.current_Option}>
+                        {option.current_Option}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
             <div className={styles["form-group"]}>
@@ -270,7 +284,7 @@ export const UpdateQuestion = () => {
                 <span className={styles["required-span"]}> *</span>
               </label>
               <div className={styles["select-icon-group"]}>
-                <SelectComponent
+                {/* <SelectComponent
                   name="question_Level"
                   width={"select-dropdown"}
                   dataFieldName={"question_level"}
@@ -280,7 +294,22 @@ export const UpdateQuestion = () => {
                   options={question_level_list}
                   optionChangeHandler={questionLevelHanderChangeHandler}
                   selectedValue={questionLevel}
-                />
+                /> */}
+                <select
+                  onChange={questionLevelHanderChangeHandler}
+                  value={questionLevel}
+                >
+                  <option value="" disabled={true}>
+                    select
+                  </option>
+                  {question_level_list.map((option, index) => {
+                    return (
+                      <option key={index} value={option.question_level}>
+                        {option.question_level}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
             <Container className={"text-center"}>
