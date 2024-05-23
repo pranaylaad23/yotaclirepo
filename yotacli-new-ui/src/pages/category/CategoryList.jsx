@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { EditIcon } from '../../components/icons/Icons';
-import { fetchAllTechnology } from '../../features/technology/technologyAction';
-import Card from '../../components/Card/Card';
-import styles from './AddCategory.css';
-import AddCategory from './AddCategory';
-import { useParams } from 'react-router-dom';
-import { getAllCategoriesUnderTechnologyById } from '../../features/category/categoryAction';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { EditIcon } from "../../components/icons/Icons";
+import { fetchAllTechnology } from "../../features/technology/technologyAction";
+import Card from "../../components/Card/Card";
+import styles from "./AddCategory.css";
+import AddCategory from "./AddCategory";
+import { useParams } from "react-router-dom";
+import { getAllCategoriesUnderTechnologyById } from "../../features/category/categoryAction";
 
 function CategoryList() {
   const dispatch = useDispatch();
-  const { userData } = useSelector(state => state.auth);
-  const { technologies } = useSelector(state => state.technologies);
-  const { categories } = useSelector(state => state.categories);
+  const { userData } = useSelector((state) => state.auth);
+  const { technologies } = useSelector((state) => state.technologies);
+  const { categories } = useSelector((state) => state.categories);
 
   const { id } = useParams("id");
 
-  console.log(id)
+  console.log(id);
 
   useEffect(() => {
     if (userData.token) {
@@ -26,7 +26,7 @@ function CategoryList() {
 
   useEffect(() => {
     if (userData.token) {
-      dispatch(getAllCategoriesUnderTechnologyById((id)));
+      dispatch(getAllCategoriesUnderTechnologyById(id));
     }
   }, [userData]);
 
@@ -47,10 +47,14 @@ function CategoryList() {
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{category.name}</td>
-                <td>{category.questionCountUnderCategory}</td>
+                <td>
+                  {Array.isArray(category.questions) &&
+                  category.questions.length
+                    ? category.questions.length
+                    : 0}
+                </td>
                 <td>
                   <div className={styles["action-buttons"]}>
-
                     <EditIcon />
                   </div>
                 </td>
@@ -59,16 +63,16 @@ function CategoryList() {
           </tbody>
         </table>
       </div>
-    )
-  }
+    );
+  };
 
   const showErrorMessage = () => {
     return (
       <div className={styles["custom-text-center"]}>
         <b>No categories found, Please try to add category...</b>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div>
@@ -77,9 +81,7 @@ function CategoryList() {
         <div className="card-header">
           <AddCategory technologyId={id} />
         </div>{" "}
-        {
-          categories.length != 0 ? showData() : showErrorMessage()
-        }
+        {categories.length != 0 ? showData() : showErrorMessage()}
       </Card>
     </div>
   );

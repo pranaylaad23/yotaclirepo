@@ -1,27 +1,24 @@
 import Card from "../../../components/Card/Card";
 import styles from "../Questions.module.css";
-import { AddIcon, UploadIcon } from "../../../components/icons/Icons";
+import { AddIcon } from "../../../components/icons/Icons";
 import { SelectComponent } from "../../../components/select-component/SelectComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchAllTechnology } from "../../../features/technology/technologyAction";
 import { Container, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   uploadQuestion,
-  downloadQuestionTemplate,
   uploadQuestionByForm,
 } from "../../../features/uploadQuestions/uploadQuestion";
+import { useParams } from "react-router-dom";
 
-export const AddQuestion = () => {
+export const UpdateQuestion = () => {
   const dispatch = useDispatch();
   const { technologies } = useSelector((state) => state.technologies);
   const { token } = useSelector((state) => state.auth.userData);
-  const downloadedTemplateContentDetails = useSelector(
-    (state) => state.uploadQuestion
-  );
+
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -38,6 +35,7 @@ export const AddQuestion = () => {
   const [option_C, setOption_C] = useState(null);
   const [option_D, setOption_D] = useState(null);
   const navigate = useNavigate();
+  const { id } = useParams("id");
   const [newQuestion, setNewQuestion] = useState({
     questionTitle: "",
     correctAnswer: "",
@@ -161,7 +159,7 @@ export const AddQuestion = () => {
     setQuestionLevel();
     setQuestionTitle("");
 
-    navigate("/add-question")
+    navigate("/add-question");
   }
 
   const handleFileChange = (event) => {
@@ -175,10 +173,6 @@ export const AddQuestion = () => {
   };
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
-  };
-
-  const handleModalUploadTrainingButton = () => {
-    setOpen(true);
   };
 
   const handleSubmitUploadTrainingButton = () => {
@@ -204,43 +198,10 @@ export const AddQuestion = () => {
     const data = technologies.find((item) => item.id == id);
     setCategoryList(data.categories);
   }
-
-  const handleDownloadTemplate = () => {
-    dispatch(downloadQuestionTemplate({}));
-  };
-
   return (
     <div>
       <Card className={styles["card-container"]}>
-        <Container
-          direction="row"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "end",
-          }}
-        >
-          <div
-            onClick={handleDownloadTemplate}
-            style={{
-              paddingRight: "20px",
-              textDecoration: "underline",
-              cursor: "pointer",
-              fontSize: "12px",
-            }}
-          >
-            Download Template
-          </div>
-          <Button
-            color={"primary"}
-            onClick={handleModalUploadTrainingButton}
-            title="Upload Question"
-          >
-            <UploadIcon color={"#ffffff"} title="Upload Question" /> Upload
-            Questions
-          </Button>
-        </Container>
-        <p className={styles["page-title"]}>Add New Question</p>
+        <p className={styles["page-title"]}>Update Question</p>
         <Card className={styles["form-container"]}>
           <form onSubmit={addNewQuestionHandler}>
             <div className={styles["form-group"]}>
@@ -392,9 +353,7 @@ export const AddQuestion = () => {
             </div>
             <Container className={"text-center"}>
               <Button color={"primary"} type={"submit"}>
-                {/* <Link className="nav-link" to="/add-question"> */}
-                Add
-                {/* </Link> */}
+                Update
               </Button>
               <Button color={"danger"} className={"ms-2"}>
                 Cancel
@@ -497,3 +456,4 @@ export const AddQuestion = () => {
     </div>
   );
 };
+export default UpdateQuestion;

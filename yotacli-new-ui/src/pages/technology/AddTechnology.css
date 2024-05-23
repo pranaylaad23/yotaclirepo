@@ -70,3 +70,21 @@
   text-align: left;
 }
 
+.showQuestion {
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.countquestion {
+  margin-right: 10px;
+}
+.showquestion{
+  color: blue;
+  text-decoration: underline;
+}
+
+.editDelete{
+  display: flex;
+  justify-content: center;
+}
