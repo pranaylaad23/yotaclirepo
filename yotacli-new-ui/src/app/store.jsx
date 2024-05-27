@@ -7,7 +7,7 @@ import trainingSlice from "../features/training/trainingSlice"
 import categorySlice from "../features/category/categorySlice";
 import questionsSlice from "../features/Question/questionSlice";
 import categoryQuestionSlice from "../features/Question/categoryQuestionSlice"
-
+import testSlice from "../features/tests/testSlice";
 
 export const store = configureStore({
     reducer: {
@@ -18,6 +18,7 @@ export const store = configureStore({
         categories:categorySlice,
         trainings: trainingSlice,
         questions:questionsSlice,
-        categoryquestions:categoryQuestionSlice
+        categoryquestions:categoryQuestionSlice,
+        tests: testSlice
     }
 });
