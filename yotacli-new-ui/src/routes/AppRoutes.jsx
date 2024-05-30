@@ -38,7 +38,7 @@ import { TPR } from "../pages/training-performance-report/TPR";
 import { AddTest } from "../pages/test/AddTest";
 import { AssociatesList } from "../pages/associates/AssociatesList";
 import { ProfileDetails } from "../pages/profile-details/ProfileDetails";
-import StartTest from "../../src/pages/associates/student/StartTest";
+import StartTest from "../../src/pages/associates/StartTest";
 export const AppRoutes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -151,7 +151,7 @@ export const AppRoutes = () => {
           <Route path={"/myTrainings"} element={<MyTrainings />} />
           <Route path={"/myTest"} element={<MyTest />} />
           <Route path={"/profile-details"} element={<ProfileDetails />} />
-          <Route path={"/starttest"} element={<StartTest/>} />
+          <Route path={"/starttest"} element={<StartTest />} />
           <Route path={"/reports"} element={"/"} />
         </>
       )}
