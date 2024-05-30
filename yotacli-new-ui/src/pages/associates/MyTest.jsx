@@ -12,11 +12,14 @@ const MyTest = () => {
   const theadData = ["S.No", "Test Name", "Start Date", "End Date", "Action"];
   const dispatch = useDispatch();
 
+ 
   useEffect(() => {
     if (token) {
       dispatch(fetchAllAssociatesTestByEmailId(email));
     }
   }, [dispatch, token, email]);
+
+  console.log("associte", associates);
 
   const currentDateTime = new Date();
 
@@ -32,10 +35,7 @@ const MyTest = () => {
             placeholder="Search..."
             style={{ marginRight: "600px" }}
           />
-          <button
-            className="btn btn-warning"
-            style={{ marginLeft: "600px" }}
-          >
+          <button className="btn btn-warning" style={{ marginLeft: "600px" }}>
             <Link className="nav-link" to="/MyTest">
               Refresh
             </Link>
@@ -51,25 +51,30 @@ const MyTest = () => {
                     <tr key={data.id}>
                       <th scope="row">{data.id}</th>
                       <td>{data.testTitle}</td>
-                      <td>{data.startDate}</td>
+                      <td>{data.created_at}</td>
                       <td>{data.endDate}</td>
                       <td>
                         {data.action === "completed" ? (
                           <button type="button" className="btn btn-info">
-                            Check Result
+                            Result
                           </button>
-                        ) : currentDateTime >= new Date(data.startDate) &&
-                          currentDateTime <= new Date(data.endDate) ? (
+                        ) : currentDateTime >= new Date(data.start_date) &&
+                          currentDateTime <= new Date(data.end_date) ? (
                           <button type="button" className="btn btn-success">
-                            Start test
+                            <Link className="nav-link" to="/starttest">
+                              Start test
+                            </Link>
                           </button>
                         ) : (
                           <button
                             type="button"
                             className="btn btn-success"
-                            disabled={true}
+                            // disabled={true}
                           >
-                            Start test
+                            <Link className="nav-link" to="/starttest">
+                              Start test
+                            </Link>
+                            {/* Start test */}
                           </button>
                         )}
                       </td>

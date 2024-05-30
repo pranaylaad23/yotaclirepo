@@ -5,6 +5,7 @@ import TestPaper from "../associates/student/TestPaper";
 import MyTestButton from "../associates/MyTestButton";
 import { USER_ROLES } from "../../constants/helperConstants";
 import StartTest from "../associates/student/StartTest";
+import StudentDashboard from "../associates/student/StudentDashboard";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -32,7 +33,8 @@ export const Home = () => {
           <h3>Welcome, {userData.fullName}</h3>
           <br />
           <div>
-            <StartTest />
+            {/* <StartTest /> */}
+            <StudentDashboard/>
           </div>
         </div>
       )}
