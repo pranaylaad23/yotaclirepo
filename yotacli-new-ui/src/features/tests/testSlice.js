@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTest, countQuestion, questionUnderTechnologyId } from "./testAction";
+import { addTest, countQuestion, getAllTest, questionUnderTechnologyId } from "./testAction";
 
 const initialState = {
   tests: [],
@@ -71,6 +71,24 @@ const testSlice = createSlice({
       state.success = false;
       state.error = action.payload;
       state.question = [];
+    });
+
+     //get all test
+     builder.addCase(getAllTest.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+    });
+    builder.addCase(getAllTest.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+      state.tests = action.payload;
+    });
+    builder.addCase(getAllTest.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+      state.tests = [];
     });
   },
 });

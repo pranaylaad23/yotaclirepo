@@ -2,23 +2,30 @@ import styles from "../test/AddQuestion.module.css"
 import Card from "../../components/Card/Card";
 import Button from "react-bootstrap/esm/Button";
 import Form from 'react-bootstrap/Form';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTechnology } from "../../features/technology/technologyAction";
-import { countQuestion, questionUnderTechnologyId } from "../../features/tests/testAction";
+import { questionUnderTechnologyId } from "../../features/tests/testAction";
+import { useNavigate } from "react-router-dom";
+import ReviewQuestionContext from "../../app/ReviewQuestionContext";
 
 export const AddQuestion = () => {
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth.userData);
     const { technologies } = useSelector((state) => state.technologies);
-    const questionCount = useSelector((state) => state.tests.questionCount);
-    const easyCount = useSelector((state) => state.tests.easyCount);
-    const mediumCount = useSelector((state) => state.tests.mediumCount);
-    const hardCount = useSelector((state) => state.tests.hardCount);
     const question = useSelector((state) => state.tests.question);
     const [screenContain, setScreenContain] = useState('Add');
     const technologyId = useRef();
+    const navigate = useNavigate();
+    const { reviewQuestionJson,
+        setReviewQuestionJsonValue,
+        totalQuestionCount,
+        easyQuestionCount,
+        mediumQuestionCount,
+        hardQuestionCount
+    } = useContext(ReviewQuestionContext);
+
 
     useEffect(() => {
         if (token) {
@@ -29,7 +36,31 @@ export const AddQuestion = () => {
     const questionByTechnology = () => {
         const techId = technologyId.current.value;
         dispatch(questionUnderTechnologyId(techId))
-        dispatch(countQuestion(techId));
+    }
+
+    const handleChange = (event) => {
+        const isChecked = event.target.checked;
+        const isDisabled = event.target.disabled;
+        const value = JSON.parse(event.target.value);
+
+        let newCheckedValues;
+        if (isChecked && !isDisabled) {
+            // If the checkbox is checked, add its value to the checkedValues array
+            newCheckedValues = [...reviewQuestionJson, value];
+        } else {
+            // If the checkbox is unchecked, remove its value from the checkedValues object
+            newCheckedValues = reviewQuestionJson.filter(item => item.id !== value.id);
+        }
+        setReviewQuestionJsonValue(newCheckedValues);
+    }
+
+
+    const redirectToReviewPage = () => {
+        if (reviewQuestionJson.length === 0 && totalQuestionCount === 0) {
+            alert("You haven't selected any question yet. please select the question and move ahead.!!");
+            return;
+        }
+        navigate("/review-test");
     }
 
     const LoadScreenContain = () => {
@@ -80,22 +111,22 @@ export const AddQuestion = () => {
         return (
             <div>
                 {/* level code */}
-                <div class="container text-center" style={{ fontStyle: "italic" }}>
-                    <div class="row">
+                <div className="container text-center" style={{ fontStyle: "italic" }}>
+                    <div className="row">
                         <hr></hr>
-                        <div class="col-6">
+                        <div className="col-6">
                             <b>
-                                Total Questions to be added - {questionCount > 0 ? questionCount : 0}
+                                Total Questions to be added - {totalQuestionCount > 0 ? totalQuestionCount : 0}
                             </b>
                         </div>
-                        <div class="col-2">
-                            <b>Easy - {easyCount > 0 ? easyCount : 0}</b>
+                        <div className="col-2">
+                            <b>Easy - {easyQuestionCount > 0 ? easyQuestionCount : 0}</b>
                         </div>
-                        <div class="col-2">
-                            <b>Medium - {mediumCount > 0 ? mediumCount : 0}</b>
+                        <div className="col-2">
+                            <b>Medium - {mediumQuestionCount > 0 ? mediumQuestionCount : 0}</b>
                         </div>
-                        <div class="col-2">
-                            <b>Hard - {hardCount > 0 ? hardCount : 0}</b>
+                        <div className="col-2">
+                            <b>Hard - {hardQuestionCount > 0 ? hardQuestionCount : 0}</b>
                         </div>
                     </div>
                 </div>
@@ -103,13 +134,13 @@ export const AddQuestion = () => {
                 {/* end level code */}
 
                 {/* technology Search */}
-                <div class="container text-center mt-3" style={{ width: "60%" }}>
-                    <div class="row">
-                        <div class="col-3">
+                <div className="container text-center mt-3" style={{ width: "60%" }}>
+                    <div className="row">
+                        <div className="col-3">
                             Technology:
                         </div>
-                        <div class="col-6" style={{ float: "right" }}>
-                            <select class="form-select form-select-sm"
+                        <div className="col-6" style={{ float: "right" }}>
+                            <select className="form-select form-select-sm"
                                 aria-label="Small select example"
                                 ref={technologyId}>
                                 <option selected>----</option>
@@ -122,7 +153,7 @@ export const AddQuestion = () => {
                                 }
                             </select>
                         </div>
-                        <div class="col-3" style={{ float: "left" }}>
+                        <div className="col-3" style={{ float: "left" }}>
                             <Button variant="secondary" size="sm" onClick={questionByTechnology}>
                                 show
                             </Button>
@@ -136,16 +167,18 @@ export const AddQuestion = () => {
                     question.length !== 0 ? (
                         <div className={styles["searchBoxContainer"]}>
                             <Card>
-                                <div class="container text-center mt-2" style={{ padding: "10px" }}>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <input class="form-control form-control-sm" type="text" placeholder="Search..." aria-label=".form-control-sm example" style={{ float: "left" }} />
+                                <div className="container text-center mt-2" style={{ padding: "10px" }}>
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <input className="form-control form-control-sm" type="text" placeholder="Search..." aria-label=".form-control-sm example" style={{ float: "left" }} />
                                         </div>
-                                        <div class="col">
+                                        <div className="col">
                                             <Button
+                                                onClick={redirectToReviewPage}
                                                 variant="primary"
                                                 size="sm"
-                                                style={{ float: "right" }}>
+                                                style={{ float: "right" }}
+                                            >
                                                 Add Selected Ques.
                                             </Button>
                                         </div>
@@ -165,13 +198,16 @@ export const AddQuestion = () => {
                                         <tbody>
                                             {
                                                 question.map((response, index) => (
-                                                    <tr>
+                                                    <tr key={response.id}>
                                                         <td>
                                                             <div className="form-check" style={{ display: "inline-block" }}>
                                                                 <input
                                                                     className="form-check-input"
                                                                     type="checkbox"
-                                                                    id="flexCheckDefault"
+                                                                    id={` flexCheckDefault checkbox-${response.id}`}
+                                                                    checked={reviewQuestionJson.some(item => item.id === response.id)}
+                                                                    value={JSON.stringify(response)}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </div>
                                                         </td>
