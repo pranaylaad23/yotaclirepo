@@ -3,9 +3,9 @@
 }
 
 .pageContainer {
-  max-width: 65%;
-  min-width: 65%;
-  width: 70%;
+  max-width: 70%;
+  min-width: 70%;
+  width: 75%;
   align-items: center;
   justify-content: center;
   margin: 1rem auto;

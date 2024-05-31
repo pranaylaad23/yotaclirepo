@@ -1,0 +1,11 @@
+.pageContainer {
+    max-width: 60%;
+    min-width: 60%;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    padding: 1rem;
+    margin-top: -16px;
+}
+

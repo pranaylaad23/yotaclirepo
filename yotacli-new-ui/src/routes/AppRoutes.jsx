@@ -38,6 +38,8 @@ import { TPR } from "../pages/training-performance-report/TPR";
 import { AddTest } from "../pages/test/AddTest";
 import { AssociatesList } from "../pages/associates/AssociatesList";
 import { ProfileDetails } from "../pages/profile-details/ProfileDetails";
+import { ListTest } from "../pages/test/test-list/ListTest";
+import { ReviewTest } from "../pages/test/review-test/ReviewTest";
 
 export const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -123,6 +125,8 @@ export const AppRoutes = () => {
           <Route path={"/associates"} element={<AssociatesList />} />
           <Route path={"/all-trainers"} element={<AllTrainers />} />
           <Route path={"/add-test"} element={<AddTest />} />
+          <Route path={"/list-test"} element={<ListTest />} />
+          <Route path={"/review-test"} element={<ReviewTest />} />
           <Route path={"/add-question"} element={<AddQuestion />} />
           <Route
             path={"/assigned-associate"}

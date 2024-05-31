@@ -5,19 +5,19 @@
   IDE used - IntelliJ IDEA
   Path of this file -
  */
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const TechnicalManagerNavigation = ({
-                                        onLogout,
-                                        role
-                                    }) => {
+    onLogout,
+    role
+}) => {
     return (
         <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
             <div className="container-fluid">
                 <Link to={"/"} className="navbar-brand align-items-center">
                     <b>YOTA
-                        <span style={{fontSize: "12px"}}>
-                        {" (" + role + ")"}
+                        <span style={{ fontSize: "12px" }}>
+                            {" (" + role + ")"}
                         </span>
                     </b>
                 </Link>
@@ -44,10 +44,33 @@ const TechnicalManagerNavigation = ({
                                 Training
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className="nav-link" to="/add-test">
                                 Test
                             </Link>
+                        </li> */}
+                        <li className="nav-item dropdown">
+                            <a
+                                className="nav-link dropdown-toggle"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Test
+                            </a>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <Link className="dropdown-item" to="/add-test">
+                                        Add Test
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link className="dropdown-item" to="/list-test">
+                                        Test List
+                                    </Link>
+                                </li>
+                            </ul>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/add-question">
@@ -99,7 +122,7 @@ const TechnicalManagerNavigation = ({
                                     </a>
                                 </li>
                                 <li>
-                                    <hr className="dropdown-divider"/>
+                                    <hr className="dropdown-divider" />
                                 </li>
                                 <li>
                                     <a className="dropdown-item" href="#">
@@ -134,7 +157,7 @@ const TechnicalManagerNavigation = ({
                     </ul>
                     <div className="d-flex">
                         <button className="btn btn-primary"
-                                onClick={onLogout}>
+                            onClick={onLogout}>
                             Logout
                         </button>
                     </div>
