@@ -1,34 +1,54 @@
 import React from "react";
 import Card from "../../components/Card/Card";
-import MyTestButton from "./MyTestButton";
+// import MyTestButton from "./MyTestButton";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./StartTest.css";
 
-const StartTest = (props) => {
+const StartTest = () => {
   const { associates } = useSelector((state) => state.associates);
+  const { id } = useParams("id");
 
-  console.log("associate", associates);
+  const description = associates.filter((des) => {
+    return des.id == id ? des.testDescription : null;
+  });
+  const instruction = associates.filter((des) => {
+    return des.id == id ? des.testInstruction : null;
+  });
+
+  const testTitle = associates.filter((des) => {
+    return des.id == id ? des.testTitle : null;
+  });
 
   return (
     <>
-      <h5>Collection List</h5>
-      <p></p>
+      {testTitle.map((des) => {
+        return <h5>{des.testTitle}-Test</h5>;
+      })}
       <Card>
         <div className="p-3">
           <h5 className="instruction">DESCRIPTION</h5>
           <hr />
-          {associates.map((data) => {
-            return <p>{data.testDescription}</p>;
+          {description.map((des) => {
+            return <p>{des.testDescription}</p>;
           })}
 
           <h5 className="instruction">INSTRUCTION</h5>
           <hr />
-          <p>
-            {associates.map((data) => {
-              return <p>{data.testInstruction}</p>;
-            })}
-          </p>
-          <MyTestButton />
+          {instruction.map((ins) => {
+            return (
+              <ul className="inst">
+                <li>{ins.testInstruction}</li>
+              </ul>
+            );
+          })}
+          <Link  to={`/my-test/` + id}>
+          {/* to={"/my-test"} */}
+            <button type="button" class="btn btn-danger">
+              Start Test
+            </button>
+          </Link>
         </div>
       </Card>
     </>

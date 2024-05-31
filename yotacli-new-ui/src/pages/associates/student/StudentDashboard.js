@@ -22,7 +22,7 @@ const StudentDashboard = () => {
             <h5 class="card-title">Total Training</h5>
             <p class="card-text">Total Training Completed</p>
 
-            <Link className="btn btn-info" to="/myTrainings">
+            <Link className="btn btn-dark" to="/myTrainings">
               {associates.length}
             </Link>
           </div>
@@ -31,7 +31,7 @@ const StudentDashboard = () => {
           <div class="card-body">
             <h5 class="card-title">Total Test</h5>
             <p class="card-text">Total Test Appear for</p>
-            <Link className="btn btn-info" to="/myTest">
+            <Link className="btn btn-dark" to="/myTest">
               {associates.length}
             </Link>
           </div>

@@ -152,11 +152,11 @@ export const AppRoutes = () => {
       {/*For Associates*/}
       {userRole === USER_ROLES.ASSOCIATE && (
         <>
-          <Route path={"/my-test"} element={<TestPaper />} />
+          <Route path={"/my-test/:id"} element={<TestPaper />} />
           <Route path={"/myTrainings"} element={<MyTrainings />} />
           <Route path={"/myTest"} element={<MyTest />} />
           <Route path={"/profile-details"} element={<ProfileDetails />} />
-          <Route path={"/starttest"} element={<StartTest />} />
+          <Route path={"/starttest/:id"} element={<StartTest />} />
           <Route path={"/reports"} element={"/"} />
         </>
       )}

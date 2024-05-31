@@ -6,8 +6,6 @@ export const fetchAllAssociates = createAsyncThunk(
   "associates/fetchAllAssociates",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("Trying fetching associates...");
-
       const response = await axios.get(
         AXIOS_BASE_URL + "/users/get/all-associates"
       );
@@ -23,8 +21,6 @@ export const fetchAllPendingAssociates = createAsyncThunk(
   "associates/fetchPendingAssociates",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("Fetched pending associates...");
-
       const response = await axios.get(
         AXIOS_BASE_URL + "/users/get/all-pending/associates"
       );
@@ -39,8 +35,6 @@ export const approvePendingAssociate = createAsyncThunk(
   "associates/approvePendingAssociate",
   async (email, { rejectWithValue }) => {
     try {
-      console.log("Approving pending associate...");
-
       const config = {
         params: {
           email: email,
@@ -62,8 +56,6 @@ export const declinePendingAssociate = createAsyncThunk(
   "associates/declinePendingAssociate",
   async (email, { rejectWithValue }) => {
     try {
-      console.log("Declining pending associate...");
-
       const param = {
         params: {
           email: email,
@@ -85,8 +77,6 @@ export const fetchAllAssociatesByStatus = createAsyncThunk(
   "associates/fetchAllAssociatesByStatus",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("Trying fetching associates...");
-
       const response = await axios.get(
         AXIOS_BASE_URL + "/users/all-associates-status",
         {
@@ -107,12 +97,10 @@ export const fetchRegisteredAssociates = createAsyncThunk(
   "associates/fetchRegisteredAssociates",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("Fetched Registered Associates...");
-
       const response = await axios.get(
         AXIOS_BASE_URL + "/users/get/all-registered/associates?trainingId=1"
       );
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -121,19 +109,18 @@ export const fetchRegisteredAssociates = createAsyncThunk(
 );
 export const fetchTestByTestId = createAsyncThunk(
   "associates/fetchTestByTestId",
-  async (_, { rejectWithValue }) => {
-
+  async (id, { rejectWithValue }) => {
     try {
-      console.log("Trying fetching associates test...");
-
       const response = await axios.get(
-        AXIOS_BASE_URL + "/tests/testPaper", {
-        params: {
-          id: 1
-        }
-      }
+        AXIOS_BASE_URL + `/tests/testPaper?id=${id}`
       );
-      console.log('response.data..............', response.data)
+      // {
+      //   params: {
+      //     id: 1,
+      //   },
+      // }
+
+      console.log("response.data..............", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -159,7 +146,6 @@ export const fetchAllAssociatesTrainingsByEmailId = createAsyncThunk(
 export const fetchAllAssociatesTestByEmailId = createAsyncThunk(
   "associates/fetchAllAssociatesTestByEmailId",
   async (email, { rejectWithValue }) => {
-    console.log("email", email)
     try {
       const response = await axios.get(
         AXIOS_BASE_URL + `/associate/assignedTest?email=${email}`
@@ -171,18 +157,16 @@ export const fetchAllAssociatesTestByEmailId = createAsyncThunk(
   }
 );
 
-
 export const profileDetail = createAsyncThunk(
   "associates/profileDetail",
   async (email, { rejectWithValue }) => {
-    console.log("email", email)
     try {
       const response = await axios.get(
         AXIOS_BASE_URL + `/associate/profile-details`,
         {
           params: {
-            email: email
-          }
+            email: email,
+          },
         }
       );
       console.log("Profile details = " + response.data);
