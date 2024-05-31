@@ -40,6 +40,7 @@ import { AssociatesList } from "../pages/associates/AssociatesList";
 import { ProfileDetails } from "../pages/profile-details/ProfileDetails";
 import { ListTest } from "../pages/test/test-list/ListTest";
 import { ReviewTest } from "../pages/test/review-test/ReviewTest";
+import StartTest from "../../src/pages/associates/StartTest";
 
 export const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -155,6 +156,7 @@ export const AppRoutes = () => {
           <Route path={"/myTrainings"} element={<MyTrainings />} />
           <Route path={"/myTest"} element={<MyTest />} />
           <Route path={"/profile-details"} element={<ProfileDetails />} />
+          <Route path={"/starttest"} element={<StartTest />} />
           <Route path={"/reports"} element={"/"} />
         </>
       )}
