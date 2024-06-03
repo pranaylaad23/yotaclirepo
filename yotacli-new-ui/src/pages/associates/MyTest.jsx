@@ -12,14 +12,11 @@ const MyTest = () => {
   const theadData = ["S.No", "Test Name", "Start Date", "End Date", "Action"];
   const dispatch = useDispatch();
 
- 
   useEffect(() => {
     if (token) {
       dispatch(fetchAllAssociatesTestByEmailId(email));
     }
   }, [dispatch, token, email]);
-
-  console.log("associte", associates);
 
   const currentDateTime = new Date();
 
@@ -61,7 +58,10 @@ const MyTest = () => {
                         ) : currentDateTime >= new Date(data.start_date) &&
                           currentDateTime <= new Date(data.end_date) ? (
                           <button type="button" className="btn btn-success">
-                            <Link className="nav-link" to="/starttest">
+                            <Link
+                              className="nav-link"
+                              to={`/starttest/` + data.id}
+                            >
                               Start test
                             </Link>
                           </button>
@@ -69,12 +69,14 @@ const MyTest = () => {
                           <button
                             type="button"
                             className="btn btn-success"
-                            // disabled={true}
+                            disabled={true}
                           >
-                            <Link className="nav-link" to="/starttest">
+                            <Link
+                              className="nav-link"
+                              to={`/starttest/` + data.id}
+                            >
                               Start test
                             </Link>
-                            {/* Start test */}
                           </button>
                         )}
                       </td>

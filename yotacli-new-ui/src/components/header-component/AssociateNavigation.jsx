@@ -116,7 +116,7 @@ function AssociateNavigation({ onLogout, role }) {
 
           </ul>
           <div className="d-flex">
-            <button className="btn btn-primary" onClick={onLogout}>
+            <button className="btn btn-danger" onClick={onLogout}>
               Logout
             </button>
           </div>
