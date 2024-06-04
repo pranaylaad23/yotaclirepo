@@ -66,3 +66,52 @@ export const getAllTest = createAsyncThunk(
     }
   }
 );
+
+//add question in test
+export const addQuestionInTest = createAsyncThunk(
+  "test/addQuestionInTest",
+  async ({ questionIds, testId }, { rejectWithValue }) => {
+
+    console.log("Test id = " + testId);
+
+    // Convert array to JSON string
+    const jsonArray = JSON.stringify(questionIds);
+    console.log("Question = " + jsonArray);
+
+    try {
+      const response = await axios.post(
+        AXIOS_BASE_URL + "/tests/add-question-in-test",
+        jsonArray,
+        {
+          params: { testId: testId }
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+export const updateTotalQuestionCount = createAsyncThunk(
+  "test/updateTotalQuestionCount",
+  async ({ totalQuestionCount, testId }, { rejectWithValue }) => {
+    console.log("Total question count = " + totalQuestionCount + "test id = " + testId);
+    try {
+      const response = await axios.put(
+        AXIOS_BASE_URL + `/tests/total-question-count`,
+        null,
+        {
+          params: {
+            testIds: testId, totalQuestionCounts: totalQuestionCount 
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

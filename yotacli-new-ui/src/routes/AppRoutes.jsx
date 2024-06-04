@@ -157,6 +157,8 @@ export const AppRoutes = () => {
           <Route path={"/myTest"} element={<MyTest />} />
           <Route path={"/profile-details"} element={<ProfileDetails />} />
           <Route path={"/starttest/:id"} element={<StartTest />} />
+          <Route path={"/assigned-associate"} element={<AssignedAssociateList />} />
+          <Route path={"/training-performance-report"} element={<TPR />} />
           <Route path={"/reports"} element={"/"} />
         </>
       )}

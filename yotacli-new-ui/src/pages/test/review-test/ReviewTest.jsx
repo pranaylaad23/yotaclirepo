@@ -3,10 +3,17 @@ import Card from "../../../components/Card/Card"
 import styles from "../review-test/ReviewTest.module.css"
 import { useContext } from "react"
 import ReviewQuestionContext from "../../../app/ReviewQuestionContext"
+import { addQuestionInTest, updateTotalQuestionCount } from "../../../features/tests/testAction"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 export const ReviewTest = () => {
 
     const { reviewQuestionJson } = useContext(ReviewQuestionContext);
+    const testDetails = useSelector((state) => state.tests.testDetails);
+    const navigates = useNavigate();
+
+    const dispatch = useDispatch();
 
     const getColorChange = (questionLevel) => {
         switch (questionLevel) {
@@ -21,6 +28,21 @@ export const ReviewTest = () => {
         }
     }
 
+    const addQuestionsInTest = (questionId) => {
+        dispatch(updateTotalQuestionCount({
+            totalQuestionCount: Object.keys(questionId).length,
+            testId: testDetails.id
+        }))
+        dispatch(addQuestionInTest({ questionIds: questionId, testId: testDetails.id }))
+            .then(() => {
+                navigates("/add-test")
+            })
+            .catch((error) => {
+                alert(error);
+            });
+
+    }
+
     return (
         <div>
             <h6>Review Question</h6>
@@ -32,6 +54,7 @@ export const ReviewTest = () => {
                             variant="primary"
                             size="sm"
                             style={{ float: "right" }}
+                            onClick={() => addQuestionsInTest(reviewQuestionJson.map(questionId => questionId.id))}
                         >
                             Add to test
                         </Button>
