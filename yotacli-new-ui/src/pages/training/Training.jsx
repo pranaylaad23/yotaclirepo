@@ -121,181 +121,177 @@ const Training = () => {
 
   const ShowTraining = () => {
     return (
-      <Card>
-        <table className="table table-bordered table-striped table-hover mt-1">
-          <TableHeader theadData={theadData} />
-          <tbody>
-            {Array.isArray(trainings.trainings) &&
-              trainings.trainings.map((training, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{training.trainingName}</td>
-                  <td>
-                    {new Date(training.startDate).toLocaleDateString(
-                      "en-US",
-                      options
+      <table className="table table-bordered table-striped table-hover mt-1">
+        <TableHeader theadData={theadData} />
+        <tbody>
+          {Array.isArray(trainings.trainings) &&
+            trainings.trainings.map((training, index) => (
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{training.trainingName}</td>
+                <td>
+                  {new Date(training.startDate).toLocaleDateString(
+                    "en-US",
+                    options
+                  )}
+                </td>
+                <td>
+                  {new Date(training.endDate).toLocaleDateString(
+                    "en-US",
+                    options
+                  )}
+                </td>
+                <td>{training.assignTo}</td>
+                <td>{training.totalNominations}</td>
+                <td>
+                  {training.registeredInTraining}
+                  <a
+                    className={styles["view"]}
+                    onClick={() =>
+                      navigateToAssignedAssociateList(training.id)
+                    }
+                  >
+                    view associate
+                  </a>
+                </td>
+                <td>
+                  <div className={styles["action-buttons"]}>
+                    {userRole !== USER_ROLES.TRAINER && (
+                      <AssignTrainingIcon
+                        assignTraining={() =>
+                          navigateToAllAssociates(training)
+                        }
+                      />
                     )}
-                  </td>
-                  <td>
-                    {new Date(training.endDate).toLocaleDateString(
-                      "en-US",
-                      options
-                    )}
-                  </td>
-                  <td>{training.assignTo}</td>
-                  <td>{training.totalNominations}</td>
-                  <td>
-                    {training.registeredInTraining}
-                    <a
-                      className={styles["view"]}
-                      onClick={() =>
-                        navigateToAssignedAssociateList(training.id)
-                      }
-                    >
-                      view associate
-                    </a>
-                  </td>
-                  <td>
-                    <div className={styles["action-buttons"]}>
-                      {userRole !== USER_ROLES.TRAINER && (
-                        <AssignTrainingIcon
-                          assignTraining={() =>
-                            navigateToAllAssociates(training)
-                          }
-                        />
-                      )}
-                      &nbsp;&nbsp;
-                      <ReportIcon report={() => navigateToTrainingReport()} />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </Card>
+                    &nbsp;&nbsp;
+                    <ReportIcon report={() => navigateToTrainingReport()} />
+                  </div>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     );
   };
 
   const NoTraining = () => {
     return (
-      <Card>
         <div className={styles["custom-text-left"]}>
           <b>No training details found..</b>
         </div>
-      </Card>
     );
   };
 
   const ShowAddTrainigButton = () => {
     return (
-      <Card className={styles["training-list"]}>
-        <div>
-          <Button
-            variant="primary"
-            size="sm"
-            style={{ marginLeft: "89%" }}
-            onClick={openModal}
-          >
-            Add Training
-          </Button>
+      <div>
+        <Button
+          variant="primary"
+          size="sm"
+          style={{ marginLeft: "89%" }}
+          onClick={openModal}
+        >
+          Add Training
+        </Button>
 
-          <Modal
-            show={open}
-            onHide={() => setOpen(false)}
-            dialogClassName="modal-90w"
-            aria-labelledby="example-custom-modal-styling-title"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-custom-modal-styling-title">
-                Add Training
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form style={{ padding: "2%" }}>
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <label for="inputState" class="form-label">
-                      Training Name
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Training Name"
-                      onChange={handleTrainingChange}
-                      ref={trainingName}
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="inputState" class="form-label">
-                      Assign To
-                    </label>
-                    <select
-                      id="inputState"
-                      class="form-select"
-                      onChange={handleAssignChange}
-                    >
-                      <option>Select Trainer</option>
-                      {trainers.trainers.map((trainer) => (
-                        <option key={trainer.emailAdd} value={trainer.fullName}>
-                          {trainer.fullName}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="inputState" class="form-label">
-                      Start Date
-                    </label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      onChange={handleStartDateChange}
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="inputState" class="form-label">
-                      End Date
-                    </label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      onChange={handleEndDateChange}
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="inputState" class="form-label">
-                      Total Nominations
-                    </label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      placeholder="Total Nominations"
-                      onChange={handleNominationChange}
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <Button
-                      type="submit"
-                      onClick={formSubmit}
-                      className={styles["submit-buttons"]}
-                    >
-                      Add
-                    </Button>
-                  </div>
+        <Modal
+          show={open}
+          onHide={() => setOpen(false)}
+          dialogClassName="modal-90w"
+          aria-labelledby="example-custom-modal-styling-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-custom-modal-styling-title">
+              Add Training
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form style={{ padding: "2%" }}>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="inputState" class="form-label">
+                    Training Name
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Training Name"
+                    onChange={handleTrainingChange}
+                    ref={trainingName}
+                  />
                 </div>
-              </form>
-            </Modal.Body>
-          </Modal>
-        </div>
-      </Card>
+                <div class="col-md-6">
+                  <label for="inputState" class="form-label">
+                    Assign To
+                  </label>
+                  <select
+                    id="inputState"
+                    class="form-select"
+                    onChange={handleAssignChange}
+                  >
+                    <option>Select Trainer</option>
+                    {trainers.trainers.map((trainer) => (
+                      <option key={trainer.emailAdd} value={trainer.fullName}>
+                        {trainer.fullName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="inputState" class="form-label">
+                    Start Date
+                  </label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    onChange={handleStartDateChange}
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputState" class="form-label">
+                    End Date
+                  </label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    onChange={handleEndDateChange}
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputState" class="form-label">
+                    Total Nominations
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Total Nominations"
+                    onChange={handleNominationChange}
+                  />
+                </div>
+                <div class="col-md-6">
+                  <Button
+                    type="submit"
+                    onClick={formSubmit}
+                    className={styles["submit-buttons"]}
+                  >
+                    Add
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </Modal.Body>
+        </Modal>
+      </div>
     );
   };
 
   return (
     <div>
       <h6>Training List</h6>
-      {userRole !== USER_ROLES.TRAINER && <ShowAddTrainigButton />}
-      {trainings.trainings.length !== 0 ? <ShowTraining /> : <NoTraining />}
+      <Card className={styles["training-list"]}>
+        {userRole !== USER_ROLES.TRAINER && <ShowAddTrainigButton />}
+        {trainings.trainings.length !== 0 ? <ShowTraining /> : <NoTraining />}
+      </Card>
     </div>
   );
 };

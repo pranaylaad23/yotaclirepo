@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTest, countQuestion, getAllTest, questionUnderTechnologyId } from "./testAction";
+import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount } from "./testAction";
 
 const initialState = {
   tests: [],
   question: [],
+  testDetails: {},
   loading: false,
   error: null,
   success: false,
@@ -26,13 +27,13 @@ const testSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.tests.push(action.payload);
+      state.testDetails = action.payload;
     });
     builder.addCase(addTest.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;
-      state.tests = [];
+      state.testDetails = {};
     });
 
     builder.addCase(countQuestion.pending, (state) => {
@@ -73,8 +74,8 @@ const testSlice = createSlice({
       state.question = [];
     });
 
-     //get all test
-     builder.addCase(getAllTest.pending, (state) => {
+    //get all test
+    builder.addCase(getAllTest.pending, (state) => {
       state.loading = true;
       state.success = false;
     });
@@ -85,6 +86,47 @@ const testSlice = createSlice({
       state.tests = action.payload;
     });
     builder.addCase(getAllTest.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+      state.tests = [];
+    });
+
+    //add question in test
+    builder.addCase(addQuestionInTest.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+    });
+    builder.addCase(addQuestionInTest.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+      state.tests = action.payload;
+
+      // Check the status code and show an alert if needed
+      if (action.payload.statusCode === 201) {
+        alert(action.payload.data);
+      }
+    });
+    builder.addCase(addQuestionInTest.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+      state.tests = [];
+    });
+
+    //update total question count
+    builder.addCase(updateTotalQuestionCount.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+    });
+    builder.addCase(updateTotalQuestionCount.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+      state.tests = action.payload;
+    });
+    builder.addCase(updateTotalQuestionCount.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;

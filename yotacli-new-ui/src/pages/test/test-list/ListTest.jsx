@@ -11,6 +11,7 @@ export const ListTest = () => {
     const { tests } = useSelector(state => state.tests);
     const dispatch = useDispatch();
     const options = { day: "2-digit", month: "long", year: "numeric" };
+    console.log(tests);
 
     useEffect(() => {
         if (userData.token) {
@@ -27,6 +28,7 @@ export const ListTest = () => {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Test Title</th>
+                            <th scope="col">Total Question</th>
                             <th scope="col">Invited</th>
                             <th scope="col">Approval</th>
                             <th scope="col">ShortListed</th>
@@ -37,10 +39,11 @@ export const ListTest = () => {
                     </thead>
                     <tbody>
                         {
-                            tests.map((response, index) => (
+                            Array.isArray(tests) && tests.map((response, index) => (
                                 <tr key={index}>
                                     <th>{index + 1}</th>
                                     <td>{response.testTitle}</td>
+                                    <td>{response.totalQuestions}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -56,7 +59,6 @@ export const ListTest = () => {
                                         }
                                     </td>
                                     <td>
-                                        {/* <li className="nav-item dropdown"> */}
                                         <a
                                             className="nav-link dropdown-toggle"
                                             id="navbarDropdown"
@@ -98,7 +100,6 @@ export const ListTest = () => {
                                                 </Link>
                                             </li>
                                         </ul>
-                                        {/* </li> */}
                                     </td>
                                 </tr>
                             ))
