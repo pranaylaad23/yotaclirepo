@@ -47,3 +47,19 @@ export const deleteQuestion= createAsyncThunk(
     }
   }
 );
+export const getQuestionByTestid= createAsyncThunk(
+  "/questions/getQuestionByTestid",
+  async (_,{ rejectWithValue}) => {
+    try {
+      const response = await axios.get(
+        AXIOS_BASE_URL + "/questions/questionset/2?email=vaibhav.shete@yash.com",
+      );
+      console.log("getQuestionByTestid Response",response.data)
+      return response.data;
+    } catch (error) {
+      if (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
