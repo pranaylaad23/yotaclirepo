@@ -100,6 +100,12 @@ const TrainerNavigation = ({ onLogout, role }) => {
                 </li>
               </ul>
             </li>
+            <li className="nav-item">
+            <Link className="nav-link" to="/technology-list">
+                Technology
+            </Link>           
+             </li>
+            
           </ul>
           <div className="d-flex">
             <button className="btn btn-primary" onClick={onLogout}>

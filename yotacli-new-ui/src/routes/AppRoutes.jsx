@@ -146,7 +146,20 @@ export const AppRoutes = () => {
           <Route path={"/add-training"} element={<Training />} />
           <Route path={"/add-question"} element={<AddQuestion />} />
           <Route path={"/add-test"} element={<AddTest />} />
+          <Route path={"/review-test"} element={<ReviewTest />} />
           <Route path={"/list-test"} element={<ListTest />} />
+
+          <Route
+            path={"/assigned-associate"}
+            element={<AssignedAssociateList />}
+          />
+          <Route path={"/training-performance-report"} element={<TPR />} />
+          <Route path={"/technology-list"} element={<TechnologyList />} />
+          <Route path={"/show-question/:id"} element={<ShowQuestion />} />
+          <Route path={"/show-question"} element={<ShowQuestion />} />
+          <Route path={"/technology-list"} element={<TechnologyList />} />
+          <Route path={"/category-list"} element={<CategoryList />} />
+         
         </>
       )}
 
@@ -158,11 +171,6 @@ export const AppRoutes = () => {
           <Route path={"/myTest"} element={<MyTest />} />
           <Route path={"/profile-details"} element={<ProfileDetails />} />
           <Route path={"/starttest/:id"} element={<StartTest />} />
-          <Route
-            path={"/assigned-associate"}
-            element={<AssignedAssociateList />}
-          />
-          <Route path={"/training-performance-report"} element={<TPR />} />
           <Route path={"/reports"} element={"/"} />
         </>
       )}

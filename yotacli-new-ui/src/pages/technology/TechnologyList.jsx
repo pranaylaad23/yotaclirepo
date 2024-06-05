@@ -7,16 +7,19 @@ import { fetchAllTechnology } from "../../features/technology/technologyAction";
 import Card from "../../components/Card/Card";
 import AddTechnology from "./AddTechnology";
 import { Link } from "react-router-dom";
+import {
+  USER_ROLES
+} from "../../constants/helperConstants";
 
 function TechnologyList() {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.auth);
   const { technologies } = useSelector((state) => state.technologies);
-
   useEffect(() => {
     if (userData.token) dispatch(fetchAllTechnology());
   }, [userData, dispatch]);
 
+  
   const showData = () => {
     return (
       <div>
@@ -79,9 +82,10 @@ function TechnologyList() {
     <div>
       <h6>Technology List</h6>
       <Card className="users-list">
-        <div className="card-header">
+        {USER_ROLES.TECHNICAL_MANAGER===userData.userRole?.substring(5).replace("_", " ") && ( <div className="card-header">
           <AddTechnology />
-        </div>
+        </div>)}
+       
         {technologies.length != 0 ? showData() : showErrorMessage()}
       </Card>
     </div>
