@@ -6,8 +6,12 @@ const Question = () => {
     <div>
       <StudentCard
         component="Question"
-        header="Q 2"
-        text1=" What is Collection interface ?"
+        // header={index + 1}
+        // text1={questions[0]?.questionTitle}
+        // option_a={questions[0]?.option_A}
+        // option_b={questions[0]?.option_B}
+        // option_c={questions[0]?.option_C}
+        // option_d={questions[0]?.option_D}
       />
     </div>
   );
