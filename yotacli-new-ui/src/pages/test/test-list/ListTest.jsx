@@ -143,7 +143,9 @@ export const ListTest = () => {
                         <div>
                             {
                                 showMessage === true
-                                    ? <p style={{ color: "red" }}>{message}</p>
+                                    ? (message === 'Test successfully assigned to Training.'
+                                        ? <p style={{ color: "green" }}>{message}</p>
+                                        : <p style={{ color: "red" }}>{message}</p>)
                                     : ""
                             }
                         </div>
