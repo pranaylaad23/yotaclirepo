@@ -7,3 +7,13 @@
     margin: 1rem auto;
     padding: 1rem;
 }
+
+.assign-button {
+    float: right;
+}
+
+.assign-training-list {
+    align-items: center;
+    justify-content: center;
+    text-align: center
+}

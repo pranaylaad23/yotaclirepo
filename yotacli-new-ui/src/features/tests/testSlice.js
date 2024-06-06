@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount } from "./testAction";
+import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount, addTestToTrainings } from "./testAction";
 
 const initialState = {
   tests: [],
@@ -11,7 +11,9 @@ const initialState = {
   questionCount: 0,
   easyCount: 0,
   mediumCount: 0,
-  hardCount: 0
+  hardCount: 0,
+  message: "",
+  testList: []
 };
 
 const testSlice = createSlice({
@@ -83,13 +85,13 @@ const testSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.tests = action.payload;
+      state.testList = action.payload;
     });
     builder.addCase(getAllTest.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;
-      state.tests = [];
+      state.testList = [];
     });
 
     //add question in test
@@ -131,6 +133,34 @@ const testSlice = createSlice({
       state.success = false;
       state.error = action.payload;
       state.tests = [];
+    });
+
+
+    //add test to training
+    builder.addCase(addTestToTrainings.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+    });
+    builder.addCase(addTestToTrainings.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+      state.tests = action.payload;
+
+      if (action.payload.statusCode === 201) {
+        state.message = action.payload.data;
+      }
+
+    });
+    builder.addCase(addTestToTrainings.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+      state.tests = [];
+
+      if (action.payload.status === 'BAD_REQUEST') {
+        state.message = action.payload.message;
+      }
     });
   },
 });

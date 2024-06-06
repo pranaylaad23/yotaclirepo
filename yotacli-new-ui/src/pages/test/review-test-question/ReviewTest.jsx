@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap"
 import Card from "../../../components/Card/Card"
-import styles from "../review-test/ReviewTest.module.css"
+import styles from "../review-test-question/ReviewTest.module.css"
 import { useContext } from "react"
 import ReviewQuestionContext from "../../../app/ReviewQuestionContext"
 import { addQuestionInTest, updateTotalQuestionCount } from "../../../features/tests/testAction"
