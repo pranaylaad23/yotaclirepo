@@ -72,11 +72,8 @@ export const addQuestionInTest = createAsyncThunk(
   "test/addQuestionInTest",
   async ({ questionIds, testId }, { rejectWithValue }) => {
 
-    console.log("Test id = " + testId);
-
     // Convert array to JSON string
     const jsonArray = JSON.stringify(questionIds);
-    console.log("Question = " + jsonArray);
 
     try {
       const response = await axios.post(
@@ -94,18 +91,40 @@ export const addQuestionInTest = createAsyncThunk(
   }
 );
 
-
+//update total question count
 export const updateTotalQuestionCount = createAsyncThunk(
   "test/updateTotalQuestionCount",
   async ({ totalQuestionCount, testId }, { rejectWithValue }) => {
-    console.log("Total question count = " + totalQuestionCount + "test id = " + testId);
     try {
       const response = await axios.put(
         AXIOS_BASE_URL + `/tests/total-question-count`,
         null,
         {
           params: {
-            testIds: testId, totalQuestionCounts: totalQuestionCount 
+            testIds: testId,
+            totalQuestionCounts: totalQuestionCount
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//add test to training
+export const addTestToTrainings = createAsyncThunk(
+  "test/addTestToTrainings",
+  async ({ testId, trainingId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        AXIOS_BASE_URL + "/training/assign-test-to-training",
+        null,
+        {
+          params: {
+            testIds: testId,
+            trainingIds: trainingId
           }
         }
       );

@@ -39,7 +39,7 @@ import { AddTest } from "../pages/test/AddTest";
 import { AssociatesList } from "../pages/associates/AssociatesList";
 import { ProfileDetails } from "../pages/profile-details/ProfileDetails";
 import { ListTest } from "../pages/test/test-list/ListTest";
-import { ReviewTest } from "../pages/test/review-test/ReviewTest";
+import { ReviewTest } from "../pages/test/review-test-question/ReviewTest";
 import StartTest from "../../src/pages/associates/StartTest";
 
 export const AppRoutes = () => {
@@ -129,10 +129,7 @@ export const AppRoutes = () => {
           <Route path={"/list-test"} element={<ListTest />} />
           <Route path={"/review-test"} element={<ReviewTest />} />
           <Route path={"/add-question"} element={<AddQuestion />} />
-          <Route
-            path={"/assigned-associate"}
-            element={<AssignedAssociateList />}
-          />
+          <Route path={"/assigned-associate"} element={<AssignedAssociateList />} />
           <Route path={"/training-performance-report"} element={<TPR />} />
           <Route path={"/show-question/:id"} element={<ShowQuestion />} />
           <Route path={"/show-question"} element={<ShowQuestion />} />
