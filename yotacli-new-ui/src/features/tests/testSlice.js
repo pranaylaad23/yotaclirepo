@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount, addTestToTrainings } from "./testAction";
+import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount, addTestToTrainings, countAssociateToAddedTraining } from "./testAction";
 
 const initialState = {
   tests: [],
@@ -13,7 +13,8 @@ const initialState = {
   mediumCount: 0,
   hardCount: 0,
   message: "",
-  testList: []
+  testList: [],
+  countAssociate: 0
 };
 
 const testSlice = createSlice({
@@ -157,10 +158,29 @@ const testSlice = createSlice({
       state.success = false;
       state.error = action.payload;
       state.tests = [];
+      console.log(action.payload)
 
       if (action.payload.status === 'BAD_REQUEST') {
         state.message = action.payload.message;
       }
+    });
+
+    //count Associate To Added in Training
+    builder.addCase(countAssociateToAddedTraining.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+    });
+    builder.addCase(countAssociateToAddedTraining.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+      state.countAssociate = action.payload;
+    });
+    builder.addCase(countAssociateToAddedTraining.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+      state.countAssociate = 0;
     });
   },
 });
