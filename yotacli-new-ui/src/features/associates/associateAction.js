@@ -120,7 +120,7 @@ export const fetchTestByTestId = createAsyncThunk(
       //   },
       // }
 
-      console.log("response.data..............", response.data);
+    
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -169,7 +169,7 @@ export const profileDetail = createAsyncThunk(
           },
         }
       );
-      console.log("Profile details = " + response.data);
+     
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -185,7 +185,7 @@ export const changePasswordDetails = createAsyncThunk(
         AXIOS_BASE_URL + `/changePassword`,
         changePasswordDetails
       );
-      console.log("Profile details = " + response.data);
+   
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

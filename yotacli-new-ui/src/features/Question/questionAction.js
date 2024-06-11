@@ -23,7 +23,7 @@ export const questionByCategory = createAsyncThunk(
       const response = await axios.get(
         AXIOS_BASE_URL + `/questions/get/all/cat?catId=${catId}&techId=${techId}`
       );
-      console.log("category data",response.data)
+     
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -38,7 +38,6 @@ export const deleteQuestion= createAsyncThunk(
       const response = await axios.delete(
         AXIOS_BASE_URL + `/questions/${quesId}`,
       );
-      console.log("questionupdate Response",response.data)
       return response.data;
     } catch (error) {
       if (error) {
@@ -54,7 +53,7 @@ export const getQuestionByTestid= createAsyncThunk(
       const response = await axios.get(
         AXIOS_BASE_URL + "/questions/questionset/2?email=vaibhav.shete@yash.com",
       );
-      console.log("getQuestionByTestid Response",response.data)
+    
       return response.data;
     } catch (error) {
       if (error) {

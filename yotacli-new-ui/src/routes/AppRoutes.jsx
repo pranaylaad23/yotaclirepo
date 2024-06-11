@@ -34,6 +34,7 @@ import CategoryList from "../pages/category/CategoryList";
 import TestPaper from "../pages/associates/student/TestPaper";
 import MyTrainings from "../pages/associates/MyTrainings";
 import MyTest from "../pages/associates/MyTest";
+import TestResult from "../pages/associates/student/TestResult";
 import { TPR } from "../pages/training-performance-report/TPR";
 import { AddTest } from "../pages/test/AddTest";
 import { AssociatesList } from "../pages/associates/AssociatesList";
@@ -167,6 +168,7 @@ export const AppRoutes = () => {
           <Route path={"/myTrainings"} element={<MyTrainings />} />
           <Route path={"/myTest"} element={<MyTest />} />
           <Route path={"/profile-details"} element={<ProfileDetails />} />
+          <Route path={"/test-result"} element={<TestResult />} />
           <Route path={"/starttest/:id"} element={<StartTest />} />
           <Route path={"/reports"} element={"/"} />
         </>

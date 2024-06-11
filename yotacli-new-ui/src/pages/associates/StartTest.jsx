@@ -23,10 +23,10 @@ const StartTest = () => {
 
   return (
     <>
-      {testTitle.map((des) => {
-        return <h5>{des.testTitle}-Test</h5>;
-      })}
       <Card>
+        {testTitle.map((des) => {
+          return <h5>{des.testTitle}-Test</h5>;
+        })}
         <div className="p-3">
           <h5 className="instruction">DESCRIPTION</h5>
           <hr />
@@ -43,9 +43,9 @@ const StartTest = () => {
               </ul>
             );
           })}
-          <Link  to={`/my-test/` + id}>
-          {/* to={"/my-test"} */}
-            <button type="button" class="btn btn-danger">
+          <Link to={`/my-test/` + id}>
+            {/* to={"/my-test"} */}
+            <button type="button" class="btn btn-warning">
               Start Test
             </button>
           </Link>

@@ -8,14 +8,28 @@ import { useSelector, useDispatch } from "react-redux";
 import Timer from "./Timer";
 import { useParams } from "react-router-dom";
 import { getQuestionByTestid } from "../../../features/Question/questionAction";
+import { storeResult } from "../../../features/TestResult/testResultAction";
+import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import {
+  settime,
+  setAssociateMark,
+} from "../../../features/TestResult/TestResultSlice";
 
 const TestPaper = () => {
-  const { token } = useSelector((state) => state.auth.userData);
+  const { token, email } = useSelector((state) => state.auth.userData);
   const { test } = useSelector((state) => state.associates);
+
   const { questions } = useSelector((state) => state.questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentOption, setCurrentOption] = useState(false);
+  const [totalMark, setTotalMark] = useState(0);
   const [isAttempt, setIsAttempt] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [currentAnswer, setCurrentAnswer] = useState();
+  const [startTime, setStartTime] = useState(
+    new Date().toLocaleTimeString("en-US")
+  );
   const dispatch = useDispatch();
   const { id } = useParams("id");
 
@@ -26,14 +40,22 @@ const TestPaper = () => {
   useEffect(() => {
     if (token) {
       dispatch(getQuestionByTestid());
+      dispatch(settime(startTime));
     }
   }, []);
 
   function handleOption(event) {
     if (event.target.value) {
+      setCurrentAnswer(event.target.value);
       setCurrentOption(true);
     }
   }
+
+  console.log("curentsanswer", currentAnswer);
+
+  const rightAnswer = questions.map((data, index) => {
+    return data.correctAnswer;
+  });
   const saveAndNext = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -43,6 +65,10 @@ const TestPaper = () => {
     } else {
       setIsAttempt(false);
     }
+    if (rightAnswer.includes(currentAnswer)) {
+      setTotalMark(totalMark + 1);
+    }
+    setCurrentAnswer("");
   };
 
   const prevQuestion = () => {
@@ -59,7 +85,24 @@ const TestPaper = () => {
     } else {
       setIsAttempt(false);
     }
+    if (rightAnswer.includes(currentAnswer)) {
+      setTotalMark(totalMark + 1);
+    }
+    setCurrentAnswer("");
   };
+
+  function handleSubmitExam() {
+    setOpen(true);
+    if (token) {
+      let data = {
+        testId: id,
+        userEmailId: email,
+        result: totalMark,
+      };
+      dispatch(storeResult({ data }));
+      dispatch(setAssociateMark(totalMark));
+    }
+  }
 
   return (
     <>
@@ -129,7 +172,7 @@ const TestPaper = () => {
                                     type="radio"
                                     className="form-check-input"
                                     name="answer-entry"
-                                    onClick={handleOption}
+                                    onChange={handleOption}
                                     value={questions[currentQuestion]?.option_A}
                                   />
                                   <span>
@@ -141,6 +184,7 @@ const TestPaper = () => {
                                     type="radio"
                                     className="form-check-input"
                                     name="answer-entry"
+                                    onChange={handleOption}
                                     value={questions[currentQuestion]?.option_B}
                                   />
                                   <span>
@@ -152,6 +196,7 @@ const TestPaper = () => {
                                     type="radio"
                                     className="form-check-input"
                                     name="answer-entry"
+                                    onChange={handleOption}
                                     value={questions[currentQuestion]?.option_C}
                                   />
                                   <span>
@@ -163,6 +208,7 @@ const TestPaper = () => {
                                     type="radio"
                                     className="form-check-input"
                                     name="answer-entry"
+                                    onChange={handleOption}
                                     value={questions[currentQuestion]?.option_D}
                                   />
                                   <span>
@@ -267,21 +313,44 @@ const TestPaper = () => {
 
         <div className="row">
           <div className="col">
-            {/* <div className="d-grid gap-2 col-2 ">
-            <button type="button" className="btn btn-danger">
-              <Link className="nav-link" to="/myTest">
-                Exit Exam
-              </Link>
-            </button>
-          </div> */}
             <div className="d-grid gap-2 col-2 mx-auto">
-              <button type="button" className="btn btn-dark">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={handleSubmitExam}
+              >
                 Submit Exam
               </button>
             </div>
           </div>
         </div>
       </div>
+      <Modal
+        show={open}
+        onHide={() => setOpen(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header>
+          <Modal.Title id="example-custom-modal-styling-title">
+            Exam Submit !
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="mr-4">
+          <div>
+            <h5>Do you want to Submit Exam!</h5>
+          </div>
+          <button
+            className="submitt-button btn btn-success"
+            type="submit"
+            style={{ borderRadius: "revert-layer", marginLeft: "390px" }}
+          >
+            <Link className="nav-link" to="/test-result">
+              Submit
+            </Link>
+          </button>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
