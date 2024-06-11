@@ -134,3 +134,23 @@ export const addTestToTrainings = createAsyncThunk(
     }
   }
 );
+
+
+//count Associate To Added in Training
+export const countAssociateToAddedTraining = createAsyncThunk(
+  "test/countAssociateToAddedTraining",
+  async ({ testId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        AXIOS_BASE_URL + "/training/count-associate-to-added-training", {
+        params: {
+          testIds: testId
+        }
+      }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

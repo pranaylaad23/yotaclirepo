@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import Card from "../../../components/Card/Card"
 import styles from '../../test/test-list/ListTest.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { addTestToTrainings, getAllTest } from "../../../features/tests/testAction";
+import { addTestToTrainings, countAssociateToAddedTraining, getAllTest } from "../../../features/tests/testAction";
 import { SiGithubactions } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
@@ -13,9 +13,11 @@ export const ListTest = () => {
     const { userData } = useSelector(state => state.auth);
     const { testList } = useSelector(state => state.tests);
     const trainings = useSelector((state) => state.trainings);
-    const message = useSelector((state) => state.tests.message)
+    const message = useSelector((state) => state.tests.message);
+    const countAssociate = useSelector((state) => state.tests.countAssociate);
 
-    console.log(testList);
+    console.log(countAssociate);
+
     const [open, setOpen] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
 
@@ -34,7 +36,8 @@ export const ListTest = () => {
         const testIds = localStorage.getItem("testId");
         const trainingIds = trainingId.current.value;
         if (testIds > 0 && trainingIds > 0) {
-            dispatch(addTestToTrainings({ testId: testIds, trainingId: trainingIds }))
+            dispatch(addTestToTrainings({ testId: testIds, trainingId: trainingIds }));
+            dispatch(countAssociateToAddedTraining({ testId: testIds}))
             setShowMessage(true)
         } else {
             alert("Something went wrong please try again!!");
@@ -52,7 +55,6 @@ export const ListTest = () => {
                             <th scope="col">Test Title</th>
                             <th scope="col">Total Question</th>
                             <th scope="col">Invited</th>
-                            <th scope="col">Approval</th>
                             <th scope="col">ShortListed</th>
                             <th scope="col">Created On</th>
                             <th scope="col">End Date</th>
@@ -67,8 +69,7 @@ export const ListTest = () => {
                                     <th>{index + 1}</th>
                                     <td>{response.testTitle}</td>
                                     <td>{response.totalQuestions}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{response.totalAssociateCount}</td>
                                     <td></td>
                                     <td>{new Date(response.createdAt).toLocaleDateString(
                                         "en-US",
