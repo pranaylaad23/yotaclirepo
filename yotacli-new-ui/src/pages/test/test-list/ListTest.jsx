@@ -55,7 +55,6 @@ export const ListTest = () => {
                             <th scope="col">Test Title</th>
                             <th scope="col">Total Question</th>
                             <th scope="col">Invited</th>
-                            <th scope="col">Approval</th>
                             <th scope="col">ShortListed</th>
                             <th scope="col">Created On</th>
                             <th scope="col">End Date</th>
@@ -71,7 +70,6 @@ export const ListTest = () => {
                                     <td>{response.testTitle}</td>
                                     <td>{response.totalQuestions}</td>
                                     <td>{response.totalAssociateCount}</td>
-                                    <td></td>
                                     <td></td>
                                     <td>{new Date(response.createdAt).toLocaleDateString(
                                         "en-US",
