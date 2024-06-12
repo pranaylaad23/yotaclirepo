@@ -18,3 +18,20 @@ export const storeResult = createAsyncThunk(
       }
     }
   );
+
+  export const updateResult = createAsyncThunk(
+    "/questions/updateResult",
+    async ({data},{ rejectWithValue}) => {
+      try {
+        console.log("data-api",data)
+        const response = await axios.put(
+          AXIOS_BASE_URL + `/update-result`,data
+        );
+        return response.data;
+      } catch (error) {
+        if (error) {
+          return rejectWithValue(error.message);
+        }
+      }
+    }
+  );

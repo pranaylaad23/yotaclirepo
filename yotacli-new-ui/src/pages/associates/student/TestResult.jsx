@@ -5,7 +5,7 @@ import "./TestResult.css";
 import { useEffect } from "react";
 import { setEndTime } from "../../../features/TestResult/TestResultSlice";
 import { useNavigate } from "react-router-dom";
-import { storeResult } from "../../../features/TestResult/testResultAction";
+import { storeResult,updateResult } from "../../../features/TestResult/testResultAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -34,7 +34,7 @@ const TestResult = () => {
       endTime: endTime,
       timeTaken: takentime,
     };
-    dispatch(storeResult({ data }));
+    dispatch(updateResult({ data }));
     toast(" Result Save Successfully!");
     setTimeout(() => {
       navigate("/myTest");
@@ -43,6 +43,7 @@ const TestResult = () => {
 
   return (
     <>
+    <div className="container-fluid">
       <Card>
         <div className="p-3">
           <h2>Test-Analysis</h2>
@@ -110,6 +111,7 @@ const TestResult = () => {
         </div>
       </Card>
       <ToastContainer />
+      </div>
     </>
   );
 };
