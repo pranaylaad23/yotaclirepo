@@ -2,12 +2,12 @@
     text-align: left;
 }
 .submitClose{
-    margin-left: 80%;
+    margin-left: 70%;
     width: 150px;
     margin-top:0%;
 }
 .associateName{
-    margin-left: 60%;
+    margin-left: 40%;
 }
 .carddata:hover{
     background-color: rgb(203, 203, 181);
