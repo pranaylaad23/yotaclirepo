@@ -53,7 +53,9 @@ export const ListTest = () => {
     const addTestToTraining = () => {
         const trainingIds = trainingId.current.value;
         if (testIds > 0 && trainingIds > 0) {
-            dispatch(addTestToTrainings({ testId: testIds, trainingId: trainingIds }));
+            dispatch(addTestToTrainings({ testId: testIds, trainingId: trainingIds }))
+                .then(() => dispatch(getAllTest()))
+                .catch((error) => error);
             setShowMessage(true)
         } else {
             alert("Something went wrong please try again!!");
@@ -62,11 +64,17 @@ export const ListTest = () => {
 
     const addTestIndividualAssociate = () => {
         if (testIds !== null) {
-            dispatch(addTestToIndividualAssociate({ testId: testIds, trainingId: 10, userId: userId }));
+            dispatch(addTestToIndividualAssociate({ testId: testIds, trainingId: 10, userId: userId }))
+                .then(() => dispatch(getAllTest()))
+                .catch((error) => error);
             setShowMessage(true);
         } else {
             alert("Something went wrong please try again!!");
         }
+    }
+
+    const refreshPage = () => {
+        dispatch(getAllTest());
     }
 
     return (
