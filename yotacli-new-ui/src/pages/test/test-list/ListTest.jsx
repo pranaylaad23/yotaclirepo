@@ -73,10 +73,6 @@ export const ListTest = () => {
         }
     }
 
-    const refreshPage = () => {
-        dispatch(getAllTest());
-    }
-
     return (
         <div>
             <h6>Test List</h6>
