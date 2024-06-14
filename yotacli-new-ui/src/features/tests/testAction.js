@@ -135,18 +135,22 @@ export const addTestToTrainings = createAsyncThunk(
   }
 );
 
-
-//count Associate To Added in Training
-export const countAssociateToAddedTraining = createAsyncThunk(
-  "test/countAssociateToAddedTraining",
-  async ({ testId }, { rejectWithValue }) => {
+//add test to assign to individual
+export const addTestToIndividualAssociate = createAsyncThunk(
+  "test/addTestToIndividualAssociate",
+  async ({ testId, trainingId, userId }, { rejectWithValue }) => {
+    console.log(testId + "  "  + trainingId, " " + userId)
     try {
-      const response = await axios.get(
-        AXIOS_BASE_URL + "/training/count-associate-to-added-training", {
-        params: {
-          testIds: testId
+      const response = await axios.post(
+        AXIOS_BASE_URL + "/tests/assign-test-individual-associate",
+        null,
+        {
+          params: {
+            testIds: testId,
+            trainingIds: trainingId,
+            userIds: userId
+          }
         }
-      }
       );
       return response.data;
     } catch (error) {
