@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount, addTestToTrainings, countAssociateToAddedTraining } from "./testAction";
+import { addQuestionInTest, addTest, countQuestion, getAllTest, questionUnderTechnologyId, updateTotalQuestionCount, addTestToTrainings, countAssociateToAddedTraining, addTestToIndividualAssociate } from "./testAction";
 
 const initialState = {
   tests: [],
@@ -14,7 +14,8 @@ const initialState = {
   hardCount: 0,
   message: "",
   testList: [],
-  countAssociate: 0
+  testIndividualMsg:"",
+  testIndividual:[]
 };
 
 const testSlice = createSlice({
@@ -165,22 +166,33 @@ const testSlice = createSlice({
       }
     });
 
-    //count Associate To Added in Training
-    builder.addCase(countAssociateToAddedTraining.pending, (state) => {
+     //add test to individual associate
+     builder.addCase(addTestToIndividualAssociate.pending, (state) => {
       state.loading = true;
       state.success = false;
     });
-    builder.addCase(countAssociateToAddedTraining.fulfilled, (state, action) => {
+    builder.addCase(addTestToIndividualAssociate.fulfilled, (state, action) => {
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.countAssociate = action.payload;
+      state.testIndividual = action.payload;
+      console.log(action.payload)
+
+      if (action.payload === 'Test successfully assigned to individual associate.') {
+        state.testIndividualMsg = action.payload;
+      }
+
     });
-    builder.addCase(countAssociateToAddedTraining.rejected, (state, action) => {
+    builder.addCase(addTestToIndividualAssociate.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action.payload;
-      state.countAssociate = 0;
+      state.testIndividual = [];
+      console.log(action.payload.message);
+
+      if (action.payload.status === 'BAD_REQUEST') {
+        state.testIndividualMsg = action.payload.message;
+      }
     });
   },
 });

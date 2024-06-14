@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTraining, assignTraining, assignedAssociateList, listTrainings } from './trainingAction';
+import { addTraining, assignTraining, assignedAssociateList, listTrainings, getAllAssignedTraining } from './trainingAction';
 
 const initialState = {
   trainings: [],
   loading: false,
   error: null,
   success: false,
+  assignedTraining: {}
 };
 
 const trainingSlice = createSlice({
@@ -44,8 +45,8 @@ const trainingSlice = createSlice({
         state.success = false;
         state.error = action.payload;
       })
-      //assign training
-      builder
+    //assign training
+    builder
       .addCase(assignTraining.pending, (state) => {
         state.loading = true;
         state.success = false;
@@ -61,24 +62,40 @@ const trainingSlice = createSlice({
         state.success = false;
         state.error = action.payload;
       })
-      //Assigned associate in training list
+    //Assigned associate in training list
     builder
-    .addCase(assignedAssociateList.pending, (state) => {
-      state.loading = true;
-      state.success = false;
-      state.error = null;
-    })
-    .addCase(assignedAssociateList.fulfilled, (state, action) => {
-      state.loading = false;
-      state.success = true;
-      state.trainings = action.payload;
-    })
-    .addCase(assignedAssociateList.rejected, (state, action) => {
-      state.loading = false;
-      state.success = false;
-      state.error = action.payload;
-    })
-      ;
+      .addCase(assignedAssociateList.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(assignedAssociateList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.trainings = action.payload;
+      })
+      .addCase(assignedAssociateList.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload;
+      })
+
+      //get all assigned training
+      .addCase(getAllAssignedTraining.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getAllAssignedTraining.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.assignedTraining = action.payload;
+      })
+      .addCase(getAllAssignedTraining.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload;
+      });
   }
 });
 

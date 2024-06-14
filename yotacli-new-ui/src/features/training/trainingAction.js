@@ -72,3 +72,19 @@ export const assignedAssociateList = createAsyncThunk(
         }
     }
 );	
+
+export const getAllAssignedTraining = createAsyncThunk(
+    "training/getAllAssignedTraining",
+    async (_, { rejectWithValue }) => {
+        try {
+            console.log("Trying fetching associates...");
+            const response = await axios.get(
+                AXIOS_BASE_URL + "/training/get-all-assigned-training"
+            );
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
