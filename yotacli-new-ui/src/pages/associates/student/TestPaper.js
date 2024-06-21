@@ -39,7 +39,7 @@ const TestPaper = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(getQuestionByTestid());
+      dispatch(getQuestionByTestid({id:id,email:email}));
       dispatch(settime(startTime));
     }
   }, []);
@@ -51,7 +51,7 @@ const TestPaper = () => {
     }
   }
 
-  console.log("curentsanswer", currentAnswer);
+  console.log("test", test);
 
   const rightAnswer = questions.map((data, index) => {
     return data.correctAnswer;

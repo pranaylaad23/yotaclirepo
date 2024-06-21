@@ -119,8 +119,6 @@ export const fetchTestByTestId = createAsyncThunk(
       //     id: 1,
       //   },
       // }
-
-    
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
