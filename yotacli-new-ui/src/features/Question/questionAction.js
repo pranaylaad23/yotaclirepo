@@ -48,10 +48,10 @@ export const deleteQuestion= createAsyncThunk(
 );
 export const getQuestionByTestid= createAsyncThunk(
   "/questions/getQuestionByTestid",
-  async (_,{ rejectWithValue}) => {
+  async ({id,email},{ rejectWithValue}) => {
     try {
       const response = await axios.get(
-        AXIOS_BASE_URL + "/questions/questionset/2?email=vaibhav.shete@yash.com",
+        AXIOS_BASE_URL + `/questions/questionset/${id}?email=${email}`,
       );
     
       return response.data;
