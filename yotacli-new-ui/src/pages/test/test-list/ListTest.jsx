@@ -143,6 +143,13 @@ export const ListTest = () => {
                                                 </Link>
                                             </li>
                                             <li>
+                                                <Link className="dropdown-item" 
+                                                      to="/add-question-test"
+                                                      onClick={() => localStorage.setItem("testId", response.id)}>
+                                                    Add question
+                                                </Link>
+                                            </li>
+                                            <li>
                                                 <Link className="dropdown-item" to="/">
                                                     Edit Test
                                                 </Link>

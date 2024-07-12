@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BasicInfo } from "./BasicInfo";
 import { TestSetting } from "./TestSetting";
-import { AddQuestion } from "./AddQuestion";
+import { AddQuestionTest } from "./AddQuestionTest";
 
 export const AddTest = () => {
   const [nextScreen, setNextScreen] = useState("screen1");
@@ -13,9 +13,9 @@ export const AddTest = () => {
       case "screen2":
         return <TestSetting nextScreen={setNextScreen} />;
       case "screen3":
-        return <AddQuestion />;
+        return <AddQuestionTest />;
       default:
-        return <AddQuestion />;
+        return <TestSetting nextScreen={setNextScreen} />;
     }
   };
 

@@ -9,7 +9,7 @@ import { questionUnderTechnologyId } from "../../features/tests/testAction";
 import { useNavigate } from "react-router-dom";
 import ReviewQuestionContext from "../../app/ReviewQuestionContext";
 
-export const AddQuestion = () => {
+export const AddQuestionTest = () => {
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth.userData);

@@ -29,11 +29,16 @@ export const ReviewTest = () => {
     }
 
     const addQuestionsInTest = (questionId) => {
+        let testId;
+        testId = testDetails.id;
+        if (testId === undefined) {
+            testId = localStorage.getItem("testId");
+        }
         dispatch(updateTotalQuestionCount({
             totalQuestionCount: Object.keys(questionId).length,
-            testId: testDetails.id
+            testId: testId
         }))
-        dispatch(addQuestionInTest({ questionIds: questionId, testId: testDetails.id }))
+        dispatch(addQuestionInTest({ questionIds: questionId, testId: testId }))
             .then(() => {
                 navigates("/add-test")
             })
