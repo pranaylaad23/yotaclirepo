@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   time:"",
   endTime:"",
-  AssociateMark:""
+  AssociateMark:"",
+  testClick:false
 };
 const testResutSlice = createSlice({
   name: "testresult",
@@ -17,8 +18,11 @@ const testResutSlice = createSlice({
     },
     setAssociateMark(state,action){
       state.AssociateMark=action.payload
+    },
+    setTestClick(state,action){
+      state.testClick=action.payload
     }
   },
 });
-export const { settime,setEndTime,setAssociateMark } = testResutSlice.actions
+export const { settime,setEndTime,setAssociateMark,setTestClick } = testResutSlice.actions
 export default testResutSlice.reducer;
