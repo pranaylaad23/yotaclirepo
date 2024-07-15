@@ -9,6 +9,8 @@ export const TestSetting = ({ nextScreen }) => {
 
     const endDate = useRef("");
     const startDate = useRef("");
+    const durationTime = useRef("");
+
     const dispatch = useDispatch();
 
     const validateForm = (settingFormData) => {
@@ -24,7 +26,17 @@ export const TestSetting = ({ nextScreen }) => {
         }
 
         if (settingFormData.startTime.trim() === '') {
-            alert("Start date cannot be empty");
+            alert("Start time cannot be empty");
+            return false;
+        }
+
+        if (settingFormData.durationTime.trim() === '') {
+            alert("Duration time cannot be empty");
+            return false;
+        }
+
+        if (settingFormData.durationTime.trim() >= 120) {
+            alert("Duration time shouldn't be above 120 min");
             return false;
         }
         return true;
@@ -36,10 +48,12 @@ export const TestSetting = ({ nextScreen }) => {
 
         const eDate = endDate.current.value;
         const sTime = startDate.current.value;
+        const dTime = durationTime.current.value;
 
         const settingFormData = {
-            endDate: eDate,
-            startTime: sTime
+            durationTime: dTime,
+            startTime: sTime,
+            endDate: eDate
         }
 
         if (validateForm(settingFormData)) {
@@ -61,6 +75,15 @@ export const TestSetting = ({ nextScreen }) => {
                 <form onSubmit={handleSubmit}>
                     <h6 className={styles["form-title"]}>Test Setting</h6>
 
+                    <div className="form-group mt-3">
+                        <label className={styles["form-test-label"]}>Duration (Min)</label>
+                        <input
+                            type="Number"
+                            name="durationTime"
+                            className="form-control mt-1"
+                            ref={durationTime}
+                        />
+                    </div>
                     <div className="form-group mt-3">
                         <label className={styles["form-test-label"]}>End Date</label>
                         <input
