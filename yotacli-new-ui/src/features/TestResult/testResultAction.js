@@ -35,3 +35,21 @@ export const storeResult = createAsyncThunk(
       }
     }
   );
+
+  export const updateTestStatus = createAsyncThunk(
+    "/test/updateTestStatus",
+    async (id,{ rejectWithValue}) => {
+      try {
+       
+        const response = await axios.put(
+          AXIOS_BASE_URL + `/tests/update/${id}`
+          
+        );
+        return response.data;
+      } catch (error) {
+        if (error) {
+          return rejectWithValue(error.message);
+        }
+      }
+    }
+  );

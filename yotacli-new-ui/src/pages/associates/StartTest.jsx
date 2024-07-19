@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../../components/Card/Card";
 // import MyTestButton from "./MyTestButton";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./StartTest.css";
+import { updateTestStatus } from "../../features/TestResult/testResultAction";
 
 const StartTest = () => {
   const { associates } = useSelector((state) => state.associates);
+  const { token, email } = useSelector((state) => state.auth.userData);
   const { id } = useParams("id");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(updateTestStatus(id));
+    }
+  }, []);
 
   const description = associates.filter((des) => {
     return des.id == id ? des.testDescription : null;
@@ -20,6 +29,7 @@ const StartTest = () => {
   const testTitle = associates.filter((des) => {
     return des.id == id ? des.testTitle : null;
   });
+  
 
   return (
     <>

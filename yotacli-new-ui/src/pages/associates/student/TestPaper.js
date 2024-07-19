@@ -9,6 +9,7 @@ import Timer from "./Timer";
 import { useParams } from "react-router-dom";
 import { getQuestionByTestid } from "../../../features/Question/questionAction";
 import { storeResult } from "../../../features/TestResult/testResultAction";
+import { setTestClick } from "../../../features/TestResult/TestResultSlice";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
@@ -19,7 +20,7 @@ import {
 const TestPaper = () => {
   const { token, email } = useSelector((state) => state.auth.userData);
   const { test } = useSelector((state) => state.associates);
-
+  const { testClick } = useSelector((state) => state.testresult);
   const { questions } = useSelector((state) => state.questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentOption, setCurrentOption] = useState(false);
@@ -41,6 +42,7 @@ const TestPaper = () => {
     if (token) {
       dispatch(getQuestionByTestid({id:id,email:email}));
       dispatch(settime(startTime));
+      dispatch(setTestClick(true))
     }
   }, []);
 
@@ -103,7 +105,7 @@ const TestPaper = () => {
       dispatch(setAssociateMark(totalMark));
     }
   }
-
+  console.log("testslice",testClick)
   return (
     <>
       <div className="container ">

@@ -4,10 +4,12 @@ import Card from "../../components/Card/Card";
 import { TableHeader } from "../../components/table-component/TableHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllAssociatesTestByEmailId } from "../../features/associates/associateAction";
+
 import { Link } from "react-router-dom";
 
 const MyTest = () => {
   const { associates } = useSelector((state) => state.associates);
+  const { testClick } = useSelector((state) => state.testresult);
   const { token, email } = useSelector((state) => state.auth.userData);
   const theadData = ["S.No", "Test Name", "Start Date", "End Date", "Action"];
   const dispatch = useDispatch();
@@ -18,8 +20,8 @@ const MyTest = () => {
     }
   }, [dispatch, token, email]);
 
+  
   const currentDateTime = new Date();
-
   return (
     <>
       <div className="card-header">
@@ -55,8 +57,7 @@ const MyTest = () => {
                           <button type="button" className="btn btn-info">
                             Result
                           </button>
-                        ) : currentDateTime >= new Date(data.start_date) &&
-                          currentDateTime <= new Date(data.end_date) ? (
+                        ) :  data.status!=="ASSIGNED" ? (
                           <button type="button" className="btn btn-success">
                             <Link
                               className="nav-link"
@@ -69,7 +70,7 @@ const MyTest = () => {
                           <button
                             type="button"
                             className="btn btn-success"
-                            // disabled={true}
+                             disabled={true}
                           >
                             <Link
                               className="nav-link"
