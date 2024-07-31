@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SelectComponent } from "../../components/select-component/SelectComponent";
 import styles from "./ShowQuestion.module.css";
 import Button from "react-bootstrap/Button";
 import { useParams } from "react-router-dom";
@@ -23,7 +22,6 @@ const ShowQuestion = () => {
   const { categoryquestions } = useSelector((state) => state.categoryquestions);
   const { technologies } = useSelector((state) => state.technologies);
   const [selectedCategory, setSelectedCategory] = useState();
-
   const { id } = useParams("id");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,23 +32,22 @@ const ShowQuestion = () => {
       dispatch(allQuestion(id));
     }
   }, [userData]);
-
   const technologyes = technologies.filter((tech) => {
-    return tech.id == id;
+    return tech.id === id;
   });
-
+console.log("Category Data",categories)
   const catName = categories.filter((data) => {
-    return data.id == selectedCategory ? data.name : null;
-  });
 
-  const CategoriesName = catName.map((catname) => {
-    return catname.name;
+    return data.id == selectedCategory ? data.name :
+    "";
   });
-
+  const CategoriesName = catName.map((data)=>{
+      return data.name;
+  });
   const handleQuestionByCategory = () => {
+    //useEffect(() => {},[]);
     dispatch(questionByCategory({ catId: selectedCategory, techId: id }));
   };
-
   function handleDelete(data) {
     dispatch(deleteQuestion({ quesId: data }));
     toast("Question Delete Successfully!");
@@ -58,7 +55,6 @@ const ShowQuestion = () => {
       navigate("/technology-list");
     }, 2000);
   }
-
   return (
     <>
       {technologyes.map((tech) => {
@@ -99,6 +95,7 @@ const ShowQuestion = () => {
           <select onChange={(event) => setSelectedCategory(event.target.value)}>
             <option>All</option>
             {categories.map((option, index) => {
+
               return (
                 <option key={index} value={option.id}>
                   {option.name}
@@ -129,7 +126,7 @@ const ShowQuestion = () => {
                       <th scope="row">{index + 1}</th>
                       <td>{data.questionTitle}</td>
                       <td>{data.questionLevel}</td>
-                      <td>{CategoriesName}</td>
+                      <td>{CategoriesName}</td>                       
                       {data.updated_At != null ? (
                         <td>{data.updated_At}</td>
                       ) : (
@@ -147,7 +144,6 @@ const ShowQuestion = () => {
                             style={{ border: "none" }}
                             onClick={
                               () => handleDelete(data.id)
-                              // dispatch(deleteQuestion({ quesId: data.id }))
                             }
                           >
                             <DeleteIcon />
@@ -158,12 +154,13 @@ const ShowQuestion = () => {
                   );
                 })
               : questions.map((data, index) => {
+               
                   return (
                     <tr key={data.id}>
                       <th scope="row">{index + 1}</th>
                       <td>{data.questionTitle}</td>
                       <td>{data.questionLevel}</td>
-                      <td>{data.category.name}</td>
+                      <td>{data.category.name}</td> 
                       {data.updated_At != null ? (
                         <td>{data.updated_At}</td>
                       ) : (
