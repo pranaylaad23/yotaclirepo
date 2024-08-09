@@ -1,19 +1,34 @@
 
 import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import './AddTechnology.css';
+import { Modal } from 'react-bootstrap';
+import './UpdateTechnology.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Import the TechnologyList component
-import { createTechnology } from '../../features/technology/technologyAction'; // Assuming the file path is correct
+import { updateTechnology } from '../../features/technology/technologyAction'; // Assuming the file path is correct
+import { EditIcon } from '../../components/icons/Icons';
 
-function AddTechnology() {
+function UpdateTechnology(props) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const { technologies } = useSelector((state) => state.technologies);
   const [technologyName, setTechnologyName] = useState('');
-  const { error } = useSelector((state) => state.technologies);
   const [errorData, setErrorData] = useState(null);
+  const { error } = useSelector((state) => state.technologies);
+  const { token } = useSelector((state) => state.auth.userData);
 
+  const technologyData = technologies.filter((techData) => {
+    return techData.id === props.id ? techData : null;
+  });
+
+  useEffect(() => {
+    if (token) {
+      technologyData.map((data) => {
+        setTechnologyName(data.technology);
+      });
+    }
+  }, []);
+  
   useEffect(() => {  
     if (error) {  
       setErrorData(error);  
@@ -24,19 +39,25 @@ function AddTechnology() {
     event.preventDefault();
     const trimmedTechnologyName = technologyName.trim();
     if ((trimmedTechnologyName.length > 0)) {
-      dispatch(createTechnology({ technology: trimmedTechnologyName }));
+      let data = {
+        technology: trimmedTechnologyName
+      };
+      dispatch(updateTechnology({ id: props.id, data }));
       const isAlpha = /^[A-Za-z]+$/.test(trimmedTechnologyName);    
         if (isAlpha) {  
-            setTechnologyName('');  
+            setTechnologyName(technologyName);
             setOpen(false);  
             setErrorData(null);
         } else {  
-            setTechnologyName('');  
+            setTechnologyName(technologyName);  
             setOpen(true);  
         } 
     } else {
-      dispatch(createTechnology({ technology: trimmedTechnologyName }));
-      setTechnologyName('');
+      let data = {
+        technology: trimmedTechnologyName
+      };
+      dispatch(updateTechnology({ id: props.id, data }));
+      setTechnologyName(technologyName);
       setOpen(true);
     }
   };
@@ -54,9 +75,9 @@ function AddTechnology() {
 
   return (
     <>
-      <Button className='mb-2' variant="primary" size="sm" style={{ marginLeft: "83%" }} onClick={openModal}>
-        Add Technolgy
-      </Button>
+      <EditIcon
+        title={"Edit Technology"}
+        onEdit={openModal} />
       <Modal
         show={open}
         onHide={() => setOpen(false)}
@@ -65,7 +86,7 @@ function AddTechnology() {
       >
         <Modal.Header closeButton onClick={errorHandler}>
           <Modal.Title id="example-custom-modal-styling-title">
-            Add Technology
+            Update Technology
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -86,7 +107,7 @@ function AddTechnology() {
                   onChange={handleChange}
                 ></input>
                 {errorData && <label className='error-label'>{errorData.name}{errorData.technology}</label>}
-              </div>
+                </div>
             </div>
           </div>
 
@@ -105,4 +126,4 @@ function AddTechnology() {
 
 }
 
-export default AddTechnology;
+export default UpdateTechnology;

@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddTechnology.css";
-
-import { EditIcon } from "../../components/icons/Icons";
 import { fetchAllTechnology } from "../../features/technology/technologyAction";
 import Card from "../../components/Card/Card";
 import AddTechnology from "./AddTechnology";
@@ -10,16 +8,17 @@ import { Link } from "react-router-dom";
 import {
   USER_ROLES
 } from "../../constants/helperConstants";
+import UpdateTechnology from "./UpdateTechnology";
 
 function TechnologyList() {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.auth);
   const { technologies } = useSelector((state) => state.technologies);
+  
   useEffect(() => {
     if (userData.token) dispatch(fetchAllTechnology());
-  }, [userData, dispatch]);
+  }, [userData,technologies, dispatch]);
 
-  
   const showData = () => {
     return (
       <div>
@@ -59,7 +58,7 @@ function TechnologyList() {
                 </td>
                 <td>
                   <div className={styles["action-buttons"]}>
-                    <EditIcon />
+                        <UpdateTechnology id={technology.id}/>
                   </div>
                 </td>
               </tr>
