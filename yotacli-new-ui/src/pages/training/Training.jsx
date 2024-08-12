@@ -20,6 +20,14 @@ const Training = () => {
   const { userData } = useSelector((state) => state.auth);
   const [userRole, setUserRole] = useState(null);
   const [open, setOpen] = useState(false);
+  const {error}=useSelector((state)=>state.trainings);
+  const [errorData, setErrorData] = useState(null);
+ 
+  useEffect(() => {  
+    if (error) {  
+      setErrorData(error);  
+    }
+  }, [error]);
 
   const trainingName = useRef("");
   const assignTo = useRef("");
@@ -38,7 +46,7 @@ const Training = () => {
         setUserRole(userData.userRole?.substring(5).replace("_", " "));
     }
   }, [dispatch, userData]);
-
+console.log("useefect--"+JSON.stringify(error));
   const theadData = [
     "Sr No",
     "Name",
@@ -79,23 +87,13 @@ const Training = () => {
       endDate: endDate.current,
       totalNominations: nominated.current,
     };
-    if (
-      !trainingObject.startDate ||
-      !trainingObject.assignTo ||
-      !trainingObject.startDate ||
-      !trainingObject.endDate ||
-      !trainingObject.totalNominations
-    ) {
-      alert("All fields are required");
-      return; // Prevent further execution
-    }
-    if (trainingObject.startDate >= trainingObject.endDate) {
-      alert("End date must be after start date");
-      return; // Prevent further execution
-    }
     await dispatch(addTraining(trainingObject));
     dispatch(listTrainings());
-    setOpen(false);
+    
+      if(trainingObject.trainingName != "" && trainingObject.assignTo !="" && trainingObject.startDate !="" 
+        && trainingObject.endDate !=""){   
+        setOpen(false);
+      }
   };
 
   const navigateToTrainingReport = () => {
@@ -181,6 +179,9 @@ const Training = () => {
         </div>
     );
   };
+  const errorHandler=()=>{
+    setErrorData(null);
+  }
 
   const ShowAddTrainigButton = () => {
     return (
@@ -200,7 +201,8 @@ const Training = () => {
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton onClick={errorHandler}>
+          
             <Modal.Title id="example-custom-modal-styling-title">
               Add Training
             </Modal.Title>
@@ -217,8 +219,12 @@ const Training = () => {
                     class="form-control"
                     placeholder="Training Name"
                     onChange={handleTrainingChange}
-                    ref={trainingName}
+                  //  ref={trainingName}
                   />
+                    
+                {errorData && <label className={styles["error-label"]}>{errorData.tName}{errorData.trainingName}</label>}
+ 
+ 
                 </div>
                 <div class="col-md-6">
                   <label for="inputState" class="form-label">
@@ -236,6 +242,7 @@ const Training = () => {
                       </option>
                     ))}
                   </select>
+                  {errorData && <label className={styles["error-label"]}>{errorData.assignTo}</label>}
                 </div>
                 <div class="col-md-6">
                   <label for="inputState" class="form-label">
@@ -246,6 +253,7 @@ const Training = () => {
                     class="form-control"
                     onChange={handleStartDateChange}
                   />
+                   {errorData && <label className={styles["error-label"]}>{errorData.sDate}{errorData.startDate}</label>}
                 </div>
                 <div class="col-md-6">
                   <label for="inputState" class="form-label">
@@ -256,6 +264,7 @@ const Training = () => {
                     class="form-control"
                     onChange={handleEndDateChange}
                   />
+                  {errorData && <label className={styles["error-label"]}>{errorData.eDate}{errorData.endDate}</label>}
                 </div>
                 <div class="col-md-6">
                   <label for="inputState" class="form-label">
@@ -267,6 +276,7 @@ const Training = () => {
                     placeholder="Total Nominations"
                     onChange={handleNominationChange}
                   />
+                  {errorData && <label className={styles["error-label"]}>{errorData.totalNominations}</label>}
                 </div>
                 <div class="col-md-6">
                   <Button
