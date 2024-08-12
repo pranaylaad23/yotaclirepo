@@ -12,7 +12,7 @@ export const createTechnology = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      alert(error.response.data);
+      console.log(error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -25,6 +25,21 @@ export const fetchAllTechnology = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateTechnology = createAsyncThunk(
+  "technology/updateTechnology",
+  async ({id,data}, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        AXIOS_BASE_URL + `/technology/updateTechnology/${id}`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
