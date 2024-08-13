@@ -11,6 +11,8 @@ import {
   profileDetail,
   changePasswordDetails,
   fetchAllAssociatesTestByEmailId,
+  fetchAllRejectedAssociatesByStatus,
+  pendingDeclinedAssociate
 } from "./associateAction";
 
 const initialState = {
@@ -253,6 +255,48 @@ const associateSlice = createSlice({
         state.associates = [];
       }
     );
+
+    // Fetch All Rejected Associates 
+    builder
+    .addCase(fetchAllRejectedAssociatesByStatus.pending, (state) => {
+      state.loading = true;
+      state.success = false;
+      state.error = null;
+      state.associates = [];
+    })
+    .addCase(fetchAllRejectedAssociatesByStatus.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      state.associates = action.payload;
+    })
+    .addCase(fetchAllRejectedAssociatesByStatus.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action.payload;
+      state.associates = [];
+    });
+
+    // Pending Decline Associates
+    builder
+      .addCase(pendingDeclinedAssociate.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(pendingDeclinedAssociate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.error = null;
+        let index = state.associates.findIndex(
+          (associate) => associate.emailAdd === action.meta.arg
+        );
+        state.associates.splice(index, 1);
+      })
+      .addCase(pendingDeclinedAssociate.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload;
+      });
   },
 });
 

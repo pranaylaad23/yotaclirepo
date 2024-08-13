@@ -54,11 +54,12 @@ export const approvePendingAssociate = createAsyncThunk(
 
 export const declinePendingAssociate = createAsyncThunk(
   "associates/declinePendingAssociate",
-  async (email, { rejectWithValue }) => {
+  async ({email, reason},{ rejectWithValue }) => {
     try {
       const param = {
         params: {
           email: email,
+          reason: reason,
         },
       };
       const response = await axios.put(
@@ -184,6 +185,46 @@ export const changePasswordDetails = createAsyncThunk(
         changePasswordDetails
       );
    
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchAllRejectedAssociatesByStatus = createAsyncThunk(
+  "associates/fetchAllRejectedAssociatesByStatus",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        AXIOS_BASE_URL + "/users/all-rejected-associates-status",
+        {
+          params: {
+            status: "DECLINED",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const pendingDeclinedAssociate = createAsyncThunk(
+  "associates/pendingDeclinedAssociate",
+  async (email, { rejectWithValue }) => {
+    try {
+      const param = {
+        params: {
+          email: email,
+        },
+      };
+      const response = await axios.put(
+        AXIOS_BASE_URL + "/users/pending/associate",
+        null,
+        param
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
