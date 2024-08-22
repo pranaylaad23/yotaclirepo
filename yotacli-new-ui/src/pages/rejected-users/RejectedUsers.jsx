@@ -1,51 +1,39 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-    approvePendingAssociate,
-    declinePendingAssociate,
-    fetchAllPendingAssociates
-} from "../../features/associates/associateAction";
+import { fetchAllRejectedAssociatesByStatus,pendingDeclinedAssociate } from "../../features/associates/associateAction";
 import Card from "../../components/Card/Card";
-import styles from './PendingUserList.module.css';
+import styles from './RejectedUserList.module.css';
+import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
-import { ApproveIcon, DeclineIcon } from "../../components/icons/Icons";
 
-export const PendingUsers = () => {
+export const RejectedUsers = () => {
 
     const dispatch = useDispatch();
     const { associates } = useSelector(state => state.associates);
     const { userData } = useSelector(state => state.auth);
-    const [reasonOpen,setReasonOpen] = useState(false);
-    const [reason,setReason] = useState(null);
-    const[emailToDecline,setEmailToDecline] = useState("");
+    const [reason, setReason] = useState(null);
+    const [reasonOpen, setReasonOpen] = useState(false);
 
     useEffect(() => {
         if (userData.token)
-            dispatch(fetchAllPendingAssociates());
+            dispatch(fetchAllRejectedAssociatesByStatus());
     }, [userData, dispatch]);
 
-    function onApprove(email) {
-        dispatch(approvePendingAssociate(email));
-    }
-
-    function onDecline(email,event) {
+    const checkReason = (_reason, event) => {
         event.preventDefault();
-        setEmailToDecline(email);
         setReasonOpen(true);
+        setReason(_reason)
+
     }
 
-    const handleReasonChange = (event) => {
-        setReason(event.target.value);
-      };
-     
-      const handleSubmitForReason = () => {
-        if(emailToDecline){
-        dispatch(declinePendingAssociate({email: emailToDecline,reason: reason}));
+    const handleOkForReason = () => {
         setReasonOpen(false);
-        setEmailToDecline(null);
-        setReason('');
-        }      
-      };
+    }
+    const restoreAssociate = (_email) => {
+    dispatch(pendingDeclinedAssociate(_email));
+
+    }
+
     const showData = () => {
         return (
             <div>
@@ -71,8 +59,12 @@ export const PendingUsers = () => {
                                     <td>{associate.accountStatus}</td>
                                     <td>
                                         <div className={styles["action-buttons"]}>
-                                            <ApproveIcon onApprove={() => onApprove(associate.emailAdd)} />
-                                            <DeclineIcon onDecline={(event) => onDecline(associate.emailAdd,event)} />
+                                            <Button color={"danger"} className={"ms-2"} onClick={() => restoreAssociate(associate.emailAdd)}>
+                                                Restore
+                                            </Button>
+                                            <Button color={"danger"} className={"ms-2"} onClick={(event) => checkReason(associate.reason, event)}>
+                                                Check Reason
+                                            </Button>
                                         </div>
                                     </td>
                                 </tr>
@@ -81,7 +73,7 @@ export const PendingUsers = () => {
                     </table>
                 </Card>
 
-                 {/* Modal Open  */}
+                {/* Modal Open  */}
 
                 <Modal
                     show={reasonOpen}
@@ -91,7 +83,7 @@ export const PendingUsers = () => {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="example-custom-modal-styling-title">
-                            Add Rejected Reason
+                            View Rejected Reason
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -99,34 +91,25 @@ export const PendingUsers = () => {
                             <div className="form-group row mb-1 ">
                                 <label
                                     for="inputDescription"
-                                    className="createclientdescription col-sm-4 col-form-label mt-0"
+                                    className="createclientdescription col-sm-12 col-form-label mt-0"
                                 >
-                                    Reason
+                                    Reason : {reason}
                                 </label>
-                                <div className="col-sm-8">
-                                    <input
-                                        type="text"
-                                        value={reason}
-                                        placeholder="Enter Reason"
-                                        className="mb-2 form-control-sm form-control mt-1"
-                                        onChange={handleReasonChange}
-                                    ></input>
-                                </div>
+
                             </div>
                         </div>
-
                         <button
                             className="submitt-button btn btn-primary"
                             type="submit"
-                            onClick={handleSubmitForReason}
-                            style={{ borderRadius: "revert-layer", marginLeft: "390px" }}
+                            onClick={handleOkForReason}
+                            style={{ borderRadius: "revert-layer", marginLeft: "420px" }}
                         >
-                            Submit
+                            OK
                         </button>
                     </Modal.Body>
                 </Modal>
 
- {/* Modal CLose */}
+                {/* Modal CLose */}
 
             </div>
         )
@@ -135,14 +118,14 @@ export const PendingUsers = () => {
     const showErrorMessage = () => {
         return (
             <div className={styles["custom-text-center"]}>
-                <b>No Pending Users...</b>
+                <b>No Rejected Users...</b>
             </div>
         )
     }
 
     return (
         <>
-            <h6>Pending Users List</h6>
+            <h6>Rejected Users List</h6>
             {
                 associates.length > 0 ? showData() : showErrorMessage()
             }

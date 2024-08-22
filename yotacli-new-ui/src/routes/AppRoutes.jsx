@@ -43,6 +43,7 @@ import { ListTest } from "../pages/test/test-list/ListTest";
 import { ReviewTest } from "../pages/test/review-test-question/ReviewTest";
 import StartTest from "../../src/pages/associates/StartTest";
 import { AddQuestionTest } from "../pages/test/AddQuestionTest";
+import { RejectedUsers } from "../pages/rejected-users/RejectedUsers";
 
 export const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -116,6 +117,7 @@ export const AppRoutes = () => {
       {userRole === USER_ROLES.TECHNICAL_MANAGER && (
         <>
           <Route path={"/all-pending-users"} element={<PendingUsers />} />
+          <Route path={"/all-rejected-users"} element={<RejectedUsers />} />
           <Route path={"/technology-list"} element={<TechnologyList />} />
           <Route
             path={"/all-registered-associates"}
