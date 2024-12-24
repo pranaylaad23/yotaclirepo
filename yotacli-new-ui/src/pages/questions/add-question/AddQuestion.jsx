@@ -110,11 +110,18 @@ export const AddQuestion = () => {
   function addTechnologyEventHandler(event) {
     event.preventDefault();
     console.log("add button clicked...");
+    navigate("/technology-list");
   }
 
   function addCategoryEventHandler(event) {
     event.preventDefault();
-    console.log(event.target.value);
+    if (selectedTechnology) {
+      let technologyId = Number(selectedTechnology);
+      navigate("/addCategory/" + technologyId)
+      getCategoriesByTechnology(technologyId);
+    }else{
+      alert("Please select technology from the Technology List.");
+    }
   }
 
   useEffect(() => {
