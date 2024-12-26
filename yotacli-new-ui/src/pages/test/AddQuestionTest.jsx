@@ -41,11 +41,9 @@ export const AddQuestionTest = () => {
 
     const handleChange = (event) => {
         const isChecked = event.target.checked;
-      //  const isDisabled = event.target.disabled;
         const value = JSON.parse(event.target.value);
 
         let newCheckedValues;
-       // if (isChecked && !isDisabled) {
        if (isChecked ) {
             // If the checkbox is checked, add its value to the checkedValues array
             newCheckedValues = [...reviewQuestionJson, value];
@@ -55,7 +53,6 @@ export const AddQuestionTest = () => {
         }
         setReviewQuestionJsonValue(newCheckedValues);
     }
-//*************************** */
     const handleSelectAll = () => {
         if (selectAll) {
             setReviewQuestionJsonValue([]);
@@ -65,7 +62,6 @@ export const AddQuestionTest = () => {
         setSelectAll(!selectAll);
     };
 
-///**************************************** */
     const redirectToReviewPage = () => {
         if (reviewQuestionJson.length === 0 && totalQuestionCount === 0) {
             alert("You haven't selected any question yet. please select the question and move ahead.!!");
