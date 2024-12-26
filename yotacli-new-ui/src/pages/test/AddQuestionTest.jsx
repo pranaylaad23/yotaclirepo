@@ -16,6 +16,7 @@ export const AddQuestionTest = () => {
     const { technologies } = useSelector((state) => state.technologies);
     const question = useSelector((state) => state.tests.question);
     const [screenContain, setScreenContain] = useState('Add');
+    const [selectAll, setSelectAll] = useState(false);
     const technologyId = useRef();
     const navigate = useNavigate();
     const { reviewQuestionJson,
@@ -40,11 +41,12 @@ export const AddQuestionTest = () => {
 
     const handleChange = (event) => {
         const isChecked = event.target.checked;
-        const isDisabled = event.target.disabled;
+      //  const isDisabled = event.target.disabled;
         const value = JSON.parse(event.target.value);
 
         let newCheckedValues;
-        if (isChecked && !isDisabled) {
+       // if (isChecked && !isDisabled) {
+       if (isChecked ) {
             // If the checkbox is checked, add its value to the checkedValues array
             newCheckedValues = [...reviewQuestionJson, value];
         } else {
@@ -53,8 +55,17 @@ export const AddQuestionTest = () => {
         }
         setReviewQuestionJsonValue(newCheckedValues);
     }
+//*************************** */
+    const handleSelectAll = () => {
+        if (selectAll) {
+            setReviewQuestionJsonValue([]);
+        } else {
+            setReviewQuestionJsonValue(question);
+        }
+        setSelectAll(!selectAll);
+    };
 
-
+///**************************************** */
     const redirectToReviewPage = () => {
         if (reviewQuestionJson.length === 0 && totalQuestionCount === 0) {
             alert("You haven't selected any question yet. please select the question and move ahead.!!");
@@ -189,7 +200,12 @@ export const AddQuestionTest = () => {
                                     <table className="table table-bordered table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">
+                                                     {/* added select All checkBox */}
+                                                <div className="form-check" style={{ display: "inline-block" }}>
+                                                    <input className="form-check-input" type="checkbox" id="selectAll" checked={selectAll} onChange={handleSelectAll} />
+                                                </div>
+                                                </th>
                                                 <th scope="col">Category</th>
                                                 <th scope="col">Level</th>
                                                 <th scope="col">Question</th>
