@@ -87,34 +87,36 @@ export const AddQuestion = () => {
   ];
 
   function technologyChangeHandler(event) {
-    console.log(event.target.value);
     setSelectedTechnology(event.target.value);
     setSelectedCategory("");
   }
 
   function categoryChangeHandler(event) {
-    console.log(event.target.value);
     setSelectedCategory(event.target.value);
   }
 
   function currentOptionHanderChangeHandler(event) {
-    console.log(event.target.value);
     setCurrentOption(event.target.value);
   }
 
   function questionLevelHanderChangeHandler(event) {
-    console.log(event.target.value);
     setQuestionLevel(event.target.value);
   }
 
   function addTechnologyEventHandler(event) {
     event.preventDefault();
-    console.log("add button clicked...");
+    navigate("/technology-list");
   }
 
   function addCategoryEventHandler(event) {
     event.preventDefault();
-    console.log(event.target.value);
+    if (selectedTechnology) {
+      let technologyId = Number(selectedTechnology);
+      navigate("/addCategory/" + technologyId)
+      getCategoriesByTechnology(technologyId);
+    }else{
+      alert("Please select technology from the Technology List.");
+    }
   }
 
   useEffect(() => {
@@ -175,7 +177,6 @@ export const AddQuestion = () => {
   };
 
   const handleTechnologyChange = (event) => {
-    console.log(event.target.value);
     setTechnology(event.target.value);
     getCategoriesByTechnology(event.target.value);
   };

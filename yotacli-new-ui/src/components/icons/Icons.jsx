@@ -6,6 +6,7 @@ import { TbFileReport } from "react-icons/tb";
 
 import {IoMdAddCircle} from "react-icons/io";
 import {PiUploadSimpleBold} from "react-icons/pi";
+import React from "react";
 
 
 export const ApproveIcon = ({
@@ -78,6 +79,22 @@ export const AddIcon = ({
         onClick={onAdd}/>
 };
 
+export const AddQuestionsIcon = ({
+    onAdd,
+    title = null,
+    color = null,
+    size = null
+}) => {
+return <IoMdAddCircle
+color={color ? color : "#0d74da"}
+size={size > 10 ? size : "24"}
+cursor={"pointer"}
+title={title ? title : "Add Questions"}
+onClick={onAdd}/>
+};
+
+
+
 
 export const AssignTrainingIcon = ({
     assignTraining,
@@ -120,4 +137,3 @@ export const UploadIcon = ({
         title={title ? title : "Upload"}
         onClick={onUpload}/>
 }
-
