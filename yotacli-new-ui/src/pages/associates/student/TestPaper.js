@@ -9,7 +9,6 @@ import Timer from "./Timer";
 import { useParams } from "react-router-dom";
 import { getQuestionByTestid } from "../../../features/Question/questionAction";
 import { storeResult } from "../../../features/TestResult/testResultAction";
-import { setTestClick } from "../../../features/TestResult/TestResultSlice";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
@@ -20,10 +19,10 @@ import {
 const TestPaper = () => {
   const { token, email } = useSelector((state) => state.auth.userData);
   const { test } = useSelector((state) => state.associates);
-  const { testClick } = useSelector((state) => state.testresult);
+
   const { questions } = useSelector((state) => state.questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [currentOption, setCurrentOption] = useState(false);
+  const [currentOption, setCurrentOption] = useState("");
   const [totalMark, setTotalMark] = useState(0);
   const [isAttempt, setIsAttempt] = useState(null);
   const [open, setOpen] = useState(false);
@@ -33,6 +32,8 @@ const TestPaper = () => {
   );
   const dispatch = useDispatch();
   const { id } = useParams("id");
+  // const [selectedOptions, setSelectedOptions] = useState(() => Array(questions?.length || 0).fill(false));
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   useEffect(() => {
     if (token) dispatch(fetchTestByTestId(id));
@@ -40,9 +41,8 @@ const TestPaper = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(getQuestionByTestid({id:id,email:email}));
+      dispatch(getQuestionByTestid({ id: id, email: email }));
       dispatch(settime(startTime));
-      dispatch(setTestClick(true))
     }
   }, []);
 
@@ -51,9 +51,11 @@ const TestPaper = () => {
       setCurrentAnswer(event.target.value);
       setCurrentOption(true);
     }
+    setSelectedOptions({
+      ...selectedOptions,
+      [currentQuestion]: event.target.value,
+    });
   }
-
-  console.log("test", test);
 
   const rightAnswer = questions.map((data, index) => {
     return data.correctAnswer;
@@ -105,7 +107,7 @@ const TestPaper = () => {
       dispatch(setAssociateMark(totalMark));
     }
   }
-  console.log("testslice",testClick)
+
   return (
     <>
       <div className="container ">
@@ -176,6 +178,7 @@ const TestPaper = () => {
                                     name="answer-entry"
                                     onChange={handleOption}
                                     value={questions[currentQuestion]?.option_A}
+                                    checked={selectedOptions[currentQuestion] === questions[currentQuestion]?.option_A}
                                   />
                                   <span>
                                     {questions[currentQuestion]?.option_A}
@@ -188,6 +191,7 @@ const TestPaper = () => {
                                     name="answer-entry"
                                     onChange={handleOption}
                                     value={questions[currentQuestion]?.option_B}
+                                    checked={selectedOptions[currentQuestion] === questions[currentQuestion]?.option_B}
                                   />
                                   <span>
                                     {questions[currentQuestion]?.option_B}
@@ -200,6 +204,7 @@ const TestPaper = () => {
                                     name="answer-entry"
                                     onChange={handleOption}
                                     value={questions[currentQuestion]?.option_C}
+                                    checked={selectedOptions[currentQuestion] === questions[currentQuestion]?.option_C}
                                   />
                                   <span>
                                     {questions[currentQuestion]?.option_C}
@@ -212,6 +217,7 @@ const TestPaper = () => {
                                     name="answer-entry"
                                     onChange={handleOption}
                                     value={questions[currentQuestion]?.option_D}
+                                    checked={selectedOptions[currentQuestion] === questions[currentQuestion]?.option_D}
                                   />
                                   <span>
                                     {questions[currentQuestion]?.option_D}
@@ -293,7 +299,8 @@ const TestPaper = () => {
               <div className="p-2 g-col-6 text-start">
                 <StudentCard
                   header="Questions"
-                  text1={<ItereateCircle isAttempted={isAttempt} />}
+                  // text1={<ItereateCircle isAttempted={isAttempt} />}
+                  text1={<ItereateCircle selectedOptions={selectedOptions} />}
                 />
               </div>
               <div className="p-2 g-col-6 text-start p-2">
