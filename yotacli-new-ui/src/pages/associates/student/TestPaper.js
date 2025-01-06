@@ -57,9 +57,17 @@ const TestPaper = () => {
     });
   }
 
-  const rightAnswer = questions.map((data, index) => {
-    return data.correctAnswer;
-  });
+  // const rightAnswer = questions.map((data, index) => {
+  //   return data.correctAnswer;
+  // });
+
+  const rightAnswer = () => {
+    const a = questions[currentQuestion].correctAnswer;
+    const b = "option_" + a;
+    console.log(questions[currentQuestion]?.[b]);
+    return questions[currentQuestion]?.[b];
+  }
+ 
   const saveAndNext = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -69,7 +77,8 @@ const TestPaper = () => {
     } else {
       setIsAttempt(false);
     }
-    if (rightAnswer.includes(currentAnswer)) {
+    const answer = rightAnswer();
+    if (answer === currentAnswer) {
       setTotalMark(totalMark + 1);
     }
     setCurrentAnswer("");
@@ -80,6 +89,7 @@ const TestPaper = () => {
       setCurrentQuestion(currentQuestion - 1);
     }
   };
+
   const nextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -89,7 +99,8 @@ const TestPaper = () => {
     } else {
       setIsAttempt(false);
     }
-    if (rightAnswer.includes(currentAnswer)) {
+    const answer = rightAnswer();
+    if (answer === currentAnswer) {
       setTotalMark(totalMark + 1);
     }
     setCurrentAnswer("");

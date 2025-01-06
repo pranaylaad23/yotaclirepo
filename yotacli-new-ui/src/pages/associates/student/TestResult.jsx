@@ -12,9 +12,11 @@ import "react-toastify/dist/ReactToastify.css";
 const TestResult = () => {
   const { test } = useSelector((state) => state.associates);
   const { questions } = useSelector((state) => state.questions);
+
   const { time, endTime, AssociateMark } = useSelector(
     (state) => state.testresult
   );
+  
   const { token, email } = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ const TestResult = () => {
       timeTaken: takentime,
     };
     dispatch(updateResult({ data }));
-    toast(" Result Save Successfully!");
+    toast("Result Save Successfully!");
     setTimeout(() => {
       navigate("/myTest");
     }, 2000);
